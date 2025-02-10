@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>P001-BA-Analise-RFM-Area-de-Marketing</title>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important; /* cor verde claro */
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .title-header {
+            font-family: 'Caveat',cursive;
+            font-weight: bold;
+            font-size: 25px;
+            font-weight: bold;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 15px;            
+        }
+        .footer {
+            font-family: "Gloria Hallelujah" ,cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        pre, code {
+            background-color: transparent !important; /* Evita sobrescrita de estilos */
+            border: none;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+<h1 class="title-header">P001-BA-Analise-RFM-Area-de-Marketing</h1>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><br/><br/></p>
+<p style="text-align: center;">
+<font color="#0A1781" face="Segoe Script" size="6">
+<strong>
+        Business Analytics e Machine Learning<br/>Para Projetos de Data Science
+    </strong>
+</font>
+</p>
+<p style="text-align: center;">
+<font color="#F89634" face="Segoe Script" size="6.5">
+<strong>
+            Análise RFM (Recency, Frequency, Monetary Value)<br/> e Dashboard Interativo Para a Área de Marketing
+        </strong>
+</font>
+</p>
+<p><br/><br/></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p style="text-align: right;">
+<font color="#444444" face="Segoe Script" size="4">
+    Roberto Soares - LfLngLrnng<br \=""/>[+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida  
+  </font>
+</p>
+<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a>
+<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</font></p></font></p></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="4"><strong>Compreendendo o Conceito de Análise RFM (Recency, Frequency, Monetary Value)</strong></font></p>
+<p><font color="#66666" face="Segoe Print" size="3"><strong>Análise RFM: Visão Geral</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>1. Definição e Objetivo</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><strong>RFM (Recency, Frequency, Monetary Value)</strong>: Método de análise de dados que classifica os clientes com base em:<ul>
+<li><strong>Recency (R)</strong>: Há quanto tempo o cliente fez a última compra.</li>
+<li><strong>Frequency (F)</strong>: Quantas vezes o cliente comprou em um determinado período.</li>
+<li><strong>Monetary Value (M)</strong>: Quanto o cliente gastou no total durante esse período.</li>
+</ul>
+</li>
+<li><font color="red"><strong>Objetivo</strong>: <strong>Identificar e segmentar os clientes mais valiosos, ajudando a direcionar estratégias de marketing personalizadas e mais eficazes.</strong></font></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>2. Coleta e Preparação dos Dados</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><strong>Dados Necessários</strong>:<ul>
+<li>Transações de compra (data, valor da compra, cliente).</li>
+<li>Identificação única de cada cliente.</li>
+</ul>
+</li>
+<li><strong>Preparação dos Dados</strong>:<ul>
+<li>Consolidar todas as transações por cliente.</li>
+<li>Calcular a recência (dias desde a última compra), frequência (número de transações) e valor monetário (soma dos valores das compras).</li>
+</ul>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>3. Cálculo dos Scores R, F e M</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><strong>Recency Score (R)</strong>:<ul>
+<li>Ordenar os clientes pela data da última compra.</li>
+<li>Atribuir pontuações (por exemplo, de 1 a 4) com base em quartis, onde 1 representa os clientes menos recentes e 4 os mais recentes.</li>
+</ul>
+</li>
+<li><strong>Frequency Score (F)</strong>:<ul>
+<li>Ordenar os clientes pelo número total de transações.</li>
+<li>Atribuir pontuações de forma similar, onde 1 representa os clientes menos frequentes e 2 os mais frequentes.</li>
+</ul>
+</li>
+<li><strong>Monetary Value Score (M)</strong>:<ul>
+<li>Ordenar os clientes pelo valor total gasto.</li>
+<li>Atribuir pontuações, onde 1 representa os clientes que gastaram menos e 4 os que gastaram mais.</li>
+</ul>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>4. Segmentação dos Clientes</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><strong>Combinação dos Scores R, F e M</strong>:<ul>
+<li>Criar segmentos combinando os scores, por exemplo, RFM = 424 representa clientes muito recentes, muito frequentes e com alto valor de gasto.</li>
+</ul>
+</li>
+<li><strong>Principais Segmentos</strong>:<ul>
+<li><strong>Clientes Leais</strong></li>
+<li><strong>Clientes Leais Que Compram com Frequência</strong></li>
+<li><strong>Potenciais Clientes Leais</strong></li>
+<li><strong>Clientes Que Precisam de Atenção</strong></li>
+<li><strong>Clientes Quase Perdidos</strong></li>
+<li><strong>Clientes Perdidos</strong></li>
+</ul>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>5. Ações de Marketing Baseadas na Análise RFM</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><strong>Campanhas de Reativação</strong>:<ul>
+<li>Para clientes com baixa recência, oferecendo descontos ou promoções especiais.</li>
+</ul>
+</li>
+<li><strong>Programas de Fidelidade</strong>:<ul>
+<li>Para clientes frequentes, incentivando a continuidade das compras.</li>
+</ul>
+</li>
+<li><strong>Ofertas Personalizadas</strong>:<ul>
+<li>Para clientes de alto valor, proporcionando produtos exclusivos ou serviços premium.</li>
+</ul>
+</li>
+<li><strong>Aquisição de Novos Clientes</strong>:<ul>
+<li>Baseado nos padrões de clientes valiosos, direcionando esforços de marketing para alcançar novos clientes semelhantes.</li>
+</ul>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Conclusão</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p>A análise RFM é uma técnica poderosa que permite às empresas compreender melhor o comportamento dos seus clientes e direcionar suas estratégias de marketing de forma mais eficiente.</p>
+<p>Ao segmentar os clientes com base em recência, frequência e valor monetário:</p>
+<ul>
+<li>as empresas podem criar campanhas mais personalizadas,</li>
+<li>melhorar a retenção de clientes</li>
+<li>e aumentar o valor do ciclo de vida do cliente.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Business Understanding]</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Conjunto de dados públicos de comércio eletrônico brasileiro da Olist</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce</a></li>
+</ul>
+<p>O conjunto de dados tem informações de 100 mil pedidos de 2016 a 2018 feitos em vários marketplaces no Brasil.</p>
+<p>Seus recursos permitem visualizar um pedido de várias dimensões:</p>
+<ul>
+<li>do status do pedido,</li>
+<li>preço,</li>
+<li>pagamento</li>
+<li>e desempenho do frete até a localização do cliente,</li>
+<li>atributos do produto e,</li>
+<li>finalmente, avaliações escritas pelos clientes.</li>
+</ul>
+<p>Também lançamos um conjunto de dados de geolocalização que relaciona os códigos postais brasileiros às coordenadas lat/lng.</p>
+<p>Esses são <strong>dados comerciais reais, foram tornados anônimos</strong> e as referências às empresas e parceiros no texto da análise foram substituídas pelos nomes das grandes casas de Game of Thrones.</p>
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Contexto</strong></font></p>
+<p>Este conjunto de dados foi generosamente fornecido pela Olist, a maior loja de departamentos em marketplaces brasileiros.</p>
+<p><strong>A Olist conecta pequenas empresas de todo o Brasil</strong> a canais sem complicações e com um único contrato.</p>
+<p>Esses comerciantes podem vender seus produtos por meio da Olist Store e enviá-los diretamente aos clientes usando os parceiros de logística da Olist.</p>
+<ul>
+<li><p>Depois que um cliente compra o produto da Olist Store, um vendedor é notificado para atender o pedido.</p>
+</li>
+<li><p>Assim que o cliente recebe o produto, ou a data estimada de entrega é devida, o cliente recebe uma pesquisa de satisfação por e-mail, onde ele pode dar uma nota para a experiência<br>de compra e escrever alguns comentários.</br></p>
+</li>
+</ul>
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Atenção</strong></font></p>
+<ul>
+<li><strong>Um pedido pode ter vários itens.</strong></li>
+<li><strong>Cada item pode ser entregue por um vendedor diferente.</strong></li>
+<li><strong>Todos os textos que identificam lojas e parceiros foram substituídos pelos nomes das grandes casas de Game of Thrones.</strong></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Data Understanding]</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Conjunto de dados de clientes</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Este conjunto de dados tem informações sobre o cliente e sua localização.</li>
+<li>Use-o para identificar clientes únicos no conjunto de dados de pedidos e para encontrar o local de entrega dos pedidos.</li>
+</ul>
+<p>Em nosso sistema, cada pedido é atribuído a um customer_id exclusivo.</p>
+<ul>
+<li>Isso significa que o mesmo cliente obterá ids diferentes para pedidos diferentes.</li>
+<li>O propósito de ter um customer_unique_id no conjunto de dados é permitir que você identifique clientes que fizeram recompras na loja.</li>
+<li>Caso contrário, você descobriria que cada pedido tinha um cliente diferente associado.</li>
+</ul>
+<p>Consulte o esquema de dados:</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<p><img alt="olist_data_modeling" src="olist_data_modeling.png"/></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
+<font color="#66666" face="Segoe Print" size="2">
+<p>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:</p>
+<ul>
+<li>pip install -U nome_pacote</li>
+</ul>
+<p>Para instalar a versão exata de um pacote, execute o comando abaixo no terminal ou prompt de comando:</p>
+<ul>
+<li>!pip install nome_pacote==versão_desejada</li>
+</ul>
+<p>Depois de instalar ou atualizar o pacote, reinicie o jupyter notebook.</p>
+<p>Instala o pacote watermark.</p>
+<ul>
+<li>Esse pacote é usado para gravar as versões de outros pacotes usados neste jupyter notebook.</li>
+</ul>
+<p>Instala o pacote squarify.</p>
+<ul>
+<li>uma das bibliotecas Python mais poderosas quando se trata de criar treemaps.</li>
+<li><a href="https://pypi.org/project/squarify/">https://pypi.org/project/squarify/</a></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q -U watermark
+#!pip install -q -U squarify</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Imports
+import numpy as np
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.graph_objects as go
+import sklearn
+import squarify
+import pod_academy_functions as pod
+
+from sklearn.preprocessing import LabelEncoder
+from datetime import datetime, timedelta</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">-----------------------------------------------------
+------------ PoD Academy Functions ------------------
+Só Alegria!
+Você está usando o pacote de funções da PoD Academy
+Turma: 2023
+Autor: PoD Academy
+Professor: Bruno Jardim
+Versão: 1.0.0
+Data: 08/10/2023
+-----------------------------------------------------
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
+%reload_ext watermark
+%watermark -a "RSS-LfLngLrnng"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: RSS-LfLngLrnng
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Este comando é específico do ambiente Jupyter Notebook e faz com que os gráficos gerados pelo Matplotlib sejam exibidos diretamente no notebook.
+%matplotlib inline</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">import warnings                                            # permite controlar a exibição de avisos (warnings) em Python.
+warnings.filterwarnings('ignore')                          # para ignorar todos os avisos. Isso pode ser útil para evitar que avisos irrelevantes poluam a saída do código.
+
+matplotlib.rcParams['font.size'] = 10                      # Ajusta o tamanho da fonte para 10 pontos nos gráficos gerados pelo Matplotlib.
+matplotlib.rcParams['figure.figsize'] = (8, 8)             # Define o tamanho padrão das figuras (gráficos) para 8x8 polegadas. 
+matplotlib.rcParams['figure.facecolor'] = '#00000000'      # Define a cor de fundo das figuras como transparente (#00000000).
+
+pd.options.display.max_columns = 50                        # Configura o Pandas para exibir no máximo 50 colunas ao mostrar DataFrames.
+pd.options.display.max_rows = 20                           # Configura o Pandas para exibir no máximo 20 linhas ao mostrar DataFrames.
+pd.options.display.max_colwidth = 80                       # Configura o Pandas para exibir no máximo 80 caracteres por coluna ao mostrar DataFrames.
+
+np.set_printoptions(precision=4, suppress=True)            # Configura o NumPy para exibir números com uma precisão de 4 casas decimais e suprimir a notação científica (usar notação decimal normal).</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Carregando e Explorando os Dados</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Carrega o dataset
+df00 = pd.read_csv("olist_orders_dataset.csv")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Shape
+df00.shape</code></pre>
+</div>
+<div class="output">(116581, 53)</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Amostra de dados
+df00.head()</code></pre>
+</div>
+<div class="output">  order_id                         order_id3  \<br/>0  ON34305  e481f51cbdc54678b7cc49136f2d6af7   <br/>1  ON34305  e481f51cbdc54678b7cc49136f2d6af7   <br/>2  ON34305  e481f51cbdc54678b7cc49136f2d6af7   <br/>3  ON40291  128e10d95713541c87cd1a2e48201934   <br/>4  ON74313  0e7e841ddf8f8f2de2bad69267ecfbcf   <br/><br/>                       customer_id3 order_status order_purchase_timestamp  \<br/>0  9ef432eb6251297304e76186b10a928d    delivered      2017-10-02 10:56:33   <br/>1  9ef432eb6251297304e76186b10a928d    delivered      2017-10-02 10:56:33   <br/>2  9ef432eb6251297304e76186b10a928d    delivered      2017-10-02 10:56:33   <br/>3  a20e8105f23924cd00833fd87daa0831    delivered      2017-08-15 18:29:31   <br/>4  26c7ac168e1433912a51b924fbd34d34    delivered      2017-08-02 18:24:47   <br/><br/>     order_approved_at order_delivered_carrier_date  \<br/>0  2017-10-02 11:07:15          2017-10-04 19:55:00   <br/>1  2017-10-02 11:07:15          2017-10-04 19:55:00   <br/>2  2017-10-02 11:07:15          2017-10-04 19:55:00   <br/>3  2017-08-15 20:05:16          2017-08-17 15:28:33   <br/>4  2017-08-02 18:43:15          2017-08-04 17:35:43   <br/><br/>  order_delivered_customer_date order_estimated_delivery_date  order_item_id  \<br/>0           2017-10-10 21:25:13           2017-10-18 00:00:00            1.0   <br/>1           2017-10-10 21:25:13           2017-10-18 00:00:00            1.0   <br/>2           2017-10-10 21:25:13           2017-10-18 00:00:00            1.0   <br/>3           2017-08-18 14:44:43           2017-08-28 00:00:00            1.0   <br/>4           2017-08-07 18:30:01           2017-08-15 00:00:00            1.0   <br/><br/>                        product_id3                        seller_id3  \<br/>0  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/>1  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/>2  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/>3  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/>4  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/><br/>   shipping_limit_date  price  freight_value  payment_sequential payment_type  \<br/>0  2017-10-06 11:07:15  29.99           8.72                   1  Credit Card   <br/>1  2017-10-06 11:07:15  29.99           8.72                   3      Voucher   <br/>2  2017-10-06 11:07:15  29.99           8.72                   2      Voucher   <br/>3  2017-08-21 20:05:16  29.99           7.78                   1  Credit Card   <br/>4  2017-08-08 18:37:31  29.99           7.78                   1  Credit Card   <br/><br/>   payment_installments  payment_value review_id  \<br/>0                     1          18.12   PR31563   <br/>1                     1           2.00   PR31563   <br/>2                     1          18.59   PR31563   <br/>3                     3          37.77   PR93409   <br/>4                     1          37.77   PR60000   <br/><br/>                         review_id3  review_score review_comment_title  \<br/>0  a54f0611adc9ed256b57ede6b6eb5114           4.0                  NaN   <br/>1  a54f0611adc9ed256b57ede6b6eb5114           4.0                  NaN   <br/>2  a54f0611adc9ed256b57ede6b6eb5114           4.0                  NaN   <br/>3  b46f1e34512b0f4c74a72398b03ca788           4.0                  NaN   <br/>4  dc90f19c2806f1abba9e72ad3c350073           5.0                  NaN   <br/><br/>                                                            review_comment_message  \<br/>0  Não testei o produto ainda, mas ele veio correto e em boas condições. Apenas...   <br/>1  Não testei o produto ainda, mas ele veio correto e em boas condições. Apenas...   <br/>2  Não testei o produto ainda, mas ele veio correto e em boas condições. Apenas...   <br/>3  Deveriam embalar melhor o produto. A caixa veio toda amassada e vou dar de p...   <br/>4                   Só achei ela pequena pra seis xícaras ,mais é um bom produto\n   <br/><br/>  review_creation_date  ... product_name_lenght product_description_lenght  \<br/>0  2017-10-11 00:00:00  ...                40.0                      268.0   <br/>1  2017-10-11 00:00:00  ...                40.0                      268.0   <br/>2  2017-10-11 00:00:00  ...                40.0                      268.0   <br/>3  2017-08-19 00:00:00  ...                40.0                      268.0   <br/>4  2017-08-08 00:00:00  ...                40.0                      268.0   <br/><br/>  product_photos_qty  product_weight_g  product_length_cm  product_height_cm  \<br/>0                4.0             500.0               19.0                8.0   <br/>1                4.0             500.0               19.0                8.0   <br/>2                4.0             500.0               19.0                8.0   <br/>3                4.0             500.0               19.0                8.0   <br/>4                4.0             500.0               19.0                8.0   <br/><br/>   product_width_cm  customer_id  customer_unique_id  \<br/>0              13.0        23005              C10952   <br/>1              13.0        23005              C10952   <br/>2              13.0        23005              C10952   <br/>3              13.0        78728              C90486   <br/>4              13.0        53915              C18951   <br/><br/>                 customer_uniqueid3  customer_zip_code_prefix customer_city  \<br/>0  7c396fd4830fd04220f754e42b4e5bff                      3149     Sao Paulo   <br/>1  7c396fd4830fd04220f754e42b4e5bff                      3149     Sao Paulo   <br/>2  7c396fd4830fd04220f754e42b4e5bff                      3149     Sao Paulo   <br/>3  3a51803cc0d012c3b5dc8b7528cb05f7                      3366     Sao Paulo   <br/>4  ef0996a1a279c26e7ecbd737be23d235                      2290     Sao Paulo   <br/><br/>  customer_state  seller_id seller_zip_code_prefix seller_city seller_state  \<br/>0             SP      S2121                   9350        Maua           SP   <br/>1             SP      S2121                   9350        Maua           SP   <br/>2             SP      S2121                   9350        Maua           SP   <br/>3             SP      S2121                   9350        Maua           SP   <br/>4             SP      S2121                   9350        Maua           SP   <br/><br/>   product_category_name_english review_response_time order_purchase_year  \<br/>0                     housewares                  1.0                2017   <br/>1                     housewares                  1.0                2017   <br/>2                     housewares                  1.0                2017   <br/>3                     housewares                  1.0                2017   <br/>4                     housewares                  0.0                2017   <br/><br/>  order_purchase_month  order_purchase_dayofweek  order_purchase_hour  \<br/>0                   10                         0                   10   <br/>1                   10                         0                   10   <br/>2                   10                         0                   10   <br/>3                    8                         1                   18   <br/>4                    8                         2                   18   <br/><br/>   order_purchase_day  order_purchase_mon  <br/>0                 Mon                 Oct  <br/>1                 Mon                 Oct  <br/>2                 Mon                 Oct  <br/>3                 Tue                 Aug  <br/>4                 Wed                 Aug  <br/><br/>[5 rows x 53 columns]</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Info
+df00.info()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region"><class 'pandas.core.frame.dataframe'="">
+RangeIndex: 116581 entries, 0 to 116580
+Data columns (total 53 columns):
+ #   Column                         Non-Null Count   Dtype  
+---  ------                         --------------   -----  
+ 0   order_id                       116581 non-null  object 
+ 1   order_id3                      116581 non-null  object 
+ 2   customer_id3                   116581 non-null  object 
+ 3   order_status                   116581 non-null  object 
+ 4   order_purchase_timestamp       116581 non-null  object 
+ 5   order_approved_at              116581 non-null  object 
+ 6   order_delivered_carrier_date   116581 non-null  object 
+ 7   order_delivered_customer_date  116581 non-null  object 
+ 8   order_estimated_delivery_date  116581 non-null  object 
+ 9   order_item_id                  116581 non-null  float64
+ 10  product_id3                    116581 non-null  object 
+ 11  seller_id3                     116581 non-null  object 
+ 12  shipping_limit_date            116581 non-null  object 
+ 13  price                          116581 non-null  float64
+ 14  freight_value                  116581 non-null  float64
+ 15  payment_sequential             116581 non-null  int64  
+ 16  payment_type                   116581 non-null  object 
+ 17  payment_installments           116581 non-null  int64  
+ 18  payment_value                  116581 non-null  float64
+ 19  review_id                      116581 non-null  object 
+ 20  review_id3                     116581 non-null  object 
+ 21  review_score                   116581 non-null  float64
+ 22  review_comment_title           13996 non-null   object 
+ 23  review_comment_message         49878 non-null   object 
+ 24  review_creation_date           116578 non-null  object 
+ 25  review_answer_timestamp        116578 non-null  object 
+ 26  product_id                     116581 non-null  object 
+ 27  product_category_name          116581 non-null  object 
+ 28  product_name_lenght            116581 non-null  float64
+ 29  product_description_lenght     116581 non-null  float64
+ 30  product_photos_qty             116581 non-null  float64
+ 31  product_weight_g               116580 non-null  float64
+ 32  product_length_cm              116580 non-null  float64
+ 33  product_height_cm              116580 non-null  float64
+ 34  product_width_cm               116580 non-null  float64
+ 35  customer_id                    116581 non-null  int64  
+ 36  customer_unique_id             116581 non-null  object 
+ 37  customer_uniqueid3             116581 non-null  object 
+ 38  customer_zip_code_prefix       116581 non-null  int64  
+ 39  customer_city                  116581 non-null  object 
+ 40  customer_state                 116581 non-null  object 
+ 41  seller_id                      116581 non-null  object 
+ 42  seller_zip_code_prefix         116581 non-null  int64  
+ 43  seller_city                    116581 non-null  object 
+ 44  seller_state                   116581 non-null  object 
+ 45  product_category_name_english  116581 non-null  object 
+ 46  review_response_time           116578 non-null  float64
+ 47  order_purchase_year            116581 non-null  int64  
+ 48  order_purchase_month           116581 non-null  int64  
+ 49  order_purchase_dayofweek       116581 non-null  int64  
+ 50  order_purchase_hour            116581 non-null  int64  
+ 51  order_purchase_day             116581 non-null  object 
+ 52  order_purchase_mon             116581 non-null  object 
+dtypes: float64(13), int64(9), object(31)
+memory usage: 47.1+ MB
+</class></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Observações:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p>Estas variáveis deverão ser corridas de 'object' para 'date'.</p>
+<ul>
+<li><strong>order_purchase_timestamp</strong>,</li>
+<li>order_approved_at,</li>
+<li>order_delivered_carrier_date,</li>
+<li>order_delivered_customer_date,</li>
+<li>order_estimated_delivery_date</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">metadados = pod.pod_academy_generate_metadata(df00,
+                                              ids=['id'],
+                                              targets=['target'],
+                                              orderby = 'PC_NULOS')
+
+metadados.head(20)</code></pre>
+</div>
+<div class="output">                          FEATURE  USO_FEATURE  QT_NULOS  PC_NULOS  \<br/>0            review_comment_title  Explicativa    102585     87.99   <br/>1          review_comment_message  Explicativa     66703     57.22   <br/>2                        order_id  Explicativa         0      0.00   <br/>3                   customer_city  Explicativa         0      0.00   <br/>4              product_photos_qty  Explicativa         0      0.00   <br/>5                product_weight_g  Explicativa         1      0.00   <br/>6               product_length_cm  Explicativa         1      0.00   <br/>7               product_height_cm  Explicativa         1      0.00   <br/>8                product_width_cm  Explicativa         1      0.00   <br/>9                     customer_id  Explicativa         0      0.00   <br/>10             customer_unique_id  Explicativa         0      0.00   <br/>11             customer_uniqueid3  Explicativa         0      0.00   <br/>12       customer_zip_code_prefix  Explicativa         0      0.00   <br/>13                 customer_state  Explicativa         0      0.00   <br/>14            product_name_lenght  Explicativa         0      0.00   <br/>15                      seller_id  Explicativa         0      0.00   <br/>16         seller_zip_code_prefix  Explicativa         0      0.00   <br/>17                    seller_city  Explicativa         0      0.00   <br/>18                   seller_state  Explicativa         0      0.00   <br/>19  product_category_name_english  Explicativa         0      0.00   <br/><br/>    CARDINALIDADE TIPO_FEATURE  <br/>0            4549       object  <br/>1           35909       object  <br/>2           97255       object  <br/>3            4095       object  <br/>4              19      float64  <br/>5            2201      float64  <br/>6              99      float64  <br/>7             102      float64  <br/>8              95      float64  <br/>9           97255        int64  <br/>10          94087       object  <br/>11          94087       object  <br/>12          14927        int64  <br/>13             27       object  <br/>14             66      float64  <br/>15           3033       object  <br/>16           2211        int64  <br/>17            604       object  <br/>18             23       object  <br/>19             71       object  </div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Data Preparation]</strong></font></p>
+<font color="#66666" face="Segoe Print" size="4">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="4"><strong>Engenharia de Atributos:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Com as colunas do Tipo Data</strong></p>
+<ul>
+<li>A data de compra é importante para nossa análise.</li>
+<li>Vamos extrair essa informação da coluna order_purchase_timestamp e então criar duas novas colunas.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Converte 'order_purchase_timestamp' para datetime sem especificar o formato:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Converte 'order_purchase_timestamp' para datetime sem especificar o formato
+df00['order_purchase_timestamp'] = pd.to_datetime(df00['order_purchase_timestamp'])</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Extrai apenas a data do timestamp e cria uma nova coluna chamada order_purchase_date:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Extrai apenas a data do timestamp e cria uma nova coluna chamada order_purchase_date
+df00['order_purchase_date'] = df00['order_purchase_timestamp'].dt.date</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Vamos criar a coluna InvoiceDate:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Vamos criar a coluna InvoiceDate
+df00['InvoiceDate'] = df00.order_purchase_date.apply(lambda x : datetime.strftime(x, '%Y-%m-%d'))
+df00['InvoiceDate'] = pd.to_datetime(df00['InvoiceDate'])</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df00.head(3)</code></pre>
+</div>
+<div class="output">  order_id                         order_id3  \<br/>0  ON34305  e481f51cbdc54678b7cc49136f2d6af7   <br/>1  ON34305  e481f51cbdc54678b7cc49136f2d6af7   <br/>2  ON34305  e481f51cbdc54678b7cc49136f2d6af7   <br/><br/>                       customer_id3 order_status order_purchase_timestamp  \<br/>0  9ef432eb6251297304e76186b10a928d    delivered      2017-10-02 10:56:33   <br/>1  9ef432eb6251297304e76186b10a928d    delivered      2017-10-02 10:56:33   <br/>2  9ef432eb6251297304e76186b10a928d    delivered      2017-10-02 10:56:33   <br/><br/>     order_approved_at order_delivered_carrier_date  \<br/>0  2017-10-02 11:07:15          2017-10-04 19:55:00   <br/>1  2017-10-02 11:07:15          2017-10-04 19:55:00   <br/>2  2017-10-02 11:07:15          2017-10-04 19:55:00   <br/><br/>  order_delivered_customer_date order_estimated_delivery_date  order_item_id  \<br/>0           2017-10-10 21:25:13           2017-10-18 00:00:00            1.0   <br/>1           2017-10-10 21:25:13           2017-10-18 00:00:00            1.0   <br/>2           2017-10-10 21:25:13           2017-10-18 00:00:00            1.0   <br/><br/>                        product_id3                        seller_id3  \<br/>0  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/>1  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/>2  87285b34884572647811a353c7ac498a  3504c0cb71d7fa48d967e0e4c94d59d9   <br/><br/>   shipping_limit_date  price  freight_value  payment_sequential payment_type  \<br/>0  2017-10-06 11:07:15  29.99           8.72                   1  Credit Card   <br/>1  2017-10-06 11:07:15  29.99           8.72                   3      Voucher   <br/>2  2017-10-06 11:07:15  29.99           8.72                   2      Voucher   <br/><br/>   payment_installments  payment_value review_id  \<br/>0                     1          18.12   PR31563   <br/>1                     1           2.00   PR31563   <br/>2                     1          18.59   PR31563   <br/><br/>                         review_id3  review_score review_comment_title  \<br/>0  a54f0611adc9ed256b57ede6b6eb5114           4.0                  NaN   <br/>1  a54f0611adc9ed256b57ede6b6eb5114           4.0                  NaN   <br/>2  a54f0611adc9ed256b57ede6b6eb5114           4.0                  NaN   <br/><br/>                                                            review_comment_message  \<br/>0  Não testei o produto ainda, mas ele veio correto e em boas condições. Apenas...   <br/>1  Não testei o produto ainda, mas ele veio correto e em boas condições. Apenas...   <br/>2  Não testei o produto ainda, mas ele veio correto e em boas condições. Apenas...   <br/><br/>  review_creation_date  ... product_photos_qty product_weight_g  \<br/>0  2017-10-11 00:00:00  ...                4.0            500.0   <br/>1  2017-10-11 00:00:00  ...                4.0            500.0   <br/>2  2017-10-11 00:00:00  ...                4.0            500.0   <br/><br/>  product_length_cm  product_height_cm  product_width_cm  customer_id  \<br/>0              19.0                8.0              13.0        23005   <br/>1              19.0                8.0              13.0        23005   <br/>2              19.0                8.0              13.0        23005   <br/><br/>   customer_unique_id                customer_uniqueid3  \<br/>0              C10952  7c396fd4830fd04220f754e42b4e5bff   <br/>1              C10952  7c396fd4830fd04220f754e42b4e5bff   <br/>2              C10952  7c396fd4830fd04220f754e42b4e5bff   <br/><br/>   customer_zip_code_prefix  customer_city  customer_state seller_id  \<br/>0                      3149      Sao Paulo              SP     S2121   <br/>1                      3149      Sao Paulo              SP     S2121   <br/>2                      3149      Sao Paulo              SP     S2121   <br/><br/>  seller_zip_code_prefix  seller_city seller_state  \<br/>0                   9350         Maua           SP   <br/>1                   9350         Maua           SP   <br/>2                   9350         Maua           SP   <br/><br/>  product_category_name_english review_response_time  order_purchase_year  \<br/>0                    housewares                  1.0                 2017   <br/>1                    housewares                  1.0                 2017   <br/>2                    housewares                  1.0                 2017   <br/><br/>  order_purchase_month order_purchase_dayofweek order_purchase_hour  \<br/>0                   10                        0                  10   <br/>1                   10                        0                  10   <br/>2                   10                        0                  10   <br/><br/>   order_purchase_day  order_purchase_mon  order_purchase_date  InvoiceDate  <br/>0                 Mon                 Oct           2017-10-02   2017-10-02  <br/>1                 Mon                 Oct           2017-10-02   2017-10-02  <br/>2                 Mon                 Oct           2017-10-02   2017-10-02  <br/><br/>[3 rows x 55 columns]</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Resumo do dataset
+print('{:,} Linhas; {:,} Colunas'.format(df00.shape[0], df00.shape[1]))
+print('{:,} Transações não tem customer id'.format(df00[df00.customer_unique_id.isnull()].shape[0]))
+print('Datas das Transações de {} a {}'.format(df00['InvoiceDate'].min(), df00['InvoiceDate'].max()))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">116,581 Linhas; 55 Colunas
+0 Transações não tem customer id
+Datas das Transações de 2016-09-04 00:00:00 a 2018-09-03 00:00:00
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Data Modeling]</strong></font></p>
+<font color="#66666" face="Segoe Print" size="4">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Agregação dos Dados Para Criação dos Parâmetros R, F e M</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Primeiro Momento:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Vamos calcular individualmente os valores de R, F e M.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Define a data mais recente
+data_mais_recente = df00['InvoiceDate'].max() + timedelta(days = 1)
+data_mais_recente</code></pre>
+</div>
+<div class="output">Timestamp('2018-09-04 00:00:00')</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>df00['InvoiceDate'].max()</strong>:</p>
+<ul>
+<li>Esta parte do código está acessando a coluna 'InvoiceDate' em um DataFrame chamado "df00"</li>
+<li>e encontrando a data máxima, que é a data da fatura mais recente no conjunto de dados.</li>
+</ul>
+<p><strong>timedelta(days = 1)</strong>:</p>
+<ul>
+<li>Isso cria um intervalo de tempo de um dia.</li>
+<li>A função timedelta faz parte do módulo datetime em Python e é usada para representar uma duração de tempo.</li>
+<li>Neste caso, está sendo usada para adicionar um dia à data da fatura mais recente.</li>
+</ul>
+<p>O resultado é a data da fatura mais recente mais um dia.</p>
+<ul>
+<li>O motivo para adicionar um dia à data da fatura mais recente é criar um ponto de referência para calcular a recência.</li>
+<li>Na análise RFM, a recência é calculada como o número de dias desde a última compra de um cliente.</li>
+<li>Ao definir a data_mais_recente para um dia após a compra mais recente no conjunto de dados, você pode calcular a recência simplesmente<br>subtraindo a data da fatura da data_mais_recente para cada cliente, o que é feito abaixo:</br></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df00['payment_value'].describe().transpose()</code></pre>
+</div>
+<div class="output">count    116581.000000<br/>mean        172.910258<br/>std         267.622516<br/>min           0.000000<br/>25%          61.000000<br/>50%         108.190000<br/>75%         189.720000<br/>max       13664.080000<br/>Name: payment_value, dtype: float64</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Agrupando por CustomerID e fazer agregações:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Agrupando por CustomerID
+df00_agg = df00.groupby(['customer_unique_id']).agg({'InvoiceDate': lambda x: (data_mais_recente - x.max()).days,
+                                                     'order_id': 'count',
+                                                     'payment_value': 'sum'})</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Renomeia as colunas:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Renomeia as colunas
+df00_agg.rename(columns = {'InvoiceDate': 'Recency', 
+                           'order_id': 'Frequency', 
+                           'payment_value': 'Monetary'}, 
+                  inplace = True)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualiza
+df00_agg.head()</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary<br/>customer_unique_id                              <br/>C00001                   73          1    121.82<br/>C00002                   66          1    155.76<br/>C00003                  337          1    181.55<br/>C00004                  193          1     90.78<br/>C00005                  283          1    266.89</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualiza
+df00_agg.sample(5)</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary<br/>customer_unique_id                              <br/>C87365                   98          1     45.43<br/>C43017                  341          1    343.71<br/>C72079                   80          1     98.14<br/>C60859                  539          2    519.92<br/>C21212                  239          2    477.28</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Verifica se gerou valores ausentes:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Verifica se gerou valores ausentes
+df00_agg.isna().any()</code></pre>
+</div>
+<div class="output">Recency      False<br/>Frequency    False<br/>Monetary     False<br/>dtype: bool</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Resumo estatístico:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Resumo estatístico
+df00_agg['Recency'].describe()</code></pre>
+</div>
+<div class="output">count    94087.000000<br/>mean       243.803575<br/>std        153.156983<br/>min          1.000000<br/>25%        120.000000<br/>50%        224.000000<br/>75%        353.000000<br/>max        730.000000<br/>Name: Recency, dtype: float64</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Recency (R): Há quanto tempo o cliente fez a última compra</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Vamos vericar a "frequência da frequência de compra":</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Vamos vericar a "frequência da frequência de compra"
+df00_agg['Frequency'].value_counts()</code></pre>
+</div>
+<div class="output">Frequency<br/>1     79915<br/>2     10323<br/>3      2003<br/>4       956<br/>5       337<br/>      ...  <br/>18        1<br/>19        1<br/>29        1<br/>16        1<br/>35        1<br/>Name: count, Length: 27, dtype: int64</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Frequency (F): Quantas vezes o cliente comprou em um determinado período.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Resumo estatístico
+df00_agg['Monetary'].describe()</code></pre>
+</div>
+<div class="output">count     94087.000000<br/>mean        214.249054<br/>std         647.368039<br/>min           9.590000<br/>25%          64.000000<br/>50%         113.150000<br/>75%         203.770000<br/>max      109312.640000<br/>Name: Monetary, dtype: float64</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Monetary Value (M): Quanto o cliente gastou no total durante esse período.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Segundo Momento:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Vamos juntar os valores de R, F e M, e criar uma pontuação, um score RFM.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Definição dos Recursos RFM Através de Análise Estatística</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Temos registros de clientes agrupados por tempo para retorno de suas compras, a frequência por sua quantidade e o valor monetário das compras.</li>
+<li>Agora podemos usar o método .qcut() para atribuir o percentil relativo aos recursos RFM.</li>
+<li>Mas, por que faremos isso?</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Amostra
+print(df00_agg.sort_values('Monetary'))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">                    Recency  Frequency   Monetary
+customer_unique_id                               
+C93723                   10          2       9.59
+C33293                  356          1      10.07
+C25728                   75          1      10.89
+C36923                  367          1      11.63
+C81496                  310          1      11.63
+...                     ...        ...        ...
+C52090                  138         10   30186.00
+C83049                  284          6   36489.24
+C88657                  194         20   44048.00
+C71679                  377         20   45256.00
+C71116                  340          8  109312.64
+
+[94087 rows x 3 columns]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df00_agg.describe().transpose()</code></pre>
+</div>
+<div class="output">             count        mean         std   min    25%     50%     75%  \<br/>Recency    94087.0  243.803575  153.156983  1.00  120.0  224.00  353.00   <br/>Frequency  94087.0    1.239077    0.850594  1.00    1.0    1.00    1.00   <br/>Monetary   94087.0  214.249054  647.368039  9.59   64.0  113.15  203.77   <br/><br/>                 max  <br/>Recency       730.00  <br/>Frequency      75.00  <br/>Monetary   109312.64  </div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Considere os quartis dos valores monetários</strong>:</p>
+<p>Estes quartis representam os valores que dividem a distribuição dos dados em quatro partes iguais.</p>
+<p>Eles são uma medida de dispersão que dá uma ideia da distribuição dos dados. Aqui está como você pode interpretá-los:</p>
+<p><strong>25% (Primeiro Quartil)</strong>:</p>
+<ul>
+<li>25% dos dados são menores ou iguais a 64.000.</li>
+<li>Isso significa que um quarto dos valores na distribuição é menor ou igual a 64.000.</li>
+</ul>
+<p><strong>50% (Segundo Quartil ou Mediana)</strong>:</p>
+<ul>
+<li>50% dos dados são menores ou iguais a 113.150.</li>
+<li>A mediana é o valor do meio da distribuição, de modo que metade dos valores é menor ou igual a 113.150 e a outra metade é maior.</li>
+</ul>
+<p><strong>75% (Terceiro Quartil)</strong>:</p>
+<ul>
+<li>75% dos dados são menores ou iguais a 203.770.</li>
+<li>Isso indica que três quartos dos valores na distribuição são menores ou iguais a 203.770.</li>
+</ul>
+<p><strong>Os quartis são úteis para entender a distribuição dos dados, identificar valores atípicos e comparar diferentes conjuntos de dados.</strong></p>
+<p><strong>Usaremos os quartis para dividir os clientes estatisticamente nos parâmetros R, F e M.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criando grupos para Recência:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Criando labels para Recency 
+r_labels = range(4, 0, -1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><p>A função range em Python gera uma sequência de números. O uso de range(4, 0, -1) cria uma sequência que começa em 4, termina antes de 0 e decrementa em 1 a cada passo.</p>
+</li>
+<li><p>Portanto, a sequência gerada será: 4,3,2,1</p>
+</li>
+<li><p>Note que o número 0 não está incluído na sequência, pois o ponto final especificado em range é exclusivo.</p>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo esses rótulos a 4 grupos de percentis
+r_groups = pd.qcut(df00_agg['Recency'], q = 4, labels = r_labels)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>q = 4</strong>: Indica que a série de dados será dividida em 4 quantis, ou seja, em quartis.</p>
+<ul>
+<li>Isso significa que a série será dividida em quatro partes iguais com base nos valores de recência.</li>
+</ul>
+<p>Os quartis serão rotulados com os rótulos fornecidos na lista r_labels.</p>
+<ul>
+<li>Por exemplo, se r_labels = [4, 3, 2, 1], o quartil mais baixo (os 25% dos dados com a menor recência) será rotulado como '4', o próximo quartil como '3', e assim por diante.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">r_groups.value_counts()</code></pre>
+</div>
+<div class="output">Recency<br/>4    23766<br/>2    23563<br/>1    23440<br/>3    23318<br/>Name: count, dtype: int64</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria a coluna R no dataframe
+df00_agg = df00_agg.assign(R = r_groups.values)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Amostra
+df00_agg.sample(10)</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R<br/>customer_unique_id                                 <br/>C62064                   18          1    208.88  4<br/>C89750                  583          1     41.90  1<br/>C74214                  485          1     65.31  1<br/>C27612                   32          2    224.28  4<br/>C88256                  332          1   1635.64  2<br/>C33146                   30          2    744.02  4<br/>C37831                  276          1     69.14  2<br/>C77339                   58          2    139.40  4<br/>C00560                   36          1    159.60  4<br/>C19655                  120          1    199.29  4</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criando grupos para Frequência:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Para a frequência vamos trabalhar somente com 2 grupos:</strong></p>
+<ul>
+<li><strong>Grupo dos clientes que compraram apenas uma vez e grupo dos clientes que compraram mais de uma vez.</strong></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Resumo estatístico
+df00_agg['Frequency'].describe()</code></pre>
+</div>
+<div class="output">count    94087.000000<br/>mean         1.239077<br/>std          0.850594<br/>min          1.000000<br/>25%          1.000000<br/>50%          1.000000<br/>75%          1.000000<br/>max         75.000000<br/>Name: Frequency, dtype: float64</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p>Olhando para distribuição, observamos não estar interessante para divisão por quartil, pois teremos o mesmo número de clientes em três quartis, o que não é bom para segmentar os clintes.</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Criando labels para Frequency
+f_labels = range(1, 3)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">f_labels</code></pre>
+</div>
+<div class="output">range(1, 3)</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Função personalizada para criação dos grupos:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p>Não podemos utilizar a função qcut(), que utiliza a distribuição para dividir os grupos, então temos que criar uma função para essa divisão.</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função
+def fn_pct_rank_qcut(series, n):
+    
+    # Cria uma série de valores limite para os quantis, dividindo o intervalo [0, 1] em n partes iguais
+    edges = pd.Series([float(i) / n for i in range(n + 1)])
+    
+    # Define uma função que encontra o índice do primeiro valor na série de limites que é maior ou igual a x
+    f = lambda x: (edges &gt;= x).values.argmax()
+    
+    # Classifica a série de entrada como uma porcentagem (de 0 a 1)
+    # e então aplica a função f para mapear cada valor para seu respectivo quantil
+    return series.rank(pct = 1).apply(f)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo esses rótulos a 2 grupos de percentis 
+f_groups = fn_pct_rank_qcut(df00_agg['Frequency'], 2)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">f_groups.value_counts()</code></pre>
+</div>
+<div class="output">Frequency<br/>1    79915<br/>2    14172<br/>Name: count, dtype: int64</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria a coluna F no dataframe
+df00_agg = df00_agg.assign(F = f_groups.values)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Amostra
+df00_agg.sample(10)</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F<br/>customer_unique_id                                    <br/>C88810                  229          5     81.00  2  2<br/>C48185                  315          1     24.17  2  1<br/>C69214                  188          1     92.57  3  1<br/>C00955                  459          2    170.47  1  2<br/>C57865                  453          1    145.59  1  1<br/>C04875                  218          1    344.55  3  1<br/>C83915                  439          1    178.89  1  1<br/>C06137                  132          1    576.04  3  1<br/>C67188                  167          1     69.34  3  1<br/>C21778                  244          1     74.14  2  1</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criando grupos para Monetário:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Criando labels para Monetary
+m_labels = range(1, 5)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo esses rótulos a 4 grupos de percentis
+m_groups = pd.qcut(df00_agg['Monetary'], q = 4, labels = m_labels)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">m_groups.value_counts()</code></pre>
+</div>
+<div class="output">Monetary<br/>1    23569<br/>4    23521<br/>3    23503<br/>2    23494<br/>Name: count, dtype: int64</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria a nova coluna M
+df00_agg = df00_agg.assign(M = m_groups.values)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df00_agg.head()</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M<br/>customer_unique_id                                       <br/>C00001                   73          1    121.82  4  1  3<br/>C00002                   66          1    155.76  4  1  3<br/>C00003                  337          1    181.55  2  1  3<br/>C00004                  193          1     90.78  3  1  2<br/>C00005                  283          1    266.89  2  1  4</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Observe os tipos de dados
+df00_agg.info()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region"><class 'pandas.core.frame.dataframe'="">
+Index: 94087 entries, C00001 to C96999
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype   
+---  ------     --------------  -----   
+ 0   Recency    94087 non-null  int64   
+ 1   Frequency  94087 non-null  int64   
+ 2   Monetary   94087 non-null  float64 
+ 3   R          94087 non-null  category
+ 4   F          94087 non-null  int64   
+ 5   M          94087 non-null  category
+dtypes: category(2), float64(1), int64(3)
+memory usage: 3.8+ MB
+</class></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>R e F foram criados como tipo category. Vamos ajustar isso.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Processamento dos Dados e Label Encoding</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p>Não queremos modificar o dado, apenas o formato. Existe uma ordem dos quartis e precisa ser mantida, por isso usamos label enconder.</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria o codificador
+labenc = LabelEncoder()</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Transformação de categoria para representação numérica
+df00_agg['R'] = labenc.fit_transform(df00_agg['R']) + 1
+df00_agg['M'] = labenc.fit_transform(df00_agg['M']) + 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Info
+df00_agg.info()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region"><class 'pandas.core.frame.dataframe'="">
+Index: 94087 entries, C00001 to C96999
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Recency    94087 non-null  int64  
+ 1   Frequency  94087 non-null  int64  
+ 2   Monetary   94087 non-null  float64
+ 3   R          94087 non-null  int64  
+ 4   F          94087 non-null  int64  
+ 5   M          94087 non-null  int64  
+dtypes: float64(1), int64(5)
+memory usage: 7.0+ MB
+</class></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Amostra
+df00_agg.head()</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M<br/>customer_unique_id                                       <br/>C00001                   73          1    121.82  4  1  3<br/>C00002                   66          1    155.76  4  1  3<br/>C00003                  337          1    181.55  2  1  3<br/>C00004                  193          1     90.78  3  1  2<br/>C00005                  283          1    266.89  2  1  4</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p>Com essas 3 pontuações, R, F e M, podemos criar os scores e segmentos RFM.</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Terceiro Momento:</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Vamos usar o score RFM para fazer a segmentação de Clientes.</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criação dos Segmentos RFM</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria o RFM Score
+df00_agg['Score_RFM'] = df00_agg[['R','F','M']].sum(axis = 1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df00_agg.sample(5)</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M  Score_RFM<br/>customer_unique_id                                                  <br/>C74456                  119          1     58.23  4  1  1          6<br/>C18541                  133          1    157.42  3  1  3          7<br/>C28595                  191          1     53.05  3  1  1          5<br/>C50148                  196          1    296.08  3  1  4          8<br/>C28686                  130          1     73.68  3  1  2          6</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>ATENÇÃO: A OPERAÇÃO ABAIXO É CONCATENAÇÃO E NÃO SOMA!</strong></p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Concatena valores de RFM para criar segmentos de RFM
+def fn_join_rfm(x):
+    return str(x['R']) + str(x['F']) + str(x['M'])</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Aplica a função
+df00_agg['Segmento_RFM'] = df00_agg.apply(fn_join_rfm, axis = 1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualiza
+df00_agg.sample(5)</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M  Score_RFM  \<br/>customer_unique_id                                                     <br/>C68934                  134          1    140.54  3  1  3          7   <br/>C60270                  291          1    502.23  2  1  4          7   <br/>C48925                  488          1    180.85  1  1  3          5   <br/>C13654                  540          1    162.50  1  1  3          5   <br/>C70647                  417          1    568.59  1  1  4          6   <br/><br/>                   Segmento_RFM  <br/>customer_unique_id               <br/>C68934                3.01.03.0  <br/>C60270                2.01.04.0  <br/>C48925                1.01.03.0  <br/>C13654                1.01.03.0  <br/>C70647                1.01.04.0  </div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Aplica a função
+df00_agg['Segmento_RFM'] = df00_agg.apply(fn_join_rfm, axis = 1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualiza
+df00_agg.head()</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M  Score_RFM  \<br/>customer_unique_id                                                     <br/>C00001                   73          1    121.82  4  1  3          8   <br/>C00002                   66          1    155.76  4  1  3          8   <br/>C00003                  337          1    181.55  2  1  3          6   <br/>C00004                  193          1     90.78  3  1  2          6   <br/>C00005                  283          1    266.89  2  1  4          7   <br/><br/>                   Segmento_RFM  <br/>customer_unique_id               <br/>C00001                      413  <br/>C00002                      413  <br/>C00003                      213  <br/>C00004                      312  <br/>C00005                      214  </div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Contamos o número de segmentos únicos
+rfm_count_unique = df00_agg.groupby('Segmento_RFM')['Segmento_RFM'].nunique()</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">print('segmentos:')
+print(rfm_count_unique.sum())</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">segmentos:
+32
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Criamos uma cópia do dataframe
+rfm = df00_agg</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Amostra
+rfm.head()</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M  Score_RFM  \<br/>customer_unique_id                                                     <br/>C00001                   73          1    121.82  4  1  3          8   <br/>C00002                   66          1    155.76  4  1  3          8   <br/>C00003                  337          1    181.55  2  1  3          6   <br/>C00004                  193          1     90.78  3  1  2          6   <br/>C00005                  283          1    266.89  2  1  4          7   <br/><br/>                   Segmento_RFM  <br/>customer_unique_id               <br/>C00001                      413  <br/>C00002                      413  <br/>C00003                      213  <br/>C00004                      312  <br/>C00005                      214  </div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Info
+rfm.info()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region"><class 'pandas.core.frame.dataframe'="">
+Index: 94087 entries, C00001 to C96999
+Data columns (total 8 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   Recency       94087 non-null  int64  
+ 1   Frequency     94087 non-null  int64  
+ 2   Monetary      94087 non-null  float64
+ 3   R             94087 non-null  int64  
+ 4   F             94087 non-null  int64  
+ 5   M             94087 non-null  int64  
+ 6   Score_RFM     94087 non-null  int64  
+ 7   Segmento_RFM  94087 non-null  object 
+dtypes: float64(1), int64(6), object(1)
+memory usage: 8.5+ MB
+</class></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Ajusta o tipo de dado
+rfm['Segmento_RFM'] = rfm['Segmento_RFM'].astype(str).astype(int)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Info
+rfm.info()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region"><class 'pandas.core.frame.dataframe'="">
+Index: 94087 entries, C00001 to C96999
+Data columns (total 8 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   Recency       94087 non-null  int64  
+ 1   Frequency     94087 non-null  int64  
+ 2   Monetary      94087 non-null  float64
+ 3   R             94087 non-null  int64  
+ 4   F             94087 non-null  int64  
+ 5   M             94087 non-null  int64  
+ 6   Score_RFM     94087 non-null  int64  
+ 7   Segmento_RFM  94087 non-null  int32  
+dtypes: float64(1), int32(1), int64(6)
+memory usage: 8.1+ MB
+</class></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Describe
+rfm.describe()</code></pre>
+</div>
+<div class="output">            Recency     Frequency       Monetary             R             F  \<br/>count  94087.000000  94087.000000   94087.000000  94087.000000  94087.000000   <br/>mean     243.803575      1.239077     214.249054      2.503895      1.150627   <br/>std      153.156983      0.850594     647.368039      1.119577      0.357686   <br/>min        1.000000      1.000000       9.590000      1.000000      1.000000   <br/>25%      120.000000      1.000000      64.000000      2.000000      1.000000   <br/>50%      224.000000      1.000000     113.150000      3.000000      1.000000   <br/>75%      353.000000      1.000000     203.770000      4.000000      1.000000   <br/>max      730.000000     75.000000  109312.640000      4.000000      2.000000   <br/><br/>                  M     Score_RFM  Segmento_RFM  <br/>count  94087.000000  94087.000000  94087.000000  <br/>mean       2.499283      6.153804    264.395081  <br/>std        1.118482      1.715630    112.037091  <br/>min        1.000000      3.000000    111.000000  <br/>25%        1.000000      5.000000    211.000000  <br/>50%        2.000000      6.000000    311.000000  <br/>75%        3.000000      7.000000    411.000000  <br/>max        4.000000     10.000000    424.000000  </div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Evaluation]</strong></font></p>
+<font color="#66666" face="Segoe Print" size="4">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Segmentação de Clientes Usando Análise RFM</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para criar os níveis RFM
+def fn_rfm_level(df):
+    
+    if (df['Segmento_RFM'] &gt;= 424 | (df['Score_RFM'] &gt;= 9)) :
+        return 'Clientes VIP'
+    
+    elif ((df['Score_RFM'] &gt;= 8) &amp; (df['M'] == 4)):
+        return 'Clientes Leais Que Compram com Frequência'
+    
+    elif ((df['Score_RFM'] &gt;= 6) &amp; (df['F'] &gt;= 2)):
+        return 'Clientes Leais'
+    
+    elif ((df['Score_RFM'] &lt;= 4) &amp; (df['R'] == 1)):
+        return 'Clientes Quase Perdidos'
+    
+    elif ((df['Segmento_RFM'] &gt;= 221) | (df['Score_RFM'] &gt;= 6)):
+        return 'Potenciais Clientes Leais'
+    
+    elif ((df['Segmento_RFM'] &gt;= 121) &amp; (df['R'] == 1) | (df['Score_RFM'] == 5)):
+        return 'Clientes Que Precisam de Atenção'
+    
+    else:
+        return 'Clientes Perdidos'</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para as ações RFM
+def fn_rfm_action(df):
+    
+    if (df['Segmento_RFM'] &gt;= 424 | (df['Score_RFM'] &gt;= 9)) :
+        return 'Incentivos não relacionados a preços; Oferecer edição limitada e programas de fidelidade'
+    
+    elif ((df['Score_RFM'] &gt;= 8) &amp; (df['M'] == 4)):
+        return 'Oferecer itens mais caros (Upsell)'
+    
+    elif ((df['Score_RFM'] &gt;= 6) &amp; (df['F'] &gt;= 2)):
+        return 'Oferecer programas de fidelidade e venda cruzada (Cross-Sell)'
+    
+    elif ((df['Score_RFM'] &lt;= 4) &amp; (df['R'] == 1)):
+        return 'Oferecer Incentivos de preços agressivos'
+    
+    elif ((df['Segmento_RFM'] &gt;= 221) | (df['Score_RFM'] &gt;= 6)):
+        return 'Recomendações de venda cruzada e cupons de desconto'
+    
+    elif (((df['Segmento_RFM'] &gt;= 121) &amp; (df['R'] == 1)) | (df['Score_RFM'] == 5)):
+        return 'Incentivos de preço e oferta por tempo limitado'
+    
+    else:
+        return 'Não gaste muito tentando readquirir esse cliente'</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">rfm.head()</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M  Score_RFM  \<br/>customer_unique_id                                                     <br/>C00001                   73          1    121.82  4  1  3          8   <br/>C00002                   66          1    155.76  4  1  3          8   <br/>C00003                  337          1    181.55  2  1  3          6   <br/>C00004                  193          1     90.78  3  1  2          6   <br/>C00005                  283          1    266.89  2  1  4          7   <br/><br/>                    Segmento_RFM  <br/>customer_unique_id                <br/>C00001                       413  <br/>C00002                       413  <br/>C00003                       213  <br/>C00004                       312  <br/>C00005                       214  </div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Aplica a função e cria nova variável 'Segmento de Cliente'
+rfm['Segmento de Cliente'] = rfm.apply(fn_rfm_level, axis = 1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Aplica a função e cria uma nova variável 'Marketing Action'
+rfm['Marketing Action'] = rfm.apply(fn_rfm_action, axis = 1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualiza
+rfm.head(20)</code></pre>
+</div>
+<div class="output">                    Recency  Frequency  Monetary  R  F  M  Score_RFM  \<br/>customer_unique_id                                                     <br/>C00001                   73          1    121.82  4  1  3          8   <br/>C00002                   66          1    155.76  4  1  3          8   <br/>C00003                  337          1    181.55  2  1  3          6   <br/>C00004                  193          1     90.78  3  1  2          6   <br/>C00005                  283          1    266.89  2  1  4          7   <br/>C00006                  105          2    267.96  4  2  4         10   <br/>C00007                   82          1     70.03  4  1  2          7   <br/>C00008                  169          1    165.94  3  1  3          7   <br/>C00009                  366          1    103.64  1  1  2          4   <br/>C00010                  321          2    693.72  2  2  4          8   <br/>C00011                  567          1    144.21  1  1  3          5   <br/>C00012                  441          1     49.09  1  1  1          3   <br/>C00013                   51          1    108.33  4  1  2          7   <br/>C00014                  336          1     61.01  2  1  1          4   <br/>C00015                  282          1     58.61  2  1  1          4   <br/>C00016                  276          1    190.37  2  1  3          6   <br/>C00017                  357          1    111.60  1  1  2          4   <br/>C00019                  133          1     19.08  3  1  1          5   <br/>C00020                  113          2    473.00  4  2  4         10   <br/>C00021                  388          1     81.89  1  1  2          4   <br/><br/>                    Segmento_RFM                        Segmento de Cliente  \<br/>customer_unique_id                                                            <br/>C00001                       413                  Potenciais Clientes Leais   <br/>C00002                       413                  Potenciais Clientes Leais   <br/>C00003                       213                  Potenciais Clientes Leais   <br/>C00004                       312                  Potenciais Clientes Leais   <br/>C00005                       214                  Potenciais Clientes Leais   <br/>C00006                       424  Clientes Leais Que Compram com Frequência   <br/>C00007                       412                  Potenciais Clientes Leais   <br/>C00008                       313                  Potenciais Clientes Leais   <br/>C00009                       112                    Clientes Quase Perdidos   <br/>C00010                       224  Clientes Leais Que Compram com Frequência   <br/>C00011                       113           Clientes Que Precisam de Atenção   <br/>C00012                       111                    Clientes Quase Perdidos   <br/>C00013                       412                  Potenciais Clientes Leais   <br/>C00014                       211                          Clientes Perdidos   <br/>C00015                       211                          Clientes Perdidos   <br/>C00016                       213                  Potenciais Clientes Leais   <br/>C00017                       112                    Clientes Quase Perdidos   <br/>C00019                       311                  Potenciais Clientes Leais   <br/>C00020                       424  Clientes Leais Que Compram com Frequência   <br/>C00021                       112                    Clientes Quase Perdidos   <br/><br/>                                                       Marketing Action  <br/>customer_unique_id                                                       <br/>C00001              Recomendações de venda cruzada e cupons de desconto  <br/>C00002              Recomendações de venda cruzada e cupons de desconto  <br/>C00003              Recomendações de venda cruzada e cupons de desconto  <br/>C00004              Recomendações de venda cruzada e cupons de desconto  <br/>C00005              Recomendações de venda cruzada e cupons de desconto  <br/>C00006                               Oferecer itens mais caros (Upsell)  <br/>C00007              Recomendações de venda cruzada e cupons de desconto  <br/>C00008              Recomendações de venda cruzada e cupons de desconto  <br/>C00009                         Oferecer Incentivos de preços agressivos  <br/>C00010                               Oferecer itens mais caros (Upsell)  <br/>C00011                  Incentivos de preço e oferta por tempo limitado  <br/>C00012                         Oferecer Incentivos de preços agressivos  <br/>C00013              Recomendações de venda cruzada e cupons de desconto  <br/>C00014                 Não gaste muito tentando readquirir esse cliente  <br/>C00015                 Não gaste muito tentando readquirir esse cliente  <br/>C00016              Recomendações de venda cruzada e cupons de desconto  <br/>C00017                         Oferecer Incentivos de preços agressivos  <br/>C00019              Recomendações de venda cruzada e cupons de desconto  <br/>C00020                               Oferecer itens mais caros (Upsell)  <br/>C00021                         Oferecer Incentivos de preços agressivos  </div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Total de registros por segmento de cliente
+rfm['Segmento de Cliente'].value_counts()</code></pre>
+</div>
+<div class="output">Segmento de Cliente<br/>Potenciais Clientes Leais                    45421<br/>Clientes Leais Que Compram com Frequência    14249<br/>Clientes Quase Perdidos                      11595<br/>Clientes Que Precisam de Atenção             11043<br/>Clientes Leais                                6141<br/>Clientes Perdidos                             5638<br/>Name: count, dtype: int64</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Salva os dados em disco
+rfm.to_csv("rfm.csv")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Calcula os valores médios para cada segmento e o tamanho do retorno de cada segmento
+rfm_level_agg = rfm.groupby(['Segmento de Cliente']).agg({'Recency': 'mean',
+                                                          'Frequency' : 'mean',
+                                                          'Monetary': ['mean', 'count'],
+                                                          'Marketing Action' : 'unique'}).round(1)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Imprime
+rfm_level_agg</code></pre>
+</div>
+<div class="output">                                          Recency Frequency Monetary         \<br/>                                             mean      mean     mean  count   <br/>Segmento de Cliente                                                           <br/>Clientes Leais                              305.2       2.4    356.9   6141   <br/>Clientes Leais Que Compram com Frequência   146.1       1.9    619.3  14249   <br/>Clientes Perdidos                           281.9       1.0     44.2   5638   <br/>Clientes Quase Perdidos                     457.3       1.0     64.2  11595   <br/>Clientes Que Precisam de Atenção            368.5       1.0    114.9  11043   <br/>Potenciais Clientes Leais                   176.6       1.0    151.5  45421   <br/><br/>                                                                                          Marketing Action  <br/>                                                                                                    unique  <br/>Segmento de Cliente                                                                                         <br/>Clientes Leais                             [Oferecer programas de fidelidade e venda cruzada (Cross-Sell)]  <br/>Clientes Leais Que Compram com Frequência                             [Oferecer itens mais caros (Upsell)]  <br/>Clientes Perdidos                                       [Não gaste muito tentando readquirir esse cliente]  <br/>Clientes Quase Perdidos                                         [Oferecer Incentivos de preços agressivos]  <br/>Clientes Que Precisam de Atenção                         [Incentivos de preço e oferta por tempo limitado]  <br/>Potenciais Clientes Leais                            [Recomendações de venda cruzada e cupons de desconto]  </div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Deployment]</strong></font></p>
+<font color="#66666" face="Segoe Print" size="4">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Ajustando o dataframe e fazendo o reset do índice
+rfm_level_ag = pd.DataFrame(rfm_level_agg)
+rfm_level_ag = rfm_level_ag.reset_index()
+rfm_level_ag</code></pre>
+</div>
+<div class="output">                         Segmento de Cliente Recency Frequency Monetary  \<br/>                                                mean      mean     mean   <br/>0                             Clientes Leais   305.2       2.4    356.9   <br/>1  Clientes Leais Que Compram com Frequência   146.1       1.9    619.3   <br/>2                          Clientes Perdidos   281.9       1.0     44.2   <br/>3                    Clientes Quase Perdidos   457.3       1.0     64.2   <br/>4           Clientes Que Precisam de Atenção   368.5       1.0    114.9   <br/>5                  Potenciais Clientes Leais   176.6       1.0    151.5   <br/><br/>                                                         Marketing Action  <br/>   count                                                           unique  <br/>0   6141  [Oferecer programas de fidelidade e venda cruzada (Cross-Sell)]  <br/>1  14249                             [Oferecer itens mais caros (Upsell)]  <br/>2   5638               [Não gaste muito tentando readquirir esse cliente]  <br/>3  11595                       [Oferecer Incentivos de preços agressivos]  <br/>4  11043                [Incentivos de preço e oferta por tempo limitado]  <br/>5  45421            [Recomendações de venda cruzada e cupons de desconto]  </div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Recomendações Para a Área de Negócio: (Resposta para área de negócio)</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p><strong>Clientes Leais</strong></p>
+<ul>
+<li>São os clientes mais leais.</li>
+<li>Eles são ativos com compras frequentes e alto valor monetário.</li>
+<li>Eles podem ser os evangelistas da marca e a empresa deve se concentrar em servi-los muito bem.</li>
+<li>Eles podem ser os melhores clientes para obter feedback sobre o lançamento de qualquer novo produto ou ser os primeiros a adotar ou promover novos produtos/serviços.</li>
+</ul>
+<p><strong>Potenciais Clientes Leais</strong></p>
+<ul>
+<li>Alto potencial para entrar em nossos segmentos de clientes fiéis, por que não oferecer alguns brindes em sua próxima compra para mostrar que você os valoriza?</li>
+</ul>
+<p><strong>Clientes Que Precisam de Atenção</strong></p>
+<ul>
+<li>Mostrando sinais promissores com a quantidade e valor de sua compra, mas já faz um tempo que não compram.</li>
+<li>Vamos direcioná-los para seus itens da lista de desejos e um desconto com oferta por tempo limitado.</li>
+</ul>
+<p><strong>Clientes Quase Perdidos</strong></p>
+<ul>
+<li>Fizeram algumas compras iniciais, mas não voltaram desde então.</li>
+<li>Foi uma experiência ruim para o cliente? Ou adequação ao mercado do produto?</li>
+<li>Vamos gastar alguns recursos para construir o conhecimento de nossa marca com eles?</li>
+</ul>
+<p><strong>Clientes Leais Que Compram com Frequência</strong></p>
+<ul>
+<li>É sempre uma boa ideia tratar cuidadosamente todos os novos clientes, mas como esses clientes gastaram muito em suas compras, são ainda mais valiosos.</li>
+<li>É importante fazer com que eles se sintam valorizados e apreciados - e dar-lhes incentivos incríveis para continuar a interagir com a marca.</li>
+</ul>
+<p><strong>Clientes VIP</strong></p>
+<ul>
+<li>Buscam e querem mais do que preço.</li>
+<li>Programa de fidelidade ou produto/serviço exclusivo ou limitado são opções para manter esses clientes.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Dashboard Interativo</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<p>Antes de criar um dashboard interativo, vamos criar um dashboard simples.</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">rfm_level_agg</code></pre>
+</div>
+<div class="output">                                          Recency Frequency Monetary         \<br/>                                             mean      mean     mean  count   <br/>Segmento de Cliente                                                           <br/>Clientes Leais                              305.2       2.4    356.9   6141   <br/>Clientes Leais Que Compram com Frequência   146.1       1.9    619.3  14249   <br/>Clientes Perdidos                           281.9       1.0     44.2   5638   <br/>Clientes Quase Perdidos                     457.3       1.0     64.2  11595   <br/>Clientes Que Precisam de Atenção            368.5       1.0    114.9  11043   <br/>Potenciais Clientes Leais                   176.6       1.0    151.5  45421   <br/><br/>                                                                                          Marketing Action  <br/>                                                                                                    unique  <br/>Segmento de Cliente                                                                                         <br/>Clientes Leais                             [Oferecer programas de fidelidade e venda cruzada (Cross-Sell)]  <br/>Clientes Leais Que Compram com Frequência                             [Oferecer itens mais caros (Upsell)]  <br/>Clientes Perdidos                                       [Não gaste muito tentando readquirir esse cliente]  <br/>Clientes Quase Perdidos                                         [Oferecer Incentivos de preços agressivos]  <br/>Clientes Que Precisam de Atenção                         [Incentivos de preço e oferta por tempo limitado]  <br/>Potenciais Clientes Leais                            [Recomendações de venda cruzada e cupons de desconto]  </div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Plot
+rfm_level_agg.columns = ['RecencyMean', 'FrequencyMean', 'MonetaryMean', 'Count', 'MarketingAction']
+fig = plt.gcf()
+ax = fig.add_subplot()
+fig.set_size_inches(12, 8)
+sns.set(color_codes = True, style = 'whitegrid')
+squarify.plot(sizes = rfm_level_agg['Count'], 
+              label = ['Clientes Leais Que Compram com Frequência',
+                       'Clientes Quase Perdidos',
+                       'Clientes Leais',
+                       'Clientes Que Precisam de Atenção',
+                       'Potenciais Clientes Leais',
+                       'Clientes VIP'], alpha=.6 )
+
+plt.title("\nSegmentos RFM\n", fontsize = 25, fontweight = "bold")
+plt.axis('on')
+plt.show()</code></pre>
+</div>
+<div class="output text-center">
+<img alt="Graph" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+wAAAMACAYAAAC+X+1xAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9hAAAPYQGoP6dpAACSyElEQVR4nOzddXhcVeLG8ffE3d3a1FJ39xYKFHdnWdxl97ess8busoaz2GKLOywUirUFWuruqWtqSZM0ruf3x6QhmUzStE0yF/r9PM88dK6ce+ZmSvPeY8ZaKwAAAAAA4Cw+3q4AAAAAAABoisAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAkScaYnsaYXxhjZhpjNhpjCowxlcaYA8aYNcaYV4wx1xljQr1dV3QsY0ygMWaMt+vR3owxLxpjbCtfVcaYYmPMTmPMAmPMs8aYC40xfm14jeZed7uV+YcjHJ92hDp1PsL5fzj+uwsAOBYEdgA4wRlj4o0xL0haK+lvkiZJ6iYpUpK/pDhJvSVdIelZSTnGmNuMMcZLVUYHMsacJmm1pBu8XReH8ZMUKilN0nBJ10l6W9JqY0w/b1bMg0nHuR8A4CUEdgA4gRlj4iXNk/RjSa0N4BGSHpcrvOMHyhiTYYx5T9J0uR7goHWyJM0yxnTydkUamHyE/QR2AHAoAjsAnKDqWsg/kNT1GIu41hhze9vVCE5hjEmUtE7Sed6uy/dUrKQnvF2JBo4UyCd2RCUAAEePwA4AJ67zJY1221YoV7f4QXKFjkBJXSTdISnXQxl/NMYEt2cl4RXBkkK8XQmHuMZaaxq+JPnKNVwkQtJUuYYMuDvdGJN1rNc4wuvho/wMnYwxXTztMMZ0lZR+lOUBADoIgR0ATlyXeNg2xVr7K2vtcmvtQWttpbV2q7X2cbm61Va6HR8j6aR2ryngINbaWmtttbW2yFr7qVwt1IUeDj2tY2vWiPvf1eZa2d23V7RDXQAAx4jADgAnrj5u7/OttYuaO9hau0quSbXcDWrTWgHfM9baPEn/87DLm2P/F7u9b21gb/b/AQCAjkdgBwAcFm2MGXuEY56X9F+31+aWTjDGhBpj7jLGzDLG7K1bKm6vMWauMeZ3xphWd8c1LpcZY6YZY3KMMeXGmK3GmBeMMYPqjgnysCzVj93KmejhmM51+zKNMf8yxqw3xpQaY/YZY74wxlzooT6nGGPeN8bsNsaUGWM2G2Neb8V9bFjGqcaYl4wxW+quV1B37f8YY05uxfnuy4TNb7BvgDHmaWPMhrr6HTDGfGWMudkY4++hrB8bY6ykrR4udXWDa2w7Qp1GGWMeM8YsN8YUNviZzzfG3HcUXcUPLzd4vzFmdt3PoryuvFxjzCJjzBPGGUvO7fGwLaDDa/Gdb9zeNxfYJx7hPACAF7W4VigA4Adth1zLtTX0iTHmfknPWmsPuJ9grZ0paWZrL2CMOVWukJ/itiux7jVK0i+NMX+01v79CGUlSXqv7pyGOss1y/1VxpjfSHqktfXzcI2rJf1bruW6DguWdLKkk+uWv7tOriD2tKSr3YroUve6xBjzO2vtn1u4VpykVyWd4rYrWK4l9bIkXW+M+VTS1dba/UfxOYyk30m6V67x1ocFSZpQ97rTGHOKtXZXa8ttxXU7y3Vf3D+T9N3PfISkXxljnpd0t7W2tIXP8FdJP5fnBobYutdQSbcYY96W6z6VHe/nOEYZHrY1+TvUgb6R9MsG71OMMVnW2uzDG4wxPdT07+bsjqgcAKB1aGEHgBPXdA/bwuUKSXuMMTONMb80xgwzxvh6OLZFxpiLJE1T00DgLljS34wxj7VQVqxcQcI9rDfkK9eEeXcdZVUPu1bSC2oc1t1dI+n/JL2upmG9ISPpPmPM6R53umZh/1aeg6270yTNNsYkt+LYw/4p6Q9qHNbd9ZL0bl0wPm7GmCFydaduzWfylWtd9zl198KTv8gVOFv7u8pFkt5sq89zNOp6iZztYdfCjq5LA+vU9IGB+/Ju7q3u+yWtb7caAQCOGoEdAE5cL0ja28w+X7l+mb9frtCRa4x50xhzqWnFrPB1LXcv6Oh6ct1ujLm4mX1PqvXjge8/ims2dK9atxb9P9X65c7+6r6hLlC+JKlH66umHpKea+WxA+V6qNAaw9UGkwYaYxLkejgTd5SnDpLroUGj7vnGmAy5WtaP1llyBfd2ZYzxM8ZEGGO6GmMul/SVmj7o2Sfps/auyxHMcXvvHtDd39O6DgAOQ2AHgBOUtbZIrlbiqlYcHiXpYrlalnOMMX8wxrQ0PvdvahpgFsnVFTtIrlb3eyVVux3zsDGmUcg3xvST5xD2taSRdeWlS/pt3Wc5nhbWckk/kZQkKUyuVuDaZo4tknSjXN2y4yR56tI/wBgT7bbtLDVthS6WdEtdOaF1x2xxO2aqMeaMVnyGwLr/7pJ0laQEuX5+t6jpzOGSq7u/JMla+2LdsmWZHo77b4NlxTq77fuHXPesoQpJv68rK1BST0kPqun9HCPpHrdtp6lp74C/yTVMIEiuJef6yTXcwt2dHrYdjxfc5zuQ63tWKGmTXMMaPC2Z9jNrbWtnXG9yjWZeXx1l3d3Ho09064Ew8QjHAwC8jDHsAHACs9Z+bow5T64W35hWnhYlVxA7xxhznrV2W8Oddd2Dz3E7Z6OkSdbakrr3eyT92RhTKOnRBsclSzpT0gcNtl3roQ5zJZ1irT0cQHdJ+osxZouk11r5OTz5kbW24Uz4z9aF5HM9HHuetXZGg/e/rOsC38/tuHRJ+Q3e3+6hrAuttQ1bY6cZY5bLtb53ZIPtN0j6uOWPIEkqkDTO7WfzVN24+fvcjvW4Pndr1bWGX+m2uVbSWdbaLxpsy5b0f8aYNWraW+BnxphHrbXFde/dv4uF1tpfuW1bLek6Y0yMXA8DVte9Vh7jR2lL91prX/F2JdQ0gMdL6itplTGml1xzCrR0PADAy2hhB4ATnLX2Y7m6XP9NUu5RnDpQ0kfGGPeW9JPU9N+XhxuE9YaeknTIbdu5bu/HeTjvFw3Cej1r7etyhfljscEtrB/maRzyXLew3tKx4Yf/YIwJlDTebf8it7AuSaqbDM794cPpR+jZcNiT7g9S6nzQUv2O0aVq2hr+vFtYr2etfV6S+75oNe6av8Ntf6Qx5g1jzFj3+RSstedZa3tZay+y1v7RWvv+MXyGtmAlzZI0vqXJBjvYcjX9+zXJ7b+HFcgZDzsAAA0Q2AEAstbm1bVgpsjVwv2kmnbJ9qSvpN+4bRvu4bhlzVy3Sk0nuapf172u+25/t/1Fck3Y1hxP62G3RnPrT+d72Nbc9T3NCt6wN9sAfddl/TCP96bOKrf3/pL6tHD8Ye5jlw/zNCO8e32OlqcHKkfq5eCp9blhgJwmV4Bs6BK5xljnGmM+NMb83Bgzwn0IhZe8LCnVWjvZWuuYceDW2lo1fYB1eOI598D+bd3xAAAHIbADAOpZa6ustR9ba2+11naVa/zxjXK1zDY3Hvc6t1ZfT7N+z21uXK6aBvzeDcbZRsgVUhvaYq21LXyM7Bb2taS5Cfg8jfvefRTHNhwz7One3NjCvXnCw/GtCeye1gSXJE+9HI73dwFPXerdHzS0Zn/q4T9Yaw/JtVSfp/sZJdcY/79Lmi8pzxjzijGmuXXGj9c1cvUgiJRrSbpXPRxzlaTfGmOO9V5e02B+gJZeE4+hbPdu7hPqeilMOMJxAAAHILADAJplrd1mrf2PtfY8udY799RlPEGuJcIOizjOy/rJNeGb5Lm79pHW2fYUSlvD43rg8jzpXLGHbZKrW3RLjvfeSK7u40dS5GljXY+Gtuaphd7j9Y+wv+FYfVlr/ydXqJx3hLIiJF0haWbdUoRHWkbwqFlra621h6y1C621V8o1fMTdrZJe8sayckfgHsSj5JpzIP4IxwEAHIDADgAnIGPM9caYp+q6Fi8yxuyum429WdbavZIuk2sCOXfpDf5c3gZVPBzePIXzltZJl74L+0fraLoD1xzjNdry3rTEffb99uTp4cWRxsV7enDRZOiBtXa+tXa0XL0KfidXi3pL936SpM/cl4lrB7+Rayk3d1dI+kU7X/toLVLTv0f3ur0vlbSkY6oDADgaBHYAODGNlXSTXF2Lh8o1dt19qbEmrLU1kpZ62NUwoO33sL9/K7v8Hn4dHmtdoKbLznU5Qtfjnkf6HF7k6d48eJT3xikTmh221cO2Fh/+NLPffaK5etbatdba+6y1o+SaQf50SX+Way4B914NfdXOa7HXjfW+Rp4fVvzJGOM+74LX1E3O6D4ZYle39/PaqfcFAOA4EdgB4MS0wMO2m1vZMulpDHXDycyWe9g/xFNBxhh/Y8zFxpg+nq5d94BgrdvmUHme6Oyw81vY520r1DRgerw3kmSMmVg3M3pUu9aqKU9d+5vr6u1pZvzLjlD+5R62zWx0MWNSjTEnG2PuNMbcWF8xV9f06dbae621Y5u51ogjXP+41c3C7z7houSac+E/xzGevT0cqbs73eEBwKGc9I8JAKDjvK2mLdfdJD3c0hhcY8zdcrVgNlQsaXGD9597OPXnHpZ/k1xh60251s8uMcasNMb82u0YT8uD/dVTwDfG3CBpWDPV97q6ydTmu22eYIyZ7H6sMSZS0ntyzYyeb4zZaYz52BhzvMuwtYanLvVBzRz7gYdt13r6TJJkjLlaTXtz7JNrSTQZY6KMMQflegj0haRH5Ppedm7m+p5mvndfZq69PC7PD7+GS7q+g+rQGgR2APieIrADwAnIWpsr6SUPu26Va/Kus4wxccYY37oANcEY86qkhzyc85K1tn6MrLU2W66Q2VAvSbONMacaY0LryrxK0r8bHOMvV1dp9xnYX1LTFt/Rco1VHmqMCTDGdDbG3C/Xuu5O96yHbR8aY35ijEk2xgQaY4ZJ+kSNJ5hLkxRirT3ShG5twdMEfOOMMd2MMfHGmDMOb7TWrpP0sduxvpI+Nsb81hjTqa4nRXdjzD8lPe+h7PutteV15RWo6bCLYEmzjDFXGGNS6n7mqcaYyyS96KG8DllPvK5r/I3y/IDjL8aY1kwQ2BHmqfl5DSrl+aEDAMABnLB2KQDAO34l15rr7kuNTax7tcZ2SX/wsP3/5GpJbvhgeJCkT49Q3nK5rdFtrV1ljHldTbtRT1Lza6c72X8l3SFpYINtoZIerHs1p1bSz9uvWo0UyNVzouEEfsn6bsLBMkkhDfbdJdcwhYaTyQVJuq/u1ZIv5WqpbujXcq0f3rClvLM8r9/uLk+eVzNoF9balcaYB9R0srk4uT777R1Vl+ZYa0uMMUvVdAlFSVrU8IEbAMBZaGEHgBOUtfaApFMlHTzGIvIlnV5XjnvZiyTdcpTl5Um6uG7curvb1Lr11SslPeZh+5GWW+swdZ/vfEk5R3nqPXX3td3VrXPfUjfpYGNMTIPjN0s6R9Kho7zUfEmXuP/MrbULJd19lGVJrlbka621TWacb2d/lLTFw/abHTQBXXM/T7rDA4CDEdgB4ARmrV0hqb+kj47y1Hck9bPWuk8I17DsZ+Ra5qpJoPdghaTR1lpPS8Yd7iZ9qhqPlXdXIOkCeQ4gjpoB21q7Va41xr9uxeHFkm6w1rbU+t4e/qSW17xPa/jGWvuVXC24Mz0e3Vi1XK3qk6y1Hh8YWWsfl3SJXOPbW2O3pDOttR+28vg2U9dC7ekBla+kRzu4Os0hsAPA9xBd4gHgBGet3S3pbGNMllyTwI2Ua8x5tFxdtSsk5crVHXqepHestctbWfZrxphP6so9W64l1xLkCjL75Qrgb0l6u5mW9YZlbTfGjJF0laQf1ZUVLmmnXA8cHrHW7jTGXOzh9JLW1LcjWWs3SZpojDlNrgcNY+QanhAhV0v1OrmGEDxrrd3rhfotMMYMl2voxCS5unjny7X82mfy0EOgbv6Ck+rOu1yubvLd5Oo+f1CuJeA+l2veg02tqMNbxpjpki6WdIZcD5cS5RrTXiJXmF8m13j/t621nsbedwhr7efGmNfUdOjGBGPMpdbaN7xRrwbmyDWsomFjTY1cS+MBABzKuHq9AQDgTMYYY4/iHytjzPWS/uO2ebS1dl7b1gwAAKB90cIOAHC63xtj7pC0R65W3Ry5uj//rplWeU/LiW1ox/oBAAC0CwI7AMDp9kiKqXv1abA9yBjzqFwBPlRSF0nXyNX9vqEV1tq8jqgoAABAW6JLPADA0YwxGZI269gfMt9srX26DasEAADQIZglHgDgaNbaHZL+doynz5H0XBtWBwAAoMMQ2AEAjmetvVeuZcaOZnm29ySdZa2tbp9aAQAAtC+6xAMAvjeMMZ3kWpt7vFzLusXLtWRYlVxLoW2VNF/SK9baJd6qJwAAQFsgsAMAAAAA4EB0iQcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOFC7B3ZjTLwxZpMxZmKDbSOMMQuMMcXGmK3GmOvczrm67pwSY8xiY8yo9q4nAAAAAABO0q6B3RgzRtI8SV0bbIuW9ImklyRFSbpO0kPGmOF1+ydKekzS1XX7X5X0oTEmpD3rCgAAAACAk7RbYDfGXC3pNUm/cdt1gaQ8a+2/rbXV1tqZcoXy2+r2Xy/pDWvtt9baKmvtQ5JyJV3SXnUFAAAAAMBp/Nqx7M8kvWqtrTbGvNFgex9Jq9yOXStXS/vh/c972D/A00WMMYGSAt02x0g6eCyVBgAAAADgGIRLyrHW2rYqsN0Cu7V2bzO7wiWVuG0rlRTWyv3ufiXp98dSRwAAAAAA2lCapN1tVVh7trA3p0SusekNhUgqarDffbx6iFzd4j25X9KDDd6HS9r17J+flqqOr6IAvn9ikmPUfXgvzflirkqKS71dHQAAAJwAfPyMfvr7u6Tvcm2b8EZgXy3pFLdtveu2H97fx8P+TzwVZq2tkFRx+L0xxvWHKslW1Bx/bQF8r/jUGIWHh6u22qqqvNrb1QEAAMAJwD+ofaK1N9Zhf09SkjHmbmOMvzFmkqQr9N249eclXWGMmVS3/25JiZLe90JdAQAAAADwig4P7NbaPElTJF0kKU/Ss5LutNbOqts/Q9Ktkp6UlC/pMklTrbVMIgcAAAAAOGF0SJd4a61xe79Y0pgWjn9F0ivtXS8AAAAAAJzKG13iAQAAAADAERDYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR2OZ631dhUAAAAAoMP5ebsCcJa9+fu0ZNMy7czdrbKKUoUGhapTQoZGZA1TVGhk/XFvfPO2JOnS8RdJkv753sMa3XOExvQe1ab12ZWXowXrF+qCMee2abmePP3pc0qPS9PpQ09t92vtOLBTb85+V5eMu0AZ8entfj0AAAAA3z8EdtRbunmFZq38WunxaRrfd4zCgkJVUFyohRuXaMPujbp47AVKjE7weO4VEy9ReFBYm9dp5dZVyi3Ka/NyvS0xKkFXTLxEseEx3q4KAAAAAIeiSzwkuVqyZ678SoO69NfFY89X7/SeyohPV//Mvrp8wsXy9wvQ9KWfN3t+SkyywkPCO7DG32+B/oFKiUlWoH+gt6sCAAAAwKFoYYckadGGxQryD9S4PmOa7AsJDNak/uOVdyhPlVWVCvAPaHKMe5f4sspyfbN6jjbt2aKKqgolRMZrXJ/R6pSQ0eickwdM0r6C/dqYs0k1tbXKTOykkwdOUmhQqD5Z/JnW7FhXf+zUIVPUt1MfVddUa87aeVq/K1ulFWWKDovWqJ7D1DMtq77sffn79dXq2dqbv09WVsnRSRrXZ7RSYpKP+15tzNmseesXKPdQngL9A9UzrYfG9RmjAD//Bsds0qKNS7W/8IBqa2sVGRKhQV0HaHDXgZKadomvrqnWrFXfaFPOFpVVlikyJEL9M/tqWPchx11fAAAAAN9PBHbIWqtt+7ara3IX+TcInQ1lpXaXUru3qrzqmmq9OfsdlZSXalzv0QoLDtWqbWv0zrcf6MIx56lTwndjtmev/Vbdk7vpzOGnq7CkULNWfq2ZK3101vDTNarnCJVVlGlfwX6dO+osRYVGylqrD+Z/pN15ezSm10jFRsRoY85mfbRwuqpratS3U29VVFXonbnvKz0uTeeMOEM1tbWal71A73z7vm467brjatVeu3O9Pl70qXql99S43qNVWHpIs9d8q9xDebp47Pkyxmjznq36YP40Dek6UGN6jVJ1TZWWbl6hGSu+UmJUglJjU5qUO2PFV9q+f4cm9hun0KAQbd23TV+tmq3ggCD17dTnmOsLAAAA4PuLwA6VVZarurZGkQ0mlTsea3as04HCXF0x8ZL6Fu3MxM56Y/Y7+mb1HF01+bL6Y+Mi4jR16Cn17/fk71X27o2SpOiwKAUHBsvX17e+nG37tmvrvu06a/jU+hb1zMTOqqqu0jdrvlXv9J7KKzqo0ooyDe42SGl14TgmPFortq5SRVXlMQd2a62+WT1HmYmddOaw0+q3R4dF6a0572nL3m3qmpypvKI89cnopckDJtYfkxKbosenPaWdubs8BvZdubvVKSFDvdJdnykjPl3+vgEKDgg+proCAAAA+P4jsEPGGEltt3zajgM7FRoYoqSoRNXW1tZv75rURV+vnq3yynIFBQRJUpMu6uHB4aqqrmq27O0HdkqSuiRlNiq7W3IXrd25XgcO5SouIlYhgcF6f+7/lJXWQ12SMtUpPl0T+407rs91sDhfRWXFGpE1rNG10+PSFOAXoO37t6trcqaG9xgqSaqsrlJBcYHyi/O1J3+fJKmmwXkNpcenacXWVSoqK1bX5Ex1ScrU6F4jjqu+AAAAAL7fCOxQcECQAvwCdKj0ULPHVFZXqaa2RsF1QbslZZXlKqko1QMfPOpxf3F5SX1g9/dt/BU0Ryi7vLJckvTIh0943F9SXqLEqARdNv4izVu/UOt3bdCKravk7+unXuk9ddKAifLzPbavfVndtb9cPktfLp/VZH9xeYkkqbSiTJ8vm6FNOZsl42qBT4tNdR3UzEORyf0nKDw4XGt3rqsre5ZSYpJ18sBJSozyPDM/AAAAgB82AjskSZ0TO2nHgV2qrqn2GGhXb1+jmSu+1mUTLvLYpbuhQP9ARYdF6cxhUz3uP56u94H+gfL389el4y70uP/wWvEx4TE6Y9hpqrW12nNwr9buWK/lW1cqKjRSI7KGHdO1g+q60k/oO04Z8Wke6yZJ0xZN18Gig7p43PlKiUmWn6+fqqqrtHLb6mbL9vP106iewzWq53AdKj2kTXu2at76BZq2aLqum3L1MdUXAAAAwPcby7pBkjSs+2CVVZZp9pq5TfaVlJdq4YYlig6LatUs6+lxqSoqLVJIYLCSohPrX9v379DCDYvlY47Ujv4dH9P4K5oel6qq6ipZaxuVnXsoV3PXzVettcrevVGPT3taxeUl8jE+So1N0ZRBkxXoH6iisuJWX9tdTHi0QgJDVFha2OjaYcFh+nr1HO0vPCBJ2p2Xox6p3ZURn17/8GPLvm2SJE/t61U11Xr28xe1aOMSSVJESIQGdx2gXulZKio99voCAAAA+H6jhR2SXGPJx/YerTlr5yqv6KD6duql4IAQ5R7K1aKNS1VZXakLRp9TP969JX079dGyzSv01pz3NTJrmCJCwrVtnyusD+46QL4+vq2uV6B/oErLS7Vl71YlRCaoS1Km0uJS9f78jzSq53DFhsdoT/4+zV07T50TOykkMFipMSmytlYfzPtII7KGKsAvUOt3ZauiqkI9Uru1eL28ooNavGmpx/uTEpOscb1H6/NlM+RjfNQ1KVMVVRWau36hisuK6ruuJ0cnat3O9UqMSlB4cJhy8vZofvYiSfI4Pt/f10+JUQmau26BfH18FR8Rp4PF+Vq9fe0R6wsAAADgh4vAjnqjeg5XYlS8lm1eoVkrv1FZZbnCg8OUmdhJo3oOV0RIRKvKCfDz16XjL9LsNd/q69VzVFFVociQCI3vO+ao1xXv26m3tuzbqvfnfaSxvUdpRNYwXTD6XM1ZO1cLsheptKJMYUGhGtJtcP0kbWHBobpwzHmas3auPl36paqrqxQXEadzRpypjPj0Fq+3N3+f9tZNENfQ6J4jlBKTrP6ZfRXgH6CFGxZrxdZVCvDzV2psis4cdlp9d/ypQ0/VjOWzNGOFa5x7dFi0Thl0ktbuXKddebs9XvfUQSdr9tq5WrRhiUoqShUSGKz+nfvWr2sPAAAA4MRj2mpmcKcwxkRIKnz290/LVtR4uzoAOlh8eoIGnjJMH7/1qQ4VFHm7OgAAADgB+Af56Wf33S1Jkdba5mfzPkqMYQcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADeSWwG2MGG2O+McYUGGP2GGMeMcYE1u0bYYxZYIwpNsZsNcZc5406AgAAAADgTR0e2I0xPpKmSXpHUoykYZJOlfRzY0y0pE8kvSQpStJ1kh4yxgzv6HoCAAAAAOBN3mhhj5aUXHdtU7etVlKppAsk5Vlr/22trbbWzpT0qqTbvFBPAAAAAAC8psMDu7U2T9JDkh6QVCFpp6QNddv6SFrldspaSQOaK88YE2iMiTj8khTeLhUHAAAAAKADeatLfJmk2yWFSuorqbekP8oVtkvcTimVFNZCkb+SVNjgtauNqwwAAAAAQIfzRpf48yRdYK190lpbYa1dI1dYv1WusB7idnyIpKIWyrtfUmSDV1rbVxkAAAAAgI7l54VrZkgKdNtWJalS0mpJp7jt61233SNrbYVcXeslScaY5g4FAAAAAOB7wxst7J9JSjbG/NoY42uM6SLpt5JekfSepCRjzN3GGH9jzCRJV0h63gv1BAAAAADAa7wx6dxaSWdKOltSnqRZkj6S9Ju6CemmSLqobt+zku601s7q6HoCAAAAAOBN3ugSL2vtl5K+bGbfYkljOrZGAAAAAAA4ize6xAMAAAAAgCMgsAMAAAAA4EAEdgAAAAAAHIjADgAAAACAA3ll0rmOEBIeLAV5uxYAOlpwWLC3qwAAAAC0iR9sYB8xdZTCw8O9XQ0AHczH10dlFZXergYAAABw3H6wgT06xl8RYb7ergaAjubrp8rcam/XAgAAADhuP9jArppqqZZf2gEAAAAA309MOgcAAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAADgBGSt9XYVAABH4OftCgAAAPzQ5eYf0Notq7Q3b4/KK8oVHBSilPhU9e8+UOGhEfXHTZ/zkSRp6tizJEkv/O8ZDcwarEE9h7Zpffbl7dXKjcs0ZeTUNi3X3btfvikfHx+dN/kij/tra2v15mevKCkuRZOGnaxl6xdrefZSXXPOjZKkPbk5+vTbaU3O8/fzV3REjPp1H6iMpE7t+hkAwJsI7AAAAO1o3ZY1WrB6rpLjUjSk9wiFBIWoqOSQVm1coW05W3Xq6DMUFxXn8dwzxp2j0ODQNq/Thu3rVXAov83Lddc9I0tL1i1UXmGuYiObfsZd+3aovLJcPTr1bLGckf3HNDq/orJCqzev1IwFn2nKyNOUlpjR5nUHACegSzwAAEA72Ze3VwtWz1WvzD46dfQZ6prWTclxKerRqafOGHeO/P38NGfZV82enxCTqNDgsI6rcBvrltFDxhht3rnJ4/5NOzcoLDhMKfGpLZYTFR6thJjE+ld6UoZOHn6KAvwCtHbL6vaoOgA4Ai3sAAAA7WT1phUK8A/QkF7Dm+wLCgzS8L6jVFCUr6qqSvn7BzQ5xr1LfEVluRavXagde7erqqpSMZGxGtxrWKPA+8L/ntHI/mOUV5Cr7Xu2qba2RqkJ6RrVf4yCg0I0e+lX2rRzQ/2xYwdNUPeMLFXXVGvZ+sXasmuzyivLFBkWpf49BqlLatf6snMLcrV4zXzlFhyQtVJ8dIKG9Bqm+JgEj58/JChEaQnp2rp7k4b1GSFjTP2+ispy7dy3QwN6DGq0vbX8/QMUERap4tLioz4XAL4vaGEHAABoB9Za7d6/S8lxqfLz89xG0jmliwZmDfEY1t1V11Tr028/1s692zWk1zBNGj5FIUGh+nzeJ8o5sLvRsUvXLpK1VhOHnqRhfUZq174dWrB6niRpQNZgpSWmKzgwWGeMO0fpiRmy1mrmwi+UvW2d+nbrp5NHnKqEmER9vXiGNu1whfvKqkp9Me8TBQYEadKwKZo49CRV11Tp83mfqLKqstl6d+/UU6XlpdqTm9No+5bdm2VrrbplZB3xs3tSU1uj4tKiRnMAAMAPDS3sAAAA7aCiskI1tTUKDwlvk/I279yog4fydOa4c+tbtNMS0jX922lasnahUiacV39sdESMxg2eWP8+t2C/tu7eKkmKCI1QUECwfH18lRCTKEnavX+Xdu/fqQlDT6pvUU9NSFd1dZUWr12oLmndVFCUr/LKcvXu0leJsUmSpMjwKGVvW6vK6koFNPPQIT0xQ8GBwdqya2OjngCbdmxQSkKawlrR5d9aq9raWklSra1VcWmRVmQvVXlluXpl9m7tLQSA7x0COwAAQDs43Mvbqm2WT9uTu1vBgcGKjYqrD6+SlJ6UocVrFqiiskKBAYGS1KSLekhQmKprqpovu66FPj0xw63sztq8a5Pyiw4qOiJGQQFB+nLBZ8pM7aK0xAylxKVqWJ+RLdbbx8dHXdO7K3vbOo3sP1Z+vn4qLCpQbsEBTRp2cqs++2dzP26yLSgwWCP6jWbCOQA/aAR2AACAdhAYECR/P/8Wx1hXVVeptrZGgQFBRyyvorJCZRVl+u9Hz3rcX1ZeWh/Y/Xwb/4p3pCHiFVUVkqRXPn7B4/7S8lLFRsbp9LFna8WGpdq6e7Oyt62Tn6+fuqR104h+o5tcs6HuGT21etNK7dy7Q5mpXbRp5wYFBQQpI6lzyxWrM2rAWMVFxtd9FqPAgECFBocd09h3APg+IbADAAC0k9SENO3JzVF1TbXHQLtxR7YWrpqn08edXd89vTkB/gGKCI3UhCGTPe4PCz32rvcB/gHy8/XX1DFnetwfHuYaJx4ZHqXxQyar1tYqN/+ANu/cqPXb1io8NEL9uw9stvyo8CjFRydqy66N6pySqc27Nqpreg/5+LRuOqXIsCjFRccf9ecCgO87Jp0DAABoJ3269ldFZbmWrlvUZF9ZRZlWb1qhiLAIxUd7nmW9ocTYZJWUFSsoMFhx0fH1r5wDu7Vq0wr5mNb/WufeMp0Um6zqmipZ2UZl5xcd1PLsJbK1Vttytui16S+ptLxUPsZHCTGJGjVgrAL8A1RSduSZ2nt0ytLu/buUc2C3SspK1KPTsU02BwAnElrYAQAA2klCTKIG9xyqpesXq6CoQN0yeigoIEgFh/K1evMKVVVXacrIqa3q2t09I0vrt67RZ3M/Vv8egxQWHKacA7u0auMK9erSp9Wt1ZKrRb2soky79u1QTGSc0hIzlBibrBkLPtfArMGKDI9Sbv5+LVu/RKkJaQoKDFJCTFLdbPKfq1/3gfL389fW3ZtVWVWpzsldjnjNzNSuWrBqnuav/FYJMYmKCo9udX0B4ERFYAcAAGhHA7IGKzYqTuu2rtGi1fNUUVmhkOBQpSaka0CPwQoLOfIs6ZLk7+evqWPP1pK1C7V47QJVVVUqLCRMQ3oPV99u/Y+qTt0zsrRr307NWPC5BvUcqv49BmrKyNO0bP1irdiwTOWVZQoJClWfrv00IGuwJNea6qeMmqql6xbr22Vfq7qmWtERMZo8bIqS41NaVf/M1C7auCO7xe7zAIDvGGvbZuZSpzDGREgqPLhrkyLCQ71dHQAdzcdP+/Or9P7LH+lQQZG3awMAAIATgH+Qn352392SFGmtPdRW5TKGHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIG8EtiNMTHGmJeMMXnGmHxjzAfGmOS6fSOMMQuMMcXGmK3GmOu8UUcAAAAAALzJWy3s70oKk9RVUoakGkn/McZES/pE0kuSoiRdJ+khY8xwL9UTAAAAAACv8OvoCxpjhkgaKSnRWnuobtsNkpIlXSApz1r777rDZxpjXpV0m6SFHV1XAAAAAAC8xRst7MMlrZV0gzFmkzFmj6QHJO2R1EfSKrfj10oa0FxhxphAY0zE4Zek8HaqNwAAAAAAHcYbgT1GUn9J3SUNkjRQUqpc3eDDJZW4HV8qV/f55vxKUmGD1662rS4AAAAAAB3PG4G9ou6/d1tri6y1+yT9RtLpkoykELfjQyQVtVDe/ZIiG7zS2ra6AAAAAAB0PG8E9rV11w1osM237r/L5eoW31BvSaubK8xaW2GtPXT4pZbDPQAAAAAA3wveCOxfSNoi6XljTJgxJl7SXyR9IOk1SUnGmLuNMf7GmEmSrpD0vBfqCQAAAACA13R4YLfWVkmaIKla0kZJG+Qad36ttTZP0hRJF0nKk/SspDuttbM6up4AAAAAAHhThy/rJknW2hxJlzazb7GkMR1bIwAAAAAAnMUbXeIBAAAAAMARENgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjtkrfV2FQAAAAAAbvy8XYETzeq16/XyG+9o0dIVyi8oUHxsrEYOG6wbfnyl0tNS6o+7+qa7JEn/ffoRSVLvYRN06w0/1u03XtOm9Vm6YpWeeeEVPfXw39u03JbMnrtAb7zzgVavy1ZRUbESE+M1cewo/eiyi5WclNBh9WgLu3P2aMo5lzbaZoxRUFCQMjul67KLztUFZ5/Rbtd3/56cfPYlGj54oP76h181e86v/3C/Fi5dri8/fLPd6gUAAADg+BHYO9Brb72vvz34mIYPHaSf3n6jEuLjtGPnbj3/8hv6fNaNev7fD6p3zx4ez339+SeUmBDf5nV65/1p2rRlW5uX25y//utRvfrWezr9lMm69+d3Kzw8TJu2bNMrb76r96d9qkf+/ieNGDq4w+rTVm6+9keaMHakJFePhZLSMr3zv2m6975/qLq6Rpecf3aH1OPRf96nsNDQDrkWAAAAgPZFYO8gS1es0v0PPqbLLzpPv/q/O+q3Dx8ySCdNHKsLrrxBv/nT3/T+a897PH9Avz4dVdV28/b7H+mVN9/Vfb/9uS4457tW5xFDB+vcM07TTXf9XD/91R/0vzdeVFxsjBdrevTS01Ka/IxGDR+i9Rs26aXX3u6wwN47y/MDHwAAAADfP4xh7yDPv/yGwsPCdPdtNzTZFx0VpV/85DZNmTReJSWlHs/vPWyCHn/mhfr3BYWH9Pu//kvjTj1XA8dM0aXX3KJ5C5c0Oef1t9/XvX/+h0aedKaGjD9Nd//id8rNOyjJ1TX6g48/Vc6eveo9bILe/2i6JKmiokL/evRJTT7jQg0YfbLOvewaTf98ZqOy167foGtu+YmGTzxdQyecpmtv/alWrF7b7Oe31urJ517SmJHDGoX1w0JDQ/Sn396j/IJCvf72+81+bkl6/JkX1HvYhEbb3vlgmi760Y0aMu5UDRo7Reddfp2mf/FdnWtra/XYU89pyjmXaMDokzXlnEv00L+fUVV1df0xrfncR8PHx0e9enRXzt69R3WNk8++RH978HFdc8tPNGziVP3h/gckSTl79+nOe36r4RNP17hTz9OLrzbt0n7y2Zfo13+4v/594aEi/fqP92vUyWdp5OQz9MBjT6nW1jY5b/rnM133b/xpGnfqefrD/Q+o8FBRo3rf9/eHNKmu3mdceJVeeIUu9QAAAEB7ooW9A1hr9e38hZo0boyCg4I8HnPqSROlk1pXXkVFha655SfKzTuou265XvHxcXr/w09005336JnH/qWRw77rUv7wE8/qpIlj9cBffq+du3P094cel9+DvvrXX36vm6//kQ4WFGjt+g167J9/Vnpaqqy1uuOe32rZytW6/cZr1DWzs778arb+7zd/VGVVpc454zQVF5foxjvv0fAhg/Tw3/+oqqpqPfX8S7rxjnv05UdvKjwsrEmd12Vv1N59+3XjNVc2+7m6dO6krO7dNOPrObrj5utadzPkGmrw1wce1W03/Fj33HWLCgoP6bn/vqZf3PtnDejXRylJiXr2v6/p1bff18/vulXpqSlauWatHn7iWfn7++v2G69p1ec+Flu371R6aqokHdU1XnvrPV1+8fm64ceXKygoSKVlZfrRjXfK18dHf/j1/8nPz0+PPvWcduzcrUH9+3q8dm1trW688x7tztmjn91xs2Kio/Tcy69r5ep1SoiPqz/uqede0qNPPafLLjxXd91yvXbtztGjTz2vFavW6PXnn1RQUKD++sBjmrtgke656xbFxcZo9twF+ucjTygqMkLnnTX1mO4NAAAAgJYR2DtAQWGhKioqlZaS3CblffjJ58reuEmvv/CkBvTtLUkaP3qErr7pLj342FN666Vn6o/t3i1Tf/39dxOQrVqzTp/N+EqSlJGWqpioKAUEBNR35567YJHmzFuoB/7ye009ZbIkaeyo4SorK9ODjz+jM049WZu3btPB/AJdeekFGjygnyQps3OG3nrvQxUXl3oM7LtzXK3MqclJLX62Tump+nbBoqO6Hzt35+iaKy/RLddfXb8tLSVZF151g5atWKWUpEQtXrpCfXr20Plnny5JGjZkoIKCghQe5hrvPW/h4iN+bj+/5v+61NpaVde11tfW1mrf/ly9+tZ7yt64Sb/7xU+O+hrx8XH6+d23ysfH1Qnmtbfe1569+/T+a8+pR7eukqR+vXvptPMvb7ZOs+cu0Ko16/TkQ3/ThLGjJEkjhg3WlLMvqT+m8FCRnnr+ZV14zhm6t66ektSta6Z+dOOd+mDadF164blavHSFRg0botNPcT1VGj5kkEKCgxUdFdnyDwcAAADAMSOwdwBjXKGrprZpV+RjMX/RUsXFxqhPzx71IVGSJo4brX89+qQKDxUpMiJckjTQbVx1UkK8ysrKmy974VIZYzR+7MhGZU8aP0YfTf9CGzdvVbeumYqJjtKtP/2Vpk6ZpPGjR2rk8CH62Z23NFuulWvpOGNMi5/N+BjV1h7dMnO/+MltkqSi4mJt37FL23bs1PxFSyVJVVWuzzB86CA9+PjTuvKG23XyxHEaP2akrrj4/KP63L2yujdbh3vv+4fuve8fjbaFhYbqpmuv0sV149eP5hpdMzvVh3VJWrJ8pdJSU+rDuiQlJyXUP7DxZMmylfLz89O40SPqt4UEB2v8mJFatHSFJGnFqjWqrKzUmVOnNDp36KABSklO0oIly3Tphedq+NCBevPdD7XvQK4mjRutcWNGNnpAAgAAAKDtEdg7QFRkhEJDQxqNZXZXWlamysoqRUVGHLG8gsJC5eYdVP9RnvvQH8jNqw/sQW5d8I2PT4vrrhcUFspaq2ETPHdz3p+bp15Z3fXyM4/pqedf0vTPZ+rNdz9UcFCQzpw6Rb/+vzsUGBjY5LzDLeu7due0+Nl27d5z1Eu77di1W3/46wNasHip/Pz81KVzhnp06yLpuzXmr73qUoUEB+u9jz7RPx95Uv94+Al175qpX/70Do0aPqTVn7s5t97wY02sa8X28fFRWFioUpOT5OvrW3/M0VwjLqbxpHuFhw4pJrppa3Z8XGz9nATuCg8dUlRkRKPgL0nxsbENjnGNU/c0yV9cbIyKioolSb/66R1KTEjQtOmf609/f0iS62HQb39xNxPdAQAAAO2EwN5BxowcpoWLl6miosJjoH3/o+m6/4HH9Mp/HtPAZsYkHxYeHqZOGWn65333etx/PF3vw8PDFRISrBeffNjj/ox013jszM4Z+vuffquamhqtWrNOH37yud54939KT03R9Vc37abdu2cPJSUm6POZ3+jSC8+t377/QK6MMYqPi9XOXTlav2GTrrzkgkbn1tY07plQWlr23b7aWt1y9y/l7++nN154Ur2yusvPz0+btmzTR9O/qD/Ox8dHl198ni6/+DzlHczXN9/O19MvvKy7f/E7zf78g1Z/7uakJiepb++eLR5zPNeIjorUjp27m2wvKCxs9pyoqEgVFBSqpqamyYODww4/2MnNO6gunTs1Ov9Abp7SU13fpYCAAN187VW6+dqrlLN3n776Zq6efO4l/fy392na2y83WwcAAAAAx45Z4jvINVdcooLCQ3r4iWeb7Ms7mK/nXnpdndLTWrV827DBA7V3337FxESrb++e9a95C5fouZdfl6+f7xHLOMzHt/FXYNjgASotLZO1tlHZGzdv1RP/eVE1NTX6bMZXGjPlbB3IzZOvr68G9u+r3/3yp4oID9Peffs9XscYo1uvv1rzFy3R2+9/VL/9w08+10lnXqR/PvKk7v3z3xUUFKgfX3Fx/f6w0NAmZS5buar+z/kFhdq6fYcuOPsM9evTq34M+Oy5CySpfkb0y6+9VX/916OSpNiYaJ131lRdcdH5KiouVklJSas+9/E6nmuMHDZEu3L2aPXa9Q0+e0GLM/OPHDZE1TU1mvH1nPptlVVV+nbB4vr3/fv2VkBAgKY1eLghubrg79m7T4MH9FN5eYWmXnBF/azwKUmJuvzi83TGqSdpz74DR30fAAAAALQOLewdZEC/Prrj5uv06JPPasu27Tr3jNMUHR2ljZu36IVX3lRpaamefvjvRxzjLUnnnTVVr731vq6/7f904zVXKjkpQXMXLNZzL72uKy4+X/4tTI7mLjwsTHkHD+qbb+erV1Z3jR8zUkMHDdDtP/uNbrnuR+qS2Umr1qzT48+8oDEjhys6KkqDB/RTTW2t7rjnt7r+6ssVFhqq6V/MVFFxiaZMHt/stS4890xt2rJNf7j/AS1cskynnjxJA/v10WlTJuuFV96QJN1+4zVKTIivP2fC2FH65IuZ6t+3lzplpOt/H3/aqKU5NiZaqSlJevXt95SYGK+I8HB9O3+hXnr9HUmqH68/dPBAvfjKG4qNjdag/n21b3+uXnj1TQ0bPFDRUVGt+tzH63iucdbpp+jlN97Rnff8VnffdoNCQ0P19HMvNel90NCo4UM0duRw/e7P/9DBg/lKTk7Sq2+8q/z8AsXEREtyDde4/urL9cR/XpS/v78mTxirXTl79NhTz6lrZmede9ZUBQUFqk/PHnri2Rfl7++nrG5dtXX7Dn0wbbpOnTyh2esDAAAAOD4E9g5087VXqXdWd7329vv6+8P/VkHhISUmxGvc6BG66dqrlJKU2KpyQoKD9dIzj+qhfz+jBx57SkXFJUpNTtJPbr9R11xxyZELaOD8s6Zq9tz5uv1nv9EdN12rG358hZ565O967Knn9MwLrygvv0CJ8XH60WUX6da6Scbi42L1n0f/qUefek73/vkfKi8vV/cumXrk73/SiKGDW7zeL396u8aMHKbX3n5ff7z/QRWXFCshPl6XXXiugoKC9NTzL2v9hk26795fKDIiXL/4yW2qrqnWvx57Sn6+vpp6ymT99PabdO+fv5vg7bF//kX3P/CYfv3H+xXgH6CuXTrp3w/8VX978DEtWb5SV15yge68+VoFBPjrvQ+n68lnX1J4WKgmjRutn95+kyRXl/kjfe7jdTzXCPD31wtPPqT7H3jc1VPAGF187llKS01R3sH8Zs975J/36YHHntJjTz+vispKTZ0yWRedd1ajVvfbb7xGcbExevXN9/TO/z5WVGSETj1pou685fr6ZQj/+Ot79MiTz+qFV95Ubt5BxUZH6YJzztQdN13bJvcGAAAAQFOmpQnIvo+MMRGSCg/u2qSI8FBvVwdHadOWbfpg2nT99PabmkyWBrSKj5/251fp/Zc/0qGCIm/XBgAAACcA/yA//ey+uyUp0lp7qK3KpYUdjtKtS+cWl4cDAAAAgBMFTZgAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBvBrYjTG+xpivjDEvNtg2whizwBhTbIzZaoy5zotVBAAAAADAK7zdwv57SeMOvzHGREv6RNJLkqIkXSfpIWPMcK/UDgAAAAAAL/FaYDfGTJZ0gaR3G2y+QFKetfbf1tpqa+1MSa9Kus0bdQQAAAAAwFu8EtiNMQmSnpN0uaTSBrv6SFrldvhaSQNaKCvQGBNx+CUpvK3rCwAAAABAR+vwwG6M8ZH0iqQHrbUr3HaHSypx21YqKayFIn8lqbDBa1cbVRUAAAAAAK/xRgv7rySVW2sf87CvRFKI27YQSUUtlHe/pMgGr7S2qCQAAAAAAN7k54VrXiUpxRhTUPc+RJKMMedKukfSKW7H95a0urnCrLUVkioOvzfGtGFVAQAAAADwjg5vYbfW9rTWRlhro6y1UZJek/Ra3Z/fk5RkjLnbGONvjJkk6QpJz3d0PQEAAAAA8CZvL+vWiLU2T9IUSRdJypP0rKQ7rbWzvFoxAAAAAAA6mDe6xDdirf2x2/vFksZ4pzYAAAAAADiDo1rYAQAAAACAC4EdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAH8vN2BQCgPYSGh3q7CgAAADhB+PiZdimXwA7gh8VKocGBOuWMcd6uCQD88Bip2hpV19R6uyYA4ChFxUXSL9q+XAI7gB8WI4WaKgXuWC5bXubt2gDAD4qJjFFeSpa+mDFHxcUl3q4OADiGry8t7ADQOtbK5udKpUXergkA/KBYSTUJNcrZvVcF+YXerg4AOEZQSGC7lMukcwAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7AAAAAAAOBCBHQAAAAAAByKwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIH8vF2BduPjKxmeRwAnHB9fSdXergUAAABw3H6wgd3aQFkT6u1qAOho1sjYcm/XAgAAADhuP9jAvuf9eSqooYUdONEEJkYrYWwXb1cDAAAAOG4/2MBeseegTLn1djUAAAAAADgmNEEDAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4EIEdAAAAAAAHIrADAAAAAOBABHYAAAAAAByIwA4AAAAAgAMR2AEAAAAAcCACOwAAAAAADkRgBwAAAADAgQjsAAAAAAA4kFcCuzFmgDHmC2PMQWPMXmPMS8aYuLp9I4wxC4wxxcaYrcaY67xRRwAAAAAAvKnDA7sxJljSdElzJSVJ6iMpVtILxphoSZ9IeklSlKTrJD1kjBne0fUEAAAAAMCbvNHCniFphaQ/WWsrrbV5kp6WNF7SBZLyrLX/ttZWW2tnSnpV0m1eqCcAAAAAAF7j19EXtNZmS5rqtvlCSUvkam1f5bZvrVwt7R4ZYwIlBTbYFN4G1QQAAAAAwKu8OumccfmzpLMk3SVX2C5xO6xUUlgLxfxKUmGD1652qCoAAAAAAB3Ka4HdGBMh6R1JV0oab61dJVdYD3E7NERSUQtF3S8pssErre1rCwAAAABAx+rwLvGSZIzpKtfkcjskDbXW5tbtWi3pFLfDe9dt98haWyGpokHZbVtZAAAAAAC8wBuzxEdLminXLPGnNgjrkvSepCRjzN3GGH9jzCRJV0h6vqPrCQAAAACAN3mjS/w1cs0Uf7GkQ3XrrRcbY4rrZoyfIukiSXmSnpV0p7V2lhfqCQAAAACA13hjlvgHJT3Ywv7FksZ0XI0AAAAAAHAer84SDwAAAAAAPCOwAwAAAADgQAR2AAAAAAAciMAOAAAAAIADEdgBAAAAAHAgAjsAAAAAAA5EYAcAAAAAwIEI7ACAZllrvV0FoFX4ruKHju+4c/CzQEfy83YFAAAua3L269UFK7Vke47yS8sUFxaqEZmpum7sYKVFR9Yfd91/P5AkPXf1uZKkAX96QjePH6pbJg5v0/os27FHz81ZoscvP7NNy23Jt5t26M3Fq7U2Z7+KyiuVEBGq8d0766qR/ZUUGd5h9bj3fzP04YrsRtv8fHwUFRKkEZlpunPyiA6pz5NfLdRT3yzWit/d2u7Xaiu7Cw7p9Edf0Z/OnqxzBvY87vJKK6s0+YEXVFldo+l3XaXEiLAmx/xn9mL5+/rqx6MHHff1jsUv3/tCX67brJpaKyPJGKMnrzhLwzNTvVIfeNfcBTOVl3+g0TZjfBQYGKSkhBRlde+nAP+AVpdXVl6qlWsWq1+vIQoJCW3r6raotLREM76ZpoF9hys9LbPdzmlOVVWltm7fqJy9O1VaViJfX1+Fh0WqS+ceSkr47u/Xzl1btXz1Qp00/kyFhIRq2coFyju4XydPPOu4ru+pPqvXLVNGWqZiYxLatGx32RtXa8PmNTrrtEva9TqHffnVR4qNSdCg/iM65HpoPQI7ADjAG4tW6Z+ffauhnVN010kjFR8eqp0HC/XivOX68j/v6Jmrzlav5HiP57587fkeQ8zxem/ZWm0+kN/m5Tbn75/O1usLV+m0vt31q9PHKzwwUJsPHNRrC1fqwxXr9cBFp3VoAIoLC9FDF59W/766plbb8gr0yIz5WrFrr969+VIF+bfvP6PnD+6tMd0y2vUaTvfp6o0K8vdXaGCA3l+2TjdPGNbkmMdnLdTN44d6oXaulrbrxg7WlSP6y8cY+fv6KiEiVJHBQV6pD5whIiJK/XsPqX9fW1urgkP5Wr9hlQoP5WvMiJNkjGlVWbm5+7T/wB6pV3vVtnmBQUEaO/IkhYS0/t+YYznHk6LiQ1qw5BtZa9WlU3dFhEeppqZGu/ds16Klc9Sjax9lde/r8dwe3fqourrHcV3fk8JDBdqVs03pqcf3IMKJhg0eKz8/f29XAx4Q2AHAy5bt2KN/fDpHlw7vp5+fOrZ++7DOqZrUM1OXPvO2fvfhTL19k+en7P3Tkjqqqu3m3aVr9drCVfr9WRN1/qDe9duHZ6bq7AFZuvW1afr5u5/p3ZsvVWxYSIfUKcDXt8m9HdwpRf5+vvrtBzM0K3urpvbt3q51SIwIa5eHMd8nHyxfp9Fd0xUWGKD3lq3VDeOGyNfHOSP6jDHqnhDr7WrAYfx9/RUdFddoW2xMgmqqq5W9abUKCvOa7HciXx/fo67nsZzjrra2VkuWz5WPMRoz8mQFBn73ACwpMVUBa5dow+Y1SkxIUVRkTJPzQ4/zYcGJKDIi2ttVQDMI7ADgZf+dt1zhQYG6Y3LTbmjRIcH62SljtPnAQZVUVCo0sGk3Svcu8YVl5XpkxnzNyt6q4vJKZSXF6Y5JIzSiS1qjc349dbzW7T2gGeu2qKqmRmO6ZejXU8crNiykUZfwAX96or57c0V1tZ6YtVDT12zUwZIydY6N0vXjhui0Pt8F13V7DujBL+Zq7Z4DqrVW/VITdfukEeqflujx81tr9cw3izWqS3qjsH5YaGCA/nDWJJ37xOt6Y9Fq3TZpuMfPLXnuQr50e44en7VQa3L2K8DPVxN6dNZPp4xWTGhwiz+X5vSp6+mwp7BIkqv7/N7CYnWKjdKnqzcqNTpCr15/oXyM0QvfLtP7y9Zq76FiJUeG67Lh/XT58P6Nypu+eqNemrdcWw7kKyokSKf17a7bJg5XgJ9vk8+zK79Q//zsWy3buUcVVTXqkRirm8YP1djunerLm7l+i16at0LZ+3JVVVOj1KgIXTqsny4b3k+StGjbbl3/0v/0zFVn65lvFmvV7n2KDgnWTeOHalz3Tvrr9G80b/NORQQH6kcjB+rKkQNavB9frtusp79ZrO15BcqMi9ZNHlq6W/Od9GRbbr5W7Nqny0f0V3JEuN5cvFrfbNyuSVnftW4N+NMTkqSnvlnc6F5t3J+nR2bM19LtOZKk4Zlp+tkpo+uHl9TfhyvP1vNzl2r5jr0KCfTXWf2zdOdJI+VX91CgqqZGz81Zqo9WZutAUYnSoiP149EDdfYAV3f/mtpa/Xfeck1buUG78gtljFFWYqxumzRCIzK/+3xrcvbr8VkLtCZnv6prajWkU4ruOmmUuiU0DRv44YqsC5elZaWKjnJt271nhzZvXa/ikiL5+fopKTFVPXv0V4B/QH1Xb0ma8c00paV0ru+yvH3nZm3ZvkGlJcUKCAxSRmqmunftLZ+67+6ylQtUXlGm1OQMbdqyTmVlpQoLC1fPHv2VGJ9SX6eS0mKty16h3IP7JWsVHRWn3lkDFB4e6bF7e97B/dq4eZ0KCvNUXVOjoKBgpad0Vo9ufWSMaXKOtVbZm1ZrV852VZSXKTAoWKnJGcrq1re+ru72HchRUXGhhgwY1SisH9aja5+6P3keS+6pS/zx3q/cvP2at2iWJGneolmKjY7X6BGTJUl79+3Whs1rVFRcKH+/AKUkp6tn9/7y83NFrZqaGq3NXq69+3arsrJCwSGh6pTWRV0z22DYUFmJ1mWv1IG8vaqpqVFMVKx69xzYKICXlpYoe9MqHcjbp8rKCvn7ByghLkl9eg5SQECgpKZd4nfv2aFNW9aquKRYfr5+io9LUu+sAQoKOrZ/O3HsnPOIGgBOQNZazd28Q8MzUxXs77kr2pTeXXXzhGEew7q7iupq3fDS//RV9lbdMWmEHrz4NCVGhOrW16ZpwdZdjY59bOZ81dRa/f2CKfrplNGavXG7/vHZHEnSjeOGaly3DMWFhejla8/XuO6dZK3VT978VG8vWaOrRg7UI5ecrgHpSfrFu1/ooxXrJUnFFZW65dVpigoJ0r8uPFV/P3+KyiqrdOurH6movMJjndfvzdXeQ8Wa3LP5LoaZcdHKSozVrOwtR7wHDS3ZnqMbXv5QQf5++seFp+jnp47R4u2uoFZeVX1UZR22La9AkpTeYF6BpTv2aMfBQj1w8Wm6afxQ+fn46M8ff60nvlqoM/r10KOXnq5TenfVPz/7Vk9/s7j+vLeXrNEv3/tCWUlxevDi03Td2MF6a/Fq/eWTr5tct9Za3fH6JyqtrNJfzj1ZD18yVZEhQbrrzenacbBQkvTNhm36yVufqndKvB6+ZKoeuOg0pUSF62+fztbynXsalfeLd7/QhB6d9eilp6tTbJT+/PHXuv6l/6l7QqweuOg09U5O0D8//1ardu9r9l58lb1NP3v7M3WNj9FDF0/VKb276TcfzGh0zNF8J929v2ydwgMDNCkrUwPSk5QZF6W3F69pdMzL154vSTpvUK/6P2/LK9DVz7+ngyVl+tM5k/WHsydpd8EhXf3C+8orKW10/q/e/0KDM1L06GWn6/S+PfTfecv1/rJ19ft/88EMvfDtMp03sJceu/QMje6arnv/N1PTV2+UJD0yY76e/nqxLhzSW09cfqZ+d+ZE5ZeW62dvf6bSyipJ0sKtu/Wj599Tba3VH8+erN+fNUn7DhXr6hfe09bcjht2Au8rKTkk6bsW4A2b12jpinmKjorV0IGj1aNbH+Xs3al5C2eqpqZaCQnJ6t7V9SBz6KAx6tHNFVQ3bl6rlWsWKz42UcOGjFNmRjdt2rpeK9csbnS9gsKD2rw1W1nd+2no4LEyxkeLl81VZVWlJKm8vEyz532h4pJD6td7iAYNGKnKqgrNW/SVKiqb/j+78FC+5i36SgEBARo8cLSGDx6rmKg4bdi8Rrv37PD4mTdtWadtOzapR9feGjFsgjqnd9Xmreu1cfPaZu/Tgdy9MsYoIT7Z4/7AwCD16z1EUZGt693SFvcrMjJa/XoPliT16z1Y/fq4hjzsytmuRcvmKCw0QsMGjVWPbn3qtx2enG71uqXad2CPevccqBFDJygpIVVrs1do566trap/cyoqK/Tt/BkqPHRQfXsN1pABo2QlfbtgpoqKXd+16ppqzV3oet+v9xCNHDpBmRndtXvPDq3bsNJjuQfzD2jZyvlKTkzXiCHj1afXQOUe3KelK+YdV31xbGhhBwAvKigrV0W1qxW0LUxbuUHZ+/L08rUX1Ldoj+2Woev++z89MmOeXrv+ovpjuyXE6r5zJte/X52zX1+s3SxJSo+JVHRocKNu4fM279S3m3fo7xdMqW9RH9MtQ2WV1XpkxnxN7ddDWw4cVH5pmS4f3l+DMly/aGXGReudJWtUUlGp8KDAJnXeXeD6peJI9yA9JlLzNu88qvvx6Iz56hwXpccuO72+G3W/tCSd/8Tr+mD5Ol06rF+L51fX1tb/uaSiUqt379e/Pp+rlKhwje2e0ei4354xQRkxrhC/La9A7y1dqztPGqlrx7h+wRvdNUPGGD03Z4kuGdpXEcGBevKrhZrcM1N/OGtSfVmV1TX6cMV6VVbXNKrLwZIybcnN1/XjhmhcXYt639QEPfX1YlVUux4+bMnN11n9sxoNrRiYnqTx/3xeS7bnaGD6d7/8njuwp340aqAkKSTAX1c9/576pibo1roeC31SEjQre6tW7Nyrfqmee0c8M3uReqfE62/nT5Hk+j4Y4wqxhx3Nd9L93k9btUGn9e2uwLpWqnMG9NKjM+drV/4hpUW7vi+Hv5+J4aH1f37660UK9PfTM1edrbC6B10jMtN0xqOv6L9zl+unU0bXX+f8wb3rewWMyEzTrOyt+mbDNl00pI827T+oz9Zs0s9PHasrRrh6RozokqacgiIt2rZbU/t214GiEt0xeUSjnhOBfr76v7c/08Z9eRqQnqRHZsxTekyEnrjizPrv4aiu6TrrsVf1xFcL9c8LT/V4D/D9ZeXq1n1YVVWl8vIPaMPmtYqOjFVkRLQqqyq1cfNaZaR1Ub8G493DwyI1d+FM7dy9TZ0zuik02BXuI8OjFRISqqqqSm3cslad0ruqby/X/18S4pIUEBCoFasXqWvnLIWHu/5fVF1dpeGjT6l/QODn66u5C2cpN2+fUpLStWVbtmpqajRy2EQFBQbXX2fO/C+VX5CriLCoRp/rUFGh4mOTNKj/yPox+PFxSdp3IEd5B/crLaWT3OXlH1BkRLQy0rpIkuJiEuTr69fieOmy8lIF+Ae2yZjqtrxfYaGu48JCIxUeFilrrdZtWKH4uCQNHjCy/pqhoeGav+gr7T+wR4kJKcrLP6D42ESlJrv+3YiLTZCfr1996/ax2rItW5VVlZo0cqpCgl0TEibEJ2nW7OnK3rhKQweNUUlJkYKDQzSw34j6zxUXm6iCwoPKO3jAY7l5+bny8fFV18ye8vX1lST5+weqoDBP1tpWz7+AtkFgBwAv8qn7R6+2jZaIWbB1l+LCQtQ7Jb5R2JzQo5Me/HKeDpWVK6JuMqwBbl3UE8PDVFbXIthc2UbS+O6dG5U9MauzPl61QZv2H1S3hFhFhwTrzjc+0al9umlst04a0SVVP2kQkI6VjzFHdZ/Kqqq0cvc+XT1qoKy+C99p0RHKjI/W/C27WgzsOYVFGvLnp5ps75eaqHvPmNCoR0SQn5/So7974LBw6y5ZSRN6uN2rHp31n9lLtHRHjjLjopVXUqbJPbs0Kv/KkQM8dkOPDQ1Wl/ho/emjrzR/y06N6Zah0V0zdM+pY+qPOTxLemlllXYeLNT2gwVas3u/JKmqprZReQPTvxuff3hegP6p322LCnF9T5rrGVFeVa21OQfqA/5hp/Tu1iiwH813sqE5G7crt7hUJ/XsokN1dZiU1VmPzpyvd5eu0V0njfJYr8PXHNY5VUH+fvXXDA0M0KCMZM3f0vihzwC3eQoSI0JVVtf7YukOV3f6k9x6fzzYYDLC++seVuSXlmlHXqG25RXoqw2uVrOqmhqVVlZpTc5+3TR+aKOx9xFBgRrfo5Nmb/TcKonvt4P5B/Tx52+7bTWKi03QgL7DZIxRfkGeamtrlZrcOOTGxsQrOChEuQf3q3NGtyZl5xfkqaamRokJqY0eChzu5n4gb299AA0ICGw0njsoyPV3vabG9R3Pyz+gmKjY+rDuOia4vit5aWlJo2unp3ZWempn1dTUqLS0WMWlRSo8lC9rraxt/P+Yw+JiErRuw0p9u2CGkhLSlBCfrMxOLc//YWTabOm0trxf7opLilReXqbuXXo3Kjs2Ol5+fv46kLdXiQkpiotJ0Padm1VeXqbEhBQlxCfX95Y4Hrl5+xQZHqWgwOAG13f1TNiVs12Sa2z6mBEnyVqrktJilZQUqai4UMUlh5r9NzU2Ol7ra2r09befKjkpXYnxyUqIS1RiMz0e0L4I7ADgRZHBQQoN8K8fD+1JaWWVqmpqWjXrdGFpuXKLSz0GTUk6UFxaH47cZzj3Mc2NBqwru6xcVtKov/3Hc9lFJeqZFKcXf3yunpm9RJ+u2aS3l6xRkL+fzujXQ784bWx9S2lDKXXLox1uaW/OrvxDSj6KpdQOlVWo1lq9MHeZXpi7rMl+T3VpKD4sRI9cenr9+wBfXyVGhHoMlzGhwY1aHArLyiVJ5z/5hseyDxSVKjrE9QtyTEjrxgMaY/T0lWfrP7MXa8a6LfpwRbb8fHw0uWemfnvGBEUGBym/tEz3Tftas7K3ykjKiI3UoLpWdfdffj0NsTiaWe8PlVfISop2mwsgPrzxpIBH851s6IPlrmEWN7/6kcd9t04cLv+6lh93hWUV+mzNJn22ZlOTfdFu97vp34PvgsLhn2NMaPMTHa7J2a+/fPKN1uTsV5Cfn7omRNd/T61cDzys5HGyxNjQkGYfiOD7LTIiWv37fDefg6+Pr4KDQxq1GFdVuX72nsZoBwYGqaqu27q7yrrzFi75xuP+8oryRtdtyKju/1P2cB0qFRLc+gnaamqqtXrdUu3avV21tlYhwaGKjo6r+3vj+RxXK62fdu7eqrXZy7U2e7nCwyLVp9cgxcd67r0TEhyqfQf2qLq6qtlW9rKyUgUHH3kS0ra8X+4O/wxXrV2iVWuXNFt2n16DFBQUot052+qPi46KVb/eQ45rsreqqkqVlBZ7eDjkUl1TLT9fP23emq1NW9apsqpCgQFBioyMlq+vn2qb+Y7FRMdpxJBx2rJtg7bUnRsYGKRumb3UpXPbz76PlhHYAcDLRnfN0KJtu1VRXe0xRP5v+Xr947M5evHH52lAepKHEr4THhSojJjI+i7K7o6n6314UKBCAvz17I/O8bg/va47eOe4aP31vJNVU1ur1bv3a9qqbL21eI3SoiPqu4c31Cs5XkkRYfpy3RZdPPS7JXr2F5XIxxjFhYVoV36hsvfm6vIRjSdsq3H7DbG0QQ+BsMAAGblarD3N5n6kcOrv66s+Kce2zu7hrv//ueochQY2/WUzKTJM+SWuX+TyS8sa7SssK9fanAMef9YJ4aH6zekT9Oup45W9L09frt2s579dqsjgIP32jAn65XtfaGtuvp6+8mwNTE9SgJ+vyqqq9F6DMdltJTI4UD7GKK+48ZjwgtLyRu+P5TuZV1Kq2Ru368IhvRtNaChJq3fv18Mz5mnG+i1N9n13zQCNyEyr7/Lf0NHMMH/455hfWtZotv6tufkqKC1X98RY3frqNHVPjNW7N1+qLvHR8jFGszdu15frttSXYaQm90mScotLFR3C8m8/RH6+fh5nL2/I39/1/aqoKFd4WOO/BxUV5c3OdO7v53rYNqj/SIWFNn2IGRjQ+u+Un59/faBtKDdvn4KDQ78LrHVWr1umnL27NHjgKMXHJtVPqvbZzA+avYYxRpmduiuzU3dVVJRr/4E92rhlrRYv+1anTj5HPj5NH7zFxyVp646N2p+7VylJ6U32V1ZWaOY3Hys9LbPRgxFP2vJ+NVd276wBHtdl9/d37ff18VWPrr3Vo2tvlZaVaN/+HG3cvFZLV8zTpHGnNzmvtfz8/BUbHa/ePQd63O/r46NdOdu1Nnu5evXor/S0zPrPu3j5XBUU5DVbdkJ8shLik1VdU628vP3asn2D1qxfpuioWEVHsTJGR2LSOQDwsh+NGqCC0nI9NnNBk315JaV6ce4yZcRENjvLekNDOqVo36FixYQGq09KQv1r/pZdenHuMvn6tH7cmY/bGLUhnVJUWlkla22jsjftP6invl6kmtpafbF2syb+63nlFpfK18dHA9KT9JvTJyg8KFB7DxV7vI4xRjeNH6oFW3fp3aXfTUI0bWW2Tn34JT34xVz9/sNZCvL301UNuoqHBQZon1uZy3furf9zaGCAeiXHa1tufqP6do2P0ZNfL9LibTmtvhdHa0gnV1fLgrKyRtcuKC3X47MWqLC0XJlxUYoOCdKs7MaTDn28aoNue21a/bj0w1bs3KtJD7yg1bv3yRijnklxun3yCHVLjK2/t8t37NWUXl01PDNVAX6uX4K/3eTqcl3bNr1L6wX6+WlAWpJmrN/SqPX+6w3bGh13LN/JaSuyVV1bq6tGDNCwzqmNXleM6K+IoMBGk895+q5uyc1XVlJc/fV6J8frlfkrNHN96ycuPNw7Yeb6xj+jh7+cp79/NscV3MvKdcWI/uqWEFNfjzn199wqJMBfvVMS9NnaTapp0GW2qLxC32zcVj/XA0480ZEx8vHx0e492xttz8s/oLLyUsVE1y2N5vb9jo6KlY/xUXlFmaIiY+pfPj4+WrdhpUrLPP+/1pPY6HjlF+SqokErc0VlhRYs/kb79u9ucvzB/FzFxSQoOTGtPqwXFB5UZWWFmmuGnjP/S61et1SSq+dAelqmOmd0V3V1laqqPXc1j49LUnhYpNZvWOVx8rv1G1ep1tYqLaXzET9jW94v97HbYWHhCggIVGlZSaOyg4KCtW7DShUeyldNTbVmfvOxNm919RoKCQ5VZqfuSknOUFl5mafLtFpsTIKKS4sUGhre6Pq7crZpx64tMsZHB/MPyM/PX9269KoP69XVVTqYf6DZXnVr1i/X7HlfyForP18/JSakqHeW69/fsvKmDx/RvmhhBwAv65+WpNsmDdfjsxZqa26+zhqQpeiQYG3af1AvzVuuksoqPX75Ga2a5OWcgT31xqJVuumVj3T92MFKigjX/C079cLcZbpseL9muxB7Eh4UqLySUs3ZuF1ZSXEa172ThmSk6O43p+vG8UOVGRet1bv368mvF2p01wxFhwRrYHqSamqt7n5zuq4dM0ihgQH6bM0mFZdX6OSeXZu91vmDe2vzgYO6b9pXWrRtt07p3VUD0pJ0Sp+u+u+85ZKkWyYMa9TKOb57J326epP6pSaqU0yUPly5XjvzCxuVe8fkEbr9tY/1q/e+0On9eqim1uqlecu1avc+3ThuiNpL94RYndGvh/700VfKKShS7+QEbcvL12MzFyg1OkKdYqPk6+OjWyYM11+nf6O/fPK1Jmd10Y6Dhfr3rIW6aGjfJl23eybHKcjfT7/5YIZunjBMcWEhWrBll7L35uqKugnP+qYm6ONVG9UrOV6JEWFasXOvnp2zREauMf1t7c7JI3TDyx/qJ299qouG9NG2vAL9Z3bjbqHH8p38YMV69UyKU+e4pl1FA/x8dVrfbnpr8Rptzc1XZly0woMCtHzXXi3ZnqPBGcm6afxQXfX8e7rj9Y918dC+CvD11TtL12jW+q3610Wtn+AtKylOp/TuqodnzFNldbV6JsVrzqbt+mrDNj1w0anqHBulsMAA/Wf2EvkaIz9fH325bkv9LPNlla4wctfkkbrl1Y9066vTdNnwfqqqqdVz3y5VZXWNbho/7GhuOX5AAgIC1S2zlzZsXiMfHx8lJqSqtLRY2ZtWKywsQmmprrkT/Ovmy9izb5cS4pMVHhahrl16KnvjKlVXVyk2JkHl5aXK3rhakhQRHtXqOnTpnKWdOds0f/HX6t61t3x9fLVxy1oFBgYpLaWzqt0CdVRkjHL27tS2HZsUFhahQ4cKtHGL60FrdU2Np0soNjpBm7etV2BAkKKj4lReUarN27IVGx2vwGYmXfPx8dGg/iM0f/HXmj33c2V27qHI8ChVVlZoZ8427T+wR1nd+333UKMFAQGBbXa/Dv8s9h/Ikb+/vyIjotWzez+tXLNERkaJCSmqqq7Shk1rXA8IIlxdzyMjYrRhk+vnHB4epZKSIu3avVXJiS0vbSm5JpZz5+fnr4y0LuraOUu7crZp/qKv1LVzlvwDApWzZ4d27NqiPnWt7tGRsdq+c7PWrF+mxPhUlVeUafPW9aqoKK/vAeAuPjZRW7Zla/mqhUpL6aTa2lpt2rpe/v4BivPQkwDti8AOAA5ww7ih6pUUrzcWrdK/Pp+rwtJyJUaEaky3DN0wbkirx26HBPjr+R+fq0dnzNdDX85TcXmlUqLCdddJIz12D27JOQN7as6m7brrzem6deJwXTd2sB6//Az9e9ZCPTtniQ6WlCkhPExXjhigmya4uiTGh4fqySvO1OOzFuoPH81SeVW1uiXE6IGLT9PwzNQWr3fPqWM1umuGXl+0Sn/++GsVV1QqITxUlwztqyB/P/1n9hJl78vVH8+apIjgIP3slDGqrq3VQ1/Ok6+Pj07r0013njRSf/zoq/oyR3fN0JNXnKWnvlmkn739mfx9fdQrOV5PX3V2/Yzi7eVP50zWc3OW6u0la7S3cIFiw4J1Wt9uun3SiPpu2ZcM66vgAD+9ONe1lFhCeJh+NGqgrh0zqEl5gX5+euqKs/TIjPn6x2dzVFReoYyYKN17xgSdM9C1lu9955yk+6d/o79Nny1JyoiN0r1nTtTHKzdo6Y49Tco8XoM7pejfl5+hR2cu0E/emq7UqAj98exJuvONT+qPOdrv5Mpd+7TlQL5+enLzk8qd1b+n3lq8Ru8sWaN7Th2r68cO0TOzl+jW16bpg1svU4/EOL344/P02MwF+s37X8pK6hYfo4cvmaqJWZnNluvJX887WU9+tUgPfulazigrKU7/uvBUndzL9QDq4Uum6qEv5+qedz5XSKC/eibF6fmrz9Vtr03Tsh05mpjVWSO6pOnpq87WE18t1C/e/UL+fr4akpGsP59zEuuwn+CyuvdVYGCQtu7YqB07t8g/IEApSenK6t5Pfr6uX9PjYhIUF5uo9RtWKvfgPo0YMl49u/dTUGCQtu7YpM1b6oJUbKJ69ujXbAjzJDg4RGNGnKR12Su0fNVC+fj41K3FPVIBAYFNAnufngNlba2rhbvWNYa9e5feKiou1L4DOR4nnsvq7lpvfcfurdqweY38/PyVlJCqXj36Nzm2ociIaI0bNUVbtmZr+45NKq8ok6+vnyLCozR8yLhGa8kfSVvdr/CwSKUmZ2jrjk3an7tHE8dOVaf0rvL389emreu1fddm+fr6KSY6ToMHjFRI3bCGAX2Hav3GVdq8NVsVFeUKCAxURloXZXXve4Qrulq73QUHhSgjrYuCgoI1duTJWrdhpVauXaKamhqFhYZrQN9h9bPyp6V2VmlZiXbs3qJtOzYrKChYifHJ6pzRTSvXLFZRcaHCwyIblZ8Qn6zB/Udq87ZsLVr2rYykmOh4jR4+6bhntsfRM201A6NTGGMiJBUu+c1/FFT+w/psAI4sKCNe6RcMUc3CL6TS5idyw/fP5gMH9eHy9brr5FFNukAD7e1X732hHQcL9aup49S3mWXuTgixSTrQfbj++/J7KnDr0QIAJ7KgkED95W+/laRIa23LM+keBcawAwC+F7rGx+gnU0YT1tHhduUX6sIhriWYHqpraQcAoCPQJR4AAKAFz81Zqo9WZistOkJ3TB7h7eoAAE4gBHYAAIAW/P6sSfr9WZO8XQ0AwAmILvEAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAAxHYAQAAAABwIAI7AAAAAAAORGAHAAAAAMCBCOwAAAAAADgQgR0AAAAAAAcisAMAAAAA4EAEdgAAAAAAHIjADgAAAACAA/1gAntWVpbxdh0AAAAAAGgrfsdyUlZW1lBJd0maICle0h5JMyTdn52dvaXBcV9JUnZ29sS691bSH7Ozs/9wPJX2UJ8xkn4t6Yy2LNeTG798Rn1j03XnoKntfSmtzt2he+e9pftGXay+cRnHVdaB0kP6aOsSLd63RXllRQr1D1TXqESd0XmwBiZ0bpsKH4XKmmp9um25Zu9ep5ySAhkjpYbF6NROAzQxrY98DM9fnO7GL5/RgbJDze7/z8k3KS44vANrdGTr9hzQj198X77G6OFLTtfwzNQ2v8a9/5uhxdtyNP2uq9q8bAAAAJxYjjqwZ2Vl3SbpYUmzJP1SUo6kbpLukXRBVlbWydnZ2UubOX2UpF3HVtUW3SCpTzuU61VdIhP1t7GXKz0s9rjKWXlgu/6x5ENFB4bqnC5DlRoWo0OVpfpm93r9ccE7OitziK7tO6mNan1kBRUl+tP8d3Wg7JDOzBys7tHJqrW1WrJvi/69/DOtydup2wecJkNod7whCZm6qMcoj/siA0M6uDYtyysp1d1vTtfUvt3VNT5G//f2p3r5ugvUOTaqTa9z47ihunx4ZZuWCQAAgBPTUQX2upbsRyQ9np2dfXeDXV9lZWV9IGmppBckDfB0fnZ29vxjq+aJKcQ/UFnRKcdVRn55if61ZJq6RSbp18PPU4Dvdz/y0SlZ+nDzYr2w9itlRMTp5Ix+x1vlVnl02XTllRfp72OvUEpYdP32oYldlRASqZfWfaOhiV01KrlHh9QHxy4iIOS4v6Mdxdf46PHLz1B6dKT8fX00skuaQgP82/w66TGRbV4mAAAATkxH28J+j6QCubqfN5KdnZ2blZX1U0m9s7KywrOzs4vcj3HvEp+VlRUj6X5J50qKlLRc0m+ys7NnuJ1zm6TBks6XFCDpU0m3ZWdn78vKynpR0tWHj+3SpcstW7ZsUWVNtd5cO0ezd69XYWWpUkOjdWH3kRqb2rO+PpsL9um/677W5oK9qrVWPaKTdUXPceoRnXyUt6WpBXs36e0N87SjKFeh/oEak9JTV/YcqyC/gO+O2bNR/9uyWFsL/7+9+46vsrz/P/66Mk5yMsmGEAJJgMPeICBDBLTiqHtvq7Z2qK11/LS1Q62tdXy1rW2ttioO6sKBW/beIyQcEgghgQRC9p73749zcszJYAiVY3g/H4884Nz3fe5znTufnMd539d1X/dBmqwWEuyRzEkZxZyUMUDHIfENzU38O2Mx6wqzKW+oJcEeyey+w/l+2vgu2/Hxnk3UNNXzk1Fne4X1VhekjWNFgZP/7lzFzD7DMMbw7KZPSC/O45+zbvNsd7CmnNu/eoGfjvoeZ/YZBkBlQy1zM5expjCbmqZ6UiLiuWbQFEbE9e2yPTnlB9lUtIfrB0/zCuutzksdS1FtBfY2x6mkrorXdixnS1EulQ21JEfEctmAiUzo2d+zzUUf/pnbh89iZ2kBawqz8DN+TE8azHWDp/GGcwWL8rbTYllM7DWAW4fN9ByLiz78M7cOO5OsskJWF2QR5B/IlN4Orhs8jSB/V5h7aOWbxASH09jSxOaiXIZE9+ah0y7hYE05bzhXsKUol4qGWkIDgxgTn8JNQ2cQYbMDrmHjM/sMo7qpnsV5GTS2NDGhZ39+OGI2n+zZxMc5m6htamBEbF9+NPIsz/M6U1ZfzdzMZaw/sJv65kZSIxO4dvBUBke7hnU3NDcxf9c6luZncrC2nFh7OLOSh3Nh2gTPJQYPrXyT3qHRxNoj+DR3M1UNdQyL7cNPR32PDQd283bWGsrqqxkY1Ysfjzyb+JDjD58Xffhnrhw4mfUHdrG/upQL08Zz2cBJFNVU8ErmUjYX7aGhuQlHdCI3DplOamSC57mVDbW8tH0R6w/sxsJiRtJQQgKDWJS33VOfD618E4BHJl/ped7azZu5+f4/8q/rv8/4fq7jU9vYyL+WbWDlrjwampoZkZTAz2dPJi48FIB9ZRXMeXYuT1x6Fp9tz2blrjz8/fyYNTiVe8+eQog73FuWxbz16cxbn86+0griw0O5ZMxQbpw8CmNMhyHxdY1N/GPpOr7M3E1BeSU2f3+G907g7tmTGdQz9riPr4iIiIh0X0cd2N2Tup0NfOB0Oms628bpdL59DPsLBhYCPYEHcQ2tvxn41OFwnO10Ohe22fwx4D3gSiAVeBpoBK4Cfo/rOvoxwEXV1dUHAJ5aOZ+dh/Zx5cDJ9AmPYXVhNk9u/IjGlmZm9BlKTWM9v1vzNsNjk/nluAtoamnmrazV/Hb12/xz1m2EBgYd7VvpYGl+Jk9vWsC03oO5etAUDtaU89qO5eRVHuI3Ey/DGMP6A7t4fP37nJcyhisdp1Pf3MgnOZt4IX0hqZEJDIrueG3ti+kL2Vy0hxuGnEFUUAgbD+bwn4wlhNvsnhDd3rrCbNIiE4i1R3TZ3imJg3hp+yJ2lx8krUdCl9u11dDcxK9X/Zey+mquGTSF6OAwvsrbxu/WvMOvJ17KiC6uud94MAdw9aZ3JtDPn9uGz/I8Lquv5t5lcwnw8+eaQVOIsNlZmJfO4+vmc+foOUxPGuLZ9tXMpUzpPZj7xl/IusJsPsrZyOaDufSLjOOu0XPYXpzPO9lrSAyN4qL+EzzPe925goE9enHP2PPJryrm9R0rKK6t4r7x3/dss2K/k8mJA7l//IW0tLRQ39TIQyvnEWmzc9vwWYQGBpFZso95O1cS6BfAHSPP8jz3g93rGRHbl1+MPY/sskLm7ljGrrIDRNvD+NGIs9hXVcLLmUvo4Qzl9jbvva26pgYeWP4GTS3NXDd4KjH2cD7avYHfrX6bJ6ZeS++waB5b+x7O0v1cPnASKZHxpB/K47UdyymsLvdqz/L9O0iJjOfHI8+mqKaCF9K/4qEV87D5B3DjkOlUNtbxYvpC/rntSx467ZLDlQEWFs0tLR2W+/t5z2f5VtZqrh50On3D44i1h1NRX8MDK17H5h/IrcNmEhQQyEe7N/Dgijf509Rr6RMeQ4tl8bs173Cwppwbhkwn3Gbn3aw17K8u9TqhczRKa2q5/qV3CQ4M4IFzpmK3BTJ39RZufnk+r91yCalx0Z5tf//REi4cNYhnLj+H9P0HeG7hGqJCgrlzpmvo/7MLV/Pyys1cN3EkE1P7kFlYxHMLV9PQ3Mzt08Z1eO2H5n/F+tz93DlzIn2iIsgtKeevi9Zw3zufM/+Oq3Tph4iIiIh06Vh62GOAYCDnBL32dbiGzk90Op1rABwOxyfAYuCPQNtu421Op/Om1gcOh2MCcBmA0+nc5XA4ioB6p9O52hgTERISwpbCHH4x5jxPj/ro+BTqmxp5NXMp03oPJq+qmIqGWs5NGePpoewdFsPnuVuobar/xoHdsixeyVzK6Lh+3D3m6znwEkOjeHj1W2w4uJtxCWnkVRZzRtIQbhl2pmebQVGJXP/ZX9lenN9pYN9enM+IuL5Mdb+nYbHJBAfYCD9Mr+zB2grGxqccts09Q3u4ty0/6sC+OD+DPRVF/HHKNZ4RCWPiU3ho5TxezVjCE9M6n3CruM418CLhKHtuP9i1nvKGWv4y4yYSQlztHJuQysOr/svLGUuY2nuwp/c4KSyGH42YDcDQ6CS+3LuNJquZu0efi7+fH6PjU1h3YBc7SvZ7vUaELYQHJ1yMv58fYxNS8TN+vLR9EXsrD5Ec7uoB9TOGO0ac5RkhkVN+kFh7OD8ddQ693MdveGwy2WWFbC/O89q/PcDGPWPPx9/Pj5FxfVmUt52S+ir+OPUaQgODGJuQyrbivewo2dflcViYt50DNWU8Oe16UiLjARgSncTPl77C9uJ8DtSUs+VQLne1OYkxKq4fQf4BvO5cwfmpY+jjfi9NLS3cP+5CwmzBAKwpzGJT0R6eP/MHnlrIKT/I4vyMI/5+FudndLrdo5OvZEhMkufxgB69uLj/aZ7HczOXUdlQx3MzrvL04o+JT+Gni17iDecK7h13ARsO7ia7rJAHJ1zkOcEzIjaZ27785xHb1d7c1Vsor63j5ZuuJrGHayK8Kf2TufBvb/C3xev482Vne7adOqAvvzjrdABOS01i1e58lmblcufMSVTU1fPKqi1cNWEEd8+eDMCktD6UVNeyce/+Dq/b2NxMdUMD958zhe8NHQDAuH69qa5v4MkvVnKoqsbTwy8iIiIi0t6xBPbWbjT/E/TaM4FCYIPD4Wjbjg+BJxwOR5TT6Sx1L1vV7rn5QJffckNCQjC4gl3b3r/xPdNYsi/DE8QibHYeW/sepyc6GBufyojYZG4YMv243tS+qhKK6yq5dMBpXq89NKYPIQE2thTlMi4hzdPDW9fUQEF1GfurS8kuKwSgqaW5030Pi+3DZ7lbKKmrYnxCGmPiU7i8iwm/vB2+B8/Pvd6yrKPYl8u2Q7lEBYWSFpnQ4Ri/nLGEqoY6TyD0ei13uG6xOvbKdia9OA9HVC9PWG81PWkIz23+lH1VxZ4g6oj++lpqfz8/wm120iITvHp7w23BVDfVee1rau9BXttM6jWAl7YvIqM43xPY40MivS5nSImM57HTr6LFsiisLqOgupS9lYfIryru0OPcv0cvr/33CA7BHmjzOikUHmgnt+JQl8chsySf+JBIT1gHsPkH8JcZNwPwSsYS/IxhSuIgr+dNTxrC684VpBfneY5TUli01++mR1AoETa7J6y3Hqeapvou29NqXEIqVwyc3GF577Bor8d9I7yHfm87tJd+kXHEBId7jpcfhjHxKSzJz3S95+J8AowfY+JTPc+zB9iY0DONbYe8T4ocyZqcfTgSYomPCKXJ/XrGGE7vn8zHW3d6bTsyqafX44SIUPaXuU40bcs/QFNLCzMHeZ8Eu8cd8NsL9Pfn+WvOB6Cospq9JeXkHCplaVYuAI3NR/d3ICIiIiKnpqMO7E6ns8ThcFQCXV6g7HA4QoEgp9NZchS7jME1HL6xi/W9gNbA3n4IfguHSaH+/v5YwNWfPNvp+pK6Kk/gemvnapbv38FnuVsI8g9gem9Xr3dn13sfjcpGVxj8x7Yv+ce2Lzt9bYCK+hqe3/oFawuzwUCv0ChPT79F58H5lqEziAkOZ8m+DM++HVGJ3DZ8ptd1v23F2SM4UFN22Da3rj/csPn2KhvqKK2v5tIFT3W6vrS+qtPAHmd39aYW1VZ4AmR7xbWVRAWH4WcMVY11pIV0fG89glzna6obvw6VIZ0Mk269Dv1wooPCvB5H2kI67LtHJzOev79rPe9mr6GioZYeQSGkRSYQ5B9IdYt30O28XcdWX5UNdYeddb2ysY4Im73DUPTOjpM98Jsdp86EB9rp36PnEbdrf/wqG2spqC7rsn7qmxqpbKwj3GbvcIu/6OBjv1VceW0de0vKGfvI3ztdX9v49cdQcKD378bPGM/JrLJa1993dGjXo1raW5G9lyc+X07OoTJCbYEMSIgh1Ob6HXT1ty4iIiIiAsc+6dxnwAyHwxHsdDrrOll/E/B/DodjitPpbN8r3l4ZkAVc3cX6bzz0vrm5meCAQH4/6YpO17cOYe4dFs1dY+bQbLWQVVrIkvztfJq7hYTQSK/hu8eitdf0hiHTGRbTp5P1rhD71MYF5FeV8JtJlzEoKpFA/wDqmxr5cu+2Lvcd6B/AZQMnctnAiRTVVLDuwC7eylrFUxsXeHpa2xufkMZ7u9ZysKbcawKxXWWFpLmD1qqCLCJtIZ7h8MZAS7ve9tom79tUhQQG0Ss0ip+3GfbfVleTlY2O78d/MmDDwZxOA3uz1cI9y14lJSKeX0+8lLDAYErrqztsV+o+8XG4ywGOVmVjrdfjsnrX+aHDBeSl+Zn8J2Mx1w2eysw+wz3bPrH+A7LcIyVOpJDAIA7UlHdYvqNkPyGBNsIDg6loqKW5pcUrtJfWu47T4SazOxlCA4IYGpPEjUPO6HR9gL8/ETa76z1ZLfibr99TZYP378tgaG43YqOm1vvjKTzYxri+ifx8dsfRAAA2/6MbOBQe5AraJTV19GuzvLC8kr0lFYxO9j55kVdSzt3//YQzHCk8d+W5nhnk561LZ8WuvUf1miIiIiJy6vI78iZensTVM/5o+xUOhyMeuBdXCD+a27ctAfoAB51O5/rWH2CWez9Nx9AurzHktbW11DU1YmHRv0dPz8/eykPM27mS5pYWVu53csNnf6W0rhp/48eg6ERuHzGb0MAgDtV2mOD+qPUOiybSFsKBmnKv144JDufVzKXklB8AILNkH5N7DWR4bDKB7t7W1gnZ2odlgPrmRu5Y+CLv71oHQFxIBHNSRjM1cTDFh2nvuSljCA0I5q9bPqOh2XVIi2oquH/569y3/DXedA+XvmzgRE8osgcEUdlQ69ke6HDd97CYJIprK4m0hXi9zy1FubyXvdYrYLWVHB7LmPgU3s1aS2F1WYf187PXUVZfwxlJQwHXpQTO0oIOowSW7MskKiiUXqEdZ5o/VusKd3k9XlmwEwOdnnBplVmST0hAEBf3P80T1mubGsgs2XdMlxYcrSHRSRyoKSO3osizrLG5iT+tf58vcrcyNKYPLZbF8v07vJ7XOrx8cCdzIpxMQ2P6sL+qlMTQKK/6WZKfwRd7t+Fv/BgZ25dmq4XVBV8PWW9qaWbTQe9zefYAW4e/2U3p6V6PxyYnsqe4jL4xPRiaGO/5WbBtJ+9uyugwMqErw5MSCPDzY9GO3V7L567Zyi/f/qzDBHIZBUXUNzVzy+ljvG73tjzbNST+f1ErIiIiItJ9HFMPu9PpXO1wOH4FPOJwOAYDLwNFwDDgHiAcmON0Oo/mW+i/gZ8AXzgcjseAvcBs4D7gOafT2dVQ+c6UAQkOh+OcXr16ZRcUFDAoNok/rJ3P5QMnkRQWTVZZIW86VzIqrh8RQSEMiu5Ni2Xx+Lr5XNx/AvbAIFbs20FNY/0R7/+dV1XMh7s3dFg+MKoXjqhErhk0hb9v/QJ/YxiXkEZ1Yz1v7VxFcV2Vpxd7QFRPluzLILVHArHBYewo3c87WWswuMJ5e0H+gaRFJjBv5yoC/PzpGx7H/uoSFuanH7a9UcGh/HLc+fxp/Qfcs/RVzk0ZQ1J4ND8YNpOXti9iZ2kBvcOiOavvSM9zxiWksiBnI3/Z8imzk0ewt/IQ7+9a5zU0+cw+w/g4ZzO/Wf0Wlww4jTh7hCesz0kZTYBf1z2WPxw+m1+v+i/3LX+N81LGMDAqkdqmBlYV7GTZvkxmJQ9nWtJgAC5IHceS/AweXvUWVw6cTLjNzuL87Ww7tJefjDy7w3DpbyKrrICnNy7gjKQh7Kko4k3nSmb3Hel1TXd7A6J68WnuFv69fRHjE9Ioqatm/q51lNVXe0ZRnEgzk4exIGcjj619j6sGTSHSZufjPZuob25iTsoYeoZEMiymD3/f+gUldVWkRiawvTiPd7PXMiNpaJeXH5wsF6SNY3F+Bg+vfosL08YRHmhn+X4nX+zdys1DZwAwIq4vY+NT+NuWzymvryUhJJKP92yiqLbC6/KNcQlprDuwixfTF3Jaz/5kHdzKp9nef5/XTRrFR9t2cturH3DDpFH0sAfzWUY272zM4JddXH/emagQO9eeNoK5a7YSFBDA+H69Sd9/kDfWbuNnMycS0C74D+4VR4CfH898tYrrJ46iobmZ9zfvYJn7GvbahmM5LykiIiIip5pjvlDb6XQ+6nA4NuIK20/h6nHPBz4BHnU6nUc1ztPpdFY7HI5puO7D/idc92HfA9yPqyf/WPwbmAO8HxIS8ijAfVMv4d0ty3k7aw3lDTXEBIdxfupYzyRt0cFh/HriJby+YwV/cfc+J4fHcO+47zO8i1uStcouK/RMENfWFQMn4YhKZHbfEYQE2ngvex2f524l2N/GoOhE7h5zrmfytJ+NOocX0r/ihW2uW84nhkXxwxGzWZKfQUYXs4XfMfIsXtuxnPd3raO0voZIWwizkodzlePwgWN4bDJPTbueD3av5/3d6yiurcIeYGNoTBIj4/qxIGcDdy7+D7cPn8XIuL6MiuvHjUOmsyBnI6sLskiLTOC+cRfywIrXPfsMDrDxyOlXMDdzGa9kLKWmqZ54eyTXDp562PvCg2t0wB+nXM0HuzewbN8O3s1eS4CfP0lh0dw1+lzPzP7gOuHwhylX8WrmMv61fSFNLc30i4jngfEXet2H/XiclzqWkroqHl/3PhE2O5cOOI2LBxz+kogZSUM5UFPOV3vT+XTPFqKDwxibkMr3+o3i+a2fk1d56ISGZHuAjUdPv5KXM5bwYvpCmq0WBvboxSOTr/Bc4vHQhIt5w7mCBTkbKW+oJcEeyTWDpnBBWsdbjZ1s0cFh/GHK1czNXMrft35JQ3MTiWFR/Hjk2cxKHu7Z7pfjLmBu5jLm7VxJQ3MTU3oPYnKig52lBZ5tZiYPo7CmjEV56Xyeu5URSak8+fCvue5nd3q2iQ8P5ZWbLubZhat5ZMESGpqa6RsTyW/On8FFowcfU9vvmjWJ6LAQ3lqfzsurNtM7Kpz7vjeFy8d1vLVicnQkj188m+eXrOPOeR8TYQ9mRO8EXrzhQm55eT4b9xYwICHmGxxBERERETkVmO42JNMYEwGUb3jwBYLrutd7+1+pbWrg89wtDI5O8tyi7VRx0Yd/5oqBk7jyCCc9xHc8u+kT0ovz+Oes2zpdH5wcR59LxtK89guo+eaXt4iISCdielI0YAIvv/ouZaUd51YRETlVBYcE8ejjDwFEWpZVcaL2+82mQpduxR5gO2KvuIiIiIiIiHy7jnXSORERERERERH5FqiHXU5p751/z8lughyjn40+52Q3QURERETkW6EedhEREREREREfpMAuIiIiIiIi4oMU2EVERERERER8kAK7iIiIiIiIiA9SYBcRERERERHxQQrsIiIiIiIiIj5IgV1ERERERETEBymwi4iIiIiIiPggBXYRERERERERH6TALiIiIiIiIuKDFNhFREREREREfJACu4iIiIiIiIgPUmAXERERERER8UEK7CIiIiIiIiI+SIFdRERERERExAcpsIuIiIiIiIj4IAV2ERERERERER+kwC4iIiIiIiLigxTYRURERERERHyQAruIiIiIiIiID1JgFxEREREREfFBCuwiIiIiIiIiPkiBXURERERERMQHKbCLiIiIiIiI+CAFdhEREREREREfpMAuIiIiIiIi4oMU2EVERERERER8kAK7iIiIiIiIiA9SYBcRERERERHxQQrsIiIiIiIiIj5IgV1ERERERETEBymwi4iIiIiIiPggBXYRERERERERH6TALiIiIiIiIuKDFNhFREREREREfJACu4iIiIiIiIgPUmAXERERERER8UEK7CIiIiIiIiI+SIFdRERERERExAcpsIuIiIiIiIj4IAV2ERERERERER+kwC4iIiIiIiLigxTYRURERERERHyQAruIiIiIiIiID1JgFxEREREREfFBCuwiIiIiIiIiPkiBXURERERERMQHKbCLiIiIiIiI+CAFdhEREREREREfpMAuIiIiIiIi4oMU2EVERERERER8kAK7iIiIiIiIiA9SYBcRERERERHxQQrsIiIiIiIiIj5IgV1ERERERETEBymwi4iIiIiIiPggBXYRERERERERH6TALiIiIiIiIuKDFNhFREREREREfJBPBnZjTLwxZr4xpswYc8gY84wxJuBkt0tERERERETk2+KTgR2YB1QBicAEYBZw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"/>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Agora o dashboard interativo com os segmentos de clientes
+fig = go.Figure(go.Treemap(
+    labels = rfm_level_ag['Segmento de Cliente'],
+    parents = ['Segmento de Cliente', 
+               'Segmento de Cliente', 
+               'Segmento de Cliente', 
+               'Segmento de Cliente', 
+               'Segmento de Cliente', 
+               'Segmento de Cliente', 
+               'Segmento de Cliente'],  
+    values = rfm_level_ag[('Monetary', 'count')]))
+fig.update_traces(root_color="lightgrey")
+fig.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+fig.show()</code></pre>
+</div>
+<div class="output text-center">
+<img alt="Graph" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABrsAAAFoCAYAAADn+EAcAAAAAXNSR0IArs4c6QAAIABJREFUeF7t3Qm0ZVdhmOn9alaVqJJUGgBBiVFIRghQsMBmDoON2w44Dis2MbZDh8Rx242bphfxvDw3K7RjOx07tlc8Jh4a24BDkA2oGW3GCFtWEBLCgEC0VJKoKqGah9dr3/J+97xT79533r3vHO293/fW8rJUdYa9v71vCfRzzl1YXFxcDH4IECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIFCiwIHYVuGqGTIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgMBIQu2wEAgQIECBAgAABAgQIECBAgAABAgQIECBAgACBYgXErmKXzsAJECBAgAABAgQIECBAgAABAgQIECBAgAABAgTELnuAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECgWAGxq9ilM3ACBAgQIECAAAECBAgQIECAAAECBAgQIECAAAGxyx4gQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAoVkDsKnbpDJwAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQEDssgcIECBAgAABAgQIECBAgAABAgQIECBAgAABAgSKFRC7il06AydAgAABAgQIECBAgAABAgQIECBAgAABAgQIEBC77AECBAgQIECAAAECBAgQIECAAAECBAgQIECAAIFiBcSuYpfOwAkQIECAAAECBAgQIECAAAECBAgQIECAAAECBMQue4AAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQKBYAbGr2KUzcAIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAbHLHiBAgAABAgQIECBAgAABAgQIECBAgAABAgQIEChWQOwqdukMnAABAgQIECBAgAABAgQIECBAgAABAgQIECBAQOyyBwgQIECAAAECBAgQIECAAAECBAgQIECAAAECBIoVELuKXToDJ0CAAAECBAgQIECAAAECBAgQIECAAAECBAgQELvsAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAgWIFxK5il87ACRAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIExC57gAABAgQIECBAgAABAgQIECBAgAABAgQIECBAoFgBsavYpTNwAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABscseIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQKFZA7Cp26QycAAECBAgQIECAAAECBAgQIECAAAECBAgQIEBA7LIHCBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIEihUQu4pdOgMnQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAQu+wBAgQIECBAgAABAgQIECBAgAABAgQIECBAgACBYgXErmKXzsAJECBAgAABAgQIECBAgAABAgQIECBAgAABAgTELnuAAAECBAgQIECAAAECBAgQIECAAAECBAgQIECgWAGxq9ilM3ACBAgQIECAAAECBAgQIECAAAECBAgQIECAAAGxyx4gQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAoVkDsKnbpDJwAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQEDssgcIECBAgAABAgQIECBAgAABAgQIECBAgAABAgSKFRC7il06AydAgAABAgQIECBAgAABAgQIECBAgAABAgQIEBC77AECBAgQIECAAAECBAgQIECAAAECBAgQIECAAIFiBcSuYpfOwAkQIECAAAECBAgQIECAAAECBAgQIECAAAECBMQue4AAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQKBYAbGr2KUzcAIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAbHLHiBAgAABAgQIECBAgAABAgQIECBAgAABAgQIEChWQOwqdukMnAABAgQIECBAgAABAgQIECBAgAABAgQIECBAQOyyBwgQIECAAAECBAgQIECAAAECBAgQIECAAAECBIoVELuKXToDJ0CAAAECBAgQIECAAAECBAgQIECAAAECBAgQELvsAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAgWIFxK5il87ACRAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIExC57gAABAgQIECBAgAABAgQIECBAgAABAgQIECBAoFgBsavYpTNwAgQIECBAgAABAgQIECBAgAABAgQIECBAgAABscseIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQKFZA7Cp26QycAAECBAgQIECAAAECBAgQIECAAAECBAgQIEBA7LIHCBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIEihUQu4pdOgMnQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAYJHbdcsstpAkQIECAAAECBAgQIECAAAECBAgQIECAAAECBDaYwDXXXNP7jMWu3ondgAABAgQIECBAgAABAgQIECBAgAABAgQIECCwMQXEro257mZNgAABAgQIECBAgAABAgQIECBAgAABAgQIEKhCQOyqYhlNggABAgQIECBAgAABAgQIECBAgAABAgQIECCwMQXEro257mZNgAABAgQIECBAgAABAgQIECBAgAABAgQIEKhCQOyqYhnXPolP/O0d4Xf/5H3hJ/+3bw8X7jl/7ReYckbz2l85+GD4xd/8r+EHX/Mt4fFXPHxd7+NiBAgQIECAAAECBAgQIECAAAECBAgQIECAAIENEbsOHHow/MS/+8Nwz30Hl1b8miv3hf/jX70i7Ni+rYhd8Cu/d8NonN/36pety3jnjV3Hjp8I//bX3hZuuf3OpfE8/5lPHo2vj9iV1vC7vu0F4RlPecK6GLgIAQIECBAgQIAAAQIECBAgQIAAAQIECBAgUL5A9bErRZlrr35MePlLrl9asd96y43hedc/uZinjXKKXSk8XfX4y5fFt2R64IEH1/2pMbGr/D9szIAAAQIECBAgQIAAAQIECBAgQIAAAQIECPQhUH3s+uwX7u70Gr23v/tj4fff/oGRcfuprxia3v/R/7Hkn37/rru/Mrr2FY+6JHz8b+4Y/X58uun6pz1x9NRT+vvm01jxqaf0e5ddfMHSawTTOJ/9jKvDW//iI8vObZ7THN/RYyeWPbEWn1Sb9tRTc47xOs37t5/UetXLn7csDjY3X7zOzbd+fuKTcas92TXJOl33vPO2LXmmObXXII2v/dTeagZ9fIhckwABAgQIECBAgAABAgQIECBAgAABAgQIEHjoBKqPXSmGXHLR7olxJkaWG//y5qXwFMPK5Q/fO4o97d9rhp4Yu372/35LePlLnzk6Ngar+PfPuPYJoyee2qEtRqBf+d0bwo98/ytHT5TFa9119/1LxzbPbT/J1H6yq/3EWrr3933Xy1YMXu17N4PUeTu2jQLc3gsfNhpLvPeb/uNbw2u//SXnPPk26Um55haeFrtWs47BMQWr5nXi9eOrKJuvMUxGL3r2tUv+v/GH7w5v/N5vXffvIXvoPqLuTIAAAQIECBAgQIAAAQIECBAgQIAAAQIECEwTqD52xcmv9J1d6cmgleJNjCw3vPem8APf803h3//2O0PzFYjt2BWf7PrB13zLKAq1A9VqwSoGqhRnvnLwwWVPoKVxveyF143iVTt2rfTE2rRXHbZ/b7Wnr5rBr7mB2uNaaXNNuvblD79oFNWansk6Bq6/+MBfL3tirOmzUuxqf+9Yl7H544AAAQIECBAgQIAAAQIECBAgQIAAAQIECBCoS2BDxK72kqXXAsbAEl9JGAPMLbffueyw+OspdqXgFA+YN3Y1X4cYr5deJThL7Go/xdR8Uqw953a8agep+FTZ4aPHl5220qsM53myK8WulaxnjV3plZDNgXuVYV1/SJkNAQIECBAgQIAAAQIECBAgQIAAAQIECBCYJrAhY1cz2HzD8542il3NoJXAVgo788au9HrE9qK0n9Qa+smutbz+b9bv7EqxayXrdkjcsX3b6DWQaVzx99uvMWw+FRaP90OAAAECBAgQIECAAAECBAgQIECAAAECBAhsPIHqY1cMJm9910fC93/XN4UURNphqf09UjE0ve1dHwuveOn1y16tF7dHepIoPj0Uv7NrLa8xbH9vVrzeH73jQ+Glz31aWO3JrnZgSjEsfc9Wl+/s+t0/ed+y7yX79GfvGv19+zu74rji9f7uzrvDS577tHM+Fen1jFc9/vLRd3yln996y43hedc/ORx44MGQ7tWeV1frduxKY2y+ArH9nV1xHNE4/sRXP/ohQIAAAQIECBAgQIAAAQIECBAgQIAAAQIE6heoPnalKNR8dd6u87aHH/n+V46+Zyv9xAjz+2//wNLft7/TK54fz/uaKx8ddu7YPoo87Wi22nd2pRjTfPXe85/55BWv1X6yq/m9Y/EVizG2HT12YvS00z33HRyNe7XX98VXGabXKMb7pth14Z7zQ9tpJaPmx2El1zSX1b4PbJJ1O+g1n+yKY0yvn4zjSOvT/j629FrIeLwfAgQIECBAgAABAgQIECBAgAABAgQIECBAoH6B6mPXei9h+7uv1vv6rkeAAAECBAgQIECAAAECBAgQIECAAAECBAgQINBdQOxaxSq9HvDw0eOjI9PTS92JHUmAAAECBAgQIECAAAECBAgQIECAAAECBAgQINCXgNjVl6zrEiBAgAABAgQIECBAgAABAgQIECBAgAABAgQI9C4gdvVO7AYECBAgQIAAAQIECBAgQIAA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igO79NJL1zxgJxAgQIAAgfiProWFBRAECBAgQGBNAocOHRr9i4v4c8EFF4Rt27at6XwHEyBQjoDPezlrZaR5CDzwwAPh2LFjo8Hs3r17FIr9ENiIAvE/K8Z/hsSf7du3hz179mxEBnMmMLPASqErXqz62DWzmBMJECBAgAABAgQIECBAgAABAgQIECBAgAABAgSyFxC7sl8iAyRAgAABAgQIECBAgAABAgQIECBAgAABAgQIEJgkIHbZGwQIECBAgAABAgQIECBAgAABAgQIECBAgAABAsUKiF3FLp2BEyBAgAABAgQIECBAgAABAgQIECBAgAABAgQIiF32AAECBAgQIECAAAECBAgQIECAAAECBAgQIECAQLEC1cSuYlfAwAkQIECAAAECBAgQIECAAAECBAgQIECAAAECBLIWWFhcXFzMeoQGR4AAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQGCCgNhlaxAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBQrIHYVu3QGToAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgIHbZAwQIECBAgAABAgQIECBAgAABAgQIECBAgAABAsUKiF3FLp2BEyBAgAABAgQIECBAgAABAgQIECBAgAABAgQIiF32AAECBAgQIECAAAECBAgQIECAAAECBAgQIECAQLECYlexS2fgBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECYpc9QIAAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgUKyA2FXs0hk4AQIECBAgQIAAAQIECBAgQIAAAQIECBAgQICA2GUPECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIFCsgdhW7dAZOgAABAgQIECBAgAABAgQIECBAgAABAgQIECAgdtkDBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECxQqIXcUunYETIECAAAECBAgQIECAAAECBAgQIECAAAECBAiIXfYAAQIECBAgQIAAAQIECBAgQIAAAQIECBAgQIBAsQJiV7FLZ+AECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQJilz1AgAABAgQIECBAgAABAgQIECBAgAABAgQIECBQrIDYVezSGTgBAgQIECBAgAABAgQIECBAgAABAgQIECBAgIDYZQ8QIECAAAECBAgQIECAAAECBAgQIECAAAECBAgUKyB2Fbt0Bk6AAAECBAgQIECAAAECBAgQIECAAAECBAgQICB22QMECBAgQIAAAQIECBAgQIAAAQIECBAgQIAAAQLFCohdxS6dgRMgQIAAAQIECBAgQIAAAQIECBAgQIAAAQIECIhd9gABAgQIECBAgAABAgQIECBAgAABAgQIECBAgECxAmJXsUtn4AQIECBAgAABAgQIECBAgAABAgQIECBAgAABAmKXPUCAAAECBAgQIECAAAECBAgQIECAAAECBAgQIFCswP8Ph3sYl7F8JtcAAAAASUVORK5CYII="/>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
+%watermark -a "RSS - LfLngLrnng"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: RSS - LfLngLrnng
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.11.7
+IPython version      : 8.20.0
+
+Compiler    : MSC v.1916 64 bit (AMD64)
+OS          : Windows
+Release     : 10
+Machine     : AMD64
+Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+CPU cores   : 4
+Architecture: 64bit
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">ipywidgets: 7.6.5
+xarray    : 2023.6.0
+sklearn   : 1.4.2
+matplotlib: 3.8.4
+sys       : 3.11.7 | packaged by Anaconda, Inc. | (main, Dec 15 2023, 18:05:47) [MSC v.1916 64 bit (AMD64)]
+json      : 2.0.9
+pyspark   : 3.5.1
+pandas    : 2.2.2
+squarify  : 0.4.4
+IPython   : 8.20.0
+numpy     : 1.26.4
+plotly    : 5.22.0
+seaborn   : 0.13.2
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="5"><strong>Fim</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v5.tpl P001-BA-Analise-RFM-Area-de-Marketing.ipynb</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">[NbConvertApp] Converting notebook P001-BA-Analise-RFM-Area-de-Marketing.ipynb to html
+[NbConvertApp] Writing 188955 bytes to P001-BA-Analise-RFM-Area-de-Marketing.html
+</div>
+</div>
+<div class="footer">
+<p>robertossoares-lflnglrnng</p>
+<p id="datetime"></p>
+<script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></body>
+</html>
