@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lab03-Basic-Rules-of-Algebra</title>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important; /* cor verde claro */
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .title-header {
+            font-family: 'Caveat',cursive;
+            font-weight: bold;
+            font-size: 25px;
+            font-weight: bold;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 15px;            
+        }
+        .footer {
+            font-family: "Gloria Hallelujah" ,cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        pre, code {
+            background-color: transparent !important; /* Evita sobrescrita de estilos */
+            border: none;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+<h1 class="title-header">Lab03-Basic-Rules-of-Algebra</h1>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><br/><br/></p>
+<p style="text-align: center;">
+<font color="#0A1781" face="Segoe Script" size="6">
+<strong>
+        Matemática e Estatística Aplicada<br/>Para Data Science, Machine Learning e IA
+    </strong>
+</font>
+</p>
+<p style="text-align: center;">
+<font color="#F89634" face="Segoe Script" size="6.5">
+<strong>
+            Lab 3 - Regras Básicas da Álgebra,<br/>Operações com Vetores e Algoritmo de Machine Learning
+        </strong>
+</font>
+</p>
+<p><br/><br/></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p style="text-align: right;">
+<font color="#444444" face="Segoe Script" size="4">
+    Roberto Soares - LfLngLrnng<br \=""/>[+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida  
+  </font>
+</p>
+<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a>
+<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</font></p></font></p></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F89634" face="Segoe Print" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
+<font color="#66666" face="Segoe Print" size="2">
+<ul>
+<li><p>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:</p>
+</li>
+<li><p>pip install -U nome_pacote</p>
+</li>
+<li><p>Para instalar a versão exata de um pacote, execute o comando abaixo no terminal ou prompt de comando:</p>
+</li>
+<li><p>!pip install nome_pacote==versão_desejada</p>
+</li>
+<li><p>Depois de instalar ou atualizar o pacote, reinicie o jupyter notebook.</p>
+</li>
+<li><p>Instala o pacote watermark.</p>
+</li>
+<li><p>Esse pacote é usado para gravar as versões de outros pacotes usados neste jupyter notebook.</p>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">!pip install -q -U watermark</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Imports
+import math
+import numpy as np</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
+%reload_ext watermark
+%watermark -a "Roberto Soares - Data Science Academy" </code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="5"><strong>Regras Básicas da Álgebra</strong></font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Propriedades da Igualdade</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Reflexiva
+# Qualquer número ou expressão é igual a si mesmo
+a = 5
+print(a == a)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Simétrica
+a = 5
+b = 5
+print(a == b)  # True
+print(b == a)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Transitiva
+a = 5
+b = 5
+c = 5
+print(a == b and b == c)  # True
+print(a == c)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Propriedades das Operações</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comutativa (Adição e Multiplicação) 
+# A ordem dos números não afeta a soma ou o produto
+a = 3
+b = 4
+print(a + b == b + a)  # True
+print(a * b == b * a)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Associativa (Adição e Multiplicação)
+# A maneira como os números são agrupados não afeta a soma ou o produto
+a = 3
+b = 4
+c = 5
+print((a + b) + c == a + (b + c))  # True
+print((a * b) * c == a * (b * c))  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Distributiva
+a = 3
+b = 4
+c = 5
+print(a * (b + c) == a * b + a * c)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Elementos Neutros e Inversos</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Elemento Neutro da Adição (0)
+a = 7
+print(a + 0 == a)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Elemento Neutro da Multiplicação (1)
+a = 7
+print(a * 1 == a)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Inverso Aditivo
+a = 7
+print(a + (-a) == 0)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Inverso Multiplicativo
+a = 7
+print(a * (1/a) == 1)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Exponenciação</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Produto de Mesma Base
+print(2**3 * 2**4 == 2**(3+4))  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Divisão de Mesma Base
+print(2**5 / 2**2 == 2**(5-2))  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Potência de uma Potência
+print((2**3)**2 == 2**(3*2))  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Potência de um Produto
+print((2*3)**2 == 2**2 * 3**2)  # True </code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Exponencial Zero
+print(2**0 == 1)  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Radicais</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Raiz de um Produto ** ATENÇÃO AO CÁLCULO DE PONTO FLUTUANTE **
+print(math.sqrt(2*8) == math.sqrt(2) * math.sqrt(8))  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">False
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Vamos adicionar tolerância ao cálculo (afinal, o mundo precisa mesmo de mais tolerância! :-)
+a = math.sqrt(2*8)
+b = math.sqrt(2) * math.sqrt(8)
+tolerance = 1e-10
+
+print(abs(a - b) &lt; tolerance)  # Deve retornar True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Raiz de um Quociente
+print(math.sqrt(16/4) == math.sqrt(16) / math.sqrt(4))  # True</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">True
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Polinômios (Adição e Subtração de Termos Semelhantes)</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Regras de Polinômios (Adição e Subtração de Termos Semelhantes):
+
+# Polinômios: 2x^2 + 3x + 4 e 3x^2 - 2x + 1
+# Adição: (2x^2 + 3x^2) + (3x - 2x) + (4 + 1)
+
+# Variável
+x = 2
+
+# Calcula a adição dos polinômios
+print((2*x**2 + 3*x**2) + (3*x - 2*x) + (4 + 1))  </code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">27
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Frações</font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Multiplicação
+# Frações: (1/2) * (3/4)
+print((1/2) * (3/4))  # 0.375</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">0.375
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Divisão
+# Frações: (1/2) / (3/4) = (1/2) * (4/3)
+print((1/2) / (3/4))  # 0.666...</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">0.6666666666666666
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Soma e Subtração com Denominador Comum:
+# Frações: (1/4) + (3/4)
+print((1/4) + (3/4))  # 1.0</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">1.0
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Operações com Vetores - Adição e Subtração</strong></font></p>
+<font color="#66666" face="Segoe Print" size="2">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="4"><strong>O que são Ventores</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><p>Vetores são entidades matemáticas que representam magnitude e direção. Eles são amplamente utilizados em física, matemática, ciência da computação e várias outras áreas.</p>
+</li>
+<li><p>Em termos simples, um vetor é uma quantidade que possui tanto magnitude (ou tamanho) quanto direção. Por exemplo, ao descrever o movimento de um objeto, você não só precisa saber a rapidez com que ele se move (magnitude), mas também em que direção está se movendo.</p>
+</li>
+<li><p>Os vetores podem ser representados graficamente por setas, onde o comprimento da seta representa a magnitude e a direção da seta indica a direção do vetor. Por exemplo, em um gráfico bidimensional, um vetor pode ser representado como uma seta que se estende de um ponto de origem para um ponto final.</p>
+</li>
+<li><p>Além disso, os vetores podem ser somados, subtraídos, multiplicados por escalares (números reais) e têm outras operações definidas, o que os torna uma ferramenta poderosa em diversas áreas da matemática e das ciências aplicadas.e eficiente.</p>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Em ciência de dados, os vetores são usados em várias etapas do processo de análise e modelagem de dados. Aqui estão alguns dos principais usos de vetores em ciência de dados:
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><p><strong>Representação de dados</strong>: Os dados muitas vezes são representados como vetores, onde cada componente do vetor corresponde a uma característica ou atributo do dado. Por exemplo, em uma base de dados de clientes, cada cliente pode ser representado por um vetor onde cada componente representa uma característica como idade, renda, histórico de compras, etc.</p>
+</li>
+<li><p><strong>Algoritmos de Machine Learning</strong>: Muitos algoritmos de machine learning, como regressão linear, máquinas de vetores de suporte (SVM), redes neurais, entre outros, trabalham com vetores como entrada. Esses algoritmos podem aprender padrões e fazer previsões com base nos vetores de entrada.</p>
+</li>
+<li><p><strong>Processamento de linguagem natural (NLP)</strong>: Em NLP, palavras, frases ou documentos são muitas vezes representados como vetores em espaços vetoriais, como o espaço vetorial de palavras (word embeddings). Esses vetores capturam as relações semânticas e sintáticas entre as palavras e são usados em tarefas como classificação de texto, tradução automática e análise de sentimento.</p>
+</li>
+<li><p><strong>Redução de dimensionalidade</strong>: Em conjuntos de dados com muitas características, técnicas de redução de dimensionalidade, como Análise de Componentes Principais (PCA) e T-Distributed Stochastic Neighbor Embedding (t-SNE), são frequentemente usadas para representar os dados em um espaço de menor dimensionalidade sem perder muita informação. Isso é útil para visualização e simplificação de modelos.</p>
+</li>
+<li><p><strong>Visualização de dados</strong>: Técnicas de visualização de dados, como gráficos de dispersão (scatter plots) ou mapas de calor (heatmaps), muitas vezes representam os dados como vetores em espaços bidimensionais ou tridimensionais para que possam ser visualizados de forma eficaz.</p>
+</li>
+</ul>
+<p>Em resumo, os vetores são uma ferramenta fundamental em ciência de dados, permitindo a representação, análise, modelagem e visualização de dados de forma eficaz e eficiente.</p>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Definindo dois vetores como listas
+vetor_a = [3, 4, 5]
+vetor_b = [1, 2, 3]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para adição de vetores
+def adicionar_vetores(a, b):
+    return [a[i] + b[i] for i in range(len(a))]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para subtração de vetores
+def subtrair_vetores(a, b):
+    return [a[i] - b[i] for i in range(len(a))]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Realizando as operações
+vetor_soma = adicionar_vetores(vetor_a, vetor_b)
+vetor_diferenca = subtrair_vetores(vetor_a, vetor_b)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Mostrando os resultados
+print("Vetor A:", vetor_a)
+print("Vetor B:", vetor_b)
+print("Soma dos Vetores:", vetor_soma)
+print("Diferença dos Vetores:", vetor_diferenca)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Vetor A: [3, 4, 5]
+Vetor B: [1, 2, 3]
+Soma dos Vetores: [4, 6, 8]
+Diferença dos Vetores: [2, 2, 2]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Operações com Vetores - Cross Product (Produto Vetorial)
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>O produto vetorial entre dois vetores resulta em um terceiro vetor que é perpendicular aos dois vetores originais.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para calcular o produto vetorial entre 2 vetores
+def produto_vetorial(v1, v2):
+    x = v1[1] * v2[2] - v1[2] * v2[1]
+    y = v1[2] * v2[0] - v1[0] * v2[2]
+    z = v1[0] * v2[1] - v1[1] * v2[0]
+    return [x, y, z]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria os vetores
+vetor_a = [2, -3, 1]
+vetor_b = [5, 7, 6]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Calculando o produto vetorial
+resultado = produto_vetorial(vetor_a, vetor_b)
+print("Produto Vetorial:", resultado)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Produto Vetorial: [-25, -7, 29]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><a href="https://www.wolframalpha.com/input/?i=cross+product+calculator">https://www.wolframalpha.com/input/?i=cross+product+calculator</a></li>
+<li><a href="https://www.mathsisfun.com/algebra/vectors-cross-product.html">https://www.mathsisfun.com/algebra/vectors-cross-product.html</a></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Operações com Vetores - Dot Product (Produto Escalar)
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>O produto escalar de dois vetores é uma operação que resulta em um escalar (um número). Matematicamente, é a soma dos produtos dos componentes correspondentes dos vetores.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para calcular o produto escalar
+def produto_escalar(v1, v2):
+    return sum(a * b for a, b in zip(v1, v2))</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria os vetores
+vetor_a = [2, -3, 1]
+vetor_b = [5, 7, 6]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Calculando o produto escalar
+resultado = produto_escalar(vetor_a, vetor_b)
+print("Produto Escalar:", resultado)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Produto Escalar: -5
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><a href="https://www.wolframalpha.com/input?i=dot+product">https://www.wolframalpha.com/input?i=dot+product</a></li>
+<li><a href="https://www.mathsisfun.com/algebra/vectors-dot-product.html">https://www.mathsisfun.com/algebra/vectors-dot-product.html</a></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Machine Learning apenas com Operações Matemáticas (Sem Uso de Frameworks)
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Vamos criar um modelo capaz de prever o preço de um ativo financeiro com base na taxa nominal de juros.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Gerando dados sintéticos
+np.random.seed(0)
+X = np.random.randint(1, 10, size = (100, 1))  # 100 instâncias, valores entre 1 e 10
+y = 50000 + 30000 * X + np.random.randn(100, 1) * 15000  # Relação linear: preço base + preço por ativo + ruído</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualizando alguns registros
+X[1:5]</code></pre>
+</div>
+<div class="output">array([[1],<br/>       [4],<br/>       [4],<br/>       [8]])</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Visualizando alguns registros
+y[1:5]</code></pre>
+</div>
+<div class="output">array([[ 85385.04146705],<br/>       [186141.81556278],<br/>       [172882.11251578],<br/>       [302793.88936252]])</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Adicionar coluna de uns para o termo de interceptação
+X_b = np.c_[np.ones((100, 1)), X]  # Adiciona x0 = 1 a cada instância</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Função de Custo MSE com Operações Entre Vetores
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Esta função dsa_func_custo é uma implementação da função de custo de erro quadrático médio, que é amplamente usada em regressão linear.</li>
+<li>O objetivo dessa função é medir quão bem o modelo de regressão (representado pelos parâmetros theta) está desempenhando em relação ao conjunto de dados (X e y).<ul>
+<li>Um custo mais baixo indica que o modelo está fazendo previsões mais precisas.</li>
+</ul>
+</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função de Custo MSE com Operações Entre Vetores
+def fn_func_custo(X, y, theta):
+    
+    # m é o número de exemplos de treinamento (observações) no conjunto de dados
+    m = len(y)
+
+    # Calcula a função de custo para a regressão linear
+    # A função de custo é a média dos erros quadrados entre as previsões e os valores reais
+    # (1/(2*m)) é um fator de escala comum na função de custo do erro quadrático médio
+    # np.sum(np.square(X.dot(theta) - y)) é a soma dos quadrados dos erros
+    # X.dot(theta) é o produto escalar de X (dados de entrada) e theta (parâmetros do modelo)
+    # X.dot(theta) - y é a diferença entre as previsões e os valores reais
+    cost = (1/(2*m)) * np.sum(np.square(X.dot(theta) - y))
+
+    # Retorna o custo calculado
+    return cost</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Algoritmo Gradiente Descendente com Operações entre Vetores
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Gradiente descendente
+def fn_gradient_descent(X, y, theta, learning_rate, iterations):
+    
+    # m é o número de exemplos de treinamento no conjunto de dados
+    m = len(y)
+
+    # Inicializa um array para armazenar o histórico de custo em cada iteração
+    cost_history = np.zeros(iterations)
+
+    # Loop para realizar o número especificado de iterações
+    for i in range(iterations):
+        
+        # Calcula o gradiente da função de custo em relação a theta
+        # O gradiente é a média dos produtos dos erros e as características de entrada
+        gradients = 1/m * X.T.dot(X.dot(theta) - y)
+
+        # Atualiza os parâmetros theta subtraindo o produto da taxa de aprendizado e o gradiente
+        # Esta é a etapa de descida do gradiente, movendo-se em direção ao mínimo da função de custo
+        theta = theta - learning_rate * gradients
+
+        # Calcula o custo com o theta atualizado e armazena no histórico de custo
+        cost_history[i] = fn_func_custo(X, y, theta)
+    
+    # Retorna os parâmetros theta otimizados e o histórico de custo
+    return theta, cost_history</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Treinamento do Modelo
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Parâmetros iniciais
+
+# Inicializa os parâmetros randomicamente
+theta = np.random.randn(2, 1)
+
+# Taxa de aprendizado
+learning_rate = 0.01
+
+# Número de passadas de treino
+iterations = 1000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Treinando o modelo
+theta_final, cost_history = fn_gradient_descent(X_b, y, theta, learning_rate, iterations)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">print("Modelo de Machine Learning - Parâmetros Finais:\n", theta_final)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Modelo de Machine Learning - Parâmetros Finais:
+ [[44287.25556464]
+ [31108.64267429]]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Deploy e Previsão com Novos Dados
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Novo valor de X
+X_new = np.array([[4.5]])</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Novo valor do bias
+X_new_b = np.c_[np.ones((1, 1)), X_new]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Previsão
+y_predict = X_new_b.dot(theta_final)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">print("Com base na taxa de juros nominal, esta é a previsão do preço do ativo:", np.round(y_predict, 2))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Com base na taxa de juros nominal, esta é a previsão do preço do ativo: [[184276.15]]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
+%watermark -a "RobertoSSoares-LfLngLrnng"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.11.5
+IPython version      : 8.20.0
+
+Compiler    : MSC v.1916 64 bit (AMD64)
+OS          : Windows
+Release     : 10
+Machine     : AMD64
+Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+CPU cores   : 4
+Architecture: 64bit
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">numpy: 1.26.3
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+Aprendizado com Descida do Grandiente
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li><a href="https://www.deeplearningbook.com.br/aprendizado-com-a-descida-do-gradiente/">https://www.deeplearningbook.com.br/aprendizado-com-a-descida-do-gradiente/</a></li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#EE6158" face="Segoe Print" size="5"><strong>
+FIM
+</strong></font></p>
+<font color="#66666" face="Segoe Print" size="3">
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v5.tpl Lab03-Basic-Rules-of-Algebra.ipynb</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">[NbConvertApp] Converting notebook Lab03-Basic-Rules-of-Algebra.ipynb to html
+[NbConvertApp] Writing 34642 bytes to Lab03-Basic-Rules-of-Algebra.html
+</div>
+</div>
+<div class="footer">
+<p>RobertoSSoares-LfLngLrnng</p>
+<p id="datetime"></p>
+<script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></body>
+</html>
