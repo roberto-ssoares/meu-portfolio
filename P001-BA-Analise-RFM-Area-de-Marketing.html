@@ -9,8 +9,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- Jupyter Notebook CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
 <!-- Highlight.js for code syntax -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
@@ -30,7 +32,9 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .code_cell {
-            background-color: #e8f5e9 !important; /* cor verde claro */
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
             border-left: 5px solid #4caf50;
             padding: 5px;
             margin: 15px 0;
@@ -42,7 +46,7 @@
             border-left: 5px solid #2196f3;
             padding: 5px;
             margin: 15px 0;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Ubuntu', monospace;
             font-size: 15px;
             white-space: pre-wrap;
             overflow-x: auto;
@@ -59,24 +63,25 @@
             color: #333;
         }
         .title-header {
-            font-family: 'Caveat',cursive;
+            font-family: 'Caveat', cursive;
             font-weight: bold;
             font-size: 25px;
-            font-weight: bold;
             color: #84888c;
             text-transform: uppercase;
             text-align: right;
             margin-bottom: 10px;
         }
         .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
             background-color: #f3f2ee;
             padding: 5px;
             border-left: 4px solid #ff9800;
             border-radius: 5px;
-            margin-bottom: 15px;            
+            margin-bottom: 15px;
         }
         .footer {
-            font-family: "Gloria Hallelujah" ,cursive;
+            font-family: 'Gloria Hallelujah', cursive;
             font-size: 18px;            
             text-align: right;
             color: #84888c;
@@ -86,7 +91,7 @@
             border-radius: 5px;
         }
         pre, code {
-            background-color: transparent !important; /* Evita sobrescrita de estilos */
+            background-color: transparent !important;
             border: none;
             font-size: 14px;
         }
@@ -100,14 +105,14 @@
 <div style="background-color:#F3F2EE">
 <p><br/><br/></p>
 <p style="text-align: center;">
-<font color="#0A1781" face="Segoe Script" size="6">
+<font color="#0A1781" size="6">
 <strong>
         Business Analytics e Machine Learning<br/>Para Projetos de Data Science
     </strong>
 </font>
 </p>
 <p style="text-align: center;">
-<font color="#F89634" face="Segoe Script" size="6.5">
+<font color="#F89634" size="6.5">
 <strong>
             Análise RFM (Recency, Frequency, Monetary Value)<br/> e Dashboard Interativo Para a Área de Marketing
         </strong>
@@ -121,16 +126,16 @@
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
+<font color="#444444" size="4">
     Roberto SSoares - LfLngLrnng
   </font>
 </p>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br/>
 <a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
-    " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "<br/></font><font><font color="#918e8e" face="Segoe Script" size="2">"Bruno Jardim"<br>Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.
+<font color="#444444" size="4">
+    " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "<br/></font><font><font color="#918e8e" size="2">"Bruno Jardim"<br>Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.
 </br></font></font></p>
 </font></p></div>
 </div>
@@ -138,15 +143,15 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="4"><strong>Compreendendo o Conceito de Análise RFM (Recency, Frequency, Monetary Value)</strong></font></p>
-<p><font color="#66666" face="Segoe Print" size="3"><strong>Análise RFM: Visão Geral</strong></font></p>
+<p><font color="#F89634" size="4"><strong>Compreendendo o Conceito de Análise RFM (Recency, Frequency, Monetary Value)</strong></font></p>
+<p><font color="#66666" size="3"><strong>Análise RFM: Visão Geral</strong></font></p>
 </div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>1. Definição e Objetivo</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>1. Definição e Objetivo</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><strong>RFM (Recency, Frequency, Monetary Value)</strong>: Método de análise de dados que classifica os clientes com base em:<ul>
 <li><strong>Recency (R)</strong>: Há quanto tempo o cliente fez a última compra.</li>
@@ -161,8 +166,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>2. Coleta e Preparação dos Dados</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>2. Coleta e Preparação dos Dados</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><strong>Dados Necessários</strong>:<ul>
 <li>Transações de compra (data, valor da compra, cliente).</li>
@@ -180,8 +185,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>3. Cálculo dos Scores R, F e M</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>3. Cálculo dos Scores R, F e M</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><strong>Recency Score (R)</strong>:<ul>
 <li>Ordenar os clientes pela data da última compra.</li>
@@ -204,8 +209,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>4. Segmentação dos Clientes</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>4. Segmentação dos Clientes</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><strong>Combinação dos Scores R, F e M</strong>:<ul>
 <li>Criar segmentos combinando os scores, por exemplo, RFM = 424 representa clientes muito recentes, muito frequentes e com alto valor de gasto.</li>
@@ -226,8 +231,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>5. Ações de Marketing Baseadas na Análise RFM</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>5. Ações de Marketing Baseadas na Análise RFM</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><strong>Campanhas de Reativação</strong>:<ul>
 <li>Para clientes com baixa recência, oferecendo descontos ou promoções especiais.</li>
@@ -251,8 +256,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Conclusão</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Conclusão</strong></font></p>
+<font color="#66666" size="3">
 <p>A análise RFM é uma técnica poderosa que permite às empresas compreender melhor o comportamento dos seus clientes e direcionar suas estratégias de marketing de forma mais eficiente.</p>
 <p>Ao segmentar os clientes com base em recência, frequência e valor monetário:</p>
 <ul>
@@ -265,15 +270,15 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Business Understanding]</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#0A1781" size="5"><strong>CRISP-DM [Business Understanding]</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Conjunto de dados públicos de comércio eletrônico brasileiro da Olist</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Conjunto de dados públicos de comércio eletrônico brasileiro da Olist</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce</a></li>
 </ul>
@@ -289,7 +294,7 @@
 </ul>
 <p>Também lançamos um conjunto de dados de geolocalização que relaciona os códigos postais brasileiros às coordenadas lat/lng.</p>
 <p>Esses são <strong>dados comerciais reais, foram tornados anônimos</strong> e as referências às empresas e parceiros no texto da análise foram substituídas pelos nomes das grandes casas de Game of Thrones.</p>
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Contexto</strong></font></p>
+<p><font color="#F89634" size="3"><strong>Contexto</strong></font></p>
 <p>Este conjunto de dados foi generosamente fornecido pela Olist, a maior loja de departamentos em marketplaces brasileiros.</p>
 <p><strong>A Olist conecta pequenas empresas de todo o Brasil</strong> a canais sem complicações e com um único contrato.</p>
 <p>Esses comerciantes podem vender seus produtos por meio da Olist Store e enviá-los diretamente aos clientes usando os parceiros de logística da Olist.</p>
@@ -299,7 +304,7 @@
 <li><p>Assim que o cliente recebe o produto, ou a data estimada de entrega é devida, o cliente recebe uma pesquisa de satisfação por e-mail, onde ele pode dar uma nota para a experiência<br/>de compra e escrever alguns comentários.</p>
 </li>
 </ul>
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Atenção</strong></font></p>
+<p><font color="#F89634" size="3"><strong>Atenção</strong></font></p>
 <ul>
 <li><strong>Um pedido pode ter vários itens.</strong></li>
 <li><strong>Cada item pode ser entregue por um vendedor diferente.</strong></li>
@@ -310,15 +315,15 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Data Understanding]</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#0A1781" size="5"><strong>CRISP-DM [Data Understanding]</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Conjunto de dados de clientes</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Conjunto de dados de clientes</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Este conjunto de dados tem informações sobre o cliente e sua localização.</li>
 <li>Use-o para identificar clientes únicos no conjunto de dados de pedidos e para encontrar o local de entrega dos pedidos.</li>
@@ -340,8 +345,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#F89634" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
+<font color="#66666" size="2">
 <ul>
 <li>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
 <li>pip install -U nome_pacote</li>
@@ -433,8 +438,8 @@ np.set_printoptions(precision=4, suppress=True)            # Configura o NumPy p
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Carregando e Explorando os Dados</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Carregando e Explorando os Dados</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -527,8 +532,8 @@ memory usage: 47.1+ MB
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Observações:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Observações:</strong></font></p>
+<font color="#66666" size="3">
 <p>Estas variáveis deverão ser corridas de 'object' para 'date'.</p>
 <ul>
 <li><strong>order_purchase_timestamp</strong>,</li>
@@ -553,15 +558,15 @@ metadados.head(20)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Data Preparation]</strong></font></p>
-<font color="#66666" face="Segoe Print" size="4">
+<p><font color="#0A1781" size="5"><strong>CRISP-DM [Data Preparation]</strong></font></p>
+<font color="#66666" size="4">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="4"><strong>Engenharia de Atributos:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="4"><strong>Engenharia de Atributos:</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Com as colunas do Tipo Data</strong></p>
 <ul>
 <li>A data de compra é importante para nossa análise.</li>
@@ -572,8 +577,8 @@ metadados.head(20)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Converte 'order_purchase_timestamp' para datetime sem especificar o formato:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Converte 'order_purchase_timestamp' para datetime sem especificar o formato:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -585,8 +590,8 @@ df00['order_purchase_timestamp'] = pd.to_datetime(df00['order_purchase_timestamp
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Extrai apenas a data do timestamp e cria uma nova coluna chamada order_purchase_date:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Extrai apenas a data do timestamp e cria uma nova coluna chamada order_purchase_date:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -598,8 +603,8 @@ df00['order_purchase_date'] = df00['order_purchase_timestamp'].dt.date</code></p
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Vamos criar a coluna InvoiceDate:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Vamos criar a coluna InvoiceDate:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -630,22 +635,22 @@ Datas das Transações de 2016-09-04 00:00:00 a 2018-09-03 00:00:00
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Data Modeling]</strong></font></p>
-<font color="#66666" face="Segoe Print" size="4">
+<p><font color="#0A1781" size="5"><strong>CRISP-DM [Data Modeling]</strong></font></p>
+<font color="#66666" size="4">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Agregação dos Dados Para Criação dos Parâmetros R, F e M</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Agregação dos Dados Para Criação dos Parâmetros R, F e M</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Primeiro Momento:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Primeiro Momento:</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Vamos calcular individualmente os valores de R, F e M.</strong></p>
 </font></div>
 </div>
@@ -660,7 +665,7 @@ data_mais_recente</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>df00['InvoiceDate'].max()</strong>:</p>
 <ul>
 <li>Esta parte do código está acessando a coluna 'InvoiceDate' em um DataFrame chamado "df00"</li>
@@ -689,8 +694,8 @@ data_mais_recente</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Agrupando por CustomerID e fazer agregações:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Agrupando por CustomerID e fazer agregações:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -704,8 +709,8 @@ df00_agg = df00.groupby(['customer_unique_id']).agg({'InvoiceDate': lambda x: (d
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Renomeia as colunas:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Renomeia as colunas:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -734,8 +739,8 @@ df00_agg.sample(5)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Verifica se gerou valores ausentes:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Verifica se gerou valores ausentes:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -748,8 +753,8 @@ df00_agg.isna().any()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Resumo estatístico:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Resumo estatístico:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -762,15 +767,15 @@ df00_agg['Recency'].describe()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>Recency (R): Há quanto tempo o cliente fez a última compra</strong></p>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Vamos vericar a "frequência da frequência de compra":</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Vamos vericar a "frequência da frequência de compra":</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -783,7 +788,7 @@ df00_agg['Frequency'].value_counts()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>Frequency (F): Quantas vezes o cliente comprou em um determinado período.</strong></p>
 </font></div>
 </div>
@@ -797,23 +802,23 @@ df00_agg['Monetary'].describe()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>Monetary Value (M): Quanto o cliente gastou no total durante esse período.</strong></p>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Segundo Momento:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Segundo Momento:</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Vamos juntar os valores de R, F e M, e criar uma pontuação, um score RFM.</strong></p>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Definição dos Recursos RFM Através de Análise Estatística</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Definição dos Recursos RFM Através de Análise Estatística</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Temos registros de clientes agrupados por tempo para retorno de suas compras, a frequência por sua quantidade e o valor monetário das compras.</li>
 <li>Agora podemos usar o método .qcut() para atribuir o percentil relativo aos recursos RFM.</li>
@@ -852,7 +857,7 @@ C71116                  340          8  109312.64
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>Considere os quartis dos valores monetários</strong>:</p>
 <p>Estes quartis representam os valores que dividem a distribuição dos dados em quatro partes iguais.</p>
 <p>Eles são uma medida de dispersão que dá uma ideia da distribuição dos dados. Aqui está como você pode interpretá-los:</p>
@@ -878,8 +883,8 @@ C71116                  340          8  109312.64
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criando grupos para Recência:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Criando grupos para Recência:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -891,7 +896,7 @@ r_labels = range(4, 0, -1)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li><p>A função range em Python gera uma sequência de números. O uso de range(4, 0, -1) cria uma sequência que começa em 4, termina antes de 0 e decrementa em 1 a cada passo.</p>
 </li>
@@ -911,7 +916,7 @@ r_groups = pd.qcut(df00_agg['Recency'], q = 4, labels = r_labels)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>q = 4</strong>: Indica que a série de dados será dividida em 4 quantis, ou seja, em quartis.</p>
 <ul>
 <li>Isso significa que a série será dividida em quatro partes iguais com base nos valores de recência.</li>
@@ -944,8 +949,8 @@ df00_agg.sample(10)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criando grupos para Frequência:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Criando grupos para Frequência:</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Para a frequência vamos trabalhar somente com 2 grupos:</strong></p>
 <ul>
 <li><strong>Grupo dos clientes que compraram apenas uma vez e grupo dos clientes que compraram mais de uma vez.</strong></li>
@@ -962,7 +967,7 @@ df00_agg['Frequency'].describe()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p>Olhando para distribuição, observamos não estar interessante para divisão por quartil, pois teremos o mesmo número de clientes em três quartis, o que não é bom para segmentar os clintes.</p>
 </font></div>
 </div>
@@ -981,8 +986,8 @@ f_labels = range(1, 3)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Função personalizada para criação dos grupos:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Função personalizada para criação dos grupos:</strong></font></p>
+<font color="#66666" size="3">
 <p>Não podemos utilizar a função qcut(), que utiliza a distribuição para dividir os grupos, então temos que criar uma função para essa divisão.</p>
 </font></div>
 </div>
@@ -1030,8 +1035,8 @@ df00_agg.sample(10)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criando grupos para Monetário:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Criando grupos para Monetário:</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -1087,15 +1092,15 @@ memory usage: 3.8+ MB
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>R e F foram criados como tipo category. Vamos ajustar isso.</strong></p>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Processamento dos Dados e Label Encoding</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Processamento dos Dados e Label Encoding</strong></font></p>
+<font color="#66666" size="3">
 <p>Não queremos modificar o dado, apenas o formato. Existe uma ordem dos quartis e precisa ser mantida, por isso usamos label enconder.</p>
 </font></div>
 </div>
@@ -1142,23 +1147,23 @@ df00_agg.head()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p>Com essas 3 pontuações, R, F e M, podemos criar os scores e segmentos RFM.</p>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Terceiro Momento:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Terceiro Momento:</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Vamos usar o score RFM para fazer a segmentação de Clientes.</strong></p>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Criação dos Segmentos RFM</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Criação dos Segmentos RFM</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -1176,7 +1181,7 @@ df00_agg['Score_RFM'] = df00_agg[['R','F','M']].sum(axis = 1)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <p><strong>ATENÇÃO: A OPERAÇÃO ABAIXO É CONCATENAÇÃO E NÃO SOMA!</strong></p>
 </font></div>
 </div>
@@ -1301,15 +1306,15 @@ rfm.describe()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Evaluation]</strong></font></p>
-<font color="#66666" face="Segoe Print" size="4">
+<p><font color="#0A1781" size="5"><strong>CRISP-DM [Evaluation]</strong></font></p>
+<font color="#66666" size="4">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Segmentação de Clientes Usando Análise RFM</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Segmentação de Clientes Usando Análise RFM</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -1423,8 +1428,8 @@ rfm_level_agg</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1781" face="Segoe Print" size="5"><strong>CRISP-DM [Deployment]</strong></font></p>
-<font color="#66666" face="Segoe Print" size="4">
+<p><font color="#0A1781" size="5"><strong>CRISP-DM [Deployment]</strong></font></p>
+<font color="#66666" size="4">
 </font></div>
 </div>
 <div class="cell">
@@ -1439,8 +1444,8 @@ rfm_level_ag</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Recomendações Para a Área de Negócio: (Resposta para área de negócio)</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Recomendações Para a Área de Negócio: (Resposta para área de negócio)</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Clientes Leais</strong></p>
 <ul>
 <li>São os clientes mais leais.</li>
@@ -1478,8 +1483,8 @@ rfm_level_ag</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Dashboard Interativo</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="3"><strong>Dashboard Interativo</strong></font></p>
+<font color="#66666" size="3">
 <p>Antes de criar um dashboard interativo, vamos criar um dashboard simples.</p>
 </font></div>
 </div>
@@ -1584,17 +1589,9 @@ seaborn   : 0.13.2
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="5"><strong>Fim</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#F89634" size="5"><strong>Fim</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
-</div>
-<div class="cell">
-<div aria-label="Code Cell" class="code_cell" role="region">
-<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v5.tpl P001-BA-Analise-RFM-Area-de-Marketing.ipynb</code></pre>
-</div>
-<div aria-label="Code Output" class="output" role="region">[NbConvertApp] Converting notebook P001-BA-Analise-RFM-Area-de-Marketing.ipynb to html
-[NbConvertApp] Writing 261882 bytes to P001-BA-Analise-RFM-Area-de-Marketing.html
-</div>
 </div>
 <div class="footer">
 <p>RobertoSSoares-LfLngLrnng</p>

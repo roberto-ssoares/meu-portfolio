@@ -9,8 +9,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- Jupyter Notebook CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
 <!-- Highlight.js for code syntax -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
@@ -22,7 +24,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: auto;
             background: #f9f9f9;
             padding: 40px;
@@ -30,7 +32,9 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .code_cell {
-            background-color: #e8f5e9 !important; /* cor verde claro */
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
             border-left: 5px solid #4caf50;
             padding: 5px;
             margin: 15px 0;
@@ -42,7 +46,7 @@
             border-left: 5px solid #2196f3;
             padding: 5px;
             margin: 15px 0;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Ubuntu', monospace;
             font-size: 15px;
             white-space: pre-wrap;
             overflow-x: auto;
@@ -59,24 +63,25 @@
             color: #333;
         }
         .title-header {
-            font-family: 'Caveat',cursive;
+            font-family: 'Caveat', cursive;
             font-weight: bold;
             font-size: 25px;
-            font-weight: bold;
             color: #84888c;
             text-transform: uppercase;
             text-align: right;
             margin-bottom: 10px;
         }
         .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
             background-color: #f3f2ee;
             padding: 5px;
             border-left: 4px solid #ff9800;
             border-radius: 5px;
-            margin-bottom: 15px;            
+            margin-bottom: 15px;
         }
         .footer {
-            font-family: "Gloria Hallelujah" ,cursive;
+            font-family: 'Gloria Hallelujah', cursive;
             font-size: 18px;            
             text-align: right;
             color: #84888c;
@@ -86,7 +91,7 @@
             border-radius: 5px;
         }
         pre, code {
-            background-color: transparent !important; /* Evita sobrescrita de estilos */
+            background-color: transparent !important;
             border: none;
             font-size: 14px;
         }
@@ -100,14 +105,14 @@
 <div style="background-color:#F3F2EE">
 <p><br/><br/></p>
 <p style="text-align: center;">
-<font color="#0A1781" face="Segoe Script" size="6">
+<font color="#0A1781" size="6">
 <strong>
         Matemática e Estatística Aplicada<br/>Para Data Science, Machine Learning e IA
     </strong>
 </font>
 </p>
 <p style="text-align: center;">
-<font color="#F89634" face="Segoe Script" size="6.5">
+<font color="#F89634" size="6.5">
 <strong>
             Lista de Exercícios 2<br/>Resolvendo Equações Quadráticas,<br/>Funções e Logaritmos com Python
         </strong>
@@ -121,13 +126,13 @@
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
+<font color="#444444" size="4">
     Roberto Soares - LfLngLrnng<br \=""/>[+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida  
   </font>
 </p>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
 </font></p></font></p></div>
 </div>
@@ -135,8 +140,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#F89634" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
+<font color="#66666" size="2">
 <ul>
 <li>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
 <li>pip install -U nome_pacote</li>
@@ -179,7 +184,7 @@ import numpy as np</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Resolva os exercícios abaixo usando Linguagem Python. Faça pesquisa complementar se necessário.<br>
 </br></strong>
 </font></p>
@@ -188,11 +193,11 @@ Resolva os exercícios abaixo usando Linguagem Python. Faça pesquisa complement
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 1: Gráfico de Uma Função Linear
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Crie um gráfico para a função y = 2x + 3 para valores de x no intervalo de 5 a 10.</li>
 </ul>
@@ -224,11 +229,11 @@ plt.show()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 2: Gráfico de uma Função Quadrática
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Desenhe o gráfico da função y = x² - 4x + 4. Crie uma massa de dados de exemplo usando np.linspace().</li>
 </ul>
@@ -259,11 +264,11 @@ plt.show()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 3: Gráfico de Uma Função Senoidal
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Crie um gráfico da função y = sin(x) para valores de x no intervalo de 0 a 2π.</li>
 </ul>
@@ -294,11 +299,11 @@ plt.show()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 4: Gráfico de Uma Função Exponencial
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Crie um gráfico para a função y = e^x para valores de x no intervalo de -2 a 2.<ul>
 <li>A função exponencial representa uma relação de dependência.</li>
@@ -334,11 +339,11 @@ plt.show()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 5: Gráfico de uma Função Logarítmica
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Desenhe o gráfico de y = log(x) (logaritmo natural) para valores de x no intervalo de 0.1 a 10.</li>
 </ul>
@@ -369,11 +374,11 @@ plt.show()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 6: Resolver uma Equação Quadrática
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Escreva um script em Python que resolve a equação x² − 5x + 6 = 0 e imprime as raízes.</li>
 </ul>
@@ -397,11 +402,11 @@ print('As raízes são {0} e {1}'.format(sol1, sol2))</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 7: Equação Quadrática com Entrada do Usuário
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Modifique o programa anterior para aceitar coeficientes a, b, e c de um usuário e resolver a equação quadrática correspondente.</li>
 </ul>
@@ -421,20 +426,20 @@ sol2 = (-b+cmath.sqrt(d))/(2*a)
 print('As raízes são {0} e {1}'.format(sol1,sol2))</code></pre>
 </div>
 <div aria-label="Code Output" class="output" role="region">Digite o coeficiente a:  2
-Digite o coeficiente b:  4
-Digite o coeficiente c:  2
+Digite o coeficiente b:  1
+Digite o coeficiente c:  3
 </div>
-<div aria-label="Code Output" class="output" role="region">As raízes são (-1+0j) e (-1+0j)
+<div aria-label="Code Output" class="output" role="region">As raízes são (-0.25-1.1989578808281798j) e (-0.25+1.1989578808281798j)
 </div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 8: Equação Quadrática com Discriminante
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Para a equação quadrática ax² + bx + c = 0, calcule o discriminante e determine o número de raízes reais.<ul>
 <li>O discriminante em uma equação quadrática é uma parte específica da fórmula que é usada para determinar o número e o tipo de soluções (raízes) que a equação possui.</li>
@@ -462,9 +467,9 @@ elif d == 0:
 else:
     print("Nenhuma raiz real.")</code></pre>
 </div>
-<div aria-label="Code Output" class="output" role="region">Digite o coeficiente a:  3
-Digite o coeficiente b:  2
-Digite o coeficiente c:  6
+<div aria-label="Code Output" class="output" role="region">Digite o coeficiente a:  5
+Digite o coeficiente b:  4
+Digite o coeficiente c:  2
 </div>
 <div aria-label="Code Output" class="output" role="region">Nenhuma raiz real.
 </div>
@@ -472,11 +477,11 @@ Digite o coeficiente c:  6
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 9: Cálculo de Logarítmos
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Escreva um script que calcula o logarítmo de base 10 de um número fornecido pelo usuário.</li>
 <li>Certifique-se de tratar o caso em que o logaritmo não pode ser definido (números negativos e zero).</li>
@@ -495,19 +500,19 @@ if num &gt; 0:
 else:
     print("Logaritmo não definido para números negativos ou zero.")</code></pre>
 </div>
-<div aria-label="Code Output" class="output" role="region">Digite um número:  4
+<div aria-label="Code Output" class="output" role="region">Digite um número:  5
 </div>
-<div aria-label="Code Output" class="output" role="region">Logaritmo de base 10 de 4.0 é 0.6020599913279624
+<div aria-label="Code Output" class="output" role="region">Logaritmo de base 10 de 5.0 é 0.6989700043360189
 </div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>
+<p><font color="#EE6158" size="4"><strong>
 Exercício 10: Aplicação de Logarítmos
 </strong>
 </font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Utilize logarítmo para calcular o tempo necessário para que um investimento atinja um determinado valor, considerando uma taxa de crescimento contínua.</li>
 </ul>
@@ -570,7 +575,7 @@ matplotlib: 3.7.5
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="5"><strong>
+<p><font color="#EE6158" size="5"><strong>
 Fim
 </strong>
 </font></p>
@@ -578,15 +583,10 @@ Fim
 </div>
 <div class="cell">
 <div aria-label="Code Cell" class="code_cell" role="region">
-<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v5.tpl Quadratic-Equations-Functions-and-Logarithms-with-Python.ipynb</code></pre>
+<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v6.tpl Quadratic-Equations-Functions-and-Logarithms-with-Python.ipynb</code></pre>
 </div>
 <div aria-label="Code Output" class="output" role="region">[NbConvertApp] Converting notebook Quadratic-Equations-Functions-and-Logarithms-with-Python.ipynb to html
-[NbConvertApp] Writing 158121 bytes to Quadratic-Equations-Functions-and-Logarithms-with-Python.html
-</div>
-</div>
-<div class="cell">
-<div aria-label="Code Cell" class="code_cell" role="region">
-<pre><code class="language-python"></code></pre>
+[NbConvertApp] Writing 150236 bytes to Quadratic-Equations-Functions-and-Logarithms-with-Python.html
 </div>
 </div>
 <div class="footer">

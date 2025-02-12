@@ -9,8 +9,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- Jupyter Notebook CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
 <!-- Highlight.js for code syntax -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
@@ -30,7 +32,9 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .code_cell {
-            background-color: #e8f5e9 !important; /* cor verde claro */
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
             border-left: 5px solid #4caf50;
             padding: 5px;
             margin: 15px 0;
@@ -42,7 +46,7 @@
             border-left: 5px solid #2196f3;
             padding: 5px;
             margin: 15px 0;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Ubuntu', monospace;
             font-size: 15px;
             white-space: pre-wrap;
             overflow-x: auto;
@@ -59,24 +63,25 @@
             color: #333;
         }
         .title-header {
-            font-family: 'Caveat',cursive;
+            font-family: 'Caveat', cursive;
             font-weight: bold;
             font-size: 25px;
-            font-weight: bold;
             color: #84888c;
             text-transform: uppercase;
             text-align: right;
             margin-bottom: 10px;
         }
         .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
             background-color: #f3f2ee;
             padding: 5px;
             border-left: 4px solid #ff9800;
             border-radius: 5px;
-            margin-bottom: 15px;            
+            margin-bottom: 15px;
         }
         .footer {
-            font-family: "Gloria Hallelujah" ,cursive;
+            font-family: 'Gloria Hallelujah', cursive;
             font-size: 18px;            
             text-align: right;
             color: #84888c;
@@ -86,7 +91,7 @@
             border-radius: 5px;
         }
         pre, code {
-            background-color: transparent !important; /* Evita sobrescrita de estilos */
+            background-color: transparent !important;
             border: none;
             font-size: 14px;
         }
@@ -100,14 +105,14 @@
 <div style="background-color:#F3F2EE">
 <p><br/><br/></p>
 <p style="text-align: center;">
-<font color="#0A1781" face="Segoe Script" size="6">
+<font color="#0A1781" size="6">
 <strong>
         Matemática e Estatística Aplicada<br/>Para Data Science, Machine Learning e IA
     </strong>
 </font>
 </p>
 <p style="text-align: center;">
-<font color="#F89634" face="Segoe Script" size="6.5">
+<font color="#F89634" size="6.5">
 <strong>
             Lab 2 - Trabalhando com Funções<br/>e Logaritmos em Python
         </strong>
@@ -121,16 +126,16 @@
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
+<font color="#444444" size="4">
     Roberto SSoares - LfLngLrnng
   </font>
 </p>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br/>
 <a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
-    " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "<br/></font><font><font color="#918e8e" face="Segoe Script" size="2">"Bruno Jardim"<br>Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.
+<font color="#444444" size="4">
+    " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "<br/></font><font><font color="#918e8e" size="2">"Bruno Jardim"<br>Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.
 </br></font></font></p>
 </font></p></div>
 </div>
@@ -138,8 +143,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Definindo Funções na Matemática</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Definindo Funções na Matemática</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>No contexto da matemática, uma função estabelece uma relação específica entre dois conjuntos de elementos, conhecidos como domínio e contradomínio.<ul>
 <li>Uma função associa a cada elemento do domínio exatamente um elemento do contradomínio.</li>
@@ -161,8 +166,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Funções - Domínio, Imagem, Contradomínio</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Funções - Domínio, Imagem, Contradomínio</strong></font></p>
+<font color="#66666" size="3">
 <p>Para entender uma função completamente, é importante compreender três termos associados: domínio, imagem e contradomínio.</p>
 <ul>
 <li><p><strong>Domínio</strong>:</p>
@@ -176,7 +181,7 @@
 <ul>
 <li>A imagem de uma função refere-se ao conjunto de todos os valores de saída que a função pode produzir.</li>
 <li>Quando falamos da imagem, estamos nos referindo especificamente aos resultados que realmente ocorrem, dada a função e seu domínio.</li>
-<li>Por exemplo, na função f(x) = x ^ 2, a imagem é o conjunto de todos os números reais não negativos, porque elevar ao quadrado qualquer número real sempre resulta em um valor não negativo.</li>
+<li>Por exemplo, na função f(x) = x², a imagem é o conjunto de todos os números reais não negativos, porque elevar ao quadrado qualquer número real sempre resulta em um valor não negativo.</li>
 </ul>
 </li>
 <li><p><strong>Contradomínio</strong>:</p>
@@ -184,7 +189,7 @@
 <li>O contradomínio é o conjunto de todos os possíveis valores de saída que a função poderia teoricamente produzir, independentemente de eles realmente ocorrerem ou não.</li>
 <li>É o conjunto de referência que inclui todas as saídas potenciais.</li>
 <li>Em muitos casos, o contradomínio é escolhido para ser um conjunto maior ou mais geral que a imagem.</li>
-<li>Por exemplo, para a função f(x) = x ^ 2, podemos definir o contradomínio como todos os números reais, embora a imagem seja apenas os números reais não negativos.</li>
+<li>Por exemplo, para a função f(x) = x², podemos definir o contradomínio como todos os números reais, embora a imagem seja apenas os números reais não negativos.</li>
 </ul>
 </li>
 </ul>
@@ -193,8 +198,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Funções na Matemática X Funções em Programação de Computadores</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Funções na Matemática X Funções em Programação de Computadores</strong></font></p>
+<font color="#66666" size="3">
 <p>A compreensão da diferença entre funções na matemática e funções em programação de computadores é essencial pois, apesar de compartilharem algumas semelhanças conceituais, elas têm propósitos e características distintos.</p>
 <p><strong>Funções na Matemática</strong>:</p>
 <ul>
@@ -242,8 +247,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#F89634" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
+<font color="#66666" size="2">
 <ul>
 <li>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
 <li>pip install -U nome_pacote</li>
@@ -285,8 +290,8 @@ import math</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Representação Gráfica de Funções</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Representação Gráfica de Funções</strong></font></p>
+<font color="#66666" size="3">
 <p>Vamos criar um exemplo com a função quadrática f(x) = x².</p>
 </font></div>
 </div>
@@ -361,8 +366,8 @@ plt.show()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Seno, Cosseno e Tangente</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Seno, Cosseno e Tangente</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>O seno é uma função matemática fundamental, comumente encontrada na trigonometria, um ramo da Matemática que lida com as relações entre os lados e os ângulos dos triângulos.</li>
 <li>O Seno é a razão entre o cateto oposto e a hipotenusa de um triângulo retângulo, ou seja, trata-se de uma razão trigonométrica.</li>
@@ -393,8 +398,8 @@ print("Seno de 30°:", seno)  </code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong></strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong></strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>O cosseno de um ângulo em um triângulo retângulo é a razão entre o comprimento do lado adjacente ao ângulo e o comprimento da hipotenusa.</li>
 </ul>
@@ -417,8 +422,8 @@ print("Cosseno de 45°:", cosseno)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong></strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong></strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>A tangente de um ângulo em um triângulo retângulo é a razão entre o comprimento do lado oposto ao ângulo e o comprimento do lado adjacente.</li>
 </ul>
@@ -441,8 +446,8 @@ print("Tangente de 60°:", tangente)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Aplicação</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Aplicação</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><p>Nos modelos <strong>"Transformers"</strong>, utilizados em <strong>Processamento de Linguagem Natural</strong> e outras tarefas de aprendizado de máquina como LLMs (Large Language Models), a função seno (junto com a função cosseno) desempenha um papel importante na criação de "positional encodings".</p>
 </li>
@@ -470,8 +475,8 @@ print("Tangente de 60°:", tangente)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Logaritmos e Lograritmos Naturais</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Logaritmos e Lograritmos Naturais</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Logaritmos são uma operação matemática fundamental, que representa o oposto da exponenciação.</li>
 <li>Um logaritmo é uma função que retorna o número ao qual a base precisa ser elevada para obter o logaritmando.</li>
@@ -500,8 +505,8 @@ print("Tangente de 60°:", tangente)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Quando e Por que usamos Logaritmos em Data Science</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Quando e Por que usamos Logaritmos em Data Science</strong></font></p>
+<font color="#66666" size="3">
 <p>Os logaritmos são uma ferramenta poderosa utilizada em Data Science para lidar com dados numéricos que possuem um variação muito grande entre si. Eles podem ser usados para ajudar a normalizar, transformar e visualizar esse dados.</p>
 <ul>
 <li><p>O que são Logaritmos?</p>
@@ -535,8 +540,8 @@ print("Tangente de 60°:", tangente)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Como usamos os Logaritmos em Machine Learning e Inteligência Artificial</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Como usamos os Logaritmos em Machine Learning e Inteligência Artificial</strong></font></p>
+<font color="#66666" size="3">
 <p>Destacamos a seguir algumas maneiras específicas em que os logaritmos podem ser usados?</p>
 <ol>
 <li><strong>Pré-processamento e transformação de Dados</strong><ul>
@@ -578,8 +583,8 @@ print("Tangente de 60°:", tangente)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Transformação de Log</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Transformação de Log</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -621,8 +626,8 @@ Logaritmo da Potência: 3.2188758248682006 Propriedade: 3.2188758248682006
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Exemplo de Uso da Transformação de Log em Data Science</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Exemplo de Uso da Transformação de Log em Data Science</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Vamos criar um exemplo com código Python que ilustra como aplicar a transformação de log em um conjunto de dados.<ul>
 <li>Neste exemplo, usaremos a biblioteca numpy para manipular os dados e matplotlib para visualização.</li>
@@ -678,8 +683,8 @@ plt.show()
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong></strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong></strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><strong>Gráfico à Esquerda</strong>:<ul>
 <li>Mostra a distribuição dos preços das casas. Podemos observar que a distribuição é assimétrica à direita (ou seja, inclinada para a direita), com uma cauda longa para valores maiores.</li>
@@ -735,8 +740,8 @@ numpy     : 1.25.2
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Pré-Processamento de Dados:</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>Pré-Processamento de Dados:</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><a href="https://scikit-learn.org/stable/modules/preprocessing.html">https://scikit-learn.org/stable/modules/preprocessing.html</a></li>
 </ul>
@@ -745,17 +750,9 @@ numpy     : 1.25.2
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="5"><strong>Fim</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="5"><strong>Fim</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
-</div>
-<div class="cell">
-<div aria-label="Code Cell" class="code_cell" role="region">
-<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v5.tpl Lab02-Working-with-Functions-and-Logarithms-in-Python.ipynb</code></pre>
-</div>
-<div aria-label="Code Output" class="output" role="region">[NbConvertApp] Converting notebook Lab02-Working-with-Functions-and-Logarithms-in-Python.ipynb to html
-[NbConvertApp] Writing 167006 bytes to Lab02-Working-with-Functions-and-Logarithms-in-Python.html
-</div>
 </div>
 <div class="footer">
 <p>RobertoSSoares-LfLngLrnng</p>

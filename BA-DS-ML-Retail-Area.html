@@ -5,135 +5,135 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>BA-DS-ML-Retail-Area</title>
-<!-- MathJax Configuração -->
-<script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']],
-          processEscapes: true
-        }
-      });
-    </script>
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-<!-- Adicionando o Highlight.js para sintaxe de código -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 <style>
-        /* Estilo básico para o notebook exportado */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
             padding: 20px;
-            background-color: #f5f5f5;
         }
-
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Ubuntu', monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+            background-color: transparent !important;
+        }
         h1, h2, h3 {
             color: #333;
         }
-
-        .output {
-            background-color: #ECECEC;
-            border-left: 5px solid #ccc;
+        .title-header {
+            font-family: 'Caveat', cursive;
+            font-weight: bold;
+            font-size: 25px;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .footer {
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
             padding: 10px;
-            margin: 2px 0;
-            color: #171c81; /* Cor do texto do código */
-            font-size: 20px; /* Diminui o tamanho da fonte */
+            background-color: #e9ecef;
+            border-radius: 5px;
         }
-
-        .code_cell {
-            background-color: #fdf0f0; /* Fundo cinza claro */
-            border: 2px solid #e0e0e0; /* Borda clara */
-            padding: 10px;
-            margin: 10px 0;
-            color: #333333; /* Cor do texto do código */
-            font-size: 14px; /* Tamanho da fonte aumentado */
-            line-height: 1.4; /* Espaçamento entre linhas aumentado */            
-        }
-
-        pre {
-            background-color: #f7f7f7; /* Fundo cinza claro */
-            padding: 10px;
-            border-radius: 4px;
-            overflow-x: auto;
-            margin: 10px 0; /* Remove margens adicionais */        
-        }
-
-        /* Adicionando estilo de Highlight.js ao código */
-        .code_cell pre code {
-            background-color: #f5f2f0; /* Fundo similar ao Jupyter */
-            color: #000; /* Texto preto */
-            font-family: 'Courier New', Courier New, monospace; /* Estilo de fonte monoespaçada */
-        }
-
-        .output_png img {
-            width: 95%; /* Faz com que a imagem ocupe 90% da largura da célula */
-            max-width: 1000px; /* Limita a largura máxima da imagem a 1200 pixels */
-            height: 95%; /* Mantém a proporção original da imagem */
-            text-align: center;
-        }
-
-        .cell {
-            margin-bottom: 20px;
-            color: #171c81; /* Cor do texto do código */
-        }
-
-        .anchor-link {
-            display: none; /* Remover a exibição do símbolo ¶ */
-        }
-
-        .scrollable-output {
-            max-height: 100%; /* Define a altura máxima antes de ativar o scroll */
-            max-width: 100%; /* Ajusta a largura ao tamanho da tela */
-            overflow-x: auto; /* Habilita o scroll horizontal */
-            border: 1px solid #ccc; /* Adiciona uma borda ao contêiner */
-            padding: 10px;
-            background-color: #fff; /* Cor de fundo para contraste */
-        }
-
-        h1 {
-            font-size: 20px; /* Diminui o tamanho da fonte */
-            font-family: 'Segoe Print', Segoe, Print; /* Altera a fonte para Times New Roman */
-            color: #686f87; /* Cor opcional */
+        pre, code {
+            background-color: transparent !important;
+            border: none;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-<h1>BA-DS-ML-Retail-Area</h1>
+<div class="container">
+<h1 class="title-header">BA-DS-ML-Retail-Area</h1>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h1 id=""><a class="anchor-link" href="#">¶</a></h1><p style="text-align: center;">
-<font color="#0A1781" face="Segoe Script" size="6">
+<p><br/><br/></p>
+<p style="text-align: center;">
+<font color="#0A1781" size="6">
 <strong>
         Business Analytics &amp; Machine Learning
     </strong>
 </font>
 </p>
 <p style="text-align: center;">
-<font color="#C58A1E" face="Segoe Script" size="6.5">
+<font color="#C58A1E" size="6.5">
 <strong>Business Analysis, Data Science and<br/>Machine Learning in the Retail Sector
 </strong></font>
 </p>
-<h1 id=""><a class="anchor-link" href="#">¶</a></h1></div>
+<p><br/><br/></p>
+</div>
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F4F4F4">
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
+<font color="#444444" size="4">
     Roberto Soares - LfLngLrnng
   </font>
 </p>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
-<a href="https://github.com/roberto-ssoares/meu-portfolio.github.io">Portifólio: roberto-ssoares-meu-portfolio</a>
+<p style="text-align: right;"><font color="#444444" size="2">
+<a href="https://github.com/roberto-ssoares/roberto-ssoares.github.io">Portifólio: roberto-ssoares</a>
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="3">
+<font color="#444444" size="3">
     [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida  
   </font>
 </p>
@@ -141,11 +141,10 @@
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p style="text-align: left;">
-<font color="#0A1781" face="Segoe Script" size="5">
+<font color="#0A1781" size="5">
 <strong>
         Projeto - IA (LLMs) para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
     </strong>
@@ -155,10 +154,10 @@
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="Produtos-sazonais"><font color="#CC403E" face="Segoe Print" size="4"><strong>Produtos sazonais</strong></font><a class="anchor-link" href="#Produtos-sazonais">¶</a></h2><font color="#66666" face="Segoe Print" size="3">
+<p><font color="#CC403E" size="4"><strong>Produtos sazonais</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Bens ou serviços cuja demanda varia significativamente ao longo do ano, dependendo de fatores como estações do ano, feriados, eventos específicos ou tendências periódicas.</li>
 <li>Esses produtos geralmente estão associados a épocas ou períodos específicos e têm maior procura em determinados momentos, enquanto sua demanda diminui ou se torna inexistente fora desses períodos.</li>
@@ -180,10 +179,10 @@
 </font></div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="CRISP-DM-%5BBusiness-Understanding%5D"><font color="#CC403E" face="Segoe Print" size="5"><strong>CRISP-DM [Business Understanding]</strong></font><a class="anchor-link" href="#CRISP-DM-%5BBusiness-Understanding%5D">¶</a></h2><font color="#66666" face="Segoe Print" size="3">
+<p><font color="#CC403E" size="5"><strong>CRISP-DM [Business Understanding]</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>1. Objetivo Principal</strong></p>
 <ul>
 <li>Desenvolver uma solução baseada em Inteligência Artificial (IA) que integre Modelos de Linguagem de Grande Escala (LLMs) e análise de dados estruturados para prever demandas e otimizar estoques de produtos sazonais, promovendo eficiência operacional e reduzindo desperdícios.</li>
@@ -264,10 +263,10 @@
 </font></div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="Estrat%C3%A9gia-e-Abordagem"><font color="#CC403E" face="Segoe Print" size="4"><strong>Estratégia e Abordagem</strong></font><a class="anchor-link" href="#Estrat%C3%A9gia-e-Abordagem">¶</a></h2><font color="#66666" face="Segoe Print" size="3">
+<p><font color="#CC403E" size="4"><strong>Estratégia e Abordagem</strong></font></p>
+<font color="#66666" size="3">
 <p><strong>Projeto típico de uma empresa de varejo: Previsão de demanda e otimização de estoque</strong></p>
 <p><strong>Descrição do Problema</strong></p>
 <ul>
@@ -352,17 +351,17 @@ Com os avanços em inteligência artificial, modelos de linguagem como GPT podem
 </font></div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="CRISP-DM-%5BData-Understanding%5D"><font color="#CC403E" face="Segoe Print" size="5"><strong>CRISP-DM [Data Understanding]</strong></font><a class="anchor-link" href="#CRISP-DM-%5BData-Understanding%5D">¶</a></h2><font color="#66666" face="Segoe Print" size="3">
+<p><font color="#CC403E" size="5"><strong>CRISP-DM [Data Understanding]</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="Script-02-CriaTabelas.py"><font color="#CC403E" face="Segoe Print" size="4"><strong>Script 02-CriaTabelas.py</strong></font><a class="anchor-link" href="#Script-02-CriaTabelas.py">¶</a></h2><font color="#66666" face="Segoe Print" size="2">
+<p><font color="#CC403E" size="4"><strong>Script 02-CriaTabelas.py</strong></font></p>
+<font color="#66666" size="2">
 <p>Python - Pipeline de Criação do Banco de Dados</p>
 <p><strong>Descrição do objetivo deste script:</strong></p>
 <ul>
@@ -393,43 +392,40 @@ Com os avanços em inteligência artificial, modelos de linguagem como GPT podem
 </font></div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">#!pip install -q psycopg2
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q psycopg2
+#!conda install anaconda::psycopg2
 #!pip install -q dotenv</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Python - Pipeline de Criação do Banco de Dados
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Python - Pipeline de Criação do Banco de Dados
 import psycopg2
 import os
 from dotenv import load_dotenv</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Versões dos pacotes usados neste jupyter notebook
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
 %reload_ext watermark
 %watermark -a "Roberto-SSoares-LfLngLrnng"</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Author: Roberto-SSoares-LfLngLrnng
+<div aria-label="Code Output" class="output" role="region">Author: Roberto-SSoares-LfLngLrnng
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Carregar variáveis de ambiente do arquivo .env
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Carregar variáveis de ambiente do arquivo .env
 load_dotenv('config-postgresql.env',override=True)</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>True</pre>
-</div>
+<div class="output">True</div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">def fn_executa_script_sql(filename):
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">def fn_executa_script_sql(filename):
     """Executa um script SQL no PostgreSQL a partir de um arquivo."""
     
     print("\nIniciando execução do script SQL...")
@@ -479,26 +475,24 @@ load_dotenv('config-postgresql.env',override=True)</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Executar o script SQL
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Executar o script SQL Atenção o Docker deve estar ativo juntamente com o container PostgreSQL
 fn_executa_script_sql('ProjetoVarejo-01-Tabelas.sql')</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>
+<div aria-label="Code Output" class="output" role="region">
 Iniciando execução do script SQL...
 Conexão com o banco de dados estabelecida com sucesso.
 
 ✅ Script executado com sucesso!
 
 Conexão com o banco de dados fechada.
-</pre>
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="Script-03-CarregaDados.py"><font color="#CC403E" face="Segoe Print" size="4"><strong>Script 03-CarregaDados.py</strong></font><a class="anchor-link" href="#Script-03-CarregaDados.py">¶</a></h2><font color="#66666" face="Segoe Print" size="2">
+<p><font color="#CC403E" size="4"><strong>Script 03-CarregaDados.py</strong></font></p>
+<font color="#66666" size="2">
 <p>Python e SQL - Pipeline de Carga de Dados</p>
 <p><strong>Descrição do objetivo deste script:</strong></p>
 <ul>
@@ -538,8 +532,8 @@ Conexão com o banco de dados fechada.
 </font></div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Projeto Varejo - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Projeto Varejo - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
 # Imports
 import psycopg2
 import pandas as pd
@@ -549,43 +543,37 @@ from sqlalchemy import create_engine</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Versões dos pacotes usados neste jupyter notebook
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
 %reload_ext watermark
 %watermark -a "Roberto-SSoares-LfLngLrnng"</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Author: Roberto-SSoares-LfLngLrnng
+<div aria-label="Code Output" class="output" role="region">Author: Roberto-SSoares-LfLngLrnng
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Carregar variáveis de ambiente do arquivo .env
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Carregar variáveis de ambiente do arquivo .env
 load_dotenv('config-postgresql.env',override=True)</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>True</pre>
-</div>
+<div class="output">True</div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Cria o motor de conexão (ATENÇÃO COM A STRING DE CONEXÃO ABAIXO!!!!!!) e conexão com as credenciais carregadas do arquivo .env
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Cria o motor de conexão (ATENÇÃO COM A STRING DE CONEXÃO ABAIXO!!!!!!) e conexão com as credenciais carregadas do arquivo .env
 engine = create_engine(f'postgresql+psycopg2://{os.getenv("DB_USER")}:{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}:{os.getenv("DB_PORT")}/{os.getenv("DB_NAME")}')
 
 print("\nIniciando o Processo de Carga dos Dados!\n")</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>
+<div aria-label="Code Output" class="output" role="region">
 Iniciando o Processo de Carga dos Dados!
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Função para carregar dados dos arquivos CSV para o PostgreSQL no schema especificado
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para carregar dados dos arquivos CSV para o PostgreSQL no schema especificado
 def fn_carrega_dados(csv_file, table_name, schema):
     # Bloco try/except para lidar com exceções durante o processo
     try:
@@ -601,8 +589,8 @@ def fn_carrega_dados(csv_file, table_name, schema):
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Carregamento dos dados no schema 'projetoVarejo'
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Carregamento dos dados no schema 'projetoVarejo'
 schema = 'projetovarejo'
 
 fn_carrega_dados('tb_fornecedores.csv', 'fornecedores', schema)
@@ -619,8 +607,7 @@ fn_carrega_dados('tb_pedidos.csv', 'pedidos', schema)
 print("\nCarga Executada com Sucesso! Use o pgAdmin Para Checar os Dados Se Desejar!\n")
 print("\nIniciando o Processo de Análise dos Dados com IA. Seja Paciente e Aguarde o Excelente Resultado Que Será Entregue a Você!\n")</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Dados do arquivo tb_fornecedores.csv foram inseridos na tabela projetovarejo.fornecedores.
+<div aria-label="Code Output" class="output" role="region">Dados do arquivo tb_fornecedores.csv foram inseridos na tabela projetovarejo.fornecedores.
 Dados do arquivo tb_categorias.csv foram inseridos na tabela projetovarejo.categorias.
 Dados do arquivo tb_produtos.csv foram inseridos na tabela projetovarejo.produtos.
 Dados do arquivo tb_clientes.csv foram inseridos na tabela projetovarejo.clientes.
@@ -636,14 +623,13 @@ Carga Executada com Sucesso! Use o pgAdmin Para Checar os Dados Se Desejar!
 
 Iniciando o Processo de Análise dos Dados com IA. Seja Paciente e Aguarde o Excelente Resultado Que Será Entregue a Você!
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="Script-04-LLM.py"><font color="#CC403E" face="Segoe Print" size="4"><strong>Script 04-LLM.py</strong></font><a class="anchor-link" href="#Script-04-LLM.py">¶</a></h2><font color="#66666" face="Segoe Print" size="2">
+<p><font color="#CC403E" size="4"><strong>Script 04-LLM.py</strong></font></p>
+<font color="#66666" size="2">
 <p>Python - Pipeline de Extração de Insights com LLM</p>
 <p><strong>Descrição do objetivo da célula:</strong></p>
 <ul>
@@ -676,8 +662,8 @@ Iniciando o Processo de Análise dos Dados com IA. Seja Paciente e Aguarde o Exc
 </font></div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Projeto Varejo - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Projeto Varejo - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
 # Python - Pipeline de Extração de Insights com LLM
 
 # Imports
@@ -692,43 +678,38 @@ from langchain_ollama import OllamaLLM</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Versões dos pacotes usados neste jupyter notebook
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
 %reload_ext watermark
 %watermark -a "Roberto-SSoares-LfLngLrnng"</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Author: Roberto-SSoares-LfLngLrnng
+<div aria-label="Code Output" class="output" role="region">Author: Roberto-SSoares-LfLngLrnng
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Carregar variáveis de ambiente do arquivo .env
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Carregar variáveis de ambiente do arquivo .env
 load_dotenv('config-postgresql.env',override=True)</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>True</pre>
-</div>
+<div class="output">True</div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Instanciação do LLM Llama3 através do Ollama
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Instanciação do LLM Llama3 através do Ollama
 #llm = Ollama(model = "llama3") # Antigo
 llm = OllamaLLM(model="llama3")</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Criação do parser para a saída do modelo de linguagem
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Criação do parser para a saída do modelo de linguagem
 output_parser = StrOutputParser()</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Define a consulta SQL para obter dados dos clientes, compras e produtos
-
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Define a consulta SQL para obter dados dos clientes, compras e produtos
 # Lista de categorias
 categoria = ['Eletrônicos', 'Roupas']
 
@@ -776,8 +757,8 @@ sql_query = f"""
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">import psycopg2
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">import psycopg2
 
 # Lista de categorias
 categoria = ['Eletrônicos', 'Roupas']
@@ -814,14 +795,12 @@ conn.close()
 print(resultados)
 </code></pre>
 </div>
-<div class="scrollable-output">
-<pre>[(1, 'Smartphone', 'Eletrônicos', 'Fornecedor A', 3, 50, 'Dia das Mães', 50, 50), (2, 'Laptop', 'Eletrônicos', 'Fornecedor A', 3, 30, 'Nenhuma', 30, 30), (3, 'TV 55"', 'Eletrônicos', 'Fornecedor B', 3, 20, 'Nenhuma', 20, 20), (4, 'Caixa de Som Bluetooth', 'Eletrônicos', 'Fornecedor C', 5, 100, 'Nenhuma', 100, 100), (5, 'Tablet', 'Eletrônicos', 'Fornecedor D', 3, 40, 'Nenhuma', 40, 40), (11, 'Camisa Polo', 'Roupas', 'Fornecedor A', 5, 70, 'Nenhuma', 70, 0), (12, 'Calça Jeans', 'Roupas', 'Fornecedor B', 2, 60, 'Nenhuma', 60, 0), (13, 'Tênis Esportivo', 'Roupas', 'Fornecedor C', 2, 90, 'Nenhuma', 90, 0), (14, 'Jaqueta de Couro', 'Roupas', 'Fornecedor D', 3, 80, 'Nenhuma', 80, 0), (15, 'Meias 3 pares', 'Roupas', 'Fornecedor E', 9, 130, 'Dia dos Pais', 130, 0)]
-</pre>
+<div aria-label="Code Output" class="output" role="region">[(1, 'Smartphone', 'Eletrônicos', 'Fornecedor A', 3, 50, 'Dia das Mães', 50, 50), (2, 'Laptop', 'Eletrônicos', 'Fornecedor A', 3, 30, 'Nenhuma', 30, 30), (3, 'TV 55"', 'Eletrônicos', 'Fornecedor B', 3, 20, 'Nenhuma', 20, 20), (4, 'Caixa de Som Bluetooth', 'Eletrônicos', 'Fornecedor C', 5, 100, 'Nenhuma', 100, 100), (5, 'Tablet', 'Eletrônicos', 'Fornecedor D', 3, 40, 'Nenhuma', 40, 40), (11, 'Camisa Polo', 'Roupas', 'Fornecedor A', 5, 70, 'Nenhuma', 70, 0), (12, 'Calça Jeans', 'Roupas', 'Fornecedor B', 2, 60, 'Nenhuma', 60, 0), (13, 'Tênis Esportivo', 'Roupas', 'Fornecedor C', 2, 90, 'Nenhuma', 90, 0), (14, 'Jaqueta de Couro', 'Roupas', 'Fornecedor D', 3, 80, 'Nenhuma', 80, 0), (15, 'Meias 3 pares', 'Roupas', 'Fornecedor E', 9, 130, 'Dia dos Pais', 130, 0)]
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Função para gerar texto baseado nos dados do PostgreSQL
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Função para gerar texto baseado nos dados do PostgreSQL
 def fn_gera_insights():
 
     # Conecta ao banco de dados PostgreSQL com as credenciais fornecidas
@@ -842,7 +821,6 @@ def fn_gera_insights():
     # Executa a consulta SQL
     #cursor.execute(query)
     cursor.execute(query, categoria)
-
 
     # Obtém todos os resultados da consulta
     rows = cursor.fetchall()
@@ -868,7 +846,8 @@ def fn_gera_insights():
         id_produto, nome_produto, nome_categoria, nome_fornecedor, total_vendido, quantidade_em_estoque, temporada, quantidade_forecast, quantidade_reabastecida = row
         
         # Cria o prompt para o LLM com base nos dados do cliente
-        consulta = f"ID_Produto {id_produto} Nome_Produto {nome_produto} Nome_Categoria {nome_categoria} Nome_Fornecedor {nome_fornecedor} Total_Vendido ${total_vendido:.2f} quantidade_em_estoque {quantidade_em_estoque:.2f} temporada {temporada} quantidade_forecast {quantidade_forecast} quantidade_reabastecida {quantidade_reabastecida}."
+        consulta = f"ID_Produto {id_produto} Nome_Produto {nome_produto} Nome_Categoria {nome_categoria} Nome_Fornecedor {nome_fornecedor} Total_Vendido ${total_vendido:.2f} \
+                                quantidade_em_estoque {quantidade_em_estoque:.2f} temporada {temporada} quantidade_forecast {quantidade_forecast} quantidade_reabastecida {quantidade_reabastecida}."
         
         # Gera o texto de insight usando o LLM
         response = chain.invoke({'question': consulta})
@@ -891,257 +870,438 @@ def fn_gera_insights():
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Gera insights chamando a função definida
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Gera insights chamando a função definida
 insights = fn_gera_insights()</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Imprime cada insight gerado
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Imprime cada insight gerado
 for insight in insights:
     print(insight)</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Análise dos dados:
-
-O produto "Smartphone" da categoria "Eletrônicos" do fornecedor "A" apresenta uma demanda significativa, especialmente durante a temporada de "Dia das Mães". A média histórica de vendas é de $3.00 por unidade, com uma quantidade total vendida de 50 unidades.
-
-Análise da temporada:
-
-* A temporada de "Dia das Mães" é um período crítico para a venda de produtos sazonais, como o Smartphone.
-* A quantidade total de vendas registra uma alta durante essa temporada, com $15.00 (três vezes a média histórica) vendidas em apenas 10 unidades.
-
-Recomendação:
-
-* Para atender à demanda crescente da temporada e minimizar a possibilidade de falta de estoque, é recomendável reabastecer o estoque com 30 novas unidades adicionais.
-* A quantidade_reabastecida deve ser igual a quantidade_forecast (50), para garantir que haja suficiente estoque disponível durante a temporada.
-
-Feedback:
-
-A previsão da demanda do produto "Smartphone" durante a temporada de "Dia das Mães" é positiva, com uma alta demanda prevista. Para atender à essa demanda e minimizar o risco de falta de estoque, recomendo reabastecer o estoque com 30 novas unidades adicionais.
-
-Estatísticas:
-
-* Média histórica de vendas: $3.00 por unidade
-* Total de vendas durante a temporada: $15.00 (três vezes a média histórica)
-* Quantidade total em estoque: 50.00
-* Quantidade forecast para a temporada: 50
-* Recomendação para reabastecimento: 30 unidades adicionais
-Análise de dados!
-
-Vou analisar os dados para fornecer feedback sobre a previsão da demanda e otimização do estoque do produto "Laptop" pertencente à categoria "Eletrônicos".
-
-**Análise dos dados**
-
-* **Quantidade vendida (Total_Vendido)**: $3.00, o que indica uma demanda baixa para esse produto.
-* **Quantidade em estoque (quantidade_em_estoque)**: 30 unidades, que parece ser um nível de estoque razoável para um produto sazonal.
-* **Previsão da quantidade demandada (quantidade_forecast)**: 30 unidades, o que é igual à quantidade atual em estoque. Isso sugere que a previsão da demanda não está considerando variações sazonais ou seasonales.
-* **Quantidade reabastecida (quantidade_reabastecida)**: 30 unidades, o que coincide com a quantidade em estoque e a previsão da demanda.
-
-**Feedback**
-
-1. **Previsão de demanda**: A previsão da demanda parece não considerar variações sazonais ou seasonales. É importante atualizar a previsão para refletir as mudanças na demanda ao longo do tempo.
-2. **Otimização do estoque**: Com uma quantidade em estoque razoável e uma previsão da demanda que não considera variações sazonais, é recomendado ajustar o estoque para atender às necessidades futuras.
-3. **Estratégias de reabastecimento**: Para evitar problemas de estoque baixo ou excessivo, é necessário estabelecer um sistema de reabastecimento mais eficaz, levando em conta as mudanças na demanda e a previsão da quantidade demandada.
-
-**Recomendações**
-
-1. Atualize a previsão da demanda para considerar variações sazonais ou seasonales.
-2. Ajuste o estoque para atender às necessidades futuras, tendo em conta a previsão da demanda atualizada.
-3. Estabeleça um sistema de reabastecimento mais eficaz, levando em conta as mudanças na demanda e a previsão da quantidade demandada.
-
-Espero que essas recomendações sejam úteis para sua análise!
-Análise de Dados: ID_Produto 3 - TV 55"
-
-**Resumo**: O produto em questão é uma TV 55" pertencente à categoria de Eletrônicos, fornecido pelo Fornecedor A. Com base nos dados históricos, podemos verificar que a quantidade vendida até o momento (Total_Vendido) é de $3.00 e a quantidade atualmente em estoque (quantidade_em_estoque) é de 20 unidades.
-
-**Análise da Sazonalidade**: O campo "temporada" indica que não há uma temporada específica associada ao produto, o que sugere que sua demanda pode ser mais estável ao longo do tempo. No entanto, é sempre importante considerar os dados históricos e tendências para identificar possíveis flutuações na demanda.
-
-**Previsão de Demanda**: Com base nos dados históricos, podemos fazer uma previsão da quantidade que será vendida no futuro próximo. A quantidade_forecast (20) é igual à quantidade atualmente em estoque, o que sugere que a demanda está equilibrada com o estoque.
-
-**Otimização do Estoques**: Com a previsão de demanda estabelecida, podemos avaliar se o estoque atual é suficiente para atender às necessidades futuras. Na presente situação, a quantidade_em_estoque (20) é igual à quantidade_forecast (20), o que sugere que o estoque está bem dimensionado e não há necessidade de reabastecimento imediato.
-
-**Recursos**: Como cientista de dados, eu recomendo realizar uma análise mais detalhada dos dados históricos para identificar padrões e tendências na demanda do produto. Além disso, é importante monitorar os dados em tempo real para detectar qualquer mudança na demanda ou no mercado.
-
-**Recomendações**:
-
-1. Monitorize atentamente a demanda do produto e ajuste o estoque caso seja necessário.
-2. Considere realizar uma análise de temporada para identificar possíveis flutuações na demanda em função da estação do ano.
-3. Analise as tendências da demanda para prever se há um crescimento ou declínio futuro.
-
-Essas são minhas recomendações com base nos dados fornecidos. Caso você precise de mais ajuda, sinta-se à vontade para fornecer mais informações!
-Excelente dados para análise!
-
-A partir dos dados, posso dizer que o produto "Caixa de Som Bluetooth" pertence à categoria Eletrônicos e é fornecido pela empresa Fornecedor C.
-
-Aqui estão minhas observações e recomendações:
-
-**Análise da demanda**: A média de vendas por temporada é de $5.00, com uma quantidade total vendida de 100 unidades. Isso indica que a demanda por este produto é moderada e estável ao longo do tempo.
-
-**Otimização do estoque**: Com um estoque atualizado em 100 unidades, posso dizer que você tem um nível de segurança adequado para atender à demanda projetada. Além disso, a quantidade forecasted (quantidade_forecast) é igual ao estoque atual, o que significa que não há necessidade de reabastecer imediatamente.
-
-**Recomendações**: Para otimizar o estoque e reduzir possíveis perdas ou gastos desnecessários, sugiro que você considere implementar uma política de just-in-time (JIT) para este produto. Isso significa que, ao invés de reabastecer todo o estoque de uma vez, você pode reabastecer apenas a quantidade necessária para atender à demanda projetada.
-
-**Risco de falta**: Embora o estoque atual seja suficiente para atender à demanda, é importante notar que um nível mais baixo de estoque (cerca de 50-70% do atual) pode ser considerado uma opção viável. Isso permitiria que você reabastece apenas a quantidade necessária e reduza o risco de falta de estoque.
-
-**Recomendações finais**: Em resumo, recomendo que você mantenha um estoque razoável (cerca de 100 unidades) e considere implementar uma política de JIT para este produto. Além disso, é importante monitorar a demanda e ajustar o estoque com base nos resultados.
-
-Espero que essas sugestões sejam úteis!
-Análise dos dados!
-
-Vamos começar com o ID do produto, que é o 5. O nome do produto é Tablet, e ele pertence à categoria de Eletrônicos.
-
-Agora, vamos analisar a demanda histórica do produto. Com base nos dados, vemos que a quantidade vendida foi de $3.00 por unidade, com um total de unidades vendidas igual a 40. Além disso, há atualmente 40 unidades em estoque.
-
-A temporada do produto é classificada como "Nenhuma", o que significa que não há uma temporada específica associada ao produto (provavelmente porque ele é um produto não sazonal).
-
-Vamos fazer uma previsão de demanda com base na história de vendas do produto. Com um estoque atual de 40 unidades e considerando a média móvel de 40 unidades vendidas por período, podemos estimar que a demanda futura seja igual à quantidade em estoque.
-
-Portanto, minha recomendação é manter o estoque atual de 40 unidades, pois a previsão de demanda indica que não há necessidade de reabastecer ou reduzir o estoque. Além disso, com um estoque razoável e uma demanda estável, podemos evitar os custos associados à gestão do estoque (como os custos de armazenamento e possíveis perdas por descarte).
-
-No entanto, é importante continuar monitorando a demanda e as vendas para garantir que a previsão esteja correta. Caso a demanda seja maior ou menor do que o esperado, precisaremos reavaliar a estratégia de estoque e ajustá-la se necessário.
-
-Essa é minha análise inicial com base nos dados fornecidos. Se você tiver mais informações ou quer que eu faça uma análise mais detalhada, sinta-se à vontade para perguntar!
-Análise de dados para o produto "Camisa Polo"!
-
-**Previsão de demanda:**
-
-A previsão de demanda para este produto é relativamente estável, com uma média de $5,00 por unidade vendida e uma quantidade total vendida de 70 unidades. Com base nessa informação, não há motivos para se preocupar com a demanda futura.
-
-**Análise da temporada:**
-
-O registro da temporada como "Nenhuma" sugere que o produto não está relacionado a uma temporada específica (verão, outono, inverno ou primavera). Isso significa que a demanda pode variar ao longo do ano devido a fatores como mudanças climáticas, estilos de moda e eventos esportivos.
-
-**Otimização do estoque:**
-
-Considerando que o estoque atual é de 70 unidades e não há uma temporada específica associada ao produto, eu recomendo manter um estoque razoável de aproximadamente 50-60 unidades. Isso permitirá atender à demanda mais baixa prevista, sem comprometer a capacidade de reabastecer o estoque quando necessário.
-
-**Recomendações:**
-
-1. Monitorize a demanda e ajuste o estoque periodicamente para garantir que esteja adequado às necessidades do mercado.
-2. Considerar implementar um sistema de alertas para detectar mudanças na demanda e reabastecer o estoque quando necessário.
-3. Analise as tendências de vendas ao longo do tempo para identificar oportunidades de crescimento ou ajustes no estoque.
-
-Em resumo, a previsão de demanda para o produto "Camisa Polo" é estável, e a otimização do estoque deve se concentrar em manter um nível razoável de unidades, permitindo reabastecer quando necessário.
-Análise de dados para previsão de demanda e otimização do estoque de produtos sazonais.
-
-**Análise da temporada**
-
-A análise dos dados indica que o produto "Calça Jeans" não está associado a uma temporada específica, o que significa que sua demanda é constante ao longo do ano. No entanto, é importante notar que as vendas podem variar de acordo com fatores como época do ano, campanhas publicitárias e mudanças no mercado.
-
-**Análise dos dados históricos**
-
-A análise dos dados históricos de venda (Total_Vendido) indica uma tendência de venda estável ao longo do tempo. A média das vendas é de $2,00 por unidade. A quantidade em estoque atualmente é de 60 unidades.
-
-**Previsão de demanda**
-
-Considerando a tendência histórica de venda e a falta de temporada específica para o produto, podemos fazer uma previsão conservadora da demanda futura. Como a média das vendas é de $2,00 por unidade, podemos estabelecer uma previsão de demanda baseada na média das vendas históricas.
-
-Previsão de demanda: 60 unidades (quantidade em estoque atual)
-
-**Recomendação**
-
-Considerando a previsão de demanda e a quantidade em estoque atual, não é necessário reabastecer o estoque imediatamente. No entanto, é importante monitorar as vendas ao longo do tempo e ajustar a estratégia de estoque de acordo com as variações da demanda.
-
-**Sugestão**
-
-Para otimizar o estoque, sugiro que você considere implementar um sistema de alerta para quando a quantidade em estoque cair abaixo de um nível determinado (por exemplo, 30 unidades). Isso permitirá que você tome medidas preventivas e reabasteça o estoque antes de esgotá-lo.
-
-Além disso, é importante monitorar as variações da demanda ao longo do tempo e ajustar a estratégia de estoque de acordo com essas variações. Isso pode incluir reabastecimento do estoque ou mudanças na política de preços para manter o nível de vendas estável.
-
-Espero que essa análise ajude você a melhorar sua estratégia de estoque e previsão de demanda para o produto "Calça Jeans".
-Olá!
-
-Analisando os dados, posso fornecer o seguinte feedback:
-
-**Análise da demanda**
-
-O produto "Tênis Esportivo" tem uma quantidade total vendida de US$ 2.00 e uma quantidade em estoque atual de 90 unidades. A temporada não é definida como sazonal, o que sugere que a demanda possa ser mais estável ao longo do tempo.
-
-No entanto, para melhor entender a tendência da demanda, é necessário analisar os dados históricos e identificar padrões de comportamento dos clientes. Além disso, é importante considerar a estação do ano e as datas específicas que podem afetar a demanda (por exemplo, datas de lançamentos de produtos ou eventos esportivos).
-
-**Previsão de demanda**
-
-Com base nos dados históricos e tendências, posso fazer uma previsão inicial da demanda para o próximo trimestre. Considerando a temporada não ser definida como sazonal, a previsão é mais conservadora.
-
-Previsão: quantidade_total_vendida = US$ 2.20
-quantidade_em_estoque = 100
-
-**Otimização do estoque**
-
-Com base na previsão da demanda, posso sugerir que o estoque atual de 90 unidades está razoavelmente adequado para atender à demanda projetada. No entanto, é importante monitorar a evolução da demanda e ajustar o estoque com base em novas informações.
-
-**Recomendações**
-
-Para melhorar a gestão do estoque:
-
-1. Monitorize a evolução da demanda e ajuste o estoque diariamente.
-2. Considere definir uma temporada para o produto "Tênis Esportivo" se houver evidências de que a demanda seja mais sazonal.
-3. Análise os dados históricos para identificar padrões de comportamento dos clientes e ajuste a previsão da demanda com base nisso.
-
-Essas são minhas sugestões inicialmente. Se você tiver mais informações ou dados adicionais, posso fornecer um feedback mais específico e detalhado.
-Análise dos dados:
-
-* O produto em questão é a Jaqueta de Couro (ID_Produto: 14), que pertence à categoria Roupas.
-* A quantidade total vendida do produto até o momento é de $3,00.
-* A quantidade atualmente em estoque é de 80 unidades.
-* Não há temporada específica mencionada para esse produto, o que sugere que ele não seja um item sazonal.
-* A previsão de quantidade a ser vendida no futuro (quantidade_forecast) é igual à quantidade atual em estoque (80).
-* A quantidade reabastecida no passado foi zero.
-
-Feedback:
-
-Em geral, os dados sugerem que o estoque da Jaqueta de Couro está bem gerenciado e não há motivos para preocupação em relação ao estoque atual. No entanto, é importante considerar alguns fatores antes de tomar uma decisão sobre a gestão do estoque.
-
-* Como o produto não tem temporada específica, pode ser que ele seja vendido uniformemente ao longo do ano.
-* A previsão de quantidade a ser vendida no futuro é igual à quantidade atual em estoque. Isso significa que, se as vendas continuarem uniformes, não há necessidade de reabastecer o estoque.
-* No entanto, é importante considerar a possibilidade de picos sazonais ou surtos de demanda inesperados. Se houver uma mudança nas condições do mercado ou na tendência das vendas, pode ser necessário ajustar a gestão do estoque para evitar perdas de oportunidade ou excesso de estoque.
-
-Recomendação:
-
-* Continue monitorando as vendas e previsões para identificar qualquer tendência ou padrão que possa afetar o estoque.
-* Ajuste a gestão do estoque de acordo com as necessidades, levando em conta as tendências das vendas e a disponibilidade financeira.
-
- Não há necessidade imediata de reabastecer o estoque da Jaqueta de Couro. Continue monitorando os dados e ajustar a gestão do estoque como necessário.
-Análise de dados:
-
-**Resumo**: O produto "Meias" (ID_Produto: 15) pertence à categoria "Roupas" e é fornecido pelo Fornecedor E. A quantidade total vendida até o momento é de $9,00 com 130 unidades em estoque.
-
-**Análise da temporada**: Com a proximidade do Dia dos Pais (quantidade_forecast: 130), parece que a demanda por esse produto irá aumentar. É importante otimizar o estoque para atender à expectativa de vendas e evitar perdas por falta de produtos.
-
-**Sugestão**: Considerando que a quantidade forecast é igual à quantidade atual em estoque, sugiro reabastecer com 0 unidades (quantidade_reabastecida: 0) para evitar excesso de estoque e reduzir custos. Isso permitirá atender às demandas do Dia dos Pais e minimizar o risco de perda por falta de produtos.
-
-**Observação**: É fundamental monitorar as vendas e ajustar a estratégia de reabastecimento em tempo real para evitar problemas de estoque. Além disso, é recomendável que você execute uma análise mais aprofundada das tendências de demanda e do histórico de vendas para melhorar a previsão da demanda e otimizar o estoque de forma mais eficaz.
-
-**Conclusão**: Com base nos dados, sugiro reabastecer com 0 unidades para atender às demandas do Dia dos Pais e minimizar o risco de perda por falta de produtos. É importante monitorar as vendas e ajustar a estratégia de reabastecimento em tempo real para garantir um estoque otimizado e reduzir custos.
-</pre>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Define a consulta SQL para obter dados dos clientes, compras e produtos
+# Lista de categorias
+categoria = ['Eletrônicos', 'Roupas']
+
+# Criar placeholders dinâmicos para a lista
+placeholders = ', '.join(['%s'] * len(categoria))
+
+print(placeholders)</code></pre>
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Projeto 7 - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
+# Python - Pipeline de Extração de Insights com LLM
+
+# Imports
+import csv
+import psycopg2
+import os
+from dotenv import load_dotenv
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+#from langchain_community.llms.ollama import Ollama  # Antigo
+from langchain_ollama import OllamaLLM
+from concurrent.futures import ThreadPoolExecutor
+
+# Carregar variáveis de ambiente do arquivo .env
+load_dotenv('config-postgresql.env',override=True)
+
+# Instanciação do LLM Llama3 através do Ollama
+#llm = Ollama(model = "llama3") # Antigo
+llm = OllamaLLM(model="llama3")
+
+# Criação do parser para a saída do modelo de linguagem
+output_parser = StrOutputParser()
+
+# Define a consulta SQL para obter dados dos clientes, compras e produtos
+# Lista de categorias
+categoria = ['Eletrônicos', 'Roupas']
+
+# Criar placeholders dinâmicos para a lista
+placeholders = ', '.join(['%s'] * len(categoria))
+
+# Query com placeholders
+sql_query = f"""
+            SELECT
+                p.id_produto AS id_produto,
+                p.nome_produto AS nome_produto,
+                c.nome_categoria AS nome_categoria,
+                f.nome_fornecedor AS nome_fornecedor,
+                COALESCE(SUM(v.quantidade_vendida), 0) AS total_vendido,
+                COALESCE(e.quantidade_em_estoque, 0) AS quantidade_em_estoque,
+                COALESCE(s.nome_temporada, 'Nenhuma') AS temporada,
+                COALESCE(fore.quantidade_forecast, 0) AS quantidade_forecast,
+                COALESCE(re.quantidade, 0) AS quantidade_reabastecida
+            FROM
+                projetoVarejo.produtos p
+            LEFT JOIN
+                projetoVarejo.categorias c ON p.id_categoria = c.id_categoria
+            LEFT JOIN
+                projetoVarejo.fornecedores f ON p.id_fornecedor = f.id_fornecedor
+            LEFT JOIN
+                projetoVarejo.vendas v ON p.id_produto = v.id_produto
+            LEFT JOIN
+                projetoVarejo.estoque e ON p.id_produto = e.id_produto
+            LEFT JOIN
+                projetoVarejo.sazonalidade s ON p.id_produto = s.id_produto
+            LEFT JOIN
+                projetoVarejo.forecast fore ON p.id_produto = fore.id_produto
+            LEFT JOIN
+                projetoVarejo.reabastecimento re ON p.id_produto = re.id_produto
+            WHERE
+                c.nome_categoria IN ({placeholders})
+            GROUP BY
+                p.id_produto, p.nome_produto, c.nome_categoria, f.nome_fornecedor,
+                e.quantidade_em_estoque, e.data_ultimo_reabastecimento,
+                s.nome_temporada, s.data_inicio, s.data_fim,
+                fore.quantidade_forecast, re.quantidade, re.data_reabastecimento
+            ORDER BY
+                p.id_produto;
+        """
+
+# Instanciação do LLM
+llm = OllamaLLM(model="llama3")
+output_parser = StrOutputParser()
+
+# Template otimizado do prompt
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", "Você é um cientista de dados especializado. Analise os dados e forneça feedback em português do Brasil sobre previsão de demanda e otimização do estoque de produtos sazonais."),
+        ("user", "Analise o seguinte produto e forneça insights: {question}")
+    ]  
+)
+
+chain = prompt | llm | output_parser
+
+def process_row(row):
+    """Gera insights para um único registro."""
+    id_produto, nome_produto, nome_categoria, nome_fornecedor, total_vendido, estoque, temporada, forecast, reabastecida = row
+
+    consulta = (
+        f"Produto: {nome_produto} ({id_produto}), Categoria: {nome_categoria}, "
+        f"Fornecedor: {nome_fornecedor}, Vendidos: {total_vendido}, Estoque: {estoque}, "
+        f"Temporada: {temporada}, Previsão: {forecast}, Reabastecido: {reabastecida}."
+    )
+
+    try:
+        return chain.invoke({'question': consulta})
+    except Exception as e:
+        return f"Erro no produto {id_produto}: {str(e)}"
+
+def fn_gera_insights():
+    """Extrai dados do PostgreSQL e gera insights de forma eficiente."""
+    try:
+        #conn = psycopg2.connect(**DB_CONFIG)
+        # Conecta ao banco de dados PostgreSQL com as credenciais fornecidas
+        conn = psycopg2.connect(
+        dbname=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT")
+    )
+        cursor = conn.cursor()
+
+        query = sql_query
+
+        # Criar cursor e executar a query com os parâmetros corretos
+        cursor.execute(sql_query, categoria)  # Passando os valores como lista
+        
+        batch_size = 100  # Lote otimizado para reduzir chamadas excessivas ao banco
+        insights = []
+
+        with open('projetoVarejo-analise.csv', mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Insight"])  # Cabeçalho
+
+            while True:
+                rows = cursor.fetchmany(batch_size)
+                if not rows:
+                    break
+
+                # Processamento paralelo com menos threads para reduzir carga na CPU
+                #with ThreadPoolExecutor(max_workers=3) as executor:
+                with ThreadPoolExecutor(max_workers=2) as executor:                    
+                    results = list(executor.map(process_row, rows))
+
+                for insight in results:
+                    writer.writerow([insight])
+                    insights.append(insight)
+
+        cursor.close()
+        conn.close()
+        return insights
+
+    except psycopg2.Error as e:
+        print(f"Erro ao conectar ao banco: {str(e)}")
+        return []
+
+# Executa o pipeline otimizado
+insights = fn_gera_insights()
+
+# Imprime cada insight gerado
+for insight in insights:
+    print(insight)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Análise do produto Smartphone (1) durante a temporada de Dia das Mães!
+
+**Insights**
+
+* **Venda**: O produto vendeu apenas 3 unidades, o que é um número bem abaixo da previsão de 50.
+* **Estoque**: Estávamos com um estoque inicial de 50 unidades e não houve reabastecimento durante essa temporada. Isso significa que ainda temos um estoque considerável do produto.
+* **Previsão**: A previsão de vendas foi bem alta (50), o que sugere que havia uma boa demanda por esse produto durante a temporada.
+
+**Feedback**
+
+Em primeiro lugar, é importante notar que o produto não vendeu tão bem quanto se esperava. Isso pode ser um sinal de que o preço do produto é alto demais ou que a promoção feita não foi eficaz. Além disso, a falta de reabastecimento durante a temporada pode ter contribuído para a baixa demanda.
+
+No entanto, é importante aproveitar o estoque atual e revisar as estratégias de marketing e promoção para aumentar as vendas. Aqui estão algumas sugestões:
+
+1. **Reavaliação do preço**: É necessário reavaliar o preço do produto para que seja mais competitivo em relação a outros modelos semelhantes.
+2. **Reinicialização da promoção**: Reinitiar a promoção e ajustá-la de acordo com as necessidades do mercado e do público-alvo.
+3. **Aumento da visibilidade**: Aumentar a visibilidade do produto nos canais de vendas, como lojas físicas e plataformas online, para que mais pessoas o conheçam e o comprem.
+4. **Análise de dados**: Realizar uma análise mais profunda dos dados de vendas e comportamento do cliente para identificar oportunidades de melhoria.
+
+**Recomendações**
+
+Em resumo, recomendo:
+
+1. Reavaliar o preço do produto e ajustá-lo de acordo com as necessidades do mercado.
+2. Reinitiar a promoção e ajustá-la de acordo com as necessidades do mercado e do público-alvo.
+3. Aumentar a visibilidade do produto nos canais de vendas.
+4. Realizar uma análise mais profunda dos dados de vendas e comportamento do cliente para identificar oportunidades de melhoria.
+
+Espero que essas sugestões ajudem a otimizar o estoque do Smartphone (1) e aumentar as vendas durante futuras temporadas!
+Aqui vai um feedback como cientista de dados:
+
+**Análise da Situação**
+
+O produto Laptop (2) pertencente à categoria Eletrônicos, fornecido pela Fornecedor A, apresenta uma situação interessante.
+
+**Demandas Passadas**
+
+Há 3 unidades vendidas, o que indica uma demanda razoável para esse produto. No entanto, é importante notar que não há temporada específica associada a essa venda, o que pode indicar que a demanda está mais relacionada ao volume de vendas em geral do que à sazonalidade.
+
+**Estoque e Reabastecimento**
+
+O estoque atual é de 30 unidades, enquanto a previsão de demanda para os próximos períodos é de 30 unidades. Isso significa que o estoque está mais ou menos equilibrado com a previsão de demanda.
+
+**Feedback e Sugestões**
+
+Considerando a situação atual, não há grandes preocupações com o estoque do produto Laptop (2). No entanto, como um cientista de dados, gostaria de sugerir algumas coisas:
+
+1. **Monitorize a Demanda**: Embora a demanda seja razoável, é importante monitorar atentamente as vendas para identificar possíveis padrões ou variações na demanda.
+2. **Análise da Sazonalidade**: Embora não haja temporada específica associada às vendas, é sempre uma boa prática realizar um estudo de sazonalidade para entender melhor a demanda do produto ao longo do tempo. Isso pode ajudar a identificar oportunidades de otimização do estoque.
+3. **Otimização do Estoqui**: Com o estoque atualmente equilibrado com a previsão de demanda, não há necessidade de reabastecer em massa. No entanto, é sempre uma boa prática realizar um estudo de otimização do estoque para garantir que o nível de estoque esteja adequado à demanda.
+
+Em resumo, a situação atual do produto Laptop (2) é estável e equilibrada. É importante monitorar atentamente as vendas e considerar a sazonalidade na tomada de decisões sobre estoque e reabastecimento.
+Análise realizada!
+
+Observando os dados fornecidos, posso destacar alguns pontos importantes:
+
+1. **Venda atual:** Foram vendidos apenas 3 TVs 55" no momento, o que representa uma baixa demanda.
+2. **Estoque atual:** O estoque de TV 55" é de 20 unidades, o que significa que há um excesso de produtos não vendidos.
+3. **Previsão:** A previsão de demanda para este produto é de 20 unidades, o que sugere uma possível aumento da demanda em breve.
+4. **Reabastecimento:** O estoque foi reabastecido com 20 novas unidades, o que pode ser uma oportunidade para ajustar a estratégia de estoque.
+
+Insights:
+
+* **Ajuste do estoque:** Considero necessário ajustar o estoque de TV 55" para evitar perdas financeiras e minimizar os riscos. Com um estoque atual de 20 unidades e uma previsão de demanda de 20, acho que é possível manter apenas 10-15 unidades em estoque, mantendo assim um nível mais razoável.
+* **Melhorias na gestão:** A partir daqui, sugiro que sejam implementadas melhorias na gestão do estoque, como monitoramento da demanda e ajustes periódicos no estoque para garantir que a oferta esteja alinhada com a demanda.
+* **Análise de tendências:** É importante realizar uma análise mais aprofundada sobre as tendências de vendas e previsão de demanda para o futuro, especialmente considerando a temporada (ou falta de temporada) do produto.
+
+Recomendação final:
+
+Ajuste o estoque de TV 55" para manter apenas 10-15 unidades em estoque, mantendo um nível mais razoável. Além disso, implemente melhorias na gestão do estoque e realize análise mais aprofundada sobre as tendências de vendas e previsão de demanda para o futuro.
+Análise realizada!
+
+Vendo os dados, posso dizer que o produto "Caixa de Som Bluetooth" da categoria Eletrônicos, fornecido pelo Fornecedor C, apresenta uma situação interessante.
+
+**Vendidos:** 5 unidades vendidas até agora não é um número alto, mas é suficiente para entender a tendência da demanda do produto. Embora a quantidade seja baixa, é importante considerar que o estoque inicial é relativamente grande (100 unidades).
+
+**Previsão:** A previsão de demanda está estabelecida em 100 unidades, o que significa que o estoque atual não está completamente vazio. No entanto, essa previsão pode ser uma estimativa conservadora, pois a temporada não foi especificada.
+
+**Reabastecido:** O estoque foi reabastecido para 100 unidades, o que é um sinal positivo de que o fornecedor C tem capacidade para atender à demanda em caso de aumento repentino.
+
+**Otimização do estoque:**
+
+* Considere reduzir o estoque inicial para um nível mais conservador (por exemplo, 50-60 unidades), pois a previsão de demanda é relativamente alta e não há informações sobre uma temporada específica. Isso ajudaria a evitar perdas caso haja uma redução brusca na demanda.
+* Implemente um sistema de gerenciamento de estoque mais eficaz para monitorar as vendas e ajustar o estoque em tempo real, evitando sobre-estoques ou sub-estoques.
+* Fique atento à mudanças nas tendências de venda e reajuste a previsão de demanda com base nos dados históricos.
+
+**Conclusão:** Embora os dados não apoiem uma temporada específica, é importante monitorar as vendas e ajustar o estoque em função das necessidades do mercado. Uma abordagem mais conservadora em termos de estoque inicial pode ser benéfica para evitar perdas.
+Análise feita!
+
+**Produto:** Tablet (5)
+**Categoria:** Eletrônicos
+**Fornecedor:** Fornecedor D
+**Vendidos:** 3
+**Estoque:** 40
+**Temporada:** Nenhuma
+**Previsão:** 40
+**Reabastecido:** 40
+
+**Insights:**
+
+1. **Venda fraca**: Apesar de terem sido vendidos apenas 3 unidades, é importante considerar que o estoque inicial era de 40 unidades, o que significa que a demanda real foi muito baixa em relação ao estoque disponível.
+2. **Previsão conservadora**: A previsão de venda para o futuro é de 40 unidades, o mesmo valor do estoque atual. Isso pode ser considerado uma previsão conservadora, pois se não houver um aumento significativo na demanda, a empresa poderá ter excesso de estoque.
+3. **Reabastecimento**: O reabastecimento do estoque para 40 unidades é uma boa decisão, pois garantirá que o estoque esteja sempre abastado e pronto para atender à demanda.
+
+**Recursos recomendados:**
+
+1. **Análise de dados históricos**: Analisar as vendas do produto em diferentes períodos (por exemplo, semanas, meses, trimestres) pode ajudar a identificar padrões e tendências na demanda.
+2. **Modelagem de demanda**: Utilizar modelos de aprendizado automático ou técnicas de previsão de demanda para melhorar as previsões e otimizar os estoques.
+3. **Análise de concorrência**: Analisar a concorrência no mercado e suas estratégias de marketing e vendas pode ajudar a identificar oportunidades de negócios e ajustes na estratégia da empresa.
+
+**Conclusão:**
+
+A análise dos dados indica que o estoque do produto Tablet (5) está atualmente excessivo, embora a previsão de venda seja conservadora. É recomendável realizar uma análise mais detalhada dos dados históricos e utilizar técnicas de modelagem de demanda para melhorar as previsões e otimizar os estoques. Além disso, é importante analisar a concorrência no mercado para identificar oportunidades de negócios e ajustes na estratégia da empresa.
+Analise realizada!
+
+**Insights sobre a demanda do produto Camisa Polo (11)**
+
+Vendidos: 5 - Um número relativamente baixo de vendas para um produto com estoque disponível.
+
+Estoque: 70 - Um estoque razoável, mas que pode não estar completamente utilizado.
+
+Previsão: 70 - A previsão é conservadora e igual ao estoque atual. Isso sugere que a demanda futura será similar à demanda passada.
+
+**Análise da temporada**
+
+A falta de definição sobre a temporada do produto faz com que seja difícil estimar a demanda futura. No entanto, como o estoque não está completamente vendido e a previsão é conservadora, é provável que a demanda se mantenha constante ou aumente levemente.
+
+**Recomendações para otimização do estoque**
+
+1. **Reavaliar a previsão**: Com base nos dados anteriores, pode ser necessário reavaliar a previsão de demanda e considerar fatores como mudanças na temperatura, datas de eventos esportivos ou outras influências que possam afetar a demanda do produto.
+2. **Reabastecer o estoque**: Considerando o estoque atual e a previsão conservadora, é recomendável reabastecer o estoque para garantir a disponibilidade do produto e evitar perdas de vendas.
+3. **Análise de dados mais detalhada**: Para obter uma visão mais precisa da demanda do produto, é necessário analisar dados mais detalhados sobre as vendas e estoque ao longo dos meses para identificar padrões e tendências.
+
+Em resumo, a análise indica que o estoque do Camisa Polo (11) não está sendo completamente utilizado e que a previsão de demanda pode ser conservadora. É recomendável reavaliar a previsão e reabastecer o estoque para garantir a disponibilidade do produto.
+Análise realizada!
+
+**Resumo**
+
+O produto Calça Jeans (12) da categoria Roupas, fornecido pelo Fornecedor B, apresenta uma situação interessante.
+
+**Análise das Vendas**
+
+Até o momento, apenas 2 unidades do produto foram vendidas. Isso sugere que a demanda é baixa, o que pode ser um sinal de que o produto não está muito popular ou não está no período de maior procura.
+
+**Análise do Estoquiagem**
+
+O estoque atual é de 60 unidades, o que é uma quantia razoável. No entanto, a previsão de demanda é de 60 unidades, o que significa que o estoque não está sendo consumido rapidamente e não há necessidade de reabastecimento imediato.
+
+**Insights**
+
+Considerando as vendas e o estoquiagem, pode-se concluir que:
+
+1. A demanda por Calça Jeans (12) é baixa.
+2. O estoque atual é razoável e não há necessidade de reabestecimento imediato.
+3. É importante monitorar a evolução da demanda e ajustar o estoquiagem de acordo com as vendas futuras.
+
+**Recomendações**
+
+Para otimizar o estoque e prever a demanda, sugiero:
+
+1. Monitorar atentamente as vendas nos próximos períodos para identificar padrões ou mudanças na demanda.
+2. Reavaliar a previsão de demanda após um período de tempo razoável (ex.: 3-6 meses) e ajustá-la se necessário.
+3. Considerar reabestecimento apenas quando a previsão de demanda for superior ao estoque atual.
+
+**Conclusão**
+
+Em resumo, o produto Calça Jeans (12) apresenta uma situação estável em termos de estoquiagem e demanda. É importante monitorar a evolução da demanda e ajustar o estoquiagem para garantir que as necessidades do cliente sejam atendidas e minimizar perdas por excesso de estoque.
+Análise do produto Tênis Esportivo (13)!
+
+**Resumo**
+
+* O estoque atual é de 90 unidades.
+* A previsão de demanda é de 90 unidades.
+* A venda realizada até agora é de 2 unidades.
+
+**Insights**
+
+* Como o estoque atual é maior que a previsão de demanda, não há necessidade de reabastecimento imediato.
+* No entanto, é importante monitorar a evolução da temporada e do comportamento do mercado para ajustar a estratégia de estoque de acordo com as necessidades futuras.
+* Como o produto é sazonal (esportivo), é provável que haja uma demanda maior durante as épocas de jogos esportivos ou eventos importantes. Portanto, é recomendado monitorar a temporada e ajustar o estoque para atender à demanda Crescente em momentos críticos.
+* Além disso, é importante avaliar se há variações sazonais na demanda do produto e ajustar o estoque de acordo com essas variabilidades.
+
+**Recomendação**
+
+* Monitorar a temporada e as tendências de venda para ajustar o estoque de forma adequada.
+* Considerar uma revisão da previsão de demanda para contemplar possíveis variações sazonais.
+* Manter um estoque razoável, mas não excessivo, para atender à demanda Crescente durante os períodos de jogos esportivos ou eventos importantes.
+
+Espero que essas informações tenham sido úteis!
+Análise do produto Jaqueta de Couro (14):
+
+**Observações Gerais**
+
+* O estoque atual é alto, com 80 unidades.
+* A previsão de demanda é igual ao estoque atual, com 80 unidades previstas para venda.
+* Não há temporada especificada para este produto, o que pode sugerir que ele não tem uma época mais movimentada do ano.
+
+**Insights**
+
+* Com um estoque alto e uma previsão de demanda igual ao estoque, é provável que tenhamos excesso de estoque. Isso pode levar a problemas de armazenamento e manutenção do produto.
+* A falta de temporada específica para este produto sugere que o consumo é mais constante ao longo do ano, mas isso não impede que haja variações sazonais em sua demanda.
+* É recomendável reavaliar a estratégia de estoque e considerar ajustes para minimizar os custos de armazenamento e manutenção.
+
+**Recomendações**
+
+1. **Análise da Curva de Demanda**: Analisar as vendas históricas do produto e identificar eventuais padrões de comportamento de consumo, seja por temporada ou por período de semana.
+2. **Ajuste do Estoque**: Considerar ajustes no estoque para evitar excessos e garantir que o estoque esteja em sincronia com a demanda prevista.
+3. **Reabastecimento**: Reavaliar a política de reabastecimento e considerar reabastecer apenas o necessário para atender à demanda prevista, evitando excessos de estoque.
+4. **Monitoramento**: Monitore as vendas e os estoques regularmente para ajustes rápidos em caso de mudanças na demanda.
+
+**Conclusão**
+
+Em resumo, o produto Jaqueta de Couro (14) apresenta um estoque alto e uma previsão de demanda igual ao estoque. É importante reavaliar a estratégia de estoque e considerar ajustes para minimizar os custos de armazenamento e manutenção. Além disso, é fundamental monitorar as vendas e os estoques regularmente para ajustes rápidos em caso de mudanças na demanda.
+Análise do produto Meias 3 pares (15) para a temporada de Dia dos Pais:
+
+**Previsão de demanda:** A previsão de demanda é igual à quantidade vendida no período passado, que foi de 9 unidades. No entanto, é importante considerar que o Dia dos Pai é uma data específica com um padrão de consumo mais alto. Considerando isso, sugiro uma reajustada previsão de demanda de cerca de 25-30 unidades, levando em conta a curva de demanda histórica para essa data.
+
+**Análise do estoque:** O estoque atual é de 130 unidades, o que parece adequado para atender à demanda prevista. No entanto, é fundamental monitorar a movimentação do estoque e ajustar as reabastecimentos com base nas vendas efetivas.
+
+**Otimização do estoque:** Para otimizar o estoque de Meias 3 pares (15) para a temporada de Dia dos Pais, sugiro:
+
+1. Reabastecer o estoque com cerca de 25-30 unidades, considerando a previsão de demanda ajustada.
+2. Monitorar atentamente as vendas e ajustar os reabastecimentos diariamente, caso necessário.
+3. Considerar a possibilidade de realizar promoções ou ofertas especiais para atrair mais clientes e aumentar as vendas.
+
+**Conclusão:** Em geral, o estoque atual parece adequado para atender à demanda prevista para o Dia dos Pai. No entanto, é fundamental monitorar a movimentação do estoque e ajustar os reabastecimentos com base nas vendas efetivas. Além disso, sugiro uma reajustada previsão de demanda e considerar opções de promoções ou ofertas especiais para aumentar as vendas.
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<h2 id="Script-05-Run-Pipeline.py"><font color="#CC403E" face="Segoe Print" size="4"><strong>Script 05-Run-Pipeline.py</strong></font><a class="anchor-link" href="#Script-05-Run-Pipeline.py">¶</a></h2><font color="#66666" face="Segoe Print" size="2">
+<p><font color="#CC403E" size="4"><strong>Script 05-Run-Pipeline.py</strong></font></p>
+<font color="#66666" size="2">
 <p><strong>Python - Executa o Pipeline</strong></p>
 </font></div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Imports
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Imports
 import subprocess</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Versões dos pacotes usados neste jupyter notebook
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
 %reload_ext watermark
 %watermark -a "Roberto-SSoares-LfLngLrnng"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Projeto 7 - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Projeto 7 - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
 # Função para executar outros scripts Python
 def fn_run_pipeline(script_name):
     try:
@@ -1161,8 +1321,8 @@ scripts = [
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python"># Executa os scripts em um loop
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Executa os scripts em um loop
 for script in scripts:
     fn_run_pipeline(script)
 
@@ -1170,26 +1330,23 @@ print(f"\nPipeline executado com sucesso.\n")</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">%reload_ext watermark
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
 %watermark -a "Roberto-SSoares-LfLngLrnng"</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Author: Roberto-SSoares-LfLngLrnng
+<div aria-label="Code Output" class="output" role="region">Author: Roberto-SSoares-LfLngLrnng
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">%watermark -v -m</code></pre>
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>Python implementation: CPython
-Python version       : 3.10.15
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.10.14
 IPython version      : 8.27.0
 
-Compiler    : MSC v.1929 64 bit (AMD64)
+Compiler    : MSC v.1916 64 bit (AMD64)
 OS          : Windows
 Release     : 10
 Machine     : AMD64
@@ -1197,52 +1354,39 @@ Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
 CPU cores   : 4
 Architecture: 64bit
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">%watermark --iversions</code></pre>
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
 </div>
-<div class="scrollable-output">
-<pre>langchain_core  : 0.3.33
+<div aria-label="Code Output" class="output" role="region">csv             : 1.0
+psycopg2        : 2.9.9
 langchain_ollama: 0.2.3
-psycopg2        : 2.9.10
-sqlalchemy      : 2.0.37
-csv             : 1.0
-pandas          : 2.2.3
+langchain_core  : 0.3.34
 
-</pre>
 </div>
 </div>
 <div class="cell">
-<!-- Renderiza Markdown, e inclui suporte para imagens -->
-<div class="markdown">
+<div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#CC403E" face="Segoe Print" size="5"><strong>Fim</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#CC403E" size="5"><strong>Fim</strong></font></p>
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
-<div class="code_cell">
-<pre><code class="python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_a.tpl BA-DS-ML-Retail-Area.ipynb</code></pre>
-</div>
-<div class="scrollable-output">
-<pre>[NbConvertApp] Converting notebook BA-DS-ML-Retail-Area.ipynb to html
-[NbConvertApp] Writing 71739 bytes to BA-DS-ML-Retail-Area.html
-</pre>
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"></code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="code_cell">
-<pre><code class="python"></code></pre>
-</div>
-</div>
+<div class="footer">
+<p>RobertoSSoares-LfLngLrnng</p>
+<p id="datetime"></p>
 <script>
-        // Reprocessa o MathJax após a página ser carregada
-        document.addEventListener("DOMContentLoaded", function() {
-            MathJax.typesetPromise();
-        });
-    </script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </div></div></div></div></div></div></div></div></div></body>
 </html>

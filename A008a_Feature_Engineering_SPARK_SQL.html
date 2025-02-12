@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>A008a_Feature_Engineering_SPARK_SQL</title>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Ubuntu', monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+            background-color: transparent !important;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .title-header {
+            font-family: 'Caveat', cursive;
+            font-weight: bold;
+            font-size: 25px;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .footer {
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        pre, code {
+            background-color: transparent !important;
+            border: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1 class="title-header">A008a_Feature_Engineering_SPARK_SQL</h1>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<br/><br/>
+<p style="text-align: center;">
+<font color="#0A1781" size="6">
+<strong>
+                    PoD Academy<br \=""/>Formação Full Stack Data &amp; Analytics
+                </strong>
+</font>
+</p>
+<p style="text-align: center;">
+<font color="#C58A1E" size="6.5">
+<strong>
+                    Aula A008 - Feature Engineering<br \=""/>SPARK-SQL
+                </strong>
+</font>
+</p>
+<br>
+</br></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            Roberto SSoares - LfLngLrnng
+      </font>
+</p>
+<p style="text-align: right;"><font color="#444444" size="2">
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br><a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</br></font></p>
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "
+        </font>
+<br>
+<font color="#918e8e" size="2">"Bruno Jardim"
+        </font>
+</br></p>
+<p style="text-align: right;">
+<font color="#918e8e" size="2">
+            Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.<br>e a minha linda esposa "Elizabete".
+        </br></font>
+</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#CC403E" size="5"><strong>CRISP-DM (Data Understanding)</strong></font></p>
+<font color="#66666" size="3">
+<p>Feature Engineering com SPARK-SQL
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3">Instalando e Carregando Pacotes</font></p>
+<font color="#66666" size="2">
+<ul>
+<li>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
+<li>pip install -U nome_pacote</li>
+</ul>
+</li>
+<li>Para instalar a versão exata de um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
+<li>!pip install nome_pacote==versão_desejada</li>
+</ul>
+</li>
+<li>Depois de instalar ou atualizar o pacote, reinicie o jupyter notebook.</li>
+</ul>
+</font>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3">Instalando e Carregando Pacotes</font></p>
+<font color="#66666" size="2">
+<p><strong>Instala o pacote watermark</strong></p>
+<ul>
+<li>Esse pacote é usado para gravar as versões de outros pacotes usados neste jupyter notebook.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q -U watermark</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
+%reload_ext watermark
+%watermark -a "Roberto Soares - LfLngLrnng"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - LfLngLrnng
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#CC403E" size="5"><strong>Configuração do ambiente para utilização do Spark</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3">Instalando:</font></p>
+<font color="#66666" size="2">
+<ul>
+<li>Depois de criar um novo notebook no <strong>Google Colab</strong>,</li>
+<li>É preciso instalar JAVA, Spark, findspark lib.</li>
+<li>A seguir estão as etapas para fazer isso</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># install java
+#!apt-get install openjdk-8-jdk-headless -qq &gt; /dev/null
+
+#download the spark 
+#!wget https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz
+# unzip the spark files
+#!tar xf spark-3.3.0-bin-hadoop3.tgz
+,
+# set the environment variables
+#import os
+#os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-8-openjdk-amd64"
+#os.environ["SPARK_HOME"] = "/content/spark-3.3.0-bin-hadoop3"</code></pre>
+</div>
+<div class="output">''</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3">Instala o pacote findspark:</font></p>
+<font color="#66666" size="2">
+<ul>
+<li>Precisamos instalar o findspark e inicializá-lo.</li>
+<li>findpsark lib irá localizar o spark no sistema e importar a biblioteca para você inicializar o contexto do spark</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q findspark</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Ambiente Spark Local - Construindo SparkSession:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#import findspark
+#findspark.init()
+#from pyspark.sql import SparkSession
+#spark = SparkSession.builder.master("local[*]").getOrCreate()</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">import os
+os.environ['PYSPARK_PYTHON'] = r'D:\anaconda3\envs\spark-pod-env\python.exe'
+                                
+import pyspark
+
+from pyspark import SparkContext, SparkConf
+from pyspark.sql import SparkSession
+
+conf = pyspark.SparkConf() \
+    .setAppName('A008-FEATURE-ENGINEERING') \
+    .setMaster('local')
+
+sc = pyspark.SparkContext(conf=conf)
+
+spark = SparkSession(sc)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark</code></pre>
+</div>
+<div class="output"><pyspark.sql.session.sparksession 0x1e98ae91cc0="" at=""></pyspark.sql.session.sparksession></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#import sys
+#print(sys.executable)
+#print(sys.version)
+#print(sys.version_info)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="#CC403E" size="5"><strong>CRISP-DM (Data Understanding)</strong></font>
+<p></p></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">caminho = "D:/_jupyter/pod/ds/mod06-ciencia-de-dados/data/"
+base_transacoes = "base_transacoes.csv"
+base_churn = "base_churn.csv"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_transacoes = spark.read.csv(caminho+base_transacoes, 
+                               header=True, 
+                               inferSchema=True
+                              )</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">shape = (df_transacoes.count(), len(df_transacoes.columns))
+print(shape)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">(10171, 5)
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_publico = spark.read.csv(caminho+base_churn, 
+                            header=True, 
+                            inferSchema=True
+                           )</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">shape = (df_publico.count(), len(df_publico.columns))
+print(shape)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">(1000, 7)
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Mostrar o Schema da tabela - df_transacoes:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">print(df_transacoes.printSchema())
+print()
+print(df_transacoes.show(10,False))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">root
+ |-- ID Transação: integer (nullable = true)
+ |-- ID Cliente: integer (nullable = true)
+ |-- Data: timestamp (nullable = true)
+ |-- Valor: double (nullable = true)
+ |-- Categoria: string (nullable = true)
+
+None
+
++------------+----------+--------------------------+------------------+-----------+
+|ID Transação|ID Cliente|Data                      |Valor             |Categoria  |
++------------+----------+--------------------------+------------------+-----------+
+|1           |1         |2022-11-25 13:50:26.548672|57.287427536330505|Esportes   |
+|2           |1         |2020-01-19 12:27:36.637168|97.07199340552512 |Alimentos  |
+|3           |1         |2021-12-28 12:33:58.938053|169.10581012381087|Livros     |
+|4           |1         |2022-02-05 01:39:49.38053 |199.38694865538451|Roupas     |
+|5           |1         |2022-11-16 23:06:54.159292|160.00228343317622|Eletrônicos|
+|6           |1         |2020-04-25 12:42:28.672566|9.842481270765422 |Alimentos  |
+|7           |1         |2022-10-31 22:05:18.58407 |76.90706330227667 |Eletrônicos|
+|8           |1         |2020-10-06 12:14:52.035398|53.20607404593595 |Roupas     |
+|9           |1         |2022-11-02 12:50:58.407079|193.00568791656067|Livros     |
+|10          |1         |2020-09-06 21:37:41.946902|56.524638713138636|Alimentos  |
++------------+----------+--------------------------+------------------+-----------+
+only showing top 10 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Observações:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Visualizamos um formato que pode dar trabalho mais a frente, exemplo: a variável "ID Transação", tem espaço entre as palavras, bem como, cedilha e acentuação.</li>
+<li>Devemos padronizar o nome das variáveis</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="4"><strong>Função para padronizar no nome das variáveis:</strong></font></p>
+<font color="#66666" size="2.5">
+<p>O código apresentado tem o objetivo de padronizar os nomes das colunas de um DataFrame do PySpark.</p>
+<p>A padronização inclui:</p>
+<ul>
+<li><strong>Remoção de Acentos e Cedilhas:</strong> Utilizando a função <strong>"unicodedata.normalize"</strong> para transformar caracteres acentuados em seus equivalentes sem acento,<br/>seguido por encode e decode para remover caracteres não ASCII.</li>
+<li><strong>Transformação para Caixa Alta:</strong> Converte todos os caracteres para maiúsculas.</li>
+<li><strong>Substituição de Espaços por Underscores:</strong> Transforma espaços em underscores (_) para conformidade com práticas comuns de nomes de colunas.</li>
+</ul>
+<p><a href="https://docs.python.org/3/library/unicodedata.html">https://docs.python.org/3/library/unicodedata.html</a></p>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">import unicodedata
+from pyspark.sql import DataFrame
+
+def remover_acentuacao_e_formatar(nome_coluna: str) -&gt; str:
+    """
+    Remove acentuação, transforma cedilhas e converte espaços para underscores.
+    Transforma a string para caixa alta.
+    """
+    # Remove acentuação e caracteres não-ASCII
+    nome_sem_acentuacao = unicodedata.normalize('NFKD', nome_coluna).encode('ASCII', 'ignore').decode('ASCII')
+    # Substitui espaços por underscores e converte para maiúsculas
+    nome_padronizado = nome_sem_acentuacao.replace(" ", "_").upper()
+    return nome_padronizado
+
+def padronizar_nomes_colunas(dataframe: DataFrame) -&gt; DataFrame:
+    """
+    Padroniza os nomes das colunas de um DataFrame PySpark removendo acentuações,
+    substituindo espaços por underscores e convertendo para caixa alta.
+    """
+    # Renomeia as colunas do DataFrame utilizando a função de padronização
+    novas_colunas = [remover_acentuacao_e_formatar(coluna) for coluna in dataframe.columns]
+    dataframe_padronizado = dataframe.toDF(*novas_colunas)
+    
+    return dataframe_padronizado</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Aplicando a padronização do nome das variáveis em df_transacoes:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Exemplo de uso:
+df_transacoes = padronizar_nomes_colunas(df_transacoes)
+df_transacoes.printSchema()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">root
+ |-- ID_TRANSACAO: integer (nullable = true)
+ |-- ID_CLIENTE: integer (nullable = true)
+ |-- DATA: timestamp (nullable = true)
+ |-- VALOR: double (nullable = true)
+ |-- CATEGORIA: string (nullable = true)
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Verificando se há valores nulos em df_transacoes:</strong></font></p>
+<font color="#66666" size="2.5">
+<p>Esse código em PySpark é usado para contar o número de valores nulos em cada coluna de um DataFrame.</p>
+<p>Vamos analisar o que cada parte do código faz:</p>
+<ol>
+<li><strong>for c in df_publico.columns</strong>:</li>
+</ol>
+<ul>
+<li>Este loop percorre todos os nomes de colunas no DataFrame.</li>
+<li>A variável "c" representa cada nome de coluna individualmente.</li>
+</ul>
+<ol start="2">
+<li><strong>when(isnull(c), c)</strong>:</li>
+</ol>
+<ul>
+<li>A função "when" é usada para criar uma condição. Aqui, ela verifica se o valor na coluna "c" é nulo.</li>
+<li>Se for nulo, ela retorna o próprio valor de "c", caso contrário, retorna "None".</li>
+</ul>
+<ol start="3">
+<li><strong>count(when(isnull(c), c))</strong>:</li>
+</ol>
+<ul>
+<li>A função "count" conta quantas vezes a condição especificada por "when" é verdadeira.</li>
+<li>Neste caso, conta quantos valores nulos existem na coluna "c".</li>
+</ul>
+<ol start="4">
+<li><strong>alias(c)</strong>:</li>
+</ol>
+<ul>
+<li>A função "alias(c)" renomeia o resultado da contagem para o nome da coluna "c".</li>
+<li>Isso ajuda a identificar a contagem de valores nulos por coluna no resultado final.</li>
+</ul>
+<ol start="5">
+<li><strong>select([...])</strong>:</li>
+</ol>
+<ul>
+<li>O método "select" é usado para selecionar as colunas resultantes das contagens de valores nulos para cada coluna original.</li>
+<li>Ele recebe uma lista de colunas, onde cada coluna é representada por um cálculo de contagem de valores nulos.</li>
+</ul>
+<p><strong>Resumo:</strong></p>
+<ul>
+<li>Esse código conta o número de valores nulos em cada coluna do DataFrame e exibe esses valores em uma tabela.</li>
+<li>A saída será uma linha com o nome de cada coluna como cabeçalho e a contagem de valores nulos como valores nas colunas.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">from pyspark.sql.functions import *
+df_transacoes.select([count(when(isnull(c), c)).alias(c) for c in df_transacoes.columns]).show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+----+-----+---------+
+|ID_TRANSACAO|ID_CLIENTE|DATA|VALOR|CATEGORIA|
++------------+----------+----+-----+---------+
+|           0|         0|   0|    0|        0|
++------------+----------+----+-----+---------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Observações:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Muitas transações por cliente, onde deveremos agrupar para o grão "ID Cliente"</li>
+<li>Na verificação de valores nulos, não encontramos nenhuma ocorrência</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Criando uma tabela temporária - sql_trancacoes:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_transacoes.createOrReplaceTempView("sql_transacoes")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Mostrar o Schema da tabela - df_publico:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">print(df_publico.printSchema())
+print()
+print(df_publico.show(10))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">root
+ |-- ID: integer (nullable = true)
+ |-- Idade: integer (nullable = true)
+ |-- Gênero: string (nullable = true)
+ |-- Dias desde a Inscrição: integer (nullable = true)
+ |-- Usou Suporte: integer (nullable = true)
+ |-- Plano: string (nullable = true)
+ |-- Churn: integer (nullable = true)
+
+None
+
++---+-----+------+----------------------+------------+-------------+-----+
+| ID|Idade|Gênero|Dias desde a Inscrição|Usou Suporte|        Plano|Churn|
++---+-----+------+----------------------+------------+-------------+-----+
+|  1|   21|     F|                  1331|           1|Intermediário|    1|
+|  2|   21|     M|                  1160|           0|Intermediário|    0|
+|  3|   62|     M|                   454|           1|       Básico|    0|
+|  4|   64|     M|                   226|           1|Intermediário|    0|
+|  5|   61|     M|                   474|           1|     Avançado|    0|
+|  6|   18|     M|                   419|           0|       Básico|    0|
+|  7|   52|     M|                  1334|           0|       Básico|    0|
+|  8|   44|     M|                  1124|           1|Intermediário|    0|
+|  9|   52|     M|                  1256|           1|Intermediário|    0|
+| 10|   64|     F|                  1197|           0|       Básico|    0|
++---+-----+------+----------------------+------------+-------------+-----+
+only showing top 10 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Aplicando a padronização do nome das variáveis em df_publico:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Exemplo de uso:
+df_publico = padronizar_nomes_colunas(df_publico)
+df_publico.printSchema()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">root
+ |-- ID: integer (nullable = true)
+ |-- IDADE: integer (nullable = true)
+ |-- GENERO: string (nullable = true)
+ |-- DIAS_DESDE_A_INSCRICAO: integer (nullable = true)
+ |-- USOU_SUPORTE: integer (nullable = true)
+ |-- PLANO: string (nullable = true)
+ |-- CHURN: integer (nullable = true)
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Verificando se há valores nulos em df_publico:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_publico.select([count(when(isnull(c), c)).alias(c) for c in df_publico.columns]).show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+-----+------+----------------------+------------+-----+-----+
+| ID|IDADE|GENERO|DIAS_DESDE_A_INSCRICAO|USOU_SUPORTE|PLANO|CHURN|
++---+-----+------+----------------------+------------+-----+-----+
+|  0|    0|     0|                     0|           0|    0|    0|
++---+-----+------+----------------------+------------+-----+-----+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Observações:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Tabela no grão "ID Cliente" com algumas variáveis explicativas e a variável target "Churn"</li>
+<li>Na verificação de valores nulos, não encontramos nenhuma ocorrência</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3"><strong>Criando uma tabela temporária - sql_publico:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_publico.createOrReplaceTempView("sql_publico")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="4"><strong>Função de Metadados:</strong></font></p>
+<font color="#66666" size="2.5">
+<p>Você pode gerar um DataFrame de metadados utilizando Spark SQL. Abaixo está a função equivalente que gera o mesmo resultado usando SQL em PySpark:</p>
+<p><strong>Explicação:</strong></p>
+<ol>
+<li><strong>dataframe.createOrReplaceTempView("tabela"):</strong></li>
+</ol>
+<ul>
+<li>Cria uma tabela temporária chamada "tabela" a partir do DataFrame fornecido.</li>
+<li>Isso permite que você execute consultas SQL diretamente na tabela.</li>
+</ul>
+<ol start="2">
+<li><strong>sql_query:</strong></li>
+</ol>
+<ul>
+<li>Esta string SQL constrói uma consulta para calcular os metadados de cada coluna.</li>
+<li>O SQL usa subconsultas para calcular:<ul>
+<li><strong>Nome da coluna ("coluna")</strong>: Nome da variável.</li>
+<li><strong>Tipo de dados ("tipo")</strong>: Tipo da coluna.</li>
+<li><strong>Quantidade de nulos ("qt_nulos")</strong>: Contagem de valores nulos.</li>
+<li><strong>Percentual de nulos ("percent_nulos")</strong>: Percentual de valores nulos em relação ao número total de linhas.</li>
+<li><strong>Cardinalidade ("cardinalidade")</strong>: Número de valores distintos.</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>spark.sql(sql_query):</strong></li>
+</ol>
+<ul>
+<li>Executa a consulta SQL construída e retorna o DataFrame resultante.</li>
+</ul>
+<p><strong>Observação:</strong></p>
+<ul>
+<li>A consulta SQL construída na função usa as colunas do DataFrame para gerar as respectivas estatísticas.</li>
+<li>Esse código SQL é um exemplo geral, e pode ser necessário ajustá-lo dependendo das particularidades do schema do DataFrame e da compatibilidade das funções SQL com o Spark.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">from pyspark.sql.functions import expr
+
+def gerar_metadados_sql(table_name: str):
+
+    # Obtendo as colunas e seus tipos
+    dataframe = spark.table(table_name)
+    colunas = dataframe.columns
+    tipos = [str(dataframe.schema[col].dataType) for col in colunas]
+
+    # Lista para armazenar o resultado de cada coluna
+    metadados_list = []
+
+    # Iterando sobre cada coluna para gerar os metadados
+    for col, dtype in zip(colunas, tipos):
+        sql_query = f"""
+        SELECT
+            '{table_name}' AS nome_tabela,
+            '{col}' AS nome_variavel,
+            '{dtype}' AS tipo,
+            COUNT(*) AS total_linhas,
+            COUNT(CASE WHEN `{col}` IS NULL THEN 1 END) AS qt_nulos,
+            COUNT(DISTINCT `{col}`) AS cardinalidade,
+            (COUNT(CASE WHEN `{col}` IS NULL THEN 1 END) / COUNT(*)) * 100 AS percent_nulos
+        FROM
+            {table_name}
+        """
+
+        # Executando a consulta SQL para cada coluna e coletando o resultado
+        metadados_df = spark.sql(sql_query)
+        metadados_list.append(metadados_df)
+
+    # Unindo os resultados de todas as colunas
+    final_metadados_df = metadados_list[0]
+    for df in metadados_list[1:]:
+        final_metadados_df = final_metadados_df.union(df)
+
+    return final_metadados_df</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Exemplo de uso:
+metadados_transacoes = gerar_metadados_sql("sql_transacoes")
+metadados_transacoes.show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+--------------+-------------+---------------+------------+--------+-------------+-------------+
+|   nome_tabela|nome_variavel|           tipo|total_linhas|qt_nulos|cardinalidade|percent_nulos|
++--------------+-------------+---------------+------------+--------+-------------+-------------+
+|sql_transacoes| ID_TRANSACAO|  IntegerType()|       10171|       0|        10171|          0.0|
+|sql_transacoes|   ID_CLIENTE|  IntegerType()|       10171|       0|         1000|          0.0|
+|sql_transacoes|         DATA|TimestampType()|       10171|       0|        10171|          0.0|
+|sql_transacoes|        VALOR|   DoubleType()|       10171|       0|        10171|          0.0|
+|sql_transacoes|    CATEGORIA|   StringType()|       10171|       0|            5|          0.0|
++--------------+-------------+---------------+------------+--------+-------------+-------------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Exemplo de uso:
+metadados_publico = gerar_metadados_sql("sql_publico")
+metadados_publico.show(truncate=False)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+-----------+----------------------+-------------+------------+--------+-------------+-------------+
+|nome_tabela|nome_variavel         |tipo         |total_linhas|qt_nulos|cardinalidade|percent_nulos|
++-----------+----------------------+-------------+------------+--------+-------------+-------------+
+|sql_publico|ID                    |IntegerType()|1000        |0       |1000         |0.0          |
+|sql_publico|IDADE                 |IntegerType()|1000        |0       |52           |0.0          |
+|sql_publico|GENERO                |StringType() |1000        |0       |2            |0.0          |
+|sql_publico|DIAS_DESDE_A_INSCRICAO|IntegerType()|1000        |0       |773          |0.0          |
+|sql_publico|USOU_SUPORTE          |IntegerType()|1000        |0       |2            |0.0          |
+|sql_publico|PLANO                 |StringType() |1000        |0       |3            |0.0          |
+|sql_publico|CHURN                 |IntegerType()|1000        |0       |2            |0.0          |
++-----------+----------------------+-------------+------------+--------+-------------+-------------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Spark-SQL - Querys aleatórias</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Aqui algumas consultas, para conhecermos os dados e a sintaxe para Spark-SQL</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Query
+spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(AVG(VALOR),2) AS VL_MED_ROUPAS,
+COUNT(*) AS QT_ITENS
+FROM sql_transacoes
+WHERE CATEGORIA = 'Roupas' AND ID_CLIENTE = 1
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-------------+--------+
+|ID_CLIENTE|VL_MED_ROUPAS|QT_ITENS|
++----------+-------------+--------+
+|         1|        90.16|       5|
++----------+-------------+--------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("SELECT * FROM sql_transacoes WHERE Categoria ='Esportes' ORDER BY 'ID Cliente'").show(truncate=False)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------------+------------------+---------+
+|ID_TRANSACAO|ID_CLIENTE|DATA                      |VALOR             |CATEGORIA|
++------------+----------+--------------------------+------------------+---------+
+|1           |1         |2022-11-25 13:50:26.548672|57.287427536330505|Esportes |
+|17          |1         |2020-10-06 07:04:46.725663|169.44331623029686|Esportes |
+|21          |2         |2020-09-22 09:44:04.247787|106.2175613990829 |Esportes |
+|24          |2         |2021-06-09 07:40:53.097345|111.89888174965328|Esportes |
+|26          |2         |2021-11-21 03:53:37.699115|57.35018011570133 |Esportes |
+|33          |3         |2022-11-21 11:38:45.663716|164.27192555778407|Esportes |
+|36          |3         |2020-01-23 09:29:12.212389|162.81915856812918|Esportes |
+|43          |4         |2021-01-14 20:36:06.371681|199.35245392194975|Esportes |
+|46          |5         |2021-02-24 18:32:55.221238|89.18656886854006 |Esportes |
+|48          |5         |2020-01-23 19:49:22.831858|123.5923921331785 |Esportes |
+|52          |5         |2022-06-01 23:57:52.566371|148.03282816474672|Esportes |
+|59          |5         |2021-06-25 21:37:41.946902|75.20303023501266 |Esportes |
+|61          |6         |2020-07-19 06:22:18.053097|87.79156307943484 |Esportes |
+|62          |6         |2020-07-18 20:02:07.433628|179.92479261656055|Esportes |
+|72          |6         |2022-08-25 09:52:33.9823  |127.33639686302604|Esportes |
+|78          |7         |2022-07-02 03:30:15.929203|96.99892931855517 |Esportes |
+|82          |7         |2022-05-16 20:21:14.336283|40.20214650442009 |Esportes |
+|90          |8         |2022-02-05 19:45:07.964601|150.16534936166187|Esportes |
+|100         |9         |2020-11-09 20:33:58.938053|111.17895692340421|Esportes |
+|101         |9         |2020-10-22 02:56:16.99115 |60.84723552120097 |Esportes |
++------------+----------+--------------------------+------------------+---------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Quantas transações a pessoa de ID 1 da Categoria Eletrônicos fez?</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT * 
+FROM sql_transacoes
+WHERE ID_CLIENTE = 1 AND CATEGORIA = 'Eletrônicos'
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------+------------------+-----------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|  CATEGORIA|
++------------+----------+--------------------+------------------+-----------+
+|           5|         1|2022-11-16 23:06:...|160.00228343317622|Eletrônicos|
+|           7|         1|2022-10-31 22:05:...| 76.90706330227667|Eletrônicos|
+|          16|         1|2022-06-07 22:05:...|159.80720142167414|Eletrônicos|
++------------+----------+--------------------+------------------+-----------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Qual valor médio das transações por categoria ?</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+    CATEGORIA,
+    ROUND(AVG(VALOR),2) AS VL_MED_CATEG,
+    COUNT(*) AS QT_ITENS
+FROM sql_transacoes
+WHERE ID_CLIENTE = 1
+GROUP BY CATEGORIA
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+-----------+------------+--------+
+|  CATEGORIA|VL_MED_CATEG|QT_ITENS|
++-----------+------------+--------+
+|     Livros|      183.69|       3|
+|Eletrônicos|      132.24|       3|
+|  Alimentos|       87.81|       4|
+|   Esportes|      113.37|       2|
+|     Roupas|       90.16|       5|
++-----------+------------+--------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Valores do Consumo:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_temp_01 = spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(VALOR),2) AS VL_TOT_CONSUMO,
+ROUND(AVG(VALOR),2) AS VL_MED_CONSUMO,
+ROUND(MAX(VALOR),2) AS VL_MAX_CONSUMO,
+ROUND(MIN(VALOR),2) AS VL_MIN_CONSUMO
+FROM sql_transacoes
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">shape = (df_temp_01.count(), len(df_temp_01.columns))
+print(shape)
+print()
+print(df_temp_01.show())</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">(1000, 5)
+
++----------+--------------+--------------+--------------+--------------+
+|ID_CLIENTE|VL_TOT_CONSUMO|VL_MED_CONSUMO|VL_MAX_CONSUMO|VL_MIN_CONSUMO|
++----------+--------------+--------------+--------------+--------------+
+|         1|       1976.56|        116.27|        199.39|          5.39|
+|         2|        1017.8|        101.78|        192.63|         47.58|
+|         3|        997.81|        110.87|        191.09|         41.91|
+|         4|       1009.77|        126.22|        199.35|         41.01|
+|         5|       1755.18|        117.01|        170.78|         16.25|
+|         6|       1841.53|        141.66|        199.29|           8.9|
+|         7|       1671.35|         98.31|        180.02|         21.47|
+|         8|        841.03|         93.45|        164.54|         22.74|
+|         9|       1019.13|         92.65|        196.06|         14.62|
+|        10|        416.41|         104.1|        185.66|         15.92|
+|        11|        903.13|        129.02|        197.28|         29.06|
+|        12|        390.06|        130.02|        181.71|         39.81|
+|        13|        772.55|         77.25|        149.91|         27.54|
+|        14|        192.68|         64.23|        127.28|         13.86|
+|        15|        158.84|        158.84|        158.84|        158.84|
+|        16|       1482.98|        105.93|        183.63|         19.98|
+|        17|       1005.44|         77.34|        197.48|         10.01|
+|        18|        284.77|         56.95|        138.08|         10.88|
+|        19|        790.42|          98.8|         194.6|         25.56|
+|        20|        979.35|         81.61|        172.52|          5.49|
++----------+--------------+--------------+--------------+--------------+
+only showing top 20 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Valores Total e Médio da Categoria Esporte:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_temp_02 = spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Esportes' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' THEN VALOR ELSE NULL END),2) AS VL_MED_CONS_ESPORTES
+FROM sql_transacoes
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">shape = (df_temp_02.count(), len(df_temp_02.columns))
+print(shape)
+print()
+print(df_temp_02.show())</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">(1000, 3)
+
++----------+--------------------+--------------------+
+|ID_CLIENTE|VL_TOT_CONS_ESPORTES|VL_MED_CONS_ESPORTES|
++----------+--------------------+--------------------+
+|         1|              226.73|              113.37|
+|         2|              275.47|               91.82|
+|         3|              327.09|              163.55|
+|         4|              199.35|              199.35|
+|         5|              436.01|               109.0|
+|         6|              395.05|              131.68|
+|         7|               137.2|                68.6|
+|         8|              150.17|              150.17|
+|         9|              286.48|               95.49|
+|        10|                 0.0|                NULL|
+|        11|               29.06|               29.06|
+|        12|                 0.0|                NULL|
+|        13|               55.81|               55.81|
+|        14|                 0.0|                NULL|
+|        15|                 0.0|                NULL|
+|        16|              372.95|               93.24|
+|        17|              318.53|              106.18|
+|        18|                 0.0|                NULL|
+|        19|              220.42|               73.47|
+|        20|              476.36|              119.09|
++----------+--------------------+--------------------+
+only showing top 20 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="5"><strong>CRISP-DM (Data Preparation) - Feature Engineering</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Criar uma flag que marca ultimos 3 meses</strong></font></p>
+<font color="#66666" size="2.5">
+<p>Racional do código:</p>
+<ul>
+<li>Usamos a função de janela MAX(Data) OVER (PARTITION BY ID Cliente) para obter a data mais recente para cada cliente.</li>
+<li>Comparamos a data de cada transação com a data mais recente (e 3 meses antes dessa data) para determinar se ela está dentro do intervalo dos últimos 3 meses.</li>
+<li>Atribuímos 1 ou 0 à flag FLG_U03M com base nessa comparação.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_temp_03 = spark.sql("""
+SELECT
+*,
+DATA,
+CASE WHEN DATA BETWEEN DATE_ADD(MAX(DATA) OVER (PARTITION BY ID_CLIENTE),  -90) AND MAX(DATA) OVER (PARTITION BY ID_CLIENTE) THEN 1 ELSE 0 END AS FLG_U03M,
+CASE WHEN DATA BETWEEN DATE_ADD(MAX(DATA) OVER (PARTITION BY ID_CLIENTE), -180) AND MAX(DATA) OVER (PARTITION BY ID_CLIENTE) THEN 1 ELSE 0 END AS FLG_U06M,
+CASE WHEN DATA BETWEEN DATE_ADD(MAX(DATA) OVER (PARTITION BY ID_CLIENTE), -365) AND MAX(DATA) OVER (PARTITION BY ID_CLIENTE) THEN 1 ELSE 0 END AS FLG_U12M
+FROM sql_transacoes
+ORDER BY ID_CLIENTE, DATA;
+""")
+df_temp_03.createOrReplaceTempView("df_temp_03")</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">shape = (df_temp_03.count(), len(df_temp_03.columns))
+print(shape)
+print()
+print(df_temp_03.show())</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">(10171, 9)
+
++------------+----------+--------------------+------------------+-----------+--------------------+--------+--------+--------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|  CATEGORIA|                DATA|FLG_U03M|FLG_U06M|FLG_U12M|
++------------+----------+--------------------+------------------+-----------+--------------------+--------+--------+--------+
+|           2|         1|2020-01-19 12:27:...| 97.07199340552512|  Alimentos|2020-01-19 12:27:...|       0|       0|       0|
+|           6|         1|2020-04-25 12:42:...| 9.842481270765422|  Alimentos|2020-04-25 12:42:...|       0|       0|       0|
+|          10|         1|2020-09-06 21:37:...|56.524638713138636|  Alimentos|2020-09-06 21:37:...|       0|       0|       0|
+|          17|         1|2020-10-06 07:04:...|169.44331623029686|   Esportes|2020-10-06 07:04:...|       0|       0|       0|
+|           8|         1|2020-10-06 12:14:...| 53.20607404593595|     Roupas|2020-10-06 12:14:...|       0|       0|       0|
+|           3|         1|2021-12-28 12:33:...|169.10581012381087|     Livros|2021-12-28 12:33:...|       0|       0|       1|
+|          11|         1|2022-01-01 22:30:...| 188.9532871161914|     Livros|2022-01-01 22:30:...|       0|       0|       1|
+|           4|         1|2022-02-05 01:39:...|199.38694865538451|     Roupas|2022-02-05 01:39:...|       0|       0|       1|
+|          16|         1|2022-06-07 22:05:...|159.80720142167414|Eletrônicos|2022-06-07 22:05:...|       0|       0|       1|
+|          15|         1|2022-08-04 07:23:...| 5.389069461264487|     Roupas|2022-08-04 07:23:...|       0|       1|       1|
+|          12|         1|2022-08-10 13:16:...|187.81591513287063|  Alimentos|2022-08-10 13:16:...|       0|       1|       1|
+|           7|         1|2022-10-31 22:05:...| 76.90706330227667|Eletrônicos|2022-10-31 22:05:...|       1|       1|       1|
+|           9|         1|2022-11-02 12:50:...|193.00568791656067|     Livros|2022-11-02 12:50:...|       1|       1|       1|
+|           5|         1|2022-11-16 23:06:...|160.00228343317622|Eletrônicos|2022-11-16 23:06:...|       1|       1|       1|
+|          14|         1|2022-11-17 12:02:...|24.123994506156937|     Roupas|2022-11-17 12:02:...|       1|       1|       1|
+|           1|         1|2022-11-25 13:50:...|57.287427536330505|   Esportes|2022-11-25 13:50:...|       1|       1|       1|
+|          13|         1|2022-12-18 22:35:...|168.68501102043555|     Roupas|2022-12-18 22:35:...|       1|       1|       1|
+|          27|         2|2020-01-06 04:02:...| 99.88314370871791|Eletrônicos|2020-01-06 04:02:...|       0|       0|       0|
+|          18|         2|2020-02-03 21:58:...|192.62543018016476|     Livros|2020-02-03 21:58:...|       0|       0|       0|
+|          20|         2|2020-05-04 21:31:...|147.96356124522856|     Livros|2020-05-04 21:31:...|       0|       0|       0|
++------------+----------+--------------------+------------------+-----------+--------------------+--------+--------+--------+
+only showing top 20 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>Comentário</strong></font></p>
+<font color="red" size="3">
+<p><strong>A construção das variáveis explicativas é agnóstica.</strong></p>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">df_temp_04 = spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Esportes' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U06M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U06M_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U12M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U12M_CONS_ESPORTES
+FROM df_temp_03
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""")
+
+df_temp_04.show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+--------------------+--------------------+-------------------------+-------------------------+-------------------------+
+|ID_CLIENTE|VL_TOT_CONS_ESPORTES|VL_MED_CONS_ESPORTES|VL_MED_U03M_CONS_ESPORTES|VL_MED_U06M_CONS_ESPORTES|VL_MED_U12M_CONS_ESPORTES|
++----------+--------------------+--------------------+-------------------------+-------------------------+-------------------------+
+|         1|              226.73|              113.37|                    57.29|                    57.29|                    57.29|
+|         2|              275.47|               91.82|                    57.35|                    57.35|                    84.62|
+|         3|              327.09|              163.55|                   164.27|                   164.27|                   164.27|
+|         4|              199.35|              199.35|                     NULL|                     NULL|                     NULL|
+|         5|              436.01|               109.0|                     NULL|                     NULL|                   148.03|
+|         6|              395.05|              131.68|                   127.34|                   127.34|                   127.34|
+|         7|               137.2|                68.6|                     97.0|                     68.6|                     68.6|
+|         8|              150.17|              150.17|                     NULL|                     NULL|                   150.17|
+|         9|              286.48|               95.49|                     NULL|                     NULL|                     NULL|
+|        10|                 0.0|                NULL|                     NULL|                     NULL|                     NULL|
+|        11|               29.06|               29.06|                     NULL|                     NULL|                    29.06|
+|        12|                 0.0|                NULL|                     NULL|                     NULL|                     NULL|
+|        13|               55.81|               55.81|                    55.81|                    55.81|                    55.81|
+|        14|                 0.0|                NULL|                     NULL|                     NULL|                     NULL|
+|        15|                 0.0|                NULL|                     NULL|                     NULL|                     NULL|
+|        16|              372.95|               93.24|                   183.63|                   183.63|                   183.63|
+|        17|              318.53|              106.18|                    47.32|                    47.32|                    47.32|
+|        18|                 0.0|                NULL|                     NULL|                     NULL|                     NULL|
+|        19|              220.42|               73.47|                    57.63|                    57.63|                    57.63|
+|        20|              476.36|              119.09|                   155.72|                   155.72|                   142.29|
++----------+--------------------+--------------------+-------------------------+-------------------------+-------------------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT * FROM sql_transacoes""").show(3)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------+------------------+---------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|CATEGORIA|
++------------+----------+--------------------+------------------+---------+
+|           1|         1|2022-11-25 13:50:...|57.287427536330505| Esportes|
+|           2|         1|2020-01-19 12:27:...| 97.07199340552512|Alimentos|
+|           3|         1|2021-12-28 12:33:...|169.10581012381087|   Livros|
++------------+----------+--------------------+------------------+---------+
+only showing top 3 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT * FROM sql_publico """).show(3)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+-----+------+----------------------+------------+-------------+-----+
+| ID|IDADE|GENERO|DIAS_DESDE_A_INSCRICAO|USOU_SUPORTE|        PLANO|CHURN|
++---+-----+------+----------------------+------------+-------------+-----+
+|  1|   21|     F|                  1331|           1|Intermediário|    1|
+|  2|   21|     M|                  1160|           0|Intermediário|    0|
+|  3|   62|     M|                   454|           1|       Básico|    0|
++---+-----+------+----------------------+------------+-------------+-----+
+only showing top 3 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="5"><strong>EAD - Exploratory Data Analysis:</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>1. Tempo desde a Última Transação:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>A diferença entre a <strong>data mais recente no conjunto de dados</strong> e a <strong>última data de compra de cada cliente</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">dfqry01 = spark.sql("""
+SELECT 
+*,
+MAX(DATA) OVER () AS DT_MAIS_RECENTE,
+DATEDIFF(MAX(DATA) OVER (), DATA) AS TMP_ULT_TRANSACAO
+FROM 
+sql_transacoes
+""")
+print(dfqry01.sort("TMP_ULT_TRANSACAO","DATA").show(5))
+print()
+print(dfqry01.sort("TMP_ULT_TRANSACAO","DATA", ascending=False).show(5))
+
+dfqry01.createOrReplaceTempView("tmpview01")</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------+------------------+-----------+-------------------+-----------------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|  CATEGORIA|    DT_MAIS_RECENTE|TMP_ULT_TRANSACAO|
++------------+----------+--------------------+------------------+-----------+-------------------+-----------------+
+|        4728|       468| 2022-12-31 00:00:00|183.97332761751017|  Alimentos|2022-12-31 00:00:00|                0|
+|        2769|       271|2022-12-30 00:44:...| 164.7138880258104|     Livros|2022-12-31 00:00:00|                1|
+|        2831|       277|2022-12-30 03:19:...| 77.51172659846131|   Esportes|2022-12-31 00:00:00|                1|
+|         544|        55|2022-12-30 05:54:...|29.470729034047707|  Alimentos|2022-12-31 00:00:00|                1|
+|         701|        70|2022-12-30 08:29:...|6.5425879732186365|Eletrônicos|2022-12-31 00:00:00|                1|
++------------+----------+--------------------+------------------+-----------+-------------------+-----------------+
+only showing top 5 rows
+
+None
+
++------------+----------+--------------------+------------------+---------+-------------------+-----------------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|CATEGORIA|    DT_MAIS_RECENTE|TMP_ULT_TRANSACAO|
++------------+----------+--------------------+------------------+---------+-------------------+-----------------+
+|        5042|       494|2020-01-01 23:15:...|113.43587862181296|   Livros|2022-12-31 00:00:00|             1095|
+|        5023|       492|2020-01-01 20:40:...| 14.10120532793492|   Livros|2022-12-31 00:00:00|             1095|
+|        5060|       499|2020-01-01 18:05:...| 72.21652999903509| Esportes|2022-12-31 00:00:00|             1095|
+|        3886|       382|2020-01-01 15:30:...|138.75777256839774|   Roupas|2022-12-31 00:00:00|             1095|
+|        6377|       639|2020-01-01 12:55:...|136.64424419417705| Esportes|2022-12-31 00:00:00|             1095|
++------------+----------+--------------------+------------------+---------+-------------------+-----------------+
+only showing top 5 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>2. Frequência de Compra:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Quantidade de compras</strong> que o cliente fez <strong>dividida</strong> pelo <strong>número de meses desde sua inscrição</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT ID_CLIENTE, COUNT(*) AS QTD_COMPRAS, MAX(DT_MAIS_RECENTE) AS ULT_TRANSACAO FROM tmpview01 GROUP BY ID_CLIENTE""").show(3)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-----------+-------------------+
+|ID_CLIENTE|QTD_COMPRAS|      ULT_TRANSACAO|
++----------+-----------+-------------------+
+|         1|         17|2022-12-31 00:00:00|
+|         2|         10|2022-12-31 00:00:00|
+|         3|          9|2022-12-31 00:00:00|
++----------+-----------+-------------------+
+only showing top 3 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">from pyspark.sql.functions import months_between
+
+# SQL query
+dfqry02 = spark.sql("""
+WITH CTE AS (
+    SELECT 
+        ID_CLIENTE, 
+        COUNT(*) AS QTD_COMPRAS, 
+        MAX(DT_MAIS_RECENTE) AS ULT_TRANSACAO
+    FROM tmpview01
+    GROUP BY ID_CLIENTE
+)
+SELECT 
+    A.*, 
+    B.QTD_COMPRAS,
+    date_sub(B.ULT_TRANSACAO, A.DIAS_DESDE_A_INSCRICAO) AS DT_INSCRICAO,
+    ROUND(months_between(B.ULT_TRANSACAO, date_sub(B.ULT_TRANSACAO, A.DIAS_DESDE_A_INSCRICAO)),0) AS MESES_DESDE_INSCRICAO,
+    ROUND(B.QTD_COMPRAS / months_between(B.ULT_TRANSACAO, date_sub(B.ULT_TRANSACAO, A.DIAS_DESDE_A_INSCRICAO)),4) AS FREQUENCIA_COMPRA
+FROM sql_publico AS A 
+LEFT OUTER JOIN CTE AS B 
+ON A.ID = B.ID_CLIENTE
+""")
+
+print(dfqry02.sort("FREQUENCIA_COMPRA").show(10))
+print()
+print(dfqry02.sort("FREQUENCIA_COMPRA", ascending=False).show(10))
+
+dfqry02.createOrReplaceTempView("tmpview02")</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+
+| ID|IDADE|GENERO|DIAS_DESDE_A_INSCRICAO|USOU_SUPORTE|        PLANO|CHURN|QTD_COMPRAS|DT_INSCRICAO|MESES_DESDE_INSCRICAO|FREQUENCIA_COMPRA|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+
+|349|   42|     M|                  1817|           1|     Avançado|    0|          1|  2018-01-09|                 60.0|           0.0167|
+|828|   69|     F|                  1800|           1|       Básico|    1|          1|  2018-01-26|                 59.0|           0.0169|
+|348|   46|     F|                  1776|           0|       Básico|    1|          1|  2018-02-19|                 58.0|           0.0171|
+|131|   41|     M|                  1731|           0|       Básico|    0|          1|  2018-04-05|                 57.0|           0.0176|
+|814|   55|     F|                  1734|           0|Intermediário|    0|          1|  2018-04-02|                 57.0|           0.0176|
+|153|   20|     M|                  1655|           1|       Básico|    1|          1|  2018-06-20|                 54.0|           0.0184|
+|725|   56|     F|                  1638|           1|     Avançado|    1|          1|  2018-07-07|                 54.0|           0.0186|
+|212|   34|     M|                  1621|           1|       Básico|    1|          1|  2018-07-24|                 53.0|           0.0188|
+|103|   29|     M|                  1454|           0|     Avançado|    0|          1|  2019-01-07|                 48.0|           0.0209|
+|409|   57|     F|                  1404|           1|       Básico|    1|          1|  2019-02-26|                 46.0|           0.0217|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+
+only showing top 10 rows
+
+None
+
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+
+| ID|IDADE|GENERO|DIAS_DESDE_A_INSCRICAO|USOU_SUPORTE|        PLANO|CHURN|QTD_COMPRAS|DT_INSCRICAO|MESES_DESDE_INSCRICAO|FREQUENCIA_COMPRA|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+
+|145|   48|     F|                     1|           1|     Avançado|    0|          8|  2022-12-30|                  0.0|            248.0|
+|752|   42|     M|                     3|           1|       Básico|    0|          9|  2022-12-28|                  0.0|             93.0|
+|350|   29|     F|                     5|           0|Intermediário|    0|          7|  2022-12-26|                  0.0|             43.4|
+|184|   48|     M|                    17|           0|Intermediário|    1|         18|  2022-12-14|                  1.0|          32.8235|
+|533|   25|     M|                    23|           0|     Avançado|    0|         18|  2022-12-08|                  1.0|          24.2609|
+|663|   26|     F|                    17|           1|       Básico|    1|          9|  2022-12-14|                  1.0|          16.4118|
+|880|   41|     M|                    36|           1|Intermediário|    1|         17|  2022-11-25|                  1.0|          14.2432|
+|855|   48|     F|                    41|           0|     Avançado|    1|         18|  2022-11-20|                  1.0|          13.2857|
+|551|   69|     F|                    23|           1|Intermediário|    0|          9|  2022-12-08|                  1.0|          12.1304|
+|767|   64|     M|                    46|           1|       Básico|    1|         18|  2022-11-15|                  2.0|          11.8723|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+
+only showing top 10 rows
+
+None
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT * FROM tmpview01 WHERE ID_CLIENTE = 145""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------+------------------+-----------+-------------------+-----------------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|  CATEGORIA|    DT_MAIS_RECENTE|TMP_ULT_TRANSACAO|
++------------+----------+--------------------+------------------+-----------+-------------------+-----------------+
+|        1446|       145|2022-07-18 04:31:...| 161.2356656816016|Eletrônicos|2022-12-31 00:00:00|              166|
+|        1447|       145|2021-07-06 13:27:...| 54.90905298337134|Eletrônicos|2022-12-31 00:00:00|              543|
+|        1448|       145|2022-01-22 12:04:...| 5.805386882006665|     Roupas|2022-12-31 00:00:00|              343|
+|        1449|       145|2020-09-07 13:07:...| 87.55334628066488|   Esportes|2022-12-31 00:00:00|              845|
+|        1450|       145|2020-01-15 05:05:...| 138.9918347420957|  Alimentos|2022-12-31 00:00:00|             1081|
+|        1451|       145|2022-05-26 02:35:...|126.38792505759271|     Livros|2022-12-31 00:00:00|              219|
+|        1452|       145|2020-02-08 23:26:...| 91.91145926363654|     Livros|2022-12-31 00:00:00|             1057|
+|        1453|       145|2022-06-03 09:33:...|63.878619202803534|     Livros|2022-12-31 00:00:00|              211|
++------------+----------+--------------------+------------------+-----------+-------------------+-----------------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>3. Total Gasto:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Soma de <strong>todos os valores gastos</strong> pelo cliente em <strong>todas as suas transações</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT * FROM tmpview01""").show(3)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------+------------------+---------+-------------------+-----------------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|CATEGORIA|    DT_MAIS_RECENTE|TMP_ULT_TRANSACAO|
++------------+----------+--------------------+------------------+---------+-------------------+-----------------+
+|           1|         1|2022-11-25 13:50:...|57.287427536330505| Esportes|2022-12-31 00:00:00|               36|
+|           2|         1|2020-01-19 12:27:...| 97.07199340552512|Alimentos|2022-12-31 00:00:00|             1077|
+|           3|         1|2021-12-28 12:33:...|169.10581012381087|   Livros|2022-12-31 00:00:00|              368|
++------------+----------+--------------------+------------------+---------+-------------------+-----------------+
+only showing top 3 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT ID_CLIENTE, ROUND(SUM(VALOR),2) AS TOT_GASTO_CLI FROM tmpview01 GROUP BY ID_CLIENTE ORDER BY TOT_GASTO_CLI DESC""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-------------+
+|ID_CLIENTE|TOT_GASTO_CLI|
++----------+-------------+
+|       759|      2498.27|
+|       910|      2370.01|
+|       470|      2361.46|
+|       718|      2347.81|
+|       983|      2346.24|
+|       692|      2329.25|
+|       471|      2307.39|
+|       407|      2297.79|
+|       685|      2283.31|
+|       699|      2278.31|
+|       668|      2269.66|
+|       246|      2261.08|
+|       167|      2255.57|
+|       162|      2254.72|
+|       917|      2232.73|
+|       861|      2229.12|
+|       480|      2193.45|
+|       506|      2185.63|
+|       794|       2185.2|
+|       630|      2171.44|
++----------+-------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>4. Categoria Favorita:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Categoria</strong> de produto em que o <strong>cliente gastou a maior quantia</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT 
+    ID_CLIENTE, 
+    CATEGORIA, 
+    ROUND(SUM(VALOR),2) AS TOT_GASTO_CLI 
+FROM tmpview01 
+GROUP BY ID_CLIENTE, CATEGORIA 
+ORDER BY ID_CLIENTE,TOT_GASTO_CLI DESC
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-----------+-------------+
+|ID_CLIENTE|  CATEGORIA|TOT_GASTO_CLI|
++----------+-----------+-------------+
+|         1|     Livros|       551.06|
+|         1|     Roupas|       450.79|
+|         1|Eletrônicos|       396.72|
+|         1|  Alimentos|       351.26|
+|         1|   Esportes|       226.73|
+|         2|     Livros|       340.59|
+|         2|Eletrônicos|       292.16|
+|         2|   Esportes|       275.47|
+|         2|  Alimentos|       109.58|
+|         3|   Esportes|       327.09|
+|         3|Eletrônicos|       317.38|
+|         3|  Alimentos|       247.52|
+|         3|     Livros|       105.81|
+|         4|     Roupas|       367.89|
+|         4|Eletrônicos|       291.16|
+|         4|   Esportes|       199.35|
+|         4|  Alimentos|       103.19|
+|         4|     Livros|        48.18|
+|         5|Eletrônicos|       707.41|
+|         5|   Esportes|       436.01|
++----------+-----------+-------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+WITH CTE AS (
+SELECT 
+    ID_CLIENTE, 
+    CATEGORIA, 
+    ROUND(SUM(VALOR),2) AS TOT_GASTO_CLI,
+    RANK(CATEGORIA) OVER (PARTITION BY ID_CLIENTE ORDER BY ROUND(SUM(VALOR),2) DESC) AS RANK_CATEG
+FROM tmpview01 
+GROUP BY ID_CLIENTE, CATEGORIA 
+)
+
+SELECT * FROM CTE WHERE WHERE RANK_CATEG = 1
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-----------+-------------+----------+
+|ID_CLIENTE|  CATEGORIA|TOT_GASTO_CLI|RANK_CATEG|
++----------+-----------+-------------+----------+
+|         1|     Livros|       551.06|         1|
+|         2|     Livros|       340.59|         1|
+|         3|   Esportes|       327.09|         1|
+|         4|     Roupas|       367.89|         1|
+|         5|Eletrônicos|       707.41|         1|
+|         6|     Roupas|       499.17|         1|
+|         7|Eletrônicos|       572.15|         1|
+|         8|Eletrônicos|       388.75|         1|
+|         9|     Livros|       330.45|         1|
+|        10|  Alimentos|       185.66|         1|
+|        11|     Roupas|       419.34|         1|
+|        12|     Roupas|       181.71|         1|
+|        13|     Livros|       398.88|         1|
+|        14|Eletrônicos|       178.82|         1|
+|        15|Eletrônicos|       158.84|         1|
+|        16|     Livros|       767.07|         1|
+|        17|   Esportes|       318.53|         1|
+|        18|     Livros|       207.08|         1|
+|        19|   Esportes|       220.42|         1|
+|        20|   Esportes|       476.36|         1|
++----------+-----------+-------------+----------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>5. Gasto Médio por Transação:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Total gasto</strong> dividido pelo <strong>número total de transações</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+    SELECT 
+    ROUND(SUM(VALOR)/COUNT(*),2) AS GASTO_MEDIO 
+FROM tmpview01
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+-----------+
+|GASTO_MEDIO|
++-----------+
+|     102.66|
++-----------+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>6. Duração da Assinatura:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Número de dias desde</strong> que o cliente <strong>se inscreveu</strong> até a <strong>data mais recente no conjunto de dados</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">dfqry03 = spark.sql("""
+WITH CTE AS (
+SELECT DISTINCT 
+    ID_CLIENTE, 
+    DT_MAIS_RECENTE 
+FROM tmpview01
+)
+
+SELECT 
+    A.*,
+    B.DT_MAIS_RECENTE,
+    DATEDIFF(B.DT_MAIS_RECENTE, DT_INSCRICAO) AS DURACAO_ASSINATURA
+    
+FROM tmpview02 AS A 
+LEFT OUTER JOIN CTE AS B
+ON A.ID = B.ID_CLIENTE
+
+""")
+
+dfqry03.show()
+dfqry03.createOrReplaceTempView("tmpview03")</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+-------------------+------------------+
+| ID|IDADE|GENERO|DIAS_DESDE_A_INSCRICAO|USOU_SUPORTE|        PLANO|CHURN|QTD_COMPRAS|DT_INSCRICAO|MESES_DESDE_INSCRICAO|FREQUENCIA_COMPRA|    DT_MAIS_RECENTE|DURACAO_ASSINATURA|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+-------------------+------------------+
+|  1|   21|     F|                  1331|           1|Intermediário|    1|         17|  2019-05-10|                 44.0|           0.3892|2022-12-31 00:00:00|              1331|
+|  2|   21|     M|                  1160|           0|Intermediário|    0|         10|  2019-10-28|                 38.0|           0.2625|2022-12-31 00:00:00|              1160|
+|  3|   62|     M|                   454|           1|       Básico|    0|          9|  2021-10-03|                 15.0|           0.6039|2022-12-31 00:00:00|               454|
+|  4|   64|     M|                   226|           1|Intermediário|    0|          8|  2022-05-19|                  7.0|            1.083|2022-12-31 00:00:00|               226|
+|  5|   61|     M|                   474|           1|     Avançado|    0|         15|  2021-09-13|                 16.0|           0.9627|2022-12-31 00:00:00|               474|
+|  6|   18|     M|                   419|           0|       Básico|    0|         13|  2021-11-07|                 14.0|           0.9438|2022-12-31 00:00:00|               419|
+|  7|   52|     M|                  1334|           0|       Básico|    0|         17|  2019-05-07|                 44.0|           0.3884|2022-12-31 00:00:00|              1334|
+|  8|   44|     M|                  1124|           1|Intermediário|    0|          9|  2019-12-03|                 37.0|           0.2439|2022-12-31 00:00:00|              1124|
+|  9|   52|     M|                  1256|           1|Intermediário|    0|         11|  2019-07-24|                 41.0|           0.2668|2022-12-31 00:00:00|              1256|
+| 10|   64|     F|                  1197|           0|       Básico|    0|          4|  2019-09-21|                 39.0|           0.1017|2022-12-31 00:00:00|              1197|
+| 11|   50|     F|                  1820|           1|Intermediário|    0|          7|  2018-01-06|                 60.0|            0.117|2022-12-31 00:00:00|              1820|
+| 12|   46|     F|                   550|           0|     Avançado|    0|          3|  2021-06-29|                 18.0|           0.1661|2022-12-31 00:00:00|               550|
+| 13|   65|     M|                  1466|           0|     Avançado|    0|         10|  2018-12-26|                 48.0|           0.2076|2022-12-31 00:00:00|              1466|
+| 14|   33|     M|                  1507|           0|     Avançado|    0|          3|  2018-11-15|                 50.0|           0.0606|2022-12-31 00:00:00|              1507|
+| 15|   19|     F|                  1292|           1|     Avançado|    1|          1|  2019-06-18|                 42.0|           0.0236|2022-12-31 00:00:00|              1292|
+| 16|   22|     F|                  1514|           0|       Básico|    1|         14|  2018-11-08|                 50.0|           0.2815|2022-12-31 00:00:00|              1514|
+| 17|   38|     F|                  1483|           0|Intermediário|    1|         13|  2018-12-09|                 49.0|           0.2669|2022-12-31 00:00:00|              1483|
+| 18|   44|     F|                    32|           0|Intermediário|    0|          5|  2022-11-29|                  1.0|            4.697|2022-12-31 00:00:00|                32|
+| 19|   68|     F|                  1203|           1|     Avançado|    1|          8|  2019-09-15|                 40.0|           0.2024|2022-12-31 00:00:00|              1203|
+| 20|   35|     F|                  1157|           1|     Avançado|    1|         12|  2019-10-31|                 38.0|           0.3158|2022-12-31 00:00:00|              1157|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+-------------------+------------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>7. Número de Categorias Compradas:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Quantidade de categorias</strong> diferentes das quais o cliente comprou.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT ID_CLIENTE, COUNT(DISTINCT CATEGORIA) AS CATEG_DIFERENTES FROM tmpview01 GROUP BY ID_CLIENTE""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+----------------+
+|ID_CLIENTE|CATEG_DIFERENTES|
++----------+----------------+
+|       471|               5|
+|       148|               5|
+|       833|               5|
+|       496|               2|
+|       463|               4|
+|       623|               5|
+|       897|               4|
+|       858|               1|
+|       392|               5|
+|       540|               4|
+|       243|               4|
+|       737|               2|
+|        31|               4|
+|       516|               1|
+|       137|               5|
+|       251|               3|
+|       580|               5|
+|        85|               5|
+|       451|               5|
+|       808|               4|
++----------+----------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>8. Usou Suporte antes da Primeira Compra:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Indicador (1 ou 0)</strong> se o cliente <strong>usou o suporte</strong> antes de <strong>fazer sua primeira compra</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT DISTINCT ID_CLIENTE, MIN(DATA) OVER(PARTITION BY ID_CLIENTE) AS PRIM_COMPRA FROM tmpview01""").show(3)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+--------------------+
+|ID_CLIENTE|         PRIM_COMPRA|
++----------+--------------------+
+|         1|2020-01-19 12:27:...|
+|         2|2020-01-06 04:02:...|
+|         3|2020-01-23 09:29:...|
++----------+--------------------+
+only showing top 3 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">dfqry04 = spark.sql("""
+WITH CTE AS (
+SELECT DISTINCT 
+    ID_CLIENTE, 
+    MIN(DATA) OVER(PARTITION BY ID_CLIENTE) AS PRIM_COMPRA 
+FROM tmpview01
+)
+
+SELECT 
+    A.*,
+    PRIM_COMPRA,
+    datediff(DT_INSCRICAO,PRIM_COMPRA) AS DIAS_INSCRICAO_PRIM_COMPRA, 
+    CASE WHEN datediff(DT_INSCRICAO,PRIM_COMPRA) &gt; 0 AND USOU_SUPORTE = 1 THEN 1 ELSE 0 END AS SUPORTE_ANTES_PRIM_COMPRA
+FROM tmpview02 AS A
+LEFT OUTER JOIN CTE AS B
+ON A.ID = B.ID_CLIENTE
+""")
+
+dfqry04.show()
+dfqry04.createOrReplaceTempView("tmpview04")</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+--------------------+--------------------------+-------------------------+
+| ID|IDADE|GENERO|DIAS_DESDE_A_INSCRICAO|USOU_SUPORTE|        PLANO|CHURN|QTD_COMPRAS|DT_INSCRICAO|MESES_DESDE_INSCRICAO|FREQUENCIA_COMPRA|         PRIM_COMPRA|DIAS_INSCRICAO_PRIM_COMPRA|SUPORTE_ANTES_PRIM_COMPRA|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+--------------------+--------------------------+-------------------------+
+|  1|   21|     F|                  1331|           1|Intermediário|    1|         17|  2019-05-10|                 44.0|           0.3892|2020-01-19 12:27:...|                      -254|                        0|
+|  2|   21|     M|                  1160|           0|Intermediário|    0|         10|  2019-10-28|                 38.0|           0.2625|2020-01-06 04:02:...|                       -70|                        0|
+|  3|   62|     M|                   454|           1|       Básico|    0|          9|  2021-10-03|                 15.0|           0.6039|2020-01-23 09:29:...|                       619|                        1|
+|  4|   64|     M|                   226|           1|Intermediário|    0|          8|  2022-05-19|                  7.0|            1.083|2020-08-27 23:53:...|                       630|                        1|
+|  5|   61|     M|                   474|           1|     Avançado|    0|         15|  2021-09-13|                 16.0|           0.9627|2020-01-23 19:49:...|                       599|                        1|
+|  6|   18|     M|                   419|           0|       Básico|    0|         13|  2021-11-07|                 14.0|           0.9438|2020-03-05 01:31:...|                       612|                        0|
+|  7|   52|     M|                  1334|           0|       Básico|    0|         17|  2019-05-07|                 44.0|           0.3884|2020-01-18 10:37:...|                      -256|                        0|
+|  8|   44|     M|                  1124|           1|Intermediário|    0|          9|  2019-12-03|                 37.0|           0.2439|2020-03-31 15:47:...|                      -119|                        0|
+|  9|   52|     M|                  1256|           1|Intermediário|    0|         11|  2019-07-24|                 41.0|           0.2668|2020-02-17 21:54:...|                      -208|                        0|
+| 10|   64|     F|                  1197|           0|       Básico|    0|          4|  2019-09-21|                 39.0|           0.1017|2020-07-24 18:09:...|                      -307|                        0|
+| 11|   50|     F|                  1820|           1|Intermediário|    0|          7|  2018-01-06|                 60.0|            0.117|2020-06-13 02:07:...|                      -889|                        0|
+| 12|   46|     F|                   550|           0|     Avançado|    0|          3|  2021-06-29|                 18.0|           0.1661|2021-11-06 04:42:...|                      -130|                        0|
+| 13|   65|     M|                  1466|           0|     Avançado|    0|         10|  2018-12-26|                 48.0|           0.2076|2020-05-25 03:19:...|                      -516|                        0|
+| 14|   33|     M|                  1507|           0|     Avançado|    0|          3|  2018-11-15|                 50.0|           0.0606|2020-09-18 17:52:...|                      -673|                        0|
+| 15|   19|     F|                  1292|           1|     Avançado|    1|          1|  2019-06-18|                 42.0|           0.0236|2021-08-26 16:53:...|                      -800|                        0|
+| 16|   22|     F|                  1514|           0|       Básico|    1|         14|  2018-11-08|                 50.0|           0.2815|2020-01-26 09:50:...|                      -444|                        0|
+| 17|   38|     F|                  1483|           0|Intermediário|    1|         13|  2018-12-09|                 49.0|           0.2669|2020-03-24 20:59:...|                      -471|                        0|
+| 18|   44|     F|                    32|           0|Intermediário|    0|          5|  2022-11-29|                  1.0|            4.697|2020-09-18 20:27:...|                       802|                        0|
+| 19|   68|     F|                  1203|           1|     Avançado|    1|          8|  2019-09-15|                 40.0|           0.2024|2020-02-15 07:53:...|                      -153|                        0|
+| 20|   35|     F|                  1157|           1|     Avançado|    1|         12|  2019-10-31|                 38.0|           0.3158|2020-04-27 06:03:...|                      -179|                        0|
++---+-----+------+----------------------+------------+-------------+-----+-----------+------------+---------------------+-----------------+--------------------+--------------------------+-------------------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>9. Dias entre Inscrição e Primeira Compra:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><strong>Diferença em dias</strong> entre a <strong>data de inscrição</strong> do cliente e sua <strong>primeira transação</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""SELECT ID, DIAS_INSCRICAO_PRIM_COMPRA FROM tmpview04""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+--------------------------+
+| ID|DIAS_INSCRICAO_PRIM_COMPRA|
++---+--------------------------+
+|  1|                      -254|
+|  2|                       -70|
+|  3|                       619|
+|  4|                       630|
+|  5|                       599|
+|  6|                       612|
+|  7|                      -256|
+|  8|                      -119|
+|  9|                      -208|
+| 10|                      -307|
+| 11|                      -889|
+| 12|                      -130|
+| 13|                      -516|
+| 14|                      -673|
+| 15|                      -800|
+| 16|                      -444|
+| 17|                      -471|
+| 18|                       802|
+| 19|                      -153|
+| 20|                      -179|
++---+--------------------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>10. Frequência de Transações por Plano:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Número de <strong>transações</strong> do cliente dividido pelos <strong>meses de inscrição</strong>, segmentado por plano (Básico, Intermediário, Avançado)</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+WITH CTE AS (
+SELECT 
+    ID_CLIENTE,
+    COUNT(*) AS TOT_TRANSACOES
+FROM tmpview01
+GROUP BY ID_CLIENTE
+)
+
+SELECT ID, PLANO, ROUND((TOT_TRANSACOES / MESES_DESDE_INSCRICAO),2) AS FREQ_TRANSACOES_PLANO  
+FROM tmpview03 
+LEFT OUTER JOIN CTE
+ON ID = ID_CLIENTE
+""").show()</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+---+-------------+---------------------+
+| ID|        PLANO|FREQ_TRANSACOES_PLANO|
++---+-------------+---------------------+
+|  1|Intermediário|                 0.39|
+|  2|Intermediário|                 0.26|
+|  3|       Básico|                  0.6|
+|  4|Intermediário|                 1.14|
+|  5|     Avançado|                 0.94|
+|  6|       Básico|                 0.93|
+|  7|       Básico|                 0.39|
+|  8|Intermediário|                 0.24|
+|  9|Intermediário|                 0.27|
+| 10|       Básico|                  0.1|
+| 11|Intermediário|                 0.12|
+| 12|     Avançado|                 0.17|
+| 13|     Avançado|                 0.21|
+| 14|     Avançado|                 0.06|
+| 15|     Avançado|                 0.02|
+| 16|       Básico|                 0.28|
+| 17|Intermediário|                 0.27|
+| 18|Intermediário|                  5.0|
+| 19|     Avançado|                  0.2|
+| 20|     Avançado|                 0.32|
++---+-------------+---------------------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<font color="red" size="3">
+<ul>
+<li><strong>Variáveis históricas - 3 meses:</strong></li>
+<li><strong>Repita o passo anterior considerando - últimos 6 meses, 9 meses e 12 meses.</strong></li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">dfqry05 = spark.sql("""
+SELECT
+*,
+DATA,
+CASE WHEN DATA BETWEEN DATE_ADD(MAX(DATA) OVER (PARTITION BY ID_CLIENTE),  -90) AND MAX(DATA) OVER (PARTITION BY ID_CLIENTE) THEN 1 ELSE 0 END AS FLG_U03M,
+CASE WHEN DATA BETWEEN DATE_ADD(MAX(DATA) OVER (PARTITION BY ID_CLIENTE), -180) AND MAX(DATA) OVER (PARTITION BY ID_CLIENTE) THEN 1 ELSE 0 END AS FLG_U06M,
+CASE WHEN DATA BETWEEN DATE_ADD(MAX(DATA) OVER (PARTITION BY ID_CLIENTE), -365) AND MAX(DATA) OVER (PARTITION BY ID_CLIENTE) THEN 1 ELSE 0 END AS FLG_U12M
+FROM tmpview01
+ORDER BY ID_CLIENTE, DATA;
+""")
+dfqry05.show()
+dfqry05.createOrReplaceTempView("tmpview05")</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+------------+----------+--------------------+------------------+-----------+-------------------+-----------------+--------------------+--------+--------+--------+
+|ID_TRANSACAO|ID_CLIENTE|                DATA|             VALOR|  CATEGORIA|    DT_MAIS_RECENTE|TMP_ULT_TRANSACAO|                DATA|FLG_U03M|FLG_U06M|FLG_U12M|
++------------+----------+--------------------+------------------+-----------+-------------------+-----------------+--------------------+--------+--------+--------+
+|           2|         1|2020-01-19 12:27:...| 97.07199340552512|  Alimentos|2022-12-31 00:00:00|             1077|2020-01-19 12:27:...|       0|       0|       0|
+|           6|         1|2020-04-25 12:42:...| 9.842481270765422|  Alimentos|2022-12-31 00:00:00|              980|2020-04-25 12:42:...|       0|       0|       0|
+|          10|         1|2020-09-06 21:37:...|56.524638713138636|  Alimentos|2022-12-31 00:00:00|              846|2020-09-06 21:37:...|       0|       0|       0|
+|          17|         1|2020-10-06 07:04:...|169.44331623029686|   Esportes|2022-12-31 00:00:00|              816|2020-10-06 07:04:...|       0|       0|       0|
+|           8|         1|2020-10-06 12:14:...| 53.20607404593595|     Roupas|2022-12-31 00:00:00|              816|2020-10-06 12:14:...|       0|       0|       0|
+|           3|         1|2021-12-28 12:33:...|169.10581012381087|     Livros|2022-12-31 00:00:00|              368|2021-12-28 12:33:...|       0|       0|       1|
+|          11|         1|2022-01-01 22:30:...| 188.9532871161914|     Livros|2022-12-31 00:00:00|              364|2022-01-01 22:30:...|       0|       0|       1|
+|           4|         1|2022-02-05 01:39:...|199.38694865538451|     Roupas|2022-12-31 00:00:00|              329|2022-02-05 01:39:...|       0|       0|       1|
+|          16|         1|2022-06-07 22:05:...|159.80720142167414|Eletrônicos|2022-12-31 00:00:00|              207|2022-06-07 22:05:...|       0|       0|       1|
+|          15|         1|2022-08-04 07:23:...| 5.389069461264487|     Roupas|2022-12-31 00:00:00|              149|2022-08-04 07:23:...|       0|       1|       1|
+|          12|         1|2022-08-10 13:16:...|187.81591513287063|  Alimentos|2022-12-31 00:00:00|              143|2022-08-10 13:16:...|       0|       1|       1|
+|           7|         1|2022-10-31 22:05:...| 76.90706330227667|Eletrônicos|2022-12-31 00:00:00|               61|2022-10-31 22:05:...|       1|       1|       1|
+|           9|         1|2022-11-02 12:50:...|193.00568791656067|     Livros|2022-12-31 00:00:00|               59|2022-11-02 12:50:...|       1|       1|       1|
+|           5|         1|2022-11-16 23:06:...|160.00228343317622|Eletrônicos|2022-12-31 00:00:00|               45|2022-11-16 23:06:...|       1|       1|       1|
+|          14|         1|2022-11-17 12:02:...|24.123994506156937|     Roupas|2022-12-31 00:00:00|               44|2022-11-17 12:02:...|       1|       1|       1|
+|           1|         1|2022-11-25 13:50:...|57.287427536330505|   Esportes|2022-12-31 00:00:00|               36|2022-11-25 13:50:...|       1|       1|       1|
+|          13|         1|2022-12-18 22:35:...|168.68501102043555|     Roupas|2022-12-31 00:00:00|               13|2022-12-18 22:35:...|       1|       1|       1|
+|          27|         2|2020-01-06 04:02:...| 99.88314370871791|Eletrônicos|2022-12-31 00:00:00|             1090|2020-01-06 04:02:...|       0|       0|       0|
+|          18|         2|2020-02-03 21:58:...|192.62543018016476|     Livros|2022-12-31 00:00:00|             1062|2020-02-03 21:58:...|       0|       0|       0|
+|          20|         2|2020-05-04 21:31:...|147.96356124522856|     Livros|2022-12-31 00:00:00|              971|2020-05-04 21:31:...|       0|       0|       0|
++------------+----------+--------------------+------------------+-----------+-------------------+-----------------+--------------------+--------+--------+--------+
+only showing top 20 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>11. Média do Valor Gasto em Esportes nos Últimos 3 Meses:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Esta variável calcula a <strong>média dos gastos do cliente</strong> na <strong>categoria "Esportes"</strong> nos <strong>últimos três meses</strong>.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Esportes' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ESPORTES
+FROM df_temp_03
+WHERE CATEGORIA = 'Esportes'
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+--------------------+--------------------+-------------------------+
+|ID_CLIENTE|VL_TOT_CONS_ESPORTES|VL_MED_CONS_ESPORTES|VL_MED_U03M_CONS_ESPORTES|
++----------+--------------------+--------------------+-------------------------+
+|         1|              226.73|              113.37|                    57.29|
+|         2|              275.47|               91.82|                    57.35|
+|         3|              327.09|              163.55|                   164.27|
+|         4|              199.35|              199.35|                     NULL|
+|         5|              436.01|               109.0|                     NULL|
+|         6|              395.05|              131.68|                   127.34|
+|         7|               137.2|                68.6|                     97.0|
+|         8|              150.17|              150.17|                     NULL|
+|         9|              286.48|               95.49|                     NULL|
+|        11|               29.06|               29.06|                     NULL|
++----------+--------------------+--------------------+-------------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>12. Média do Valor Gasto em Eletrônicos nos Últimos 3 Meses:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Semelhante à anterior, mas focada na categoria "Eletrônicos".</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Eletrônicos' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ELETRONICOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ELETRONICOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ELETRONICOS
+FROM df_temp_03
+WHERE CATEGORIA = 'Eletrônicos'
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-----------------------+-----------------------+----------------------------+
+|ID_CLIENTE|VL_TOT_CONS_ELETRONICOS|VL_MED_CONS_ELETRONICOS|VL_MED_U03M_CONS_ELETRONICOS|
++----------+-----------------------+-----------------------+----------------------------+
+|         1|                 396.72|                 132.24|                      118.45|
+|         2|                 292.16|                  97.39|                        NULL|
+|         3|                 317.38|                 105.79|                       97.44|
+|         4|                 291.16|                  97.05|                        NULL|
+|         5|                 707.41|                  117.9|                      141.41|
+|         6|                 202.33|                 101.16|                         8.9|
+|         7|                 572.15|                 114.43|                        NULL|
+|         8|                 388.75|                  97.19|                       85.86|
+|        10|                  144.9|                  144.9|                       144.9|
+|        12|                 168.55|                 168.55|                        NULL|
++----------+-----------------------+-----------------------+----------------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>13. Média do Valor Gasto em Roupas nos Últimos 3 Meses:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Foca na categoria "Roupas", representando a média dos gastos do cliente nos últimos três meses.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Roupas' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ROUPAS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ROUPAS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ROUPAS
+FROM df_temp_03
+WHERE CATEGORIA = 'Roupas'
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+------------------+------------------+-----------------------+
+|ID_CLIENTE|VL_TOT_CONS_ROUPAS|VL_MED_CONS_ROUPAS|VL_MED_U03M_CONS_ROUPAS|
++----------+------------------+------------------+-----------------------+
+|         1|            450.79|             90.16|                   96.4|
+|         4|            367.89|            183.94|                   NULL|
+|         5|            303.13|            151.56|                 150.11|
+|         6|            499.17|            124.79|                   NULL|
+|         7|            227.68|            113.84|                 103.96|
+|         8|            118.38|            118.38|                   NULL|
+|         9|            229.77|            114.88|                   NULL|
+|        10|             69.93|             69.93|                   NULL|
+|        11|            419.34|            139.78|                  138.0|
+|        12|            181.71|            181.71|                 181.71|
++----------+------------------+------------------+-----------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>14. Média do Valor Gasto em Alimentos nos Últimos 3 Meses:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Representa a média dos gastos do cliente na categoria "Alimentos" nos últimos três meses.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Alimentos' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ALIMENTOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ALIMENTOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ALIMENTOS
+FROM df_temp_03
+WHERE CATEGORIA = 'Alimentos'
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+---------------------+---------------------+--------------------------+
+|ID_CLIENTE|VL_TOT_CONS_ALIMENTOS|VL_MED_CONS_ALIMENTOS|VL_MED_U03M_CONS_ALIMENTOS|
++----------+---------------------+---------------------+--------------------------+
+|         1|               351.26|                87.81|                      NULL|
+|         2|               109.58|                54.79|                     47.58|
+|         3|               247.52|               123.76|                      NULL|
+|         4|               103.19|               103.19|                    103.19|
+|         5|               292.37|               146.19|                      NULL|
+|         6|               373.42|               186.71|                      NULL|
+|         7|               270.44|                90.15|                      NULL|
+|         8|               113.95|                56.97|                      NULL|
+|         9|               172.42|                43.11|                     51.77|
+|        10|               185.66|               185.66|                      NULL|
++----------+---------------------+---------------------+--------------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>15. Média do Valor Gasto em Livros nos Últimos 3 Meses:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Foca na categoria "Livros", calculando a média dos gastos do cliente nos últimos três meses.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(SUM(CASE WHEN CATEGORIA = 'Livros' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_LIVROS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_LIVROS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_LIVROS
+FROM df_temp_03
+WHERE CATEGORIA = 'Livros'
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+------------------+------------------+-----------------------+
+|ID_CLIENTE|VL_TOT_CONS_LIVROS|VL_MED_CONS_LIVROS|VL_MED_U03M_CONS_LIVROS|
++----------+------------------+------------------+-----------------------+
+|         1|            551.06|            183.69|                 193.01|
+|         2|            340.59|            170.29|                   NULL|
+|         3|            105.81|             52.91|                   NULL|
+|         4|             48.18|             48.18|                   NULL|
+|         5|             16.25|             16.25|                   NULL|
+|         6|            371.56|            185.78|                   NULL|
+|         7|            463.88|             92.78|                   NULL|
+|         8|             69.79|             69.79|                   NULL|
+|         9|            330.45|            165.23|                 165.23|
+|        10|             15.92|             15.92|                   NULL|
++----------+------------------+------------------+-----------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+--ROUND(SUM(CASE WHEN CATEGORIA = 'Esportes' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ESPORTES,
+--ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ESPORTES,
+--ROUND(SUM(CASE WHEN CATEGORIA = 'Eletrônicos' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ELETRONICOS,
+--ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ELETRONICOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ELETRONICOS,
+--ROUND(SUM(CASE WHEN CATEGORIA = 'Roupas' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ROUPAS,
+--ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ROUPAS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ROUPAS,
+--ROUND(SUM(CASE WHEN CATEGORIA = 'Alimentos' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_ALIMENTOS,
+--ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_ALIMENTOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ALIMENTOS,
+--ROUND(SUM(CASE WHEN CATEGORIA = 'Livros' THEN VALOR ELSE 0 END),2) AS VL_TOT_CONS_LIVROS,
+--ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' THEN Valor ELSE NULL END),2) AS VL_MED_CONS_LIVROS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_LIVROS
+FROM df_temp_03
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+|ID_CLIENTE|VL_MED_U03M_CONS_ESPORTES|VL_MED_U03M_CONS_ELETRONICOS|VL_MED_U03M_CONS_ROUPAS|VL_MED_U03M_CONS_ALIMENTOS|VL_MED_U03M_CONS_LIVROS|
++----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+|         1|                    57.29|                      118.45|                   96.4|                      NULL|                 193.01|
+|         2|                    57.35|                        NULL|                   NULL|                     47.58|                   NULL|
+|         3|                   164.27|                       97.44|                   NULL|                      NULL|                   NULL|
+|         4|                     NULL|                        NULL|                   NULL|                    103.19|                   NULL|
+|         5|                     NULL|                      141.41|                 150.11|                      NULL|                   NULL|
+|         6|                   127.34|                         8.9|                   NULL|                      NULL|                   NULL|
+|         7|                     97.0|                        NULL|                 103.96|                      NULL|                   NULL|
+|         8|                     NULL|                       85.86|                   NULL|                      NULL|                   NULL|
+|         9|                     NULL|                        NULL|                   NULL|                     51.77|                 165.23|
+|        10|                     NULL|                       144.9|                   NULL|                      NULL|                   NULL|
++----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">spark.sql("""
+SELECT
+ID_CLIENTE,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ELETRONICOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ROUPAS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_ALIMENTOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' AND FLG_U03M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U03M_CONS_LIVROS,
+
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U06M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U06M_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' AND FLG_U06M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U06M_CONS_ELETRONICOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' AND FLG_U06M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U06M_CONS_ROUPAS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' AND FLG_U06M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U06M_CONS_ALIMENTOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' AND FLG_U06M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U06M_CONS_LIVROS,
+
+ROUND(AVG(CASE WHEN CATEGORIA = 'Esportes' AND FLG_U12M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U12M_CONS_ESPORTES,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Eletrônicos' AND FLG_U12M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U12M_CONS_ELETRONICOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Roupas' AND FLG_U12M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U12M_CONS_ROUPAS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Alimentos' AND FLG_U12M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U12M_CONS_ALIMENTOS,
+ROUND(AVG(CASE WHEN CATEGORIA = 'Livros' AND FLG_U12M = 1 THEN VALOR ELSE NULL END),2) AS VL_MED_U12M_CONS_LIVROS
+FROM df_temp_03
+GROUP BY ID_CLIENTE
+ORDER BY ID_CLIENTE
+""").show(10)</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">+----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+|ID_CLIENTE|VL_MED_U03M_CONS_ESPORTES|VL_MED_U03M_CONS_ELETRONICOS|VL_MED_U03M_CONS_ROUPAS|VL_MED_U03M_CONS_ALIMENTOS|VL_MED_U03M_CONS_LIVROS|VL_MED_U06M_CONS_ESPORTES|VL_MED_U06M_CONS_ELETRONICOS|VL_MED_U06M_CONS_ROUPAS|VL_MED_U06M_CONS_ALIMENTOS|VL_MED_U06M_CONS_LIVROS|VL_MED_U12M_CONS_ESPORTES|VL_MED_U12M_CONS_ELETRONICOS|VL_MED_U12M_CONS_ROUPAS|VL_MED_U12M_CONS_ALIMENTOS|VL_MED_U12M_CONS_LIVROS|
++----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+|         1|                    57.29|                      118.45|                   96.4|                      NULL|                 193.01|                    57.29|                      118.45|                  66.07|                    187.82|                 193.01|                    57.29|                      132.24|                   99.4|                    187.82|                 183.69|
+|         2|                    57.35|                        NULL|                   NULL|                     47.58|                   NULL|                    57.35|                       69.05|                   NULL|                     54.79|                   NULL|                    84.62|                       69.05|                   NULL|                     54.79|                   NULL|
+|         3|                   164.27|                       97.44|                   NULL|                      NULL|                   NULL|                   164.27|                       97.44|                   NULL|                      NULL|                   NULL|                   164.27|                      105.79|                   NULL|                      NULL|                   NULL|
+|         4|                     NULL|                        NULL|                   NULL|                    103.19|                   NULL|                     NULL|                        NULL|                 178.83|                    103.19|                   NULL|                     NULL|                       59.87|                 183.94|                    103.19|                   NULL|
+|         5|                     NULL|                      141.41|                 150.11|                      NULL|                   NULL|                     NULL|                      141.41|                 150.11|                      NULL|                   NULL|                   148.03|                      141.41|                 150.11|                      NULL|                   NULL|
+|         6|                   127.34|                         8.9|                   NULL|                      NULL|                   NULL|                   127.34|                         8.9|                   NULL|                      NULL|                   NULL|                   127.34|                         8.9|                   NULL|                      NULL|                 199.29|
+|         7|                     97.0|                        NULL|                 103.96|                      NULL|                   NULL|                     68.6|                        NULL|                 103.96|                     51.54|                   NULL|                     68.6|                      124.52|                 103.96|                     51.54|                  92.03|
+|         8|                     NULL|                       85.86|                   NULL|                      NULL|                   NULL|                     NULL|                       93.56|                   NULL|                      NULL|                   NULL|                   150.17|                       93.56|                   NULL|                     56.97|                   NULL|
+|         9|                     NULL|                        NULL|                   NULL|                     51.77|                 165.23|                     NULL|                        NULL|                   NULL|                     51.77|                 165.23|                     NULL|                        NULL|                   NULL|                     43.64|                 165.23|
+|        10|                     NULL|                       144.9|                   NULL|                      NULL|                   NULL|                     NULL|                       144.9|                   NULL|                      NULL|                   NULL|                     NULL|                       144.9|                   NULL|                    185.66|                   NULL|
++----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+only showing top 10 rows
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">+----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+|ID_CLIENTE|VL_MED_U03M_CONS_ESPORTES|VL_MED_U03M_CONS_ELETRONICOS|VL_MED_U03M_CONS_ROUPAS|VL_MED_U03M_CONS_ALIMENTOS|VL_MED_U03M_CONS_LIVROS|VL_MED_U06M_CONS_ESPORTES|VL_MED_U06M_CONS_ELETRONICOS|VL_MED_U06M_CONS_ROUPAS|VL_MED_U06M_CONS_ALIMENTOS|VL_MED_U06M_CONS_LIVROS|VL_MED_U12M_CONS_ESPORTES|VL_MED_U12M_CONS_ELETRONICOS|VL_MED_U12M_CONS_ROUPAS|VL_MED_U12M_CONS_ALIMENTOS|VL_MED_U12M_CONS_LIVROS|
++----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+|         1|                    57.29|                      118.45|                   96.4|                      NULL|                 193.01|                    57.29|                      118.45|                  66.07|                    187.82|                 193.01|                    57.29|                      132.24|                   99.4|                    187.82|                 183.69|
+|         2|                    57.35|                        NULL|                   NULL|                     47.58|                   NULL|                    57.35|                       69.05|                   NULL|                     54.79|                   NULL|                    84.62|                       69.05|                   NULL|                     54.79|                   NULL|
+|         3|                   164.27|                       97.44|                   NULL|                      NULL|                   NULL|                   164.27|                       97.44|                   NULL|                      NULL|                   NULL|                   164.27|                      105.79|                   NULL|                      NULL|                   NULL|
+|         4|                     NULL|                        NULL|                   NULL|                    103.19|                   NULL|                     NULL|                        NULL|                 178.83|                    103.19|                   NULL|                     NULL|                       59.87|                 183.94|                    103.19|                   NULL|
+|         5|                     NULL|                      141.41|                 150.11|                      NULL|                   NULL|                     NULL|                      141.41|                 150.11|                      NULL|                   NULL|                   148.03|                      141.41|                 150.11|                      NULL|                   NULL|
+|         6|                   127.34|                         8.9|                   NULL|                      NULL|                   NULL|                   127.34|                         8.9|                   NULL|                      NULL|                   NULL|                   127.34|                         8.9|                   NULL|                      NULL|                 199.29|
+|         7|                     97.0|                        NULL|                 103.96|                      NULL|                   NULL|                     68.6|                        NULL|                 103.96|                     51.54|                   NULL|                     68.6|                      124.52|                 103.96|                     51.54|                  92.03|
+|         8|                     NULL|                       85.86|                   NULL|                      NULL|                   NULL|                     NULL|                       93.56|                   NULL|                      NULL|                   NULL|                   150.17|                       93.56|                   NULL|                     56.97|                   NULL|
+|         9|                     NULL|                        NULL|                   NULL|                     51.77|                 165.23|                     NULL|                        NULL|                   NULL|                     51.77|                 165.23|                     NULL|                        NULL|                   NULL|                     43.64|                 165.23|
+|        10|                     NULL|                       144.9|                   NULL|                      NULL|                   NULL|                     NULL|                       144.9|                   NULL|                      NULL|                   NULL|                     NULL|                       144.9|                   NULL|                    185.66|                   NULL|
++----------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+-------------------------+----------------------------+-----------------------+--------------------------+-----------------------+
+only showing top 10 rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="3"><strong>Links:</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li><a href="https://www.kaggle.com/code/hafsaezzahraouy/dealing-with-missing-data-with-pyspark">https://www.kaggle.com/code/hafsaezzahraouy/dealing-with-missing-data-with-pyspark</a></li>
+<li><a href="https://medium.com/big-data-processing/getting-started-with-pyspark-3b2bb29bfb91">https://medium.com/big-data-processing/getting-started-with-pyspark-3b2bb29bfb91</a></li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
+%watermark -a "RobertoSSoares-LfLngLrnng"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: RobertoSSoares-LfLngLrnng
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.12.2
+IPython version      : 8.24.0
+
+Compiler    : MSC v.1937 64 bit (AMD64)
+OS          : Windows
+Release     : 11
+Machine     : AMD64
+Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+CPU cores   : 4
+Architecture: 64bit
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="5"><strong>Fim</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"></code></pre>
+</div>
+</div>
+<div class="footer">
+<p>RobertoSSoares-LfLngLrnng</p>
+<p id="datetime"></p>
+<script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></body>
+</html>

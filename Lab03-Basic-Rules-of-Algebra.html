@@ -9,8 +9,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- Jupyter Notebook CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Gloria Hallelujah" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
 <!-- Highlight.js for code syntax -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
@@ -22,7 +24,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: auto;
             background: #f9f9f9;
             padding: 40px;
@@ -30,7 +32,9 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .code_cell {
-            background-color: #e8f5e9 !important; /* cor verde claro */
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
             border-left: 5px solid #4caf50;
             padding: 5px;
             margin: 15px 0;
@@ -42,7 +46,7 @@
             border-left: 5px solid #2196f3;
             padding: 5px;
             margin: 15px 0;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Ubuntu', monospace;
             font-size: 15px;
             white-space: pre-wrap;
             overflow-x: auto;
@@ -53,29 +57,31 @@
             height: auto;
             display: block;
             margin: auto;
+            background-color: transparent !important;
         }
         h1, h2, h3 {
             color: #333;
         }
         .title-header {
-            font-family: 'Caveat',cursive;
+            font-family: 'Caveat', cursive;
             font-weight: bold;
             font-size: 25px;
-            font-weight: bold;
             color: #84888c;
             text-transform: uppercase;
             text-align: right;
             margin-bottom: 10px;
         }
         .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
             background-color: #f3f2ee;
             padding: 5px;
             border-left: 4px solid #ff9800;
             border-radius: 5px;
-            margin-bottom: 15px;            
+            margin-bottom: 15px;
         }
         .footer {
-            font-family: "Gloria Hallelujah" ,cursive;
+            font-family: 'Gloria Hallelujah', cursive;
             font-size: 18px;            
             text-align: right;
             color: #84888c;
@@ -85,11 +91,10 @@
             border-radius: 5px;
         }
         pre, code {
-            background-color: transparent !important; /* Evita sobrescrita de estilos */
+            background-color: transparent !important;
             border: none;
             font-size: 14px;
         }
-
     </style>
 </head>
 <body>
@@ -100,14 +105,14 @@
 <div style="background-color:#F3F2EE">
 <p><br/><br/></p>
 <p style="text-align: center;">
-<font color="#0A1781" face="Segoe Script" size="6">
+<font color="#0A1781" size="6">
 <strong>
         Matemática e Estatística Aplicada<br/>Para Data Science, Machine Learning e IA
     </strong>
 </font>
 </p>
 <p style="text-align: center;">
-<font color="#F89634" face="Segoe Script" size="6.5">
+<font color="#F89634" size="6.5">
 <strong>
             Lab 3 - Regras Básicas da Álgebra,<br/>Operações com Vetores e Algoritmo de Machine Learning
         </strong>
@@ -121,13 +126,13 @@
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p style="text-align: right;">
-<font color="#444444" face="Segoe Script" size="4">
+<font color="#444444" size="4">
     Roberto Soares - LfLngLrnng<br \=""/>[+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida  
   </font>
 </p>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a>
-<p style="text-align: right;"><font color="#444444" face="Segoe Print" size="2">
+<p style="text-align: right;"><font color="#444444" size="2">
 <a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
 </font></p></font></p></div>
 </div>
@@ -135,8 +140,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#F89634" face="Segoe Print" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#F89634" size="3"><strong>Instalando e Carregando os Pacotes</strong></font></p>
+<font color="#66666" size="2">
 <ul>
 <li><p>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:</p>
 </li>
@@ -180,15 +185,15 @@ import numpy as np</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="5"><strong>Regras Básicas da Álgebra</strong></font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#EE6158" size="5"><strong>Regras Básicas da Álgebra</strong></font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Propriedades da Igualdade</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Propriedades da Igualdade</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -229,8 +234,8 @@ True
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Propriedades das Operações</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Propriedades das Operações</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -274,8 +279,8 @@ print(a * (b + c) == a * b + a * c)  # True</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Elementos Neutros e Inversos</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Elementos Neutros e Inversos</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -317,8 +322,8 @@ print(a * (1/a) == 1)  # True</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Exponenciação</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Regras de Exponenciação</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -364,8 +369,8 @@ print(2**0 == 1)  # True</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Radicais</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Regras de Radicais</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -399,8 +404,8 @@ print(math.sqrt(16/4) == math.sqrt(16) / math.sqrt(4))  # True</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Polinômios (Adição e Subtração de Termos Semelhantes)</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Regras de Polinômios (Adição e Subtração de Termos Semelhantes)</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -422,8 +427,8 @@ print((2*x**2 + 3*x**2) + (3*x - 2*x) + (4 + 1))  </code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#0A1849" face="Segoe Print" size="4">Regras de Frações</font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#0A1849" size="4">Regras de Frações</font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
@@ -456,15 +461,15 @@ print((1/4) + (3/4))  # 1.0</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>Operações com Vetores - Adição e Subtração</strong></font></p>
-<font color="#66666" face="Segoe Print" size="2">
+<p><font color="#EE6158" size="4"><strong>Operações com Vetores - Adição e Subtração</strong></font></p>
+<font color="#66666" size="2">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="4"><strong>O que são Ventores</strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<p><font color="#EE6158" size="4"><strong>O que são Ventores</strong></font></p>
+<font color="#66666" size="3">
 <ul>
 <li><p>Vetores são entidades matemáticas que representam magnitude e direção. Eles são amplamente utilizados em física, matemática, ciência da computação e várias outras áreas.</p>
 </li>
@@ -480,10 +485,10 @@ print((1/4) + (3/4))  # 1.0</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Em ciência de dados, os vetores são usados em várias etapas do processo de análise e modelagem de dados. Aqui estão alguns dos principais usos de vetores em ciência de dados:
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li><p><strong>Representação de dados</strong>: Os dados muitas vezes são representados como vetores, onde cada componente do vetor corresponde a uma característica ou atributo do dado. Por exemplo, em uma base de dados de clientes, cada cliente pode ser representado por um vetor onde cada componente representa uma característica como idade, renda, histórico de compras, etc.</p>
 </li>
@@ -544,10 +549,10 @@ Diferença dos Vetores: [2, 2, 2]
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Operações com Vetores - Cross Product (Produto Vetorial)
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>O produto vetorial entre dois vetores resulta em um terceiro vetor que é perpendicular aos dois vetores originais.</li>
 </ul>
@@ -582,9 +587,9 @@ print("Produto Vetorial:", resultado)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li><a href="https://www.wolframalpha.com/input/?i=cross+product+calculator">https://www.wolframalpha.com/input/?i=cross+product+calculator</a></li>
 <li><a href="https://www.mathsisfun.com/algebra/vectors-cross-product.html">https://www.mathsisfun.com/algebra/vectors-cross-product.html</a></li>
@@ -594,10 +599,10 @@ print("Produto Vetorial:", resultado)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Operações com Vetores - Dot Product (Produto Escalar)
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>O produto escalar de dois vetores é uma operação que resulta em um escalar (um número). Matematicamente, é a soma dos produtos dos componentes correspondentes dos vetores.</li>
 </ul>
@@ -629,9 +634,9 @@ print("Produto Escalar:", resultado)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li><a href="https://www.wolframalpha.com/input?i=dot+product">https://www.wolframalpha.com/input?i=dot+product</a></li>
 <li><a href="https://www.mathsisfun.com/algebra/vectors-dot-product.html">https://www.mathsisfun.com/algebra/vectors-dot-product.html</a></li>
@@ -641,10 +646,10 @@ print("Produto Escalar:", resultado)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Machine Learning apenas com Operações Matemáticas (Sem Uso de Frameworks)
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Vamos criar um modelo capaz de prever o preço de um ativo financeiro com base na taxa nominal de juros.</li>
 </ul>
@@ -681,10 +686,10 @@ X_b = np.c_[np.ones((100, 1)), X]  # Adiciona x0 = 1 a cada instância</code></p
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Função de Custo MSE com Operações Entre Vetores
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li>Esta função dsa_func_custo é uma implementação da função de custo de erro quadrático médio, que é amplamente usada em regressão linear.</li>
 <li>O objetivo dessa função é medir quão bem o modelo de regressão (representado pelos parâmetros theta) está desempenhando em relação ao conjunto de dados (X e y).<ul>
@@ -717,10 +722,10 @@ def fn_func_custo(X, y, theta):
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Algoritmo Gradiente Descendente com Operações entre Vetores
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -755,10 +760,10 @@ def fn_gradient_descent(X, y, theta, learning_rate, iterations):
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Treinamento do Modelo
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -793,10 +798,10 @@ theta_final, cost_history = fn_gradient_descent(X_b, y, theta, learning_rate, it
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Deploy e Previsão com Novos Dados
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
@@ -862,10 +867,10 @@ Architecture: 64bit
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="3"><strong>
+<p><font color="#EE6158" size="3"><strong>
 Aprendizado com Descida do Grandiente
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 <ul>
 <li><a href="https://www.deeplearningbook.com.br/aprendizado-com-a-descida-do-gradiente/">https://www.deeplearningbook.com.br/aprendizado-com-a-descida-do-gradiente/</a></li>
 </ul>
@@ -874,18 +879,18 @@ Aprendizado com Descida do Grandiente
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
-<p><font color="#EE6158" face="Segoe Print" size="5"><strong>
+<p><font color="#EE6158" size="5"><strong>
 FIM
 </strong></font></p>
-<font color="#66666" face="Segoe Print" size="3">
+<font color="#66666" size="3">
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Code Cell" class="code_cell" role="region">
-<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v5.tpl Lab03-Basic-Rules-of-Algebra.ipynb</code></pre>
+<pre><code class="language-python">!jupyter nbconvert --to html --template=D:/anaconda3/envs/spark-pod-env/share/jupyter/nbconvert/templates/compatibility/mytemplate_gpt_v6.tpl Lab03-Basic-Rules-of-Algebra.ipynb</code></pre>
 </div>
 <div aria-label="Code Output" class="output" role="region">[NbConvertApp] Converting notebook Lab03-Basic-Rules-of-Algebra.ipynb to html
-[NbConvertApp] Writing 34642 bytes to Lab03-Basic-Rules-of-Algebra.html
+[NbConvertApp] Writing 35258 bytes to Lab03-Basic-Rules-of-Algebra.html
 </div>
 </div>
 <div class="footer">
