@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Geometric-Representation-of-Vectors-and-Linear-Algebra-in-Vector-Space-Exercise-04</title>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Ubuntu', monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+            background-color: transparent !important;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .title-header {
+            font-family: 'Caveat', cursive;
+            font-weight: bold;
+            font-size: 25px;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .footer {
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        pre, code {
+            background-color: transparent !important;
+            border: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1 class="title-header">Geometric-Representation-of-Vectors-and-Linear-Algebra-in-Vector-Space-Exercise-04</h1>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<br/><br/>
+<p style="text-align: center;">
+<font color="#014ba0" size="6">
+<strong>
+                    Matemática e Estatística Aplicada<br \=""/>Para Data Science, Machine Learning e IA
+                </strong>
+</font>
+</p>
+<p style="text-align: center;">
+<font color="#a21ad7" size="6.5">
+<strong>
+                    Exercício 4 - Representação Geométrica de Vetores<br>e Álgebra Linear no Espaço Vetorial
+                </br></strong>
+</font>
+</p>
+<br/>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            Roberto SSoares - LfLngLrnng
+      </font>
+</p>
+<p style="text-align: right;"><font color="#444444" size="2">
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br/><a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</font></p>
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "
+        </font>
+<br>
+<font color="#918e8e" size="2">"Bruno Jardim"
+        </font>
+</br></p>
+<p style="text-align: right;">
+<font color="#918e8e" size="2">
+            Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.<br>e a minha linda esposa "Elizabete" por todo apoio.
+        </br></font>
+</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3">Instalando e Carregando Pacotes</font></p>
+<font color="#66666" size="2">
+<ul>
+<li>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
+<li>pip install -U nome_pacote</li>
+</ul>
+</li>
+<li>Para instalar a versão exata de um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
+<li>!pip install nome_pacote==versão_desejada</li>
+</ul>
+</li>
+<li>Depois de instalar ou atualizar o pacote, reinicie o jupyter notebook.</li>
+<li>Instala o pacote watermark.<ul>
+<li>Esse pacote é usado para gravar as versões de outros pacotes usados neste jupyter notebook.
+</li></ul></li></ul></font></div>
+
+
+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q -U watermark
+#!pip install -q pandas_datareader</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Imports
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+#from pandas_datareader import wb
+plt.rcParams.update({'font.size':14}) </code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
+%reload_ext watermark
+%watermark -a "Roberto Soares - Data Science Academy" </code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#014ba0" face="Segoe Print" size="4">Exercício 1: Produto Escalar em Aplicação Prática</font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Descrição: Dados  dois  vetores  que  representam  preferências  de  usuários  em  três categorias diferentes user1 = [4, 3, 2] e user2 = [1, 5, 4], calcule<br/>a similaridade entre esses usuários usando o produto escalar.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Vetores representando as preferências dos usuários
+user1 = [4, 3, 2]
+user2 = [1, 5, 4]
+
+# Função para calcular o produto escalar entre dois vetores
+def produto_escalar(vetor1, vetor2):
+    # Verifica se os vetores têm o mesmo tamanho
+    if len(vetor1) != len(vetor2):
+        raise ValueError("Os vetores devem ter o mesmo tamanho.")
+    
+    # Inicializa o produto escalar como 0
+    escalar = 0
+    
+    # Calcula o produto escalar somando o produto de cada par de elementos
+    for i in range(len(vetor1)):
+        escalar += vetor1[i] * vetor2[i]
+    
+    return escalar
+
+# Calcula o produto escalar entre os vetores user1 e user2
+resultado_produto_escalar = produto_escalar(user1, user2)
+
+# Exibe o resultado
+print("O produto escalar entre os usuários é:", resultado_produto_escalar)
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">O produto escalar entre os usuários é: 27
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#014ba0" face="Segoe Print" size="4">Exercício 2: Multiplicação de Escalar por Vetor em Dados Reais</font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Descrição: Dada uma série de preços de ações prices= [120, 125, 130, 128, 135], ajuste os preços em 15% e calcule o novo preço das ações.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Série de preços de ações
+prices = [120, 125, 130, 128, 135]
+
+# Porcentagem de ajuste
+percentagem = 0.15
+
+# Função para ajustar os preços em uma certa porcentagem
+def ajustar_precos(prices, percentagem):
+    # Lista para armazenar os novos preços ajustados
+    novos_precos = []
+    
+    # Itera sobre os preços originais e ajusta cada um
+    for price in prices:
+        novo_preco = price * (1 + percentagem)  # Calcula o novo preço
+        novos_precos.append(novo_preco)  # Adiciona o novo preço à lista
+        
+    return novos_precos
+
+# Chama a função para ajustar os preços
+novos_precos = ajustar_precos(prices, percentagem)
+
+# Exibe os novos preços ajustados
+print("Novos preços ajustados em 15%:")
+for i, novo_preco in enumerate(novos_precos):
+    print(f"Ação {i+1}: ${novo_preco:.2f}")
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Novos preços ajustados em 15%:
+Ação 1: $138.00
+Ação 2: $143.75
+Ação 3: $149.50
+Ação 4: $147.20
+Ação 5: $155.25
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#014ba0" face="Segoe Print" size="4">Exercício 3: Otimização de Produto Escalar</font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Descrição: Encontre o vetor unitário que maximiza o produto escalar com o vetor v = [3, 4, 5]. Use técnicas de otimização para encontrar a solução.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">from scipy.optimize import minimize
+
+# Função objetivo
+def objective_function(u):
+    v = np.array([3, 4, 5])
+    return -np.dot(u, v)  # Minimizar o negativo do produto escalar para maximizar o produto escalar
+
+# Restrição de comprimento unitário
+def constraint(u):
+    return np.sum(u**2) - 1
+
+# Vetor de condições iniciais
+initial_guess = np.array([1, 0, 0])  # Começando com [1, 0, 0] é uma escolha razoável
+
+# Definindo a restrição
+constraint_definition = {'type': 'eq', 'fun': constraint}
+
+# Otimização usando o método dos multiplicadores de Lagrange
+result = minimize(objective_function, initial_guess, constraints=constraint_definition)
+
+# Vetor unitário que maximiza o produto escalar
+unit_vector_max_scalar_product = result.x
+
+# Produto escalar máximo
+max_scalar_product = -result.fun
+
+print("Vetor unitário que maximiza o produto escalar:", unit_vector_max_scalar_product)
+print("Produto escalar máximo:", max_scalar_product)
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Vetor unitário que maximiza o produto escalar: [0.42426249 0.56567407 0.70711684]
+Produto escalar máximo: 7.071067966276123
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#014ba0" face="Segoe Print" size="4">Exercício 4: Produto Vetorial e Direção Normal</font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Descrição: Dados três pontos no espaço 3D<ul>
+<li>A  =  [1,  2,  3],  B  =  [4,  5,  6],  e  C  =  [7,  8,  9],</li>
+<li>encontre um vetor normal ao plano definido por esses três pontos.
+</li></ul></li></ul></font></div>
+
+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">import numpy as np
+
+# Definindo os pontos A, B e C
+A = np.array([1, 2, 3])
+B = np.array([4, 5, 6])
+C = np.array([7, 8, 9])
+
+# Vetores que estão no plano
+AB = B - A
+AC = C - A
+
+# Calculando o produto vetorial
+vetor_normal = np.cross(AB, AC)
+
+print("Um vetor normal ao plano definido por A, B e C é:", vetor_normal)
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Um vetor normal ao plano definido por A, B e C é: [0 0 0]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#014ba0" face="Segoe Print" size="4">Exercício 5: Produto Vetorial em Análise de Dados</font></p>
+<font color="#66666" face="Segoe Print" size="3">
+<ul>
+<li>Descrição: Em um conjunto de dados 3D com pontos p1 = [1, 2, 3], p2 = [4, 5, 6], e p3 = [7, 8, 9], encontre o vetor normal ao<br/>plano formado por esses três pontos e interprete seu significado em termos de orientação do plano.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">import numpy as np
+
+# Definindo os pontos p1, p2 e p3
+p1 = np.array([1, 2, 3])
+p2 = np.array([4, 5, 6])
+p3 = np.array([7, 8, 9])
+
+# Vetores que estão no plano
+p1p2 = p2 - p1
+p1p3 = p3 - p1
+
+# Calculando o produto vetorial
+vetor_normal = np.cross(p1p2, p1p3)
+
+# Interpretando a orientação do plano
+if np.allclose(vetor_normal, [0, 0, 0]):
+    print("Os pontos estão alinhados, não formando um plano.")
+elif np.all(vetor_normal &gt; 0):
+    print("O plano tem orientação para fora do espaço delimitado pelos pontos.")
+elif np.all(vetor_normal &lt; 0):
+    print("O plano tem orientação para dentro do espaço delimitado pelos pontos.")
+else:
+    print("O plano não tem uma orientação clara em relação ao espaço delimitado pelos pontos.")
+
+print("O vetor normal ao plano formado pelos pontos é:", vetor_normal)
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Os pontos estão alinhados, não formando um plano.
+O vetor normal ao plano formado pelos pontos é: [0 0 0]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
+%watermark -a "RobertoSSoares-LfLngLrnng"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: RobertoSSoares-LfLngLrnng
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.12.2
+IPython version      : 8.24.0
+
+Compiler    : MSC v.1937 64 bit (AMD64)
+OS          : Windows
+Release     : 11
+Machine     : AMD64
+Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+CPU cores   : 4
+Architecture: 64bit
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#014ba0" face="Segoe Print" size="5"><strong>Fim</strong></font></p>
+</div>
+</div>
+<div class="footer">
+<p>RobertoSSoares-LfLngLrnng</p>
+<p id="datetime"></p>
+<script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div></body>
+</html>
