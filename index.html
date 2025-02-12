@@ -3,13 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portfólio - Cientista de Dados</title>
+    <title>Portfólio de Roberto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?technology,data') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">Meu Portfólio</a>
+            <a class="navbar-brand" href="#">Roberto | Data Engineer</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,143 +50,67 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    <header class="bg-primary text-white text-center py-5">
+
+    <section class="hero">
         <div class="container">
-            <h1>Bem-vindo ao meu Portfólio</h1>
-            <p>Cientista de Dados | Machine Learning | Engenharia de Dados</p>
+            <h1>Bem-vindo ao meu portfólio</h1>
+            <p>Engenharia de Dados | Análise de Dados | Ciência de Dados</p>
         </div>
-    </header>
-    
-    <section id="sobre" class="container my-5">
-        <h2>Sobre Mim</h2>
-        <p>Sou um Cientista de Dados apaixonado por transformar dados em insights estratégicos...</p>
     </section>
-    
-    <section id="projetos" class="container my-5">
-        <h2>Projetos</h2>
+
+    <section id="sobre" class="container py-5">
+        <h2 class="text-center mb-4">Sobre Mim</h2>
+        <p class="text-center">Sou um profissional com mais de 25 anos de experiência na área de dados. Atualmente, estou focado no desenvolvimento de projetos em Engenharia de Dados, Análise de Dados e Ciência de Dados.</p>
+    </section>
+
+    <section id="projetos" class="container py-5">
+        <h2 class="text-center mb-4">Projetos</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Feature Engineering SPARK-SQL</h5>
-                        <p class="card-text">Projeto Laboratório - Construindo uma ABT (Analytical Base Table), tabelas base para criação de modelos de Machine Learning.</p>
-                        <a href="A008a_Feature_Engineering_SPARK_SQL.html" class="btn btn-primary">Ver Projeto</a>
-                    </div>
-                </div>
-            </div>            
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Análise de Varejo com DS & ML</h5>
-                        <p class="card-text">Projeto de Análise e Machine Learning aplicado ao setor varejista.</p>
-                        <a href="BA-DS-ML-Retail-Area.html" class="btn btn-primary">Ver Projeto</a>
+                        <h5 class="card-title">Data Lake na AWS</h5>
+                        <p class="card-text">Projeto de estruturação de um Data Lake utilizando AWS e PostgreSQL.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Análise RFM para Área de Marketing</h5>
-                        <p class="card-text">Projeto de Análise RFM (Recency, Frequency, Monetary Value) e Dashboard Interativo para a Área de Marketing</p>
-                        <a href="P001-BA-Analise-RFM-Area-de-Marketing.html" class="btn btn-primary">Ver Projeto</a>
+                        <h5 class="card-title">Análise de Crédito</h5>
+                        <p class="card-text">Projeto para análise de risco de crédito utilizando Machine Learning.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Lab01 - Representando Equações via Programação</h5>
-                        <p class="card-text">Projeto Laboratório - Representando Equações via Programação</p>
-                        <a href="Lab1-Representing-Equations-via-Programming.html" class="btn btn-primary">Ver Mais</a>
-                    </div>
-                </div>
-            </div>                        
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Lab02 - Regras Básicas de Álgebra</h5>
-                        <p class="card-text">Projeto Laboratório Trabalhando com Funções e Logaritmos em Python.</p>
-                        <a href="Lab02-Working-with-Functions-and-Logarithms-in-Python.html" class="btn btn-primary">Ver Mais</a>
-                    </div>
-                </div>
-            </div>            
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Lab03 - Regras Básicas de Álgebra</h5>
-                        <p class="card-text">Projeto Laboratório de Regras Básicas da Álgebra - Operações com Vetores e Algoritmo de Machine Learning.</p>
-                        <a href="Lab03-Basic-Rules-of-Algebra.html" class="btn btn-primary">Ver Mais</a>
+                        <h5 class="card-title">Detecção de Fraudes</h5>
+                        <p class="card-text">Modelo preditivo para detectar fraudes em transações financeiras.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Equações Matemáticas com Python</h5>
-                        <p class="card-text">Projeto Estudo - Lista de Exercícios - Resolvendo Equações Matemáticas com Python</p>
-                        <a href="Fundamental-Mathematics-with-Python-Language-Exercise-List-01.html" class="btn btn-primary">Ver Mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Equações Quadráticas, Funções e Logaritmos com Python</h5>
-                        <p class="card-text">Projeto Estudo - Lista de Exercícios - Resolvendo Equações Quadráticas, Funções e Logaritmos com Python</p>
-                        <a href="Quadratic-Equations-Functions-and-Logarithms-with-Python.html" class="btn btn-primary">Ver Mais</a>
-                    </div>
-                </div>
-            </div>                                                    
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Matemática Fundamental com Linguagem Python</h5>
-                        <p class="card-text">Projeto Estudo - Lista de Exercícios - Matemática Fundamental com Linguagem Python</p>
-                        <a href="Fundamental-Mathematics-with-Python-Language.html" class="btn btn-primary">Ver Mais</a>
-                    </div>
-                </div>
-            </div>                    
         </div>
     </section>
-    
-    <section id="habilidades" class="container my-5">
-        <h2>Habilidades</h2>
-        <p>Python, SQL, Machine Learning, Spark, AWS, Databricks...</p>
+
+    <section id="contato" class="container py-5">
+        <h2 class="text-center mb-4">Contato</h2>
+        <p class="text-center">Entre em contato comigo pelo LinkedIn ou e-mail.</p>
+        <div class="text-center">
+            <a href="https://www.linkedin.com/in/seu-perfil" class="btn btn-primary">LinkedIn</a>
+            <a href="mailto:seuemail@email.com" class="btn btn-secondary">E-mail</a>
+        </div>
     </section>
 
-    <section id="contato" class="container my-5">
-        <h2>Contato</h2>
-        <p>Conecte-se comigo:</p>
-        <ul>
-            <li>LinkedIn: 
-                <a href="https://www.linkedin.com/in/roberto-dos-santos-soares/" target="_blank" rel="noopener noreferrer">
-                    in/roberto-dos-santos-soares
-                </a>
-            </li>
-            <li>GitHub: 
-                <a href="https://roberto-ssoares.github.io/meu-portfolio/" target="_blank" rel="noopener noreferrer">
-                    roberto-ssoares
-                </a>
-            </li>
-            <li>Email: 
-                <a href="mailto:ssoares.roberto@gmail.com">
-                    ssoares.roberto@gmail.com
-                </a>
-            </li>
-        </ul>
-    </section>    
-    
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2025 - Roberto dos Santos Soares - Cientista de Dados</p>
+    <footer>
+        <p>&copy; 2025 Roberto | Data Engineer</p>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
