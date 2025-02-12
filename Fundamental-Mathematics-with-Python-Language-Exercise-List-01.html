@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fundamental-Mathematics-with-Python-Language-Exercise-List-01</title>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Ubuntu', monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+            background-color: transparent !important;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .title-header {
+            font-family: 'Caveat', cursive;
+            font-weight: bold;
+            font-size: 25px;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .footer {
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        pre, code {
+            background-color: transparent !important;
+            border: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1 class="title-header">Fundamental-Mathematics-with-Python-Language-Exercise-List-01</h1>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<br/><br/>
+<p style="text-align: center;">
+<font color="#6C3483" size="6">
+<strong>
+                    Matemática e Estatística Aplicada<br \=""/>Para Data Science, Machine Learning e IA
+                </strong>
+</font>
+</p>
+<p style="text-align: center;">
+<font color="#CB4335" size="6.5">
+<strong>
+                    Lista de Exercícios 1 - Matemática Fundamental<br \=""/>com Linguagem Python
+                </strong>
+</font>
+</p>
+<br>
+</br></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            Roberto SSoares - LfLngLrnng
+      </font>
+</p>
+<p style="text-align: right;"><font color="#444444" size="2">
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br><a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</br></font></p>
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "
+        </font>
+<br>
+<font color="#918e8e" size="2">"Bruno Jardim"
+        </font>
+</br></p>
+<p style="text-align: right;">
+<font color="#918e8e" size="2">
+            Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.<br>e a minha linda esposa "Elizabete" por todo apoio.
+        </br></font>
+</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q -U watermark</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
+%reload_ext watermark
+%watermark -a "Roberto Soares - Data Science Academy" --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 1: Cálculo de Área de um Círculo</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Escreva um programa que calcula a área de um círculo.</li>
+<li>O usuário deve fornecer o raio</li>
+<li>e o programa deve retornar a área.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#A = π r²
+pi = 3.14
+r = 2
+A = pi * r ** 2
+A
+
+# Importar o módulo math para acessar constantes e funções matemáticas, como o valor de pi
+import math
+
+def area_circulo(raio):
+    # Calcula a área do círculo usando a fórmula área = π * raio^2
+    # math.pi fornece o valor de π e raio ** 2 calcula o quadrado do raio
+    return math.pi * raio ** 2
+
+# Pedir ao usuário para inserir o valor do raio do círculo e converter essa entrada em um número de ponto flutuante "mais precisão"
+raio = float(input("Digite o raio do círculo: "))
+
+# Imprimir a área do círculo chamando a função area_circulo com o raio fornecido e exibindo o resultado
+print("Área do círculo: ",area_circulo(raio))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite o raio do círculo:  12
+</div>
+<div aria-label="Code Output" class="output" role="region">Área do círculo:  452.3893421169302
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 2: Conversão de Temperatura</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Crie uma função que converte a temperatura de Celsius para Fahrenheit e vice-versa.</li>
+<li>O usuário deve informar a temperatura e a escala de origem.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Multiplicar a temperatura em Celsius por 9/5 e adiciona 32 para converter para Fahrenheit
+def celsius_para_fahrenheit(c):
+    return (c * 9/5) + 32
+    
+# Subtrair 32 da temperatura em Fahrenheit e multiplica por 5/9 para converter para Celsius
+def fahrenheit_para_celsius(f):
+    return (f - 32) * 5/9
+
+# Solicitar ao usuário para inserir uma temperatura e converter a entrada para um número de ponto flutuante
+temp = float(input("Digite a temperatura: "))
+
+# Solicitar ao usuário para escolher a escala ('C' para Celsius ou 'F' para Fahrenheit) e armazenar a entrada
+escala = input("Digite a escala (C para Celsius, F para Fahrenheit: ")
+
+# Verificar se a escala escolhida é Celsius (tranformando a entrada em maiúsculas para evitar erros)
+if escala.upper() == 'C':
+    # Se for Celsius, converter a temperatura para Fahrenheit e imprime o resultado
+    print("Temperatura em Fahrenheit: ", celsius_para_fahrenheit(temp))
+else:
+    # Se não for Celsius (assumindo Fahrenheit), converte a temperatura para Celsius e imprime o resultado
+    print("Temperatura em Celsius:", fahrenheit_para_celsius(temp))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite a temperatura:  72
+Digite a escala (C para Celsius, F para Fahrenheit:  f
+</div>
+<div aria-label="Code Output" class="output" role="region">Temperatura em Celsius: 22.22222222222222
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 3: Resolver uma Equação Linear</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Faça um programa que resolve uma equação linear do tipo ax + b = 0.</li>
+<li>Os valores de a e b são fornecidos pelo usuário.</li>
+</ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 3. Criar função para resolver a equação linar ax + b = 0
+def revolve_linear(a, b):
+    # 3.1. Verificar se 'a' é zero, o que indica uma equação linear degenerada
+    if a == 0:
+        
+        # 3.2. Se 'b' também for zero, a equação é determnada com soluções infinitas
+        # caso contrário, é uma contradição e não tem solução
+        return "Sem solução" if b != 0 else "Soluções infinitas"
+        
+    # 3.3. Se 'a' não é zero, revolve a equação linear ax + b = 0 e retorna a solução x = -b/a
+    return -b/a
+
+# 1. Pedir ao usuário para inserir o valor do coeficiente 'a' e converter a entrada para um número de ponto flutuante.
+a = float(input("Digite o valor de a: "))
+
+# 2. Pedir ao usuário para inserir o valor do coeficiente 'b' e converter a entrada para um número de ponto flutuante.
+b = float(input("Digite o valor de b: "))
+
+# 4. Imprimir a solução da equação linear chamando a função resolve_linear com os valores de 'a' e 'b'
+print("Solução da equação: ", revolve_linear(a, b))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite o valor de a:  10
+Digite o valor de b:  6
+</div>
+<div aria-label="Code Output" class="output" role="region">Solução da equação:  -0.6
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 4: Cálculo de Média Aritmética</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Escreva um programa que calcula a média aritmética de uma lista de números fornecida pelo usuário.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 2. Criar uma função que realize o cálculo da média aritmética na lista de números
+def media_aritmetica(numeros):
+
+    # 2.1. Calcula a média aritimética de uma lista de números, somando todos os elementos da lista (sum(numeros))
+    #      e dividindo pelo número total de elementos (len(numeros))
+    return sum(numeros) / len(numeros)
+
+# 1. Pedir ao usuário para inserir uma lista de números separados por espaço,
+#    dividir a string de entrada em elementos individuais com split(),
+#    e converter cada elemento para um floa, crianto uma lista de números.
+numeros = [float(n) for n in input("Digite uma lista de números separados por espaço: ").split()]
+
+# 3. Imprime a média aritmética da lista de número, chamando a função media_aritmética
+print("Média aritmética: ", media_aritmetica(numeros))
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite uma lista de números separados por espaço:  5 8 7 9 6 12
+</div>
+<div aria-label="Code Output" class="output" role="region">Média aritmética:  7.833333333333333
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 5: Determinar as Raízes de uma Equação Quadrática</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Crie um programa que encontra as raízes de uma equação quadrática do tipo ax² + bx + c = 0.</li>
+<li>O programa deve lidar com todos os tipos de raízes (reais e complexas).</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 4. Criar uma função que realize o cálculo da equação quadrática
+# 4.1. Importar o módulo cmath para operações matemáticas com números complexos
+import cmath
+
+def raizes_quadraticas(a, b, c):
+
+    # 4.2. Calcula o discriminante (delta) da equação quadrática usando a fórmula delta = b^2 - 4ac
+    #      cmath.sqrt é usado para lidar com raízes quadraticas de números negativos (números complexos)
+    delta = cmath.sqrt(b**2 - 4*a*c)
+
+    # 4.3. Calcula a primeira raiz (x1) da equação quadrática usando a fórmula x = (-b + sqtr(delta)) / 2a
+    x1 = (-b + delta) / (2*a)
+
+    # 4.4. Calcula a primeira raiz (x2) da equação quadrática usando a fórmula x = (-b + sqtr(delta)) / 2a
+    x2 = (-b + delta) / (2*a)
+
+    # 4.5. Retorna ambas as raízes como um par de valores
+    return (x1, x2)
+
+# 1. Solicitar ao usuário para inserir o valor do coeficiente 'a' e converter para um número de ponto flutuante
+a = float(input("Digite o valor de a: "))
+
+# 2. Solicitar ao usuário para inserir o valor do coeficiente 'b' e converter para um número de ponto flutuante
+b = float(input("Digite o valor de b: "))
+
+# 3. Solicitar ao usuário para inserir o valor do coeficiente 'c' e converter para um número de ponto flutuante
+c = float(input("Digite o valor de c: "))
+
+# Final. Imprime as raízes da equação quadrática, chamando a função raizes_quadraticas com os valores de 'a', 'b', e 'c'
+print("As raízes da equação são: ", raizes_quadraticas(a, b, c))
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite o valor de a:  5
+Digite o valor de b:  7
+Digite o valor de c:  3
+</div>
+<div aria-label="Code Output" class="output" role="region">As raízes da equação são:  ((-0.7+0.33166247903553997j), (-0.7+0.33166247903553997j))
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 6: Calcular o Fatorial de um Número</strong></font></p>
+<font color="#66666" size="3">
+<p>Escreva uma função que calcula o fatorial de um número inteiro fornecido pelo usuário.</p>
+<ul>
+<li>O fatorial de um número inteiro não negativo n, denotado por n!, é o produto de todos os inteiros positivos menores ou a n.</li>
+<li>O conceito de fatorial é amplamente utilizado em matemática, especialmente em combinações e permutações, onde é usado para calcular o número de maneiras possíveis de organizar ou escolher objetos.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 2. Criar uma função para o cálculo do fatorial
+def fatorial(n):
+
+    # 2.1. Retorna 1 se n é 0, pois o fatorial de 0 é definido como 1
+    #      Caso contrário, retorna n multiplicado pelo fatorial de n-1 (chamada recursiva),
+    #      o que efetivamente constrói o produto n * (n-1) * (n-2) * ... * 1 
+    return 1 if n == 0 else n * fatorial(n - 1)
+    
+# 1. Solicitar ao usuário para inserir o valor e converter para um número inteiro
+num = int(input("Digite um número inteiro: "))
+
+# Final. Imprimir o fatorial do número inserido, chamando a função fatorial
+print("Fatorial: ", fatorial(num))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite um número inteiro:  26
+</div>
+<div aria-label="Code Output" class="output" role="region">Fatorial:  403291461126605635584000000
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 7: Sequência de Fibonacci</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Crie um programa que gera a sequência de Fibonacci até um determinado número n fornecido pelo usuário.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 2. Criar uma função para encontrar a sequência de Fibonacci
+def fibonacci(n):
+
+    # 2.1. Inicializa as duas primeiras variáveis, a e b, que armazenam os dois primeiros números da sequência de Fibonacci
+    a, b = 0, 1
+
+    # 2.2. Um loop que itera n vezes para gerar n termos da sequência
+    for _ in range(n):
+
+        # 2.2.1. Gera o valor atual de a, que é um termo da sequência de Fibonacci
+        yield a
+
+        # 2.2.2. Atualiza os valores de a e b para os próximos dois termos na sequência
+        #        a recebe o valor atual de b, e b recebe a soma dos valores anteriores de a e b
+        a, b = b, a + b
+
+# 1. Solicitar ao usuário para inserir o número de termos desejados na sequência de Fibonacci e converter a entrada para um inteiro
+n = int(input("Digite o número de termos da sequência de Fibonacci: "))
+
+# Final. Imprime a sequência de Fibonacci como uma lista, convertendo o gerador de uma lista para exibir todos os termos gerados.
+print("Sequência de Fibonacci: ", list(fibonacci(n)))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite o número de termos da sequência de Fibonacci:  1
+</div>
+<div aria-label="Code Output" class="output" role="region">Sequência de Fibonacci:  [0]
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 8: Cálculo de Juros Compostos</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Faça um programa que calcula o montante final de um investimento com juros compostos.</li>
+<li>O usuário deve fornecer o capital inicial, a taxa de juros anual, e o número de anos.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 4. Criar uma função para o cálculo do juros compostos
+def juros_compostos(capital, taxa, anos):
+
+    # 4.1. Calcula o montante final usuando a fórmula de juros compostos: M = C * (1 + r)^t
+    #      onde M é o montante, C é o capital inicial, r é a taxa de juros, e t é o tempo em anos
+    return capital * (1 + taxa) ** anos
+
+# 1. Solicitar ao usuário para inserir o capital inicial e converter a entrada em um número de ponto flutuante
+capital = float(input("Digite o capital inicial: "))
+
+# 2. Solicitar ao usuário para inserir a taxa de juros anual (em formato decimal) e converter a entrada em um número de ponto flutuante
+#    Por exemplo, uma taxa 5% deve ser inserida como 0.05
+taxa = float(input("Digite a taxa de juros anual (em decimal): "))
+
+# 3. Solicitar ao usuário para inserir o número de anos e converter a entrada em um número inteiro
+anos = int(input("Digite o número de anos: "))
+
+# Final. Imprime o montante final após o período especificado, chamando a função juros_compostos
+#        com os valores de capital, taxa e juros.
+print("Montante final: ", juros_compostos(capital, taxa, anos))
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite o capital inicial:  15000
+Digite a taxa de juros anual (em decimal):  14
+Digite o número de anos:  5
+</div>
+<div aria-label="Code Output" class="output" role="region">Montante final:  11390625000.0
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 9: Conversão de Moedas</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Escreva um programa que converte uma quantidade de uma moeda (como dólar) para outra (como euro), considerando uma taxa de câmbio fornecida pelo usuário.</li>
+</ul>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 3. Criar uma função para o cálculo da conversão de moedas
+def converter_moeda(valor, taxa_cambio):
+
+    # 3.1. Multiplica o valor na moeda original pela a taxa de câmbio para obter o valor na moeda convertida
+    return valor * taxa_cambio
+
+# 1. Solicitar ao usuário para inserir o valor na moeda original e converter em um número de ponto flutuante
+valor = float(input("Digite o valor na moeda original: "))
+
+# 2. Solicitar ao usuário para inserir a taxa de câmbio para a conversão e converte em um número de ponto flutuante
+taxa_cambio = float(input("Digite a taxa de cmâmbio: "))
+
+# Final. Imprime o valor convertido chamando a função converter_moeda com o valor e a taxa de câmbio
+print("Valor convertido: ", converter_moeda(valor, taxa_cambio))</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite o valor na moeda original:  2650
+Digite a taxa de cmâmbio:  5.5
+</div>
+<div aria-label="Code Output" class="output" role="region">Valor convertido:  14575.0
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Exercício 10: Verificar se um Número é Primo</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Crie uma função que verifica se um número fornecido pelo usuário é primo ou não.<ul>
+<li>Um número primo é um número natual maior do que 1 que não tem outros divisores além de 1 e ele mesmo.</li>
+<li>Em outras palavras, um número é primo se ele só pode ser dividido de forma exata por 1 e por ele próprio.</li>
+<li>Esse números têm uma importância fundamental em vária áreas da matemática, incluindo a teoria dos números, a criptografia e a análise de algoritmos
+</li></ul></li></ul></font></div>
+
+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># 2. Criar uma função para verificar se um número é primo
+def e_primo(num):
+
+    # 2.1. Percorre os números de 2 até a raiz quadrada do número (arredondamento para cima).
+    #      Essa otimização é possível porque se um número tem um divisor maior que sua raiz quadrada, 
+    #      então ele também deve ter um divisor menor que a raiz quadrada.
+    for i in range(2, int(num**0.5) + 1 ):
+
+        # 2.1.1. Se o número num for divisível por i, então ele não é primo
+        if num % i == 0:
+            return False
+
+    #      Se o loop for concluído sem encotrar divisores, o número é primo
+    return True
+
+# 1. Pede ao usuário para digitar um número e converte a entrada em um inteiro
+numero = int(input("Digite um número: "))
+
+# Final. Imprime se o número é primo ou não, utilizando a função e_primo
+print("O número é primo! " if e_primo(numero) else "O número não é primo! ")
+</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Digite um número:  65
+</div>
+<div aria-label="Code Output" class="output" role="region">O número não é primo! 
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
+%watermark -a "Roberto Soares - Data Science Academy"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.11.5
+IPython version      : 8.20.0
+
+Compiler    : MSC v.1916 64 bit (AMD64)
+OS          : Windows
+Release     : 10
+Machine     : AMD64
+Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+CPU cores   : 4
+Architecture: 64bit
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#F91215" size="5"><strong>Fim</strong></font></p>
+</div>
+</div>
+<div class="footer">
+<p>RobertoSSoares-LfLngLrnng</p>
+<p id="datetime"></p>
+<script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div></div></body>
+</html>

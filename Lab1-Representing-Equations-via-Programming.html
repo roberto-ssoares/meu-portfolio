@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lab1-Representing-Equations-via-Programming</title>
+<!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+<!-- Jupyter Notebook CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jupyterlab/3.6.3/themes/JupyterLab-light-theme.css" rel="stylesheet"/>
+<!-- Google Fonts (Correção de espaço por "+") -->
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&amp;display=swap" rel="stylesheet"/>
+<!-- Highlight.js for code syntax -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .code_cell {
+            background-color: #e8f5e9 !important;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 15px;
+            border-left: 5px solid #4caf50;
+            padding: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output {
+            background-color: #f1f7fa;
+            border-left: 5px solid #2196f3;
+            padding: 5px;
+            margin: 15px 0;
+            font-family: 'Ubuntu', monospace;
+            font-size: 15px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        .output img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: auto;
+            background-color: transparent !important;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .title-header {
+            font-family: 'Caveat', cursive;
+            font-weight: bold;
+            font-size: 25px;
+            color: #84888c;
+            text-transform: uppercase;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .markdown {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 15px;
+            background-color: #f3f2ee;
+            padding: 5px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .footer {
+            font-family: 'Gloria Hallelujah', cursive;
+            font-size: 18px;            
+            text-align: right;
+            color: #84888c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        pre, code {
+            background-color: transparent !important;
+            border: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1 class="title-header">Lab1-Representing-Equations-via-Programming</h1>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<br/><br/>
+<p style="text-align: center;">
+<font color="#6C3483" size="6">
+<strong>
+                    Matemática e Estatística Aplicada<br \=""/>Para Data Science, Machine Learning e IA
+                </strong>
+</font>
+</p>
+<p style="text-align: center;">
+<font color="#CB4335" size="6.5">
+<strong>
+                    Lab01 - Representando Equações via Programação
+                </strong>
+</font>
+</p>
+<br>
+</br></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            Roberto SSoares - LfLngLrnng
+      </font>
+</p>
+<p style="text-align: right;"><font color="#444444" size="2">
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br/><a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</font></p>
+<p style="text-align: right;">
+<font color="#444444" size="4">
+            " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "
+        </font>
+<br>
+<font color="#918e8e" size="2">"Bruno Jardim"
+        </font>
+</br></p>
+<p style="text-align: right;">
+<font color="#918e8e" size="2">
+            Agradeço a "PoD Academy" e "DSA Academy" pelo conhecimento transmitido.<br>e a minha linda esposa "Elizabete" por todo apoio.
+        </br></font>
+</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#FF5733" size="3">Instalando e Carregando Pacotes</font></p>
+<font color="#66666" size="2">
+<ul>
+<li>Para atualizar um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
+<li>pip install -U nome_pacote</li>
+</ul>
+</li>
+<li>Para instalar a versão exata de um pacote, execute o comando abaixo no terminal ou prompt de comando:<ul>
+<li>!pip install nome_pacote==versão_desejada</li>
+</ul>
+</li>
+<li>Depois de instalar ou atualizar o pacote, reinicie o jupyter notebook.</li>
+<li>Instala o pacote watermark.<ul>
+<li>Esse pacote é usado para gravar as versões de outros pacotes usados neste jupyter notebook.
+</li></ul></li></ul></font></div>
+
+
+
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">#!pip install -q -U watermark</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Versões dos pacotes usados neste jupyter notebook
+%reload_ext watermark
+%watermark -a "Roberto Soares - Data Science Academy" --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Números e Representações</strong></font></p>
+<font color="#66666" size="3">
+<p>Na matemática, uma variedade de números e suas representações são usados para diferentes propósitos.</p>
+<ul>
+<li>Aqui está uma lista dos tipos mais comuns de números e suas representações:<ul>
+<li><strong>Números Naturais (N)</strong>: São os números inteiros não-negativos. Incluem 0, 1, 2, 3, 4, ... Eles são usados para contar e ordenar.</li>
+<li><strong>Números Inteiros (Z)</strong>: Incluem todos os números naturais, seus opostos negativos e o zero. Portanto, são ..., -3, -2, -1, 0, 1, 2, 3, ...</li>
+<li><strong>Números Racionais (Q)</strong>: São os números que podem ser expressos como a fração de dois inteiros, onde o denominador não é zero. Incluem números como 1/2, -3/4, 5, 0.75, etc.</li>
+<li><strong>Números Irracionais</strong>: São números que não podem ser expressos como uma fração simples de dois inteiros. Incluem números como π (pi) e √2. Esses números têm uma expansão decimal infinita não periódica.</li>
+<li><strong>Números Reais (R)</strong>: Incluem todos os números racionais e irracionais. Os números reais podem ser representados em uma linha numérica.</li>
+<li><strong>Números Complexos (C)</strong>: Incluem todos os números que podem ser expressos na forma a + bi, onde a e b são números reais e i é a unidade imaginária.<ul>
+<li>A unidade imaginária é uma extensão dos números reais e foi criada para solucionar equações que não possuem soluções dentro do conjunto dos números reais.</li>
+<li>A unidade imaginária é representada pela letra i, que é definida como a raiz quadrada de −1.</li>
+</ul>
+</li>
+<li><strong>Números Primos</strong>: São números maiores que 1 que têm exatamente dois divisores distintos: 1 e eles mesmos. Exemplos incluem 2, 3, 5, 7, 11, ...</li>
+</ul>
+</li>
+</ul>
+<p>Cada um desses tipos de números tem sua própria utilidade e aplicação em diferentes áreas da matemática e ciência.
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>PEMDAS</strong></font></p>
+<font color="#66666" size="3">
+<p>A regra PEMDAS é um acrônimo usado para ajudar a lembrar a ordem das operações em matemática.</p>
+<ul>
+<li>Significa:<ul>
+<li>Parênteses</li>
+<li>Expoentes (ou potências)</li>
+<li>Multiplicação e Divisão (da esquerda para a direita)</li>
+<li>Adição e Subtração (da esquerda para a direita)</li>
+</ul>
+</li>
+</ul>
+<p>Esta regra é um guia para determinar qual operação matemática deve ser realizada primeiro em uma expressão matemática.</p>
+<ul>
+<li>Aqui está como ela funciona:<ul>
+<li><strong>1. Parênteses</strong>: Realize primeiro as operações dentro dos parênteses. Isso também se aplica a colchetes [ ] e chaves { }.</li>
+<li><strong>2. Expoentes</strong>: Em seguida, calcule as potências e as raízes.</li>
+<li><strong>3. Multiplicação e Divisão</strong>: Estas operações são **realizadas da esquerda para a direita. Elas têm a mesma prioridade, o que significa que você deve fazer a que aparecer primeiro.</li>
+<li><strong>4. Adição e Subtração</strong>: Por último, faça as operações de adição e subtração, também da esquerda para a direita. Assim como na multiplicação e divisão, adição e subtração têm a mesma prioridade.</li>
+</ul>
+</li>
+</ul>
+<p>É importante notar que, embora a regra PEMDAS seja um guia útil, ela não substitui a compreensão das propriedades matemáticas e de como as expressões são construídas e simplificadas.
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>O Que São Equações?</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Equações são cálculos em que uma ou mais variáveis representam valores desconhecidos.</li>
+<li>Neste Lab, você aprenderá algumas técnicas fundamentais para resolver equações usando programação.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Resolvendo Equações com 1 Passo</strong></font></p>
+<font color="#66666" size="3">
+<p>Considere a seguinte equação:</p>
+<p>\begin{equation}x + 12 = -37\end{equation}</p>
+<p>O desafio aqui é encontrar o valor de <strong>x</strong> e para isso precisamos <em>isolar a variável</em>.</p>
+<ul>
+<li>Nesse caso, precisamos colocar <strong>x</strong> em um lado do sinal "=" e todos os outros valores no outro lado. Para isso, seguiremos estas regras:</li>
+</ul>
+<ol>
+<li>Usar operações opostas para cancelar os valores que não queremos de um lado.<ul>
+<li>Nesse caso, o lado esquerdo da equação inclui uma adição de 12, então vamos cancelar isso subtraindo 12 e o lado esquerdo da equação se torna <strong>x + 12 - 12</strong>.</li>
+</ul>
+</li>
+<li>O que quer que você faça de um lado, você também deve fazer do outro lado.<ul>
+<li>Nesse caso, subtraímos 12 do lado esquerdo, portanto também devemos subtrair 12 do lado direito da equação, que se torna <strong>-37 - 12</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>Nossa equação agora fica assim:</p>
+<p>\begin{equation}x + 12 - 12 = -37 - 12\end{equation}</p>
+<p>Agora podemos calcular os valores em ambos os lados. No lado esquerdo, 12 - 12 é 0, então ficamos com:</p>
+<p>\begin{equation}x = -37 - 12\end{equation}</p>
+<p>O que produz o resultado <strong>-49</strong>. Nossa equação agora está resolvida, como você pode ver aqui:</p>
+<p>\begin{equation}x = -49\end{equation}</p>
+<p>É sempre uma boa prática verificar seu resultado inserindo o valor da variável que você calculou na equação original e garantindo que ele seja verdadeiro.</p>
+<ul>
+<li>Podemos fazer isso facilmente usando algum código Python simples.
+</li></ul></font></div>
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = -49</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+x + 12 == -37</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+x + 12 == -37</code></pre>
+</div>
+<div class="output">False</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Resolvendo Equações com 2 Passos</strong></font></p>
+<font color="#66666" size="3">
+<p>O exemplo anterior foi bastante simples - você provavelmente poderia resolvê-lo em sua cabeça. Então, que tal algo um pouco mais complexo?</p>
+<p>\begin{equation}3x - 2 = 10 \end{equation}</p>
+<p>Como antes, precisamos isolar a variável <strong>x</strong>, mas desta vez faremos isso em duas etapas.</p>
+<ul>
+<li>A primeira coisa que faremos é cancelar as <em>constantes</em>.</li>
+<li>Uma constante é qualquer número que se mantém sozinho, então, neste caso, o 2 que estamos subtraindo do lado esquerdo é uma constante.</li>
+<li>Usaremos uma operação oposta para cancelá-lo no lado esquerdo, portanto, como a operação atual é subtrair 2, adicionaremos 2; e é claro que tudo o que fazemos no<br/>lado esquerdo também precisamos fazer no lado direito, então após o primeiro passo, nossa equação fica assim:</li>
+</ul>
+<p>\begin{equation}3x - 2 + 2 = 10 + 2 \end{equation}</p>
+<p>Agora os -2 e +2 à esquerda se cancelam, e à direita, 10 + 2 é 12; então a equação agora é:</p>
+<p>\begin{equation}3x = 12 \end{equation}</p>
+<p>OK, hora do passo dois - precisamos lidar com os <em>coeficientes</em> - um coeficiente é um número que é aplicado a uma variável.</p>
+<ul>
+<li>Nesse caso, nossa expressão à esquerda é 3x, o que significa x multiplicado por 3; para que possamos aplicar a operação oposta para cancelá-lo, desde que façamos o mesmo para o outro lado, ficaria assim:</li>
+</ul>
+<p>\begin{equation}\frac{3x}{3} = \frac{12}{3} \end{equation}</p>
+<p>3x ÷ 3 é igual a x, então agora isolamos a variável.</p>
+<p>\begin{equation}x = \frac{12}{3} \end{equation}</p>
+<p>E podemos calcular o resultado como <sup>12</sup>/<sub>3</sub> que é <strong>4</strong>:</p>
+<p>\begin{equation}x = 4 \end{equation}</p>
+<p>Vamos verificar esse resultado usando Python:
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+(3 * x) - 2 == 10</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Resolvendo Equações Combinando Termos</strong></font></p>
+<font color="#66666" size="3">
+<p>Termos semelhantes são elementos de uma expressão que se relacionam com a mesma variável ou constante (com a mesma <em>ordem</em> ou <em>exponencial</em>, que discutiremos mais adiante).</p>
+<ul>
+<li>Por exemplo, considere a seguinte equação:</li>
+</ul>
+<p>\begin{equation}\textbf{5x} + 1 \textbf{- 2x} = 22 \end{equation}</p>
+<p>Nesta equação, o lado esquerdo inclui os termos <strong>5x</strong> e <strong>- 2x</strong>, ambos representando a variável <strong>x</strong> multiplicada por um coeficiente.</p>
+<p>Observe que incluímos o sinal (+ ou -) na frente do valor.</p>
+<ul>
+<li>Podemos reescrever a equação para combinar estes termos semelhantes:</li>
+</ul>
+<p>\begin{equation}\textbf{5x - 2x} + 1 = 22 \end{equation}</p>
+<p>Podemos então simplesmente realizar as operações necessárias nos termos semelhantes para consolidá-los em um único termo:</p>
+<p>\begin{equation}\textbf{3x} + 1 = 22 \end{equation}</p>
+<p>Agora, podemos resolver isso como qualquer outra equação de duas etapas.</p>
+<ul>
+<li>Primeiro vamos remover as constantes do lado esquerdo - neste caso, há uma expressão constante que adiciona 1, então vamos usar a operação oposta para removê-la e fazer o mesmo do outro lado:</li>
+</ul>
+<p>\begin{equation}3x + 1 - 1 = 22 - 1 \end{equation}</p>
+<p>Isso nos dá:</p>
+<p>\begin{equation}3x = 21 \end{equation}</p>
+<ul>
+<li>Então vamos lidar com os coeficientes - neste caso x é multiplicado por 3, então vamos dividir por 3 em ambos os lados para remover o coeficiente:</li>
+</ul>
+<p>\begin{equation}\frac{3x}{3} = \frac{21}{3} \end{equation}</p>
+<p>Isso nos dá como resposta:</p>
+<p>\begin{equation}x = 7 \end{equation}
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+(5 * x) + 1 - (2 * x) == 22</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Trabalhando com Frações - Exemplo 1</strong></font></p>
+<font color="#66666" size="3">
+<p>Algumas das etapas para resolver as equações acima envolveram trabalhar com frações - que em si são apenas operações de divisão.</p>
+<ul>
+<li>Vamos dar uma olhada em um exemplo de uma equação em que nossa variável é definida como uma fração:</li>
+</ul>
+<p>\begin{equation}\frac{x}{3} + 1 = 16 \end{equation}</p>
+<p>Seguimos a mesma abordagem de antes, primeiro removendo as constantes do lado esquerdo - então subtraímos 1 de ambos os lados.</p>
+<p>\begin{equation}\frac{x}{3} = 15 \end{equation}</p>
+<p>Agora precisamos lidar com a fração à esquerda para que fiquemos com apenas <strong>x</strong>.</p>
+<p>A fração é <sup>x</sup>/<sub>3</sub> que é outra maneira de dizer <em>x dividido por 3</em>, então podemos aplicar a operação oposta para ambos os lados.</p>
+<ul>
+<li>Nesse caso, precisamos multiplicar ambos os lados pelo denominador sob nossa variável, que é 3.</li>
+</ul>
+<p>Para facilitar o trabalho com um termo que contém frações, podemos expressar números inteiros como frações com denominador 1; então, à esquerda, podemos expressar 3 como <sup>3</sup>/<sub>1</sub> e multiplicamos com <sup>x</sup>/<sub>3</sub>.</p>
+<p>Observe que a notação para multiplicação é um símbolo <strong>•</strong> em vez do operador de multiplicação <em>x</em> padrão (que causaria confusão com a variável <strong>x</strong>) ou o símbolo de asterisco usado pela maioria das linguagens de programação.</p>
+<p>\begin{equation}\frac{3}{1} \cdot \frac{x}{3} = 15 \cdot 3 \end{equation}</p>
+<p>Isso nos dá o seguinte resultado:</p>
+<p>\begin{equation}x = 45 \end{equation}</p>
+<p></p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 45</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+x / 3 + 1 == 16</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+1 + x / 3 == 16</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Trabalhando com Frações - Exemplo 2</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Vejamos outro exemplo, em que a variável é um número inteiro, mas seu coeficiente é uma fração:</li>
+</ul>
+<p>\begin{equation}\frac{2}{5}x + 1 = 11 \end{equation}</p>
+<ul>
+<li>Como de costume, começaremos removendo as constantes da expressão variável; então, neste caso, precisamos subtrair 1 de ambos os lados:</li>
+</ul>
+<p>\begin{equation}\frac{2}{5}x = 10 \end{equation}</p>
+<p>Agora precisamos cancelar a fração. A expressão equivale a dois quintos vezes x, então a operação oposta é dividir por <sup>2</sup>/<sub>5</sub>; mas uma maneira mais<br/>simples de fazer isso com uma fração é multiplicá-la por sua <em>recíproca</em>, que é apenas o inverso da fração, neste caso <sup>5</sup>/<sub>2</sub>.</p>
+<ul>
+<li>Claro, precisamos fazer isso para os dois lados:</li>
+</ul>
+<p>\begin{equation}\frac{5}{2} \cdot \frac{2}{5}x = \frac{10}{1} \cdot \frac{5}{2} \end{equation}</p>
+<p>Isso nos dá o seguinte resultado:</p>
+<p>\begin{equation}x = \frac{50}{2} \end{equation}</p>
+<p>Que podemos simplificar para:</p>
+<p>\begin{equation}x = 25 \end{equation}
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 25</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+2 / 5 * x + 1 == 11</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Equações Com Variáveis em Ambos os Lados</strong></font></p>
+<font color="#66666" size="3">
+<p>Até agora, todas as nossas equações tiveram um termo variável em apenas um lado. No entanto, os termos variáveis podem existir em ambos os lados.</p>
+<p>Considere esta equação:</p>
+<p>\begin{equation}3x + 2 = 5x - 1 \end{equation}</p>
+<p>Desta vez, temos termos que incluem <strong>x</strong> em ambos os lados. Vamos usar exatamente a mesma abordagem para resolver esse tipo de equação que fizemos para os exemplos anteriores.</p>
+<ul>
+<li>Primeiro, vamos lidar com as constantes adicionando 1 a ambos os lados. Isso elimina o -1 à direita:</li>
+</ul>
+<p>\begin{equation}3x + 3 = 5x \end{equation}</p>
+<ul>
+<li>Agora podemos eliminar a expressão variável de um lado subtraindo 3x de ambos os lados. Isso elimina o 3x à esquerda:</li>
+</ul>
+<p>\begin{equation}3 = 2x \end{equation}</p>
+<ul>
+<li>Em seguida, podemos lidar com o coeficiente dividindo ambos os lados por 2:</li>
+</ul>
+<p>\begin{equation}\frac{3}{2} = x \end{equation}</p>
+<ul>
+<li>Agora isolamos x. Parece um pouco estranho porque geralmente temos a variável do lado esquerdo, então se isso te deixa mais confortável você pode simplesmente inverter a equação:</li>
+</ul>
+<p>\begin{equation}x = \frac{3}{2} \end{equation}</p>
+<p>O resultado é 1,5.
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 1.5 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+3*x + 2 == 5*x -1</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#f3f2ee">
+<p><font color="#F91215" size="5"><strong>Usando a Propriedade Distributiva</strong></font></p>
+<font color="#66666" size="3">
+<p>A propriedade distributiva é uma lei matemática que nos permite distribuir a mesma operação para termos entre parênteses.</p>
+<ul>
+<li>Por exemplo, considere a seguinte equação:</li>
+</ul>
+<p>\begin{equation}\textbf{4(x + 2)} + \textbf{3(x - 2)} = 16 \end{equation}</p>
+<p>A equação inclui duas operações entre parênteses: <strong>4(<em>x</em> + 2)</strong> e <strong>3(<em>x</em> - 2)</strong>.</p>
+<ul>
+<li>Cada uma dessas operações consiste em uma constante pela qual o conteúdo entre parênteses deve ser multiplicado: por exemplo, 4 vezes (<em>x</em> + 2).</li>
+</ul>
+<p>A propriedade distributiva significa que podemos obter o mesmo resultado multiplicando cada termo entre parênteses e somando os resultados, então para a primeira operação<br/>entre parênteses, podemos multiplicar 4 por <em>x</em> e somar 4 vezes +2; e para a segunda operação entre parênteses, podemos calcular 3 vezes <em>x</em> + 3 vezes -2).</p>
+<ul>
+<li>Observe que as constantes entre parênteses incluem o sinal (+ ou -) que as precede:</li>
+</ul>
+<p>\begin{equation}4x + 8 + 3x - 6 = 16 \end{equation}</p>
+<ul>
+<li>Agora podemos agrupar nossos termos semelhantes:</li>
+</ul>
+<p>\begin{equation}7x + 2 = 16 \end{equation}</p>
+<ul>
+<li>Em seguida, movemos a constante para o outro lado:</li>
+</ul>
+<p>\begin{equation}7x = 14 \end{equation}</p>
+<ul>
+<li>E agora podemos lidar com o coeficiente:</li>
+</ul>
+<p>\begin{equation}\frac{7x}{7} = \frac{14}{7} \end{equation}</p>
+<ul>
+<li>O que nos dá a resposta:</li>
+</ul>
+<p>\begin{equation}x = 2 \end{equation}
+</p></font></div>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Atribuindo valor a x
+x = 2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"># Comparando as expressões
+4 * (x + 2) + 3 * (x - 2) == 16</code></pre>
+</div>
+<div class="output">True</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%reload_ext watermark
+%watermark -a "Roberto Soares - Data Science Academy"</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Author: Roberto Soares - Data Science Academy
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark -v -m</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">Python implementation: CPython
+Python version       : 3.11.5
+IPython version      : 8.20.0
+
+Compiler    : MSC v.1916 64 bit (AMD64)
+OS          : Windows
+Release     : 10
+Machine     : AMD64
+Processor   : Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+CPU cores   : 4
+Architecture: 64bit
+
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python">%watermark --iversions</code></pre>
+</div>
+<div aria-label="Code Output" class="output" role="region">
+</div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#E7F5FA">
+<h2 id="Fim"><font color="#F91215" size="5"><strong>Fim</strong></font><a class="anchor-link" href="#Fim">¶</a></h2><font color="#66666" size="3">
+</font></div>
+</div>
+<div class="footer">
+<p>RobertoSSoares-LfLngLrnng</p>
+<p id="datetime"></p>
+<script>
+                document.getElementById("datetime").innerText = new Date().toLocaleString();
+            </script>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</div></body>
+</html>
