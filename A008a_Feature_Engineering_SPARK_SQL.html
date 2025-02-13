@@ -107,7 +107,7 @@
 <p style="text-align: center;">
 <font color="#0A1781" size="6">
 <strong>
-                    PoD Academy<br \=""/>Formação Full Stack Data &amp; Analytics
+                    Formação Full Stack Data &amp; Analytics
                 </strong>
 </font>
 </p>
@@ -131,8 +131,8 @@
       </font>
 </p>
 <p style="text-align: right;"><font color="#444444" size="2">
-<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br><a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
-</br></font></p>
+<a href="https://www.linkedin.com/in/roberto-dos-santos-soares/">in/roberto-dos-santos-soares</a><br/><a href="https://roberto-ssoares.github.io/meu-portfolio/">Portifólio: roberto-ssoares</a>
+</font></p>
 <p style="text-align: right;">
 <font color="#444444" size="4">
             " [+] Faturamento,<br \=""/> [-] Custo,<br \=""/> [+] Qualidade de vida "
@@ -214,8 +214,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3">Instalando:</font></p>
-<font color="#66666" size="2">
+<p><font color="#FF5733" size="4">Instalando:</font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Depois de criar um novo notebook no <strong>Google Colab</strong>,</li>
 <li>É preciso instalar JAVA, Spark, findspark lib.</li>
@@ -244,8 +244,8 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3">Instala o pacote findspark:</font></p>
-<font color="#66666" size="2">
+<p><font color="#FF5733" size="4">Instala o pacote findspark:</font></p>
+<font color="#66666" size="3">
 <ul>
 <li>Precisamos instalar o findspark e inicializá-lo.</li>
 <li>findpsark lib irá localizar o spark no sistema e importar a biblioteca para você inicializar o contexto do spark</li>
@@ -261,7 +261,7 @@
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Ambiente Spark Local - Construindo SparkSession:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Ambiente Spark Local - Construindo SparkSession:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -354,7 +354,7 @@ print(shape)</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Mostrar o Schema da tabela - df_transacoes:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Mostrar o Schema da tabela - df_transacoes:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -394,7 +394,7 @@ None
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Observações:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Observações:</strong></font></p>
 <font color="#66666" size="3">
 <ul>
 <li>Visualizamos um formato que pode dar trabalho mais a frente, exemplo: a variável "ID Transação", tem espaço entre as palavras, bem como, cedilha e acentuação.</li>
@@ -407,7 +407,7 @@ None
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
 <p><font color="#FF5733" size="4"><strong>Função para padronizar no nome das variáveis:</strong></font></p>
-<font color="#66666" size="2.5">
+<font color="#66666" size="3">
 <p>O código apresentado tem o objetivo de padronizar os nomes das colunas de um DataFrame do PySpark.</p>
 <p>A padronização inclui:</p>
 <ul>
@@ -450,7 +450,7 @@ def padronizar_nomes_colunas(dataframe: DataFrame) -&gt; DataFrame:
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Aplicando a padronização do nome das variáveis em df_transacoes:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Aplicando a padronização do nome das variáveis em df_transacoes:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -471,8 +471,8 @@ df_transacoes.printSchema()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Verificando se há valores nulos em df_transacoes:</strong></font></p>
-<font color="#66666" size="2.5">
+<p><font color="#FF5733" size="4"><strong>Verificando se há valores nulos em df_transacoes:</strong></font></p>
+<font color="#66666" size="3">
 <p>Esse código em PySpark é usado para contar o número de valores nulos em cada coluna de um DataFrame.</p>
 <p>Vamos analisar o que cada parte do código faz:</p>
 <ol>
@@ -534,7 +534,7 @@ df_transacoes.select([count(when(isnull(c), c)).alias(c) for c in df_transacoes.
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Observações:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Observações:</strong></font></p>
 <font color="#66666" size="3">
 <ul>
 <li>Muitas transações por cliente, onde deveremos agrupar para o grão "ID Cliente"</li>
@@ -546,7 +546,7 @@ df_transacoes.select([count(when(isnull(c), c)).alias(c) for c in df_transacoes.
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Criando uma tabela temporária - sql_trancacoes:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Criando uma tabela temporária - sql_trancacoes:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -557,7 +557,7 @@ df_transacoes.select([count(when(isnull(c), c)).alias(c) for c in df_transacoes.
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Mostrar o Schema da tabela - df_publico:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Mostrar o Schema da tabela - df_publico:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -599,7 +599,7 @@ None
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Aplicando a padronização do nome das variáveis em df_publico:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Aplicando a padronização do nome das variáveis em df_publico:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -622,7 +622,7 @@ df_publico.printSchema()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Verificando se há valores nulos em df_publico:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Verificando se há valores nulos em df_publico:</strong></font></p>
 </div>
 </div>
 <div class="cell">
@@ -640,7 +640,7 @@ df_publico.printSchema()</code></pre>
 <div class="cell">
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
-<p><font color="#FF5733" size="3"><strong>Observações:</strong></font></p>
+<p><font color="#FF5733" size="4"><strong>Observações:</strong></font></p>
 <font color="#66666" size="3">
 <ul>
 <li>Tabela no grão "ID Cliente" com algumas variáveis explicativas e a variável target "Churn"</li>
@@ -664,7 +664,7 @@ df_publico.printSchema()</code></pre>
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#f3f2ee">
 <p><font color="#FF5733" size="4"><strong>Função de Metadados:</strong></font></p>
-<font color="#66666" size="2.5">
+<font color="#66666" size="3">
 <p>Você pode gerar um DataFrame de metadados utilizando Spark SQL. Abaixo está a função equivalente que gera o mesmo resultado usando SQL em PySpark:</p>
 <p><strong>Explicação:</strong></p>
 <ol>
@@ -1026,7 +1026,7 @@ None
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p><font color="#CC403E" size="4"><strong>Criar uma flag que marca ultimos 3 meses</strong></font></p>
-<font color="#66666" size="2.5">
+<font color="#66666" size="3">
 <p>Racional do código:</p>
 <ul>
 <li>Usamos a função de janela MAX(Data) OVER (PARTITION BY ID Cliente) para obter a data mais recente para cada cliente.</li>
@@ -2234,6 +2234,11 @@ Architecture: 64bit
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <p><font color="#CC403E" size="5"><strong>Fim</strong></font></p>
+</div>
+</div>
+<div class="cell">
+<div aria-label="Code Cell" class="code_cell" role="region">
+<pre><code class="language-python"></code></pre>
 </div>
 </div>
 <div class="footer">
