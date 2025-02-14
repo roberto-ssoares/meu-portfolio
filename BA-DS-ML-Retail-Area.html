@@ -5,6 +5,17 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>BA-DS-ML-Retail-Area</title>
+<!-- MathJax Configuração -->
+<script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      });
+    </script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"/>
 <!-- Jupyter Notebook CSS -->
@@ -396,6 +407,130 @@ Com os avanços em inteligência artificial, modelos de linguagem como GPT podem
 <li>Caso ocorra um erro, a execução será interrompida com um rollback, preservando a integridade do banco.</li>
 <li>Logs no console indicarão o andamento da execução para facilitar a depuração.</li>
 </ul>
+</font></div>
+</div>
+<div class="cell">
+<div aria-label="Markdown Cell" class="markdown" role="region">
+<div style="background-color:#F3F2EE">
+<p><font color="#CC403E" size="4"><strong>ProjetoVarejo-01-Tabelas.sql</strong></font></p>
+<font color="#66666" size="3">
+<ul>
+<li>Este script sql cria o banco, schema e tabelas com relacionamento no PostgreSQL em um Containver Docker</li>
+</ul>
+<pre><code>
+-- Projeto - IA Para Previsão de Demanda e Otimização do Estoque de Produtos Sazonais
+-- SQL - Criação do Banco de Dados
+
+-- Deleta o schema se já existir
+DROP SCHEMA IF EXISTS projetoVarejo CASCADE;
+
+-- Cria o schema
+CREATE SCHEMA projetoVarejo AUTHORIZATION rss;
+
+-- Cria as tabelas
+
+CREATE TABLE projetoVarejo.fornecedores (
+    id_fornecedor SERIAL PRIMARY KEY,
+    nome_fornecedor VARCHAR(255) NOT NULL,
+    nome_contato VARCHAR(255),
+    email_contato VARCHAR(255)
+);
+
+CREATE TABLE projetoVarejo.categorias (
+    id_categoria SERIAL PRIMARY KEY,
+    nome_categoria VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE projetoVarejo.produtos (
+    id_produto SERIAL PRIMARY KEY,
+    nome_produto VARCHAR(255) NOT NULL,
+    id_categoria INT,
+    id_fornecedor INT,
+    preco_unitario DECIMAL(10, 2),
+    CONSTRAINT fk_categoria
+        FOREIGN KEY(id_categoria) 
+        REFERENCES projetoVarejo.categorias(id_categoria),
+    CONSTRAINT fk_fornecedor
+        FOREIGN KEY(id_fornecedor) 
+        REFERENCES projetoVarejo.fornecedores(id_fornecedor)
+);
+
+CREATE TABLE projetoVarejo.clientes (
+    id_cliente SERIAL PRIMARY KEY,
+    nome_cliente VARCHAR(255) NOT NULL,
+    email VARCHAR(255)
+);
+
+CREATE TABLE projetoVarejo.vendas (
+    id_venda SERIAL PRIMARY KEY,
+    id_produto INT NOT NULL,
+    id_cliente INT,
+    data_venda DATE NOT NULL,
+    quantidade_vendida INT NOT NULL,
+    total_venda DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT fk_produto
+        FOREIGN KEY(id_produto) 
+        REFERENCES projetoVarejo.produtos(id_produto),
+    CONSTRAINT fk_cliente
+        FOREIGN KEY(id_cliente) 
+        REFERENCES projetoVarejo.clientes(id_cliente)
+);
+
+CREATE TABLE projetoVarejo.estoque (
+    id_estoque SERIAL PRIMARY KEY,
+    id_produto INT NOT NULL,
+    quantidade_em_estoque INT NOT NULL,
+    data_ultimo_reabastecimento DATE,
+    CONSTRAINT fk_produto
+        FOREIGN KEY(id_produto) 
+        REFERENCES projetoVarejo.produtos(id_produto)
+);
+
+CREATE TABLE projetoVarejo.sazonalidade (
+    id_sazonalidade SERIAL PRIMARY KEY,
+    id_produto INT NOT NULL,
+    nome_temporada VARCHAR(255) NOT NULL,
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL,
+    CONSTRAINT fk_produto
+        FOREIGN KEY(id_produto) 
+        REFERENCES projetoVarejo.produtos(id_produto)
+);
+
+CREATE TABLE projetoVarejo.forecast (
+    id_forecast SERIAL PRIMARY KEY,
+    id_produto INT NOT NULL,
+    data_forecast DATE NOT NULL,
+    quantidade_forecast INT NOT NULL,
+    CONSTRAINT fk_produto
+        FOREIGN KEY(id_produto) 
+        REFERENCES projetoVarejo.produtos(id_produto)
+);
+
+CREATE TABLE projetoVarejo.reabastecimento (
+    id_reabastecimento SERIAL PRIMARY KEY,
+    id_produto INT NOT NULL,
+    data_reabastecimento DATE NOT NULL,
+    quantidade INT NOT NULL,
+    CONSTRAINT fk_produto
+        FOREIGN KEY(id_produto) 
+        REFERENCES projetoVarejo.produtos(id_produto)
+);
+
+CREATE TABLE projetoVarejo.pedidos (
+    id_pedido SERIAL PRIMARY KEY,
+    id_fornecedor INT NOT NULL,
+    data_pedido DATE NOT NULL,
+    id_produto INT NOT NULL,
+    quantidade INT NOT NULL,
+    CONSTRAINT fk_fornecedor
+        FOREIGN KEY(id_fornecedor) 
+        REFERENCES projetoVarejo.fornecedores(id_fornecedor),
+    CONSTRAINT fk_produto
+        FOREIGN KEY(id_produto) 
+        REFERENCES projetoVarejo.produtos(id_produto)
+);
+</code></pre>
 </font></div>
 </div>
 <div class="cell">
@@ -1390,5 +1525,5 @@ langchain_core  : 0.3.34
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</div></div></div></div></div></div></div></div></div></body>
+</div></div></div></div></div></div></div></div></div></div></body>
 </html>
