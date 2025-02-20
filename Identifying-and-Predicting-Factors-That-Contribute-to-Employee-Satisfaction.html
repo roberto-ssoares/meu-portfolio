@@ -259,7 +259,7 @@
 <li>Técnicas de Machine Learning, como regressão logística, árvores de decisão e redes neurais, são aplicadas para criar modelos que possam prever a probabilidade de um funcionário deixar a empresa.</li>
 </ul>
 </li>
-<li>Esses modelos levam em consideração diversas variáveis, como satisfação no trabalho, engajamento, oportunidades de crescimento e equilíbrio entre vida pessoal e prossional.<ul>
+<li>Esses modelos levam em consideração diversas variáveis, como satisfação no trabalho, engajamento, oportunidades de crescimento e equilíbrio entre vida pessoal e profissional.<ul>
 <li>A validação cruzada é usada para garantir que os modelos sejam precisos e generalizáveis.</li>
 </ul>
 </li>
@@ -267,7 +267,7 @@
 <li>Por exemplo, se o modelo identificar que a falta de oportunidades de desenvolvimento profissional é um fator significativo para o turnover, a empresa pode investir em programas de treinamento e desenvolvimento de carreira.</li>
 </ul>
 </li>
-<li>Da mesma forma, se o equilíbrio entre vida pessoal e prossional for um fator crítico, políticas de trabalho exígivel e bem-estar podem ser implementadas para melhorar a satisfação dos funcionários.</li>
+<li>Da mesma forma, se o equilíbrio entre vida pessoal e profissional for um fator crítico, políticas de trabalho exígivel e bem-estar podem ser implementadas para melhorar a satisfação dos funcionários.</li>
 </ul>
 </font></div>
 </div>
@@ -310,7 +310,7 @@
 <li>Métricas comuns incluem a produtividade, a qualidade do trabalho, o cumprimento de prazos e a contribuição para a equipe.</li>
 </ul>
 </li>
-<li>Ferramentas de visualização de dados, como dashboards e grácos de tendência, ajudam a monitorar o desempenho ao longo do tempo e a identificar padrões ou desvios significativos.<ul>
+<li>Ferramentas de visualização de dados, como dashboards e gráficos de tendência, ajudam a monitorar o desempenho ao longo do tempo e a identificar padrões ou desvios significativos.<ul>
 <li>Essa análise detalhada fornece insights valiosos para a tomada de decisões estratégicas na gestão de talentos.</li>
 </ul>
 </li>
@@ -393,10 +393,10 @@
 <font color="#66666" size="3">
 <ul>
 <li>A previsão e análise de impacto de políticas de RH devem ser vistas como um ciclo contínuo de melhoria.<ul>
-<li>As empresas devem constantemente revisar e atualizar seus modelos preditivos com novos dados para renar suas previsões e análises de impacto.</li>
+<li>As empresas devem constantemente revisar e atualizar seus modelos preditivos com novos dados para refinar suas previsões e análises de impacto.</li>
 </ul>
 </li>
-<li>A adoção de uma abordagem iterativa permite que as empresas se adaptem rapidamente às mudanças no ambiente de trabalho e mantenham suas políticas de RH relevantes e ecazes.</li>
+<li>A adoção de uma abordagem iterativa permite que as empresas se adaptem rapidamente às mudanças no ambiente de trabalho e mantenham suas políticas de RH relevantes e eficazes.</li>
 <li>Ao utilizar análises preditivas e de impacto de forma proativa, as empresas podem criar um ambiente de trabalho mais resiliente e responsivo, promovendo a satisfação e a produtividade dos funcionários em longo prazo.</li>
 </ul>
 </font></div>
@@ -474,9 +474,15 @@ pd.set_option('display.max_rows', 500)</code></pre>
 <p>Formulado o problema junto a Área de Negócio, temos:</p>
 <ul>
 <li>Neste projeto, utilizaremos técnicas de ciência de dados e aprendizado de máquina para analisar e prever os fatores que influenciam a satisfação dos funcionários em uma empresa.<ul>
-<li>O objetivo é identificar as variáveis mais significativas que afetam o bem-estar e a motivação dos colaboradores, como ambiente de trabalho, remuneração, oportunidades de crescimento, e equilíbrio entre vida pessoal e profissional.</li>
+<li>O <strong>objetivo é identificar as variáveis mais significativas que afetam o bem-estar e a motivação dos colaboradores</strong>, como:<ul>
+<li>ambiente de trabalho,</li>
+<li>remuneração,</li>
+<li>oportunidades de crescimento,</li>
+<li>e equilíbrio entre vida pessoal e profissional.</li>
+</ul>
+</li>
 <li>Utilizaremos um conjunto de dados que inclui diversas características dos funcionários, como idade, tempo de empresa, avaliações de desempenho, feedbacks e índices de satisfação.</li>
-<li>Através de modelos preditivos, buscaremos entender padrões e tendências que podem orientar políticas internas para melhorar a satisfação e retenção dos funcionários.</li>
+<li>Através de modelos preditivos, <strong>buscaremos entender padrões e tendências que podem orientar políticas internas para melhorar a satisfação e retenção dos funcionários</strong>.</li>
 <li>Usaremos um conjunto de dados que foi adaptado a partir do dataset disponível no link abaixo:<ul>
 <li><a href="https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset">https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset</a></li>
 </ul>
@@ -531,7 +537,7 @@ df00.shape</code></pre>
 <pre><code class="language-python"># Amostra
 df00.sample(5).transpose()</code></pre>
 </div>
-<div class="output">                                    18626                      12785            12410                   7933                       5919 <br/>Age                                    33                         37               36                      35                         32<br/>Attrition                               0                          0                0                       0                          0<br/>BusinessTravel              Travel_Rarely              Travel_Rarely    Travel_Rarely           Travel_Rarely                 Non-Travel<br/>Department                          Sales     Research &amp; Development            Sales  Research &amp; Development                      Sales<br/>DistanceFromHome                        2                          7               11                      18                          2<br/>Education                               4                          4                4                       5                          1<br/>EducationField                    Medical                  Marketing          Medical                 Medical              Life Sciences<br/>EnvironmentSatisfaction                 4                          3                3                       2                          2<br/>Gender                               Male                       Male             Male                    Male                       Male<br/>JobInvolvement                          3                          3                2                       3                          2<br/>JobLevel                                2                          4                3                       3                          2<br/>JobRole                   Sales Executive  Healthcare Representative  Human Resources  Manufacturing Director  Healthcare Representative<br/>JobSatisfaction                         4                          4                1                       3                          2<br/>MaritalStatus                    Divorced                   Divorced          Married                 Married                     Single<br/>MonthlyIncome                        5505                      12169            10482                    9434                       6540<br/>NumCompaniesWorked                      1                          0                0                       1                          0<br/>OverTime                               No                         No               No                      No                         No<br/>PercentSalaryHike                      14                         11               14                      15                         19<br/>PerformanceRating                       3                          3                3                       3                          3<br/>RelationshipSatisfaction                3                          4                4                       3                          3<br/>StockOptionLevel                        2                          3                1                       1                          0<br/>TotalWorkingYears                       6                         21               24                      10                         10<br/>TrainingTimesLastYear                   5                          4                1                       2                          5<br/>WorkLifeBalance                         3                          3                3                       3                          3<br/>YearsAtCompany                          6                         18               20                      10                          1<br/>YearsInCurrentRole                      2                          7                6                       7                          1<br/>YearsSinceLastPromotion                 0                         11                3                       7                          0<br/>YearsWithCurrManager                    4                          5                6                       8                          0<br/>Employee Source                      Seek            Company Website             Seek                LinkedIn                Recruit.net<br/>AgeStartedWorking                      27                         16               12                      25                         22</div>
+<div class="output">                                           9495                    9525                    22816                   15131                   16946<br/>Age                                           30                      33                      40                      34                      39<br/>Attrition                       Current employee        Current employee        Current employee        Current employee        Current employee<br/>BusinessTravel                     Travel_Rarely       Travel_Frequently           Travel_Rarely           Travel_Rarely           Travel_Rarely<br/>Department                Research &amp; Development  Research &amp; Development  Research &amp; Development  Research &amp; Development                   Sales<br/>DistanceFromHome                               2                       7                       2                       9                       6<br/>Education                                      3                       2                       4                       3                       3<br/>EducationField                     Life Sciences           Life Sciences           Life Sciences                 Medical               Marketing<br/>EnvironmentSatisfaction                        3                       3                       3                       3                       2<br/>Gender                                    Female                    Male                    Male                  Female                  Female<br/>JobInvolvement                                 2                       3                       2                       3                       3<br/>JobLevel                                       2                       2                       1                       2                       3<br/>JobRole                   Manufacturing Director  Manufacturing Director      Research Scientist         Sales Executive  Manufacturing Director<br/>JobSatisfaction                                4                       2                       3                       1                       2<br/>MaritalStatus                             Single                 Married                  Single                Divorced                  Single<br/>MonthlyIncome                               6877                    4434                    2809                    6893                    8376<br/>NumCompaniesWorked                             1                       1                       2                       6                       5<br/>OverTime                                     Yes                      No                      No                      No                      No<br/>PercentSalaryHike                             24                      13                      14                      15                      11<br/>PerformanceRating                              4                       3                       3                       4                       3<br/>RelationshipSatisfaction                       2                       4                       4                       4                       1<br/>StockOptionLevel                               0                       1                       0                       1                       1<br/>TotalWorkingYears                             12                      10                       8                      11                      11<br/>TrainingTimesLastYear                          4                       3                       2                       3                       3<br/>WorkLifeBalance                                2                       2                       3                       3                       3<br/>YearsAtCompany                                 0                       9                       2                       7                       7<br/>YearsInCurrentRole                             0                       8                       2                       7                       6<br/>YearsSinceLastPromotion                        0                       7                       2                       1                       7<br/>YearsWithCurrManager                           0                       8                       2                       7                       6<br/>Employee Source                             Jora         Company Website                  Indeed                    Seek         Company Website<br/>AgeStartedWorking                             18                      23                      32                      23                      28</div>
 </div>
 <div class="cell">
 <div aria-label="Code Cell" class="code_cell" role="region">
@@ -660,7 +666,7 @@ memory usage: 5.3+ MB
 </ul>
 </li>
 <li>Vamos analisar os resultados com base na classe 1 e compreender os fatores que influenciam a satisfação dos funcionários, ou seja, levam os funcionários a pedir demissão.</li>
-<li>A categoria Termination será descartada, pois a decisão de demissão nesse caso foi da empresa e não do funcionário!</li>
+<li>A <strong>categoria Termination será descartada</strong>, pois a decisão de demissão nesse caso foi da empresa e não do funcionário!</li>
 </ul>
 </font></div>
 </div>
@@ -737,7 +743,7 @@ numeric_transformer = Pipeline(steps = [
 <p>O objetivo deste pipeline é garantir que todas as features categóricas no conjunto de dados sejam tratadas de forma consistente e apropriada antes de serem alimentadas no modelo de Machine Learning.</p>
 <ul>
 <li><strong>Tratamento de valores ausentes:</strong> Substitui valores ausentes por 'missing', criando uma categoria especial para valores ausentes.</li>
-<li><strong>Codificação One-Hot:</strong> Transforma as features categóricas em uma forma que pode ser usada pelo modelo de Machine Learning, convertendo cada categoria em uma coluna binária.</li>
+<li><strong>Codificação One-Hot:</strong> Transforma as features categóricas em uma forma que pode ser usada pelo modelo de Machine Learning, convertendo cada <strong>categoria em uma coluna binária</strong>.</li>
 </ul>
 </font></div>
 </div>
@@ -774,16 +780,16 @@ preprocessor = ColumnTransformer(
 <div style="background-color:#F3F2EE">
 <font color="#66666" size="3">
 <ul>
-<li>O objetivo do pipeline de modelagem é combinar todas as etapas de pré-processamento e modelagem em um único fluxo de trabalho que pode ser aplicado de forma consistente aos dados de treinamento e de teste.</li>
-<li>Isso garante que todas as transformações necessárias sejam aplicadas corretamente e na ordem certa, facilitando a replicação e manutenção do processo.</li>
+<li>O objetivo do <strong>pipeline de modelagem é combinar todas as etapas de pré-processamento e modelagem em um único fluxo de trabalho</strong> que pode ser aplicado de forma consistente aos dados de treinamento e de teste.</li>
+<li>Isso garante que todas as transformações necessárias sejam <strong>aplicadas corretamente e na ordem certa</strong>, facilitando a replicação e manutenção do processo.</li>
 </ul>
 </font></div>
 </div>
 <div class="cell">
 <div aria-label="Code Cell" class="code_cell" role="region">
 <pre><code class="language-python"># Criando o pipeline de modelagem
-modelo = Pipeline(steps = [('preprocessor', preprocessor), 
-                            ('classifier', LogisticRegression(max_iter = 1000))])</code></pre>
+#modelo = Pipeline(steps = [('preprocessor', preprocessor),('classifier', LogisticRegression(max_iter = 1000))])
+modelo = Pipeline(steps = [('preprocessor', preprocessor),('classifier', LogisticRegression())])</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -791,7 +797,7 @@ modelo = Pipeline(steps = [('preprocessor', preprocessor),
 <pre><code class="language-python"># Treina o modelo
 modelo.fit(X_treino, y_treino)</code></pre>
 </div>
-<div class="output">Pipeline(steps=[('preprocessor',<br/>                 ColumnTransformer(transformers=[('num',<br/>                                                  Pipeline(steps=[('imputer',<br/>                                                                   SimpleImputer(strategy='median')),<br/>                                                                  ('scaler',<br/>                                                                   StandardScaler())]),<br/>                                                  ['Age', 'DistanceFromHome',<br/>                                                   'Education',<br/>                                                   'EnvironmentSatisfaction',<br/>                                                   'JobInvolvement', 'JobLevel',<br/>                                                   'JobSatisfaction',<br/>                                                   'MonthlyIncome',<br/>                                                   'NumCompaniesWorked',<br/>                                                   'PercentSalaryHike',<br/>                                                   'PerformanceRating',<br/>                                                   '...<br/>                                                   'YearsWithCurrManager',<br/>                                                   'AgeStartedWorking ']),<br/>                                                 ('cat',<br/>                                                  Pipeline(steps=[('imputer',<br/>                                                                   SimpleImputer(fill_value='missing',<br/>                                                                                 strategy='constant')),<br/>                                                                  ('onehot',<br/>                                                                   OneHotEncoder(handle_unknown='ignore'))]),<br/>                                                  ['BusinessTravel',<br/>                                                   'Department',<br/>                                                   'EducationField', 'Gender',<br/>                                                   'JobRole', 'MaritalStatus',<br/>                                                   'OverTime',<br/>                                                   'Employee Source'])])),<br/>                ('classifier', LogisticRegression(max_iter=1000))])</div>
+<div class="output">Pipeline(steps=[('preprocessor',<br/>                 ColumnTransformer(transformers=[('num',<br/>                                                  Pipeline(steps=[('imputer',<br/>                                                                   SimpleImputer(strategy='median')),<br/>                                                                  ('scaler',<br/>                                                                   StandardScaler())]),<br/>                                                  ['Age', 'DistanceFromHome',<br/>                                                   'Education',<br/>                                                   'EnvironmentSatisfaction',<br/>                                                   'JobInvolvement', 'JobLevel',<br/>                                                   'JobSatisfaction',<br/>                                                   'MonthlyIncome',<br/>                                                   'NumCompaniesWorked',<br/>                                                   'PercentSalaryHike',<br/>                                                   'PerformanceRating',<br/>                                                   '...<br/>                                                   'YearsSinceLastPromotion',<br/>                                                   'YearsWithCurrManager',<br/>                                                   'AgeStartedWorking ']),<br/>                                                 ('cat',<br/>                                                  Pipeline(steps=[('imputer',<br/>                                                                   SimpleImputer(fill_value='missing',<br/>                                                                                 strategy='constant')),<br/>                                                                  ('onehot',<br/>                                                                   OneHotEncoder(handle_unknown='ignore'))]),<br/>                                                  ['BusinessTravel',<br/>                                                   'Department',<br/>                                                   'EducationField', 'Gender',<br/>                                                   'JobRole', 'MaritalStatus',<br/>                                                   'OverTime',<br/>                                                   'Employee Source'])])),<br/>                ('classifier', LogisticRegression())])</div>
 </div>
 <div class="cell">
 <div aria-label="Code Cell" class="code_cell" role="region">
@@ -855,7 +861,7 @@ coeff_df.head(10)</code></pre>
 <div aria-label="Markdown Cell" class="markdown" role="region">
 <div style="background-color:#F3F2EE">
 <font color="#66666" size="3">
-<p>Os coeficientes na regressão logística indicam a força e a direção da associação entre cada feature (atributo) e a probabilidade de ocorrência do evento alvo, que neste caso é a demissão voluntária (Attrition).</p>
+<p>Os <strong>coeficientes na regressão logística indicam a força e a direção da associação entre cada feature (atributo) e a probabilidade de ocorrência do evento alvo</strong>, que neste caso é a demissão voluntária (Attrition).</p>
 <ul>
 <li>Ou seja, a análise dos coeficientes de um modelo de regressão logística nos ajuda a entender a influência de cada atributo na probabilidade do evento de interesse.<ul>
 <li>Os coeficientes positivos indicam que, conforme o valor do atributo aumenta, a probabilidade do funcionário se demitir voluntariamente também aumenta.</li>
@@ -1044,8 +1050,8 @@ Architecture: 64bit
 <div aria-label="Code Cell" class="code_cell" role="region">
 <pre><code class="language-python">%watermark --iversions</code></pre>
 </div>
-<div aria-label="Code Output" class="output" role="region">pandas : None
-sklearn: 1.5.2
+<div aria-label="Code Output" class="output" role="region">sklearn: 1.5.2
+pandas : None
 
 </div>
 </div>
